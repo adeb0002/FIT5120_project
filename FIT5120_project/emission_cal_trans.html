@@ -25,87 +25,97 @@
 </head>
 
 <body>
-    <!-- Header Section with Navigation Bar -->
-    <div class="header">
-        <div class="container">
-            <nav class="navbar navbar-inverse" role="navigation">
-                <div class="navbar-header">
-                    <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a href="#" class="navbar-brand scroll-top"><em>Eco</em>Insight</a>
-                </div>
-                <div id="main-nav" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="home.html" class="scroll-top">Home</a></li>
-                        <li><a href="#" class="scroll-link" data-id="emission-calculator">Emission Calculator</a></li>
-                        <li><a href="#" class="scroll-link" data-id="about">About</a></li>
-                        <li><a href="#" class="scroll-link" data-id="contact-us">Contact Us</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
+<!-- Header Section with Navigation Bar -->
+<div class="header">
+    <div class="container">
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="navbar-header">
+                <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#main-nav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" class="navbar-brand scroll-top"><em>Eco</em>Insight</a>
+            </div>
+            <div id="main-nav" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="home.html" class="scroll-top">Home</a></li>
+                    <li><a href="#" class="scroll-link" data-id="emission-calculator">Emission Calculator</a></li>
+                    <li><a href="#" class="scroll-link" data-id="about">About</a></li>
+                    <li><a href="#" class="scroll-link" data-id="contact-us">Contact Us</a></li>
+                </ul>
+            </div>
+        </nav>
     </div>
+</div>
 
-    <!-- CO2 Emission Calculator Section -->
-    <div class="parallax-content" id="emission-calculator" style="padding: 100px 0;">
-        <div class="container">
-            <div class="text-content">
-                <h2>Ecological Footprint Calculator</h2>
+<!-- CO2 Emission Calculator Section -->
+<div class="parallax-content" id="emission-calculator" style="padding: 100px 0;">
+    <div class="container">
+        <div class="text-content">
+            <h2>Ecological Footprint Calculator</h2>
 
-                <!-- Section 1: Transportation Selection -->
-                <div class="form-group">
-                    <label for="transportation-selection">Which mode(s) of transportation do you use?</label>
-                    <div id="transportation-selection">
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="transportation-selection[]" value="car"> Car</label>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="transportation-selection[]" value="motorcycle"> Motorcycle</label>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="transportation-selection[]" value="public-transport"> Public Transport (Bus, Train, Tram)</label>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="transportation-selection[]" value="none" id="none-checkbox"> None of the above</label>
-                        </div>
+            <!-- Section 1: Transportation Selection -->
+            <div class="form-group">
+                <label for="transportation-selection">Which mode(s) of transportation do you use?</label>
+                <div id="transportation-selection">
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="transportation-selection[]" value="car"> Car</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="transportation-selection[]" value="motorcycle">
+                            Motorcycle</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="transportation-selection[]" value="public-transport"> Public
+                            Transport (Bus, Train, Tram)</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="transportation-selection[]" value="plane"> Plane</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="transportation-selection[]" value="none" id="none-checkbox">
+                            None of the above</label>
                     </div>
                 </div>
+            </div>
 
-                <!-- Buttons for showing questions and submitting -->
-                <div class="form-group">
-                    <button type="button" id="show-questions" class="btn btn-primary" style="display: none;">Show Transportation Questions</button>
-                </div>
+            <!-- Buttons for showing questions and submitting -->
+            <div class="form-group">
+                <button type="button" id="show-questions" class="btn btn-primary" style="display: none;">Show
+                    Transportation Questions
+                </button>
+            </div>
 
-                <!-- Section 3: Usage Details (hidden initially) -->
-                <div id="transportation-usage-section" style="display: none;">
-                    <div id="usage-questions"></div>
-                </div>
+            <!-- Section 3: Usage Details (hidden initially) -->
+            <div id="transportation-usage-section" style="display: none;">
+                <div id="usage-questions"></div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Floating Navigation Buttons -->
-    <div class="floating-buttons">
-        <button id="back-button" class="btn btn-primary" onclick="window.location.href='emission_cal_appli.html';" aria-label="Back">
-            <i class="fa fa-arrow-left"></i> Back
-        </button>
-        <button id="next-button" class="btn btn-primary" onclick="validateAndNavigate();" aria-label="Next">
-            Next <i class="fa fa-arrow-right"></i>
-        </button>
-    </div>
+<!-- Floating Navigation Buttons -->
+<div class="floating-buttons">
+    <button id="back-button" class="btn btn-primary" onclick="window.location.href='emission_cal_appli.html';"
+            aria-label="Back">
+        <i class="fa fa-arrow-left"></i> Back
+    </button>
+    <button id="next-button" class="btn btn-primary" onclick="validateAndNavigate();" aria-label="Next">
+        Next <i class="fa fa-arrow-right"></i>
+    </button>
+</div>
 
-    <!-- JavaScript -->
-    <script src="js/vendor/jquery-1.11.1.min.js"></script>
-    <script src="js/vendor/bootstrap.min.js"></script>
-    <script src="js/vendor/owl.carousel.min.js"></script>
-    <script src="js/vendor/lightbox.min.js"></script>
-    <script src="js/main.js"></script>
+<!-- JavaScript -->
+<script src="js/vendor/jquery-1.11.1.min.js"></script>
+<script src="js/vendor/bootstrap.min.js"></script>
+<script src="js/vendor/owl.carousel.min.js"></script>
+<script src="js/vendor/lightbox.min.js"></script>
+<script src="js/main.js"></script>
 
-    <script>
+<script>
         function clearAllSelections() {
             document.querySelectorAll('#transportation-selection input[type="checkbox"]:not(#none-checkbox)').forEach(checkbox => checkbox.checked = false);
             document.getElementById('usage-questions').innerHTML = '';
@@ -153,7 +163,8 @@
             const transportationQuestions = {
                 'car': 'How many kilometers do you travel by car in a week (as a driver or a passenger)?',
                 'motorcycle': 'How many kilometers do you travel by motorcycle in a week (as a driver or a passenger)?',
-                'public-transport': 'How many hours do you spend on public transport in a week?'
+                'public-transport': 'How many hours do you spend on public transport in a week?',
+                'plane': 'How many hours do you fly in a year?'
             };
 
             // Clear existing questions
@@ -165,7 +176,7 @@
                     const question = transportationQuestions[checkbox.value];
                     const questionDiv = document.createElement('div');
                     questionDiv.classList.add('form-group');
-                    questionDiv.innerHTML = `<label for="${checkbox.value}-usage">${question}</label><input type="number" class="form-control" id="${checkbox.value}-usage" name="${checkbox.value}-usage" required>`;
+                    questionDiv.innerHTML = `<label for="${checkbox.value}-usage">${question}</label><input type="number" class="form-control" id="${checkbox.value}-usage" name="${checkbox.value}-usage" min="1" value="1" required>`;
                     usageQuestions.appendChild(questionDiv);
                 }
             });
@@ -183,7 +194,7 @@
             let valid = true;
 
             questions.forEach(input => {
-                if (input.value.trim() === '' || isNaN(input.value) || Number(input.value) <= 0) {
+                if (input.value.trim() === '' || isNaN(input.value) || input.value < 1) {
                     valid = false;
                     input.style.borderColor = 'red';
                 } else {
@@ -192,12 +203,12 @@
             });
 
             if (valid) {
-                window.location.href = 'emission_cal_appli.html'; // Proceed to the next page if valid
+                window.location.href = 'next_page.html'; // Replace with your next page URL
             } else {
-                alert('Please fill out all fields correctly.');
+                alert('Please provide valid input for all questions.');
             }
         }
-    </script>
+
+</script>
 </body>
 </html>
-

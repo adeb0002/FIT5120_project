@@ -235,9 +235,9 @@
                     } else {
                         // Add regular number input questions for other appliances
                         usageQuestions.innerHTML += `<div class="form-group">
-                            <label for="${checkbox.value}-hours">${question}</label>
-                            <input type="number" class="form-control" id="${checkbox.value}-hours" name="${checkbox.value}-hours" required>
-                        </div>`;
+                        <label for="${checkbox.value}-hours">${question}</label>
+                        <input type="number" class="form-control" id="${checkbox.value}-hours" name="${checkbox.value}-hours" min="1" value="1" required>
+                    </div>`;
                     }
                 }
             }
@@ -288,6 +288,9 @@
         }
         return isValid;
     }
+
+
+
 
 </script>
 </body>
