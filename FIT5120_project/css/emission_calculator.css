@@ -270,3 +270,11 @@ bootstrap.min.css:5
 .floating-buttons .btn i {
     margin-right: 5px;
 }
+
+.is-invalid {
+    border: 2px solid red;
+}
+
+.input-error {
+    border-color: red;
+}

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>EcoInsight Melbourne</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Fonts and CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/fontAwesome.css">
+    <link rel="stylesheet" href="css/hero-slider.css">
+    <link rel="stylesheet" href="css/owl-carousel.css">
+    <link rel="stylesheet" href="css/templatemo-style.css">
+    <link rel="stylesheet" href="css/lightbox.css">
+    <link rel="stylesheet" href="css/emission_calculator.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+</head>
+
+<body>
+    <!-- Header Section with Navigation Bar -->
+    <div class="header">
+        <div class="container">
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#" class="navbar-brand scroll-top"><em>Eco</em>Insight</a>
+                </div>
+                <div id="main-nav" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="home.html" class="scroll-top">Home</a></li>
+                        <li><a href="#" class="scroll-link" data-id="emission-calculator">Emission Calculator</a></li>
+                        <li><a href="#" class="scroll-link" data-id="about">About</a></li>
+                        <li><a href="#" class="scroll-link" data-id="contact-us">Contact Us</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- CO2 Emission Calculator Section -->
+    <div class="parallax-content" id="emission-calculator" style="padding: 100px 0;">
+        <div class="container">
+            <div class="text-content">
+                <h2>Ecological Footprint Calculator</h2>
+
+                <!-- Section 1: Transportation Selection -->
+                <div class="form-group">
+                    <label for="transportation-selection">Which mode(s) of transportation do you use?</label>
+                    <div id="transportation-selection">
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="transportation-selection[]" value="car"> Car</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="transportation-selection[]" value="motorcycle"> Motorcycle</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="transportation-selection[]" value="public-transport"> Public Transport (Bus, Train, Tram)</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="transportation-selection[]" value="none" id="none-checkbox"> None of the above</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttons for showing questions and submitting -->
+                <div class="form-group">
+                    <button type="button" id="show-questions" class="btn btn-primary" style="display: none;">Show Transportation Questions</button>
+                </div>
+
+                <!-- Section 3: Usage Details (hidden initially) -->
+                <div id="transportation-usage-section" style="display: none;">
+                    <div id="usage-questions"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Navigation Buttons -->
+    <div class="floating-buttons">
+        <button id="back-button" class="btn btn-primary" onclick="window.location.href='emission_cal_appli.html';" aria-label="Back">
+            <i class="fa fa-arrow-left"></i> Back
+        </button>
+        <button id="next-button" class="btn btn-primary" onclick="validateAndNavigate();" aria-label="Next">
+            Next <i class="fa fa-arrow-right"></i>
+        </button>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/vendor/jquery-1.11.1.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/owl.carousel.min.js"></script>
+    <script src="js/vendor/lightbox.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+        function clearAllSelections() {
+            document.querySelectorAll('#transportation-selection input[type="checkbox"]:not(#none-checkbox)').forEach(checkbox => checkbox.checked = false);
+            document.getElementById('usage-questions').innerHTML = '';
+            document.getElementById('transportation-usage-section').style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initially hide "Show Transportation Questions" and "Next" buttons
+            document.getElementById('show-questions').style.display = 'none';
+            document.getElementById('next-button').style.display = 'none';
+        });
+
+        document.getElementById('transportation-selection').addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('#transportation-selection input[type="checkbox"]');
+            const noneCheckbox = document.getElementById('none-checkbox');
+
+            let anyChecked = false;
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked && checkbox.value !== 'none') {
+                    anyChecked = true;
+                }
+            });
+
+            if (noneCheckbox.checked) {
+                clearAllSelections();
+                document.getElementById('show-questions').style.display = 'none';
+                document.getElementById('next-button').style.display = 'block';
+            } else if (anyChecked) {
+                document.getElementById('show-questions').style.display = 'block';
+                document.getElementById('next-button').style.display = 'none';
+            } else {
+                document.getElementById('show-questions').style.display = 'none';
+                document.getElementById('next-button').style.display = 'none';
+            }
+        });
+
+        document.getElementById('show-questions').addEventListener('click', function() {
+            const usageSection = document.getElementById('transportation-usage-section');
+            const usageQuestions = document.getElementById('usage-questions');
+            const checkboxes = document.querySelectorAll('#transportation-selection input[type="checkbox"]');
+            const noneCheckbox = document.getElementById('none-checkbox');
+
+            // Mapping transportation modes to their respective questions
+            const transportationQuestions = {
+                'car': 'How many kilometers do you travel by car in a week (as a driver or a passenger)?',
+                'motorcycle': 'How many kilometers do you travel by motorcycle in a week (as a driver or a passenger)?',
+                'public-transport': 'How many hours do you spend on public transport in a week?'
+            };
+
+            // Clear existing questions
+            usageQuestions.innerHTML = '';
+
+            // Add questions for selected transportation modes
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked && checkbox.value !== 'none') {
+                    const question = transportationQuestions[checkbox.value];
+                    const questionDiv = document.createElement('div');
+                    questionDiv.classList.add('form-group');
+                    questionDiv.innerHTML = `<label for="${checkbox.value}-usage">${question}</label><input type="number" class="form-control" id="${checkbox.value}-usage" name="${checkbox.value}-usage" required>`;
+                    usageQuestions.appendChild(questionDiv);
+                }
+            });
+
+            if (noneCheckbox.checked) {
+                document.getElementById('next-button').style.display = 'block';
+            } else {
+                usageSection.style.display = 'block';
+                document.getElementById('next-button').style.display = 'block';
+            }
+        });
+
+        function validateAndNavigate() {
+            const questions = document.querySelectorAll('#transportation-usage-section input[type="number"]');
+            let valid = true;
+
+            questions.forEach(input => {
+                if (input.value.trim() === '' || isNaN(input.value) || Number(input.value) <= 0) {
+                    valid = false;
+                    input.style.borderColor = 'red';
+                } else {
+                    input.style.borderColor = '';
+                }
+            });
+
+            if (valid) {
+                window.location.href = 'emission_cal_appli.html'; // Proceed to the next page if valid
+            } else {
+                alert('Please fill out all fields correctly.');
+            }
+        }
+    </script>
+</body>
+</html>
+
