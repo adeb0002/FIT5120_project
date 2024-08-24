@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>EcoInsight Melbourne</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Fonts and CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/fontAwesome.css">
+    <link rel="stylesheet" href="css/hero-slider.css">
+    <link rel="stylesheet" href="css/owl-carousel.css">
+    <link rel="stylesheet" href="css/templatemo-style.css">
+    <link rel="stylesheet" href="css/lightbox.css">
+    <link rel="stylesheet" href="css/emission_calculator.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+</head>
+
+<body>
+<!-- Header Section with Navigation Bar -->
+<div class="header">
+    <div class="container">
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="navbar-header">
+                <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#main-nav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" class="navbar-brand scroll-top"><em>Eco</em>Insight</a>
+            </div>
+            <div id="main-nav" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="home.html" class="scroll-top">Home</a></li>
+                    <li><a href="emission_cal_appli.html">Emission Calculator</a></li>
+                    <li><a href="#" class="scroll-link" data-id="about">About</a></li>
+                    <li><a href="#" class="scroll-link" data-id="contact-us">Contact Us</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div class="parallax-content" id="emission-calculator" style="padding: 100px 0;">
+    <div class="container">
+        <div class="text-content">
+            <h2>Ecological Footprint Calculator</h2>
+
+            <!-- Section 1: Dining Habit Selection -->
+            <div class="form-group">
+                <label for="dining-selection">Select your dining habit.</label>
+                <div id="dining-selection">
+                    <div class="radio">
+                        <label><input type="radio" name="dining-selection" value="vegan"> Vegan</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="dining-selection" value="vegetarian-egg-milk"> Vegetarian - Eggs/Dairy, No Meat</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="dining-selection" value="vegetarian-occasional-meat"> Really Like Veggies - Occasional Meat, Eggs/Dairy</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="dining-selection" value="balanced-meat-veggies"> Balanced Meat/Veggies - Meat a Few Times a Week, Eggs/Dairy Almost Daily</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="dining-selection" value="meat-daily"> Meat Daily</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="dining-selection" value="prefer-not-to-say"> Prefer Not to Say</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Unprocessed and Unpackaged Food -->
+            <div class="form-group">
+                <label for="unprocessed-food">How much of the food that you eat is unprocessed and unpackaged?</label>
+                <div id="unprocessed-food">
+                    <div class="radio">
+                        <label><input type="radio" name="unprocessed-food" value="0%"> 0%</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="unprocessed-food" value="30%"> 30%</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="unprocessed-food" value="50%"> 50%</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="unprocessed-food" value="80%"> 80%</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="unprocessed-food" value="100%"> 100%</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="unprocessed-food" value="prefer-not-to-say"> Prefer Not to Say</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Locally Grown Food -->
+            <div class="form-group">
+                <label for="locally-grown-food">How much of the food that you eat is locally grown?</label>
+                <div id="locally-grown-food">
+                    <div class="radio">
+                        <label><input type="radio" name="locally-grown-food" value="0%"> 0%</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="locally-grown-food" value="30%"> 30%</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="locally-grown-food" value="50%"> 50%</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="locally-grown-food" value="80%"> 80%</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="locally-grown-food" value="100%"> 100%</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="locally-grown-food" value="prefer-not-to-say"> Prefer Not to Say</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Floating Navigation Buttons -->
+<div class="floating-buttons">
+    <button id="back-button" class="btn btn-primary" onclick="window.location.href='emission_cal_trans.html';"
+            aria-label="Back">
+        <i class="fa fa-arrow-left"></i> Back
+    </button>
+    <button id="next-button" class="btn btn-primary" onclick="validateAndNavigate();" aria-label="Next">
+        Next <i class="fa fa-arrow-right"></i>
+    </button>
+</div>
+
+<!-- JavaScript -->
+<script src="js/vendor/jquery-1.11.1.min.js"></script>
+<script src="js/vendor/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+    function validateAndNavigate() {
+        const diningSelection = document.querySelector('input[name="dining-selection"]:checked');
+        const unprocessedFood = document.querySelector('input[name="unprocessed-food"]:checked');
+        const locallyGrownFood = document.querySelector('input[name="locally-grown-food"]:checked');
+
+        if (diningSelection && unprocessedFood && locallyGrownFood) {
+            window.location.href = 'emission_result.html'; // Replace with your next page URL
+        } else {
+            alert('Please answer all questions to proceed.');
+        }
+    }
+
+    // Optional: JavaScript to automatically show or hide the "Next" button based on selection
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initially hide "Next" button
+        document.getElementById('next-button').style.display = 'none';
+
+        document.querySelectorAll('input[name="dining-selection"], input[name="unprocessed-food"], input[name="locally-grown-food"]').forEach(function(element) {
+            element.addEventListener('change', function() {
+                const diningSelection = document.querySelector('input[name="dining-selection"]:checked');
+                const unprocessedFood = document.querySelector('input[name="unprocessed-food"]:checked');
+                const locallyGrownFood = document.querySelector('input[name="locally-grown-food"]:checked');
+
+                if (diningSelection && unprocessedFood && locallyGrownFood) {
+                    document.getElementById('next-button').style.display = 'block';
+                } else {
+                    document.getElementById('next-button').style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
