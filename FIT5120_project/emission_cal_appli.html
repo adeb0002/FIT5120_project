@@ -92,10 +92,6 @@
                                     Water Heater</label>
                             </div>
                             <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="refrigerator">
-                                    Refrigerator</label>
-                            </div>
-                            <div class="checkbox">
                                 <label><input type="checkbox" name="appliance-selection[]" value="clothes-washer">
                                     Clothes
                                     Washer</label>
@@ -108,6 +104,10 @@
                             <div class="checkbox">
                                 <label><input type="checkbox" name="appliance-selection[]" value="air-conditioner"> Air
                                     Conditioner</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="appliance-selection[]" value="refrigerator">
+                                    Refrigerator</label>
                             </div>
                             <div class="checkbox">
                                 <label><input type="checkbox" name="appliance-selection[]" value="pool-pump"> Pool
@@ -154,109 +154,146 @@
 <script src="js/vendor/owl.carousel.min.js"></script>
 <script src="js/vendor/lightbox.min.js"></script>
 <script src="js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 
 <script>
     function clearAllSelections() {
-        document.querySelectorAll('#appliance-selection input[type="checkbox"]:not(#none-checkbox)').forEach(checkbox => checkbox.checked = false);
-        document.getElementById('usage-questions').innerHTML = '';
-        document.getElementById('appliance-usage-section').style.display = 'none';
-    }
+    document.querySelectorAll('#appliance-selection input[type="checkbox"]:not(#none-checkbox)').forEach(checkbox => checkbox.checked = false);
+    document.getElementById('usage-questions').innerHTML = '';
+    document.getElementById('appliance-usage-section').style.display = 'none';
+}
 
-    document.addEventListener('DOMContentLoaded', function() {
-        // Initially hide "Show Appliance Questions" and "Next" buttons
-        document.getElementById('show-questions').style.display = 'none';
-        document.getElementById('next-button').style.display = 'none';
-    });
+document.addEventListener('DOMContentLoaded', function() {
+    // Initially hide "Show Appliance Questions" and "Next" buttons
+    document.getElementById('show-questions').style.display = 'none';
+    document.getElementById('next-button').style.display = 'none';
+});
 
-    document.getElementById('appliance-selection').addEventListener('change', function() {
-        const checkboxes = document.querySelectorAll('#appliance-selection input[type="checkbox"]');
-        const noneCheckbox = document.getElementById('none-checkbox');
+document.getElementById('appliance-selection').addEventListener('change', function() {
+    const checkboxes = document.querySelectorAll('#appliance-selection input[type="checkbox"]');
+    const noneCheckbox = document.getElementById('none-checkbox');
 
-        let anyChecked = false;
+    let anyChecked = false;
 
-        checkboxes.forEach(checkbox => {
-            if (checkbox.checked && checkbox.value !== 'none') {
-                anyChecked = true;
-            }
-        });
-
-        if (noneCheckbox.checked) {
-            clearAllSelections();
-            document.getElementById('show-questions').style.display = 'none';
-            document.getElementById('next-button').style.display = 'block';
-        } else if (anyChecked) {
-            document.getElementById('show-questions').style.display = 'block';
-            document.getElementById('next-button').style.display = 'none';
-        } else {
-            document.getElementById('show-questions').style.display = 'none';
-            document.getElementById('next-button').style.display = 'none';
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked && checkbox.value !== 'none') {
+            anyChecked = true;
         }
     });
 
-    document.getElementById('show-questions').addEventListener('click', function() {
-        const usageSection = document.getElementById('appliance-usage-section');
-        const usageQuestions = document.getElementById('usage-questions');
-        const checkboxes = document.querySelectorAll('#appliance-selection input[type="checkbox"]');
+    if (noneCheckbox.checked) {
+        clearAllSelections();
+        document.getElementById('show-questions').style.display = 'none';
+        document.getElementById('next-button').style.display = 'block';
+    } else if (anyChecked) {
+        document.getElementById('show-questions').style.display = 'block';
+        document.getElementById('next-button').style.display = 'none';
+    } else {
+        document.getElementById('show-questions').style.display = 'none';
+        document.getElementById('next-button').style.display = 'none';
+    }
+});
 
-        // Mapping appliances to their respective questions or brand selection
-        const applianceQuestions = {
-            'television': 'How many hours do you watch television a week?',
-            'dishwasher': 'How many times do you use the dishwasher a week?',
-            'hot-water-heater': 'How many hours per day is your hot water heater on?',
-            'refrigerator': 'Select the brand of your refrigerator:',
-            'clothes-washer': 'How many times do you use the clothes washer a week?',
-            'clothes-dryer': 'How many times do you use the clothes dryer a week?',
-            'air-conditioner': 'How many hours per day do you use the air conditioner?',
-            'pool-pump': 'Select the brand of your pool pump:'
-        };
+async function loadBrandsFromCSV(url) {
+    try {
+        const response = await fetch(url);
+        const csvText = await response.text();
+        return new Promise((resolve, reject) => {
+            Papa.parse(csvText, {
+                header: true,
+                skipEmptyLines: true,
+                complete: function(results) {
+                    const brands = results.data.map(row => row.Brand ? row.Brand.toUpperCase() : '').filter(brand => brand);
+                    const uniqueBrands = [...new Set(brands)];
+                    uniqueBrands.sort();
+                    resolve(uniqueBrands);
+                },
+                error: function(error) {
+                    reject(error);
+                }
+            });
+        });
+    } catch (error) {
+        console.error('Error loading CSV:', error);
+        return [];
+    }
+}
 
-        // Clear existing questions
-        usageQuestions.innerHTML = '';
+document.getElementById('show-questions').addEventListener('click', async function() {
+    const usageSection = document.getElementById('appliance-usage-section');
+    const usageQuestions = document.getElementById('usage-questions');
+    const checkboxes = document.querySelectorAll('#appliance-selection input[type="checkbox"]');
 
-        // Add questions for selected appliances
-        checkboxes.forEach(checkbox => {
-            if (checkbox.checked && checkbox.value !== 'none') {
-                const question = applianceQuestions[checkbox.value];
-                if (question) {
-                    if (checkbox.value === 'refrigerator' || checkbox.value === 'pool-pump') {
-                        // Add dropdown for refrigerator and pool pump brand selection
-                        const brands = checkbox.value === 'refrigerator' ?
-                        ['Samsung', 'LG', 'Whirlpool', 'GE'] :
-                        ['Pentair', 'Hayward', 'Intex', 'Jandy'];
+    const applianceQuestions = {
+        'television': 'How many hours do you watch television a week?',
+        'dishwasher': 'How many times do you use the dishwasher a week?',
+        'hot-water-heater': 'How many hours per day is your hot water heater on?',
+        'clothes-washer': 'How many times do you use the clothes washer a week?',
+        'clothes-dryer': 'How many times do you use the clothes dryer a week?',
+        'air-conditioner': 'How many hours per day do you use the air conditioner?',
+        'refrigerator': 'Select the brand of your refrigerator:',
+        'pool-pump': 'Select the brand of your pool pump:'
+    };
 
-                        let dropdownHTML = `<div class="form-group">
-                            <label for="${checkbox.value}-brand">${question}</label>
-                            <select class="form-control" id="${checkbox.value}-brand" name="${checkbox.value}-brand" required>
-                                <option value="">--Select a Brand--</option>`;
+    usageQuestions.innerHTML = ''; // Clear previous questions
 
-                        brands.forEach(brand => {
-                            dropdownHTML += `<option value="${brand}">${brand}</option>`;
-                        });
+    for (const checkbox of checkboxes) {
+        if (checkbox.checked && checkbox.value !== 'none') {
+            const question = applianceQuestions[checkbox.value];
+            if (question) {
+                let dropdownHTML = '';
+                if (checkbox.value == 'refrigerator') {
+                    const brands = await loadBrandsFromCSV('new_freezer.csv');
+                    if (brands.length === 0) {
+                        console.error('No brands loaded for refrigerator.');
+                    }
+                    dropdownHTML = `<div class="form-group">
+                        <label for="${checkbox.value}-brand">${question}</label>
+                        <select class="form-control" id="${checkbox.value}-brand" name="${checkbox.value}-brand" required>
+                            <option value="">--Select a Brand--</option>`;
 
-                        dropdownHTML += `</select></div>`;
+                    brands.forEach(brand => {
+                        dropdownHTML += `<option value="${brand}">${brand}</option>`;
+                    });
 
-                        usageQuestions.innerHTML += dropdownHTML;
-                    } else {
-                        // Add regular number input questions for other appliances
-                        usageQuestions.innerHTML += `<div class="form-group">
+                    dropdownHTML += `</select></div>`;
+                } else if (checkbox.value == 'pool-pump') {
+                    const brands = await loadBrandsFromCSV('pool_pump.csv');
+                    if (brands.length === 0) {
+                        console.error('No brands loaded for pool pump.');
+                    }
+                    dropdownHTML = `<div class="form-group">
+                        <label for="${checkbox.value}-brand">${question}</label>
+                        <select class="form-control" id="${checkbox.value}-brand" name="${checkbox.value}-brand" required>
+                            <option value="">--Select a Brand--</option>`;
+
+                    brands.forEach(brand => {
+                        dropdownHTML += `<option value="${brand}">${brand}</option>`;
+                    });
+
+                    dropdownHTML += `</select></div>`;
+                } else {
+                    dropdownHTML = `<div class="form-group">
                         <label for="${checkbox.value}-hours">${question}</label>
                         <input type="number" class="form-control" id="${checkbox.value}-hours" name="${checkbox.value}-hours" min="1" value="1" required>
                     </div>`;
-                    }
                 }
+
+                usageQuestions.innerHTML += dropdownHTML; // Append each dropdown
             }
-        });
-
-        if (usageQuestions.innerHTML) {
-            usageSection.style.display = 'block';
-            document.getElementById('next-button').style.display = 'block';
-        } else {
-            usageSection.style.display = 'none';
-            document.getElementById('next-button').style.display = 'none';
         }
-    });
+    }
 
-    document.addEventListener('DOMContentLoaded', function() {
+    if (usageQuestions.innerHTML) {
+        usageSection.style.display = 'block';
+        document.getElementById('next-button').style.display = 'block';
+    } else {
+        usageSection.style.display = 'none';
+        document.getElementById('next-button').style.display = 'none';
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
     // Initially hide "Show Appliance Questions" and "Next" buttons
     document.getElementById('show-questions').style.display = 'none';
     document.getElementById('next-button').style.display = 'none';
@@ -304,6 +341,7 @@ function validateForm() {
     }
     return isValid;
 }
+
 
 
 </script>
