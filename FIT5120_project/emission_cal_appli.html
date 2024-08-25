@@ -14,11 +14,6 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/fontAwesome.css">
-    <link rel="stylesheet" href="css/hero-slider.css">
-    <link rel="stylesheet" href="css/owl-carousel.css">
-    <link rel="stylesheet" href="css/templatemo-style.css">
-    <link rel="stylesheet" href="css/lightbox.css">
     <link rel="stylesheet" href="css/emission_calculator.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
@@ -52,96 +47,105 @@
 </div>
 
 <!-- CO2 Emission Calculator Section -->
-<div class="parallax-content" id="emission-calculator" style="padding: 100px 0;">
+<div class="parallax-content" id="emission-calculator">
     <div class="container">
-        <div class="text-content">
-            <h2>Ecological Footprint Calculator</h2>
+        <div class = "row">
+            <div class="col-md-3 left-section">
+                <h2>Ecological Footprint Calculator</h2>
+                <div class="line-dec"></div>
+                <p> place holder for calculator instruction</p>
+            </div>
 
             <!-- Section 1: Household Size -->
-            <form id="emission-form">
-                <div class="form-group">
-                    <label for="household-size">How many people are in your household?</label>
-                    <select class="form-control" id="household-size" name="household-size" required>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                </div>
+            <div class="col-md-9 right-section">
+                <form id="emission-form">
+                    <div class="form-group">
+                        <label for="household-size">How many people are in your household?</label>
+                        <select class="form-control" id="household-size" name="household-size" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
 
-                <!-- Section 2: Appliance Selection -->
-                <div class="form-group">
-                    <label for="appliance-selection">What appliance(s) do you have in your household?</label>
-                    <div id="appliance-selection">
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="appliance-selection[]" value="television">
-                                Television</label>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="appliance-selection[]" value="dishwasher">
-                                Dishwasher</label>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="appliance-selection[]" value="hot-water-heater"> Hot
-                                Water Heater</label>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="appliance-selection[]" value="refrigerator">
-                                Refrigerator</label>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="appliance-selection[]" value="clothes-washer"> Clothes
-                                Washer</label>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="appliance-selection[]" value="clothes-dryer"> Clothes
-                                Dryer</label>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="appliance-selection[]" value="air-conditioner"> Air
-                                Conditioner</label>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="appliance-selection[]" value="pool-pump"> Pool
-                                Pump</label>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="appliance-selection[]" value="none" id="none-checkbox">
-                                None of the above</label>
+                    <!-- Section 2: Appliance Selection -->
+                    <div class="form-group">
+                        <label for="appliance-selection">What appliance(s) do you have in your household?</label>
+                        <div id="appliance-selection">
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="appliance-selection[]" value="television">
+                                    Television</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="appliance-selection[]" value="dishwasher">
+                                    Dishwasher</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="appliance-selection[]" value="hot-water-heater"> Hot
+                                    Water Heater</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="appliance-selection[]" value="refrigerator">
+                                    Refrigerator</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="appliance-selection[]" value="clothes-washer">
+                                    Clothes
+                                    Washer</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="appliance-selection[]" value="clothes-dryer">
+                                    Clothes
+                                    Dryer</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="appliance-selection[]" value="air-conditioner"> Air
+                                    Conditioner</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="appliance-selection[]" value="pool-pump"> Pool
+                                    Pump</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="appliance-selection[]" value="none"
+                                              id="none-checkbox">
+                                    None of the above</label>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Buttons for showing questions and submitting -->
-                <div class="form-group">
-                    <button type="button" id="show-questions" class="btn btn-primary" style="display: none;">Show
-                        Appliance Questions
-                    </button>
-                </div>
+                    <!-- Buttons for showing questions and submitting -->
+                    <div class="form-group">
+                        <div class="primary-blue-button">
+                             <a href="#" class="scroll-link" id="show-questions">Show
+                            Appliance Questions</a>
+                        </div>
+                    </div>
 
-                <!-- Section 3: Usage Hours (hidden initially) -->
-                <div id="appliance-usage-section" style="display: none;">
-                    <div id="usage-questions"></div>
-                </div>
-            </form>
+                    <!-- Section 3: Usage Hours (hidden initially) -->
+                    <div id="appliance-usage-section" style="display: none;">
+                        <div id="usage-questions"></div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
 <!-- Floating Navigation Buttons -->
 <div class="floating-buttons">
-    <button id="back-button" class="btn btn-primary" onclick="window.location.href='home.html';">
-        <i class="fa fa-arrow-left"></i> Back
-    </button>
-    <button id="next-button" class="btn btn-primary" onclick="validateAndNavigate()">
-        Next <i class="fa fa-arrow-right"></i>
-    </button>
+     <a href="home.html" class="scroll-link" id="back-button">
+         <i class="fa fa-arrow-left"></i> Back</a>
+
+    <a href="#" class="scroll-link" id="next-button">
+        Next <i class="fa fa-arrow-right"></i></a>
 </div>
 
 <!-- JavaScript -->
@@ -252,44 +256,54 @@
         }
     });
 
-    function validateAndNavigate() {
-        // Validate form input
-        if (validateForm()) {
-            // If validation passes, navigate to the next page
-            window.location.href = 'emission_cal_trans.html';
-        }
-        // If validation fails, stay on the same page and show an alert (this happens automatically by not changing the href)
+    document.addEventListener('DOMContentLoaded', function() {
+    // Initially hide "Show Appliance Questions" and "Next" buttons
+    document.getElementById('show-questions').style.display = 'none';
+    document.getElementById('next-button').style.display = 'none';
+
+    // Add event listener for the "Next" button
+    document.getElementById('next-button').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default anchor behavior
+        validateAndNavigate(); // Call the function to handle navigation
+    });
+});
+
+function validateAndNavigate() {
+    // Validate form input
+    if (validateForm()) {
+        // If validation passes, navigate to the next page
+        window.location.href = 'emission_cal_trans.html';
     }
+    // If validation fails, stay on the same page and show an alert (this happens automatically by not changing the href)
+}
 
-    function validateForm() {
-        const usageQuestions = document.querySelectorAll('#usage-questions input[type="number"], #usage-questions select');
-        let isValid = true;
+function validateForm() {
+    const usageQuestions = document.querySelectorAll('#usage-questions input[type="number"], #usage-questions select');
+    let isValid = true;
 
-        usageQuestions.forEach(input => {
-            if (input.tagName === 'SELECT') {
-                if (input.value === '') {
-                    isValid = false;
-                    input.classList.add('input-error');  // Add a class for styling if needed
-                } else {
-                    input.classList.remove('input-error');  // Remove the class if input is valid
-                }
-            } else if (input.tagName === 'INPUT' && input.type === 'number') {
-                if (input.value.trim() === '' || input.value <= 0) {
-                    isValid = false;
-                    input.classList.add('input-error');  // Add a class for styling if needed
-                } else {
-                    input.classList.remove('input-error');  // Remove the class if input is valid
-                }
+    usageQuestions.forEach(input => {
+        if (input.tagName === 'SELECT') {
+            if (input.value === '') {
+                isValid = false;
+                input.classList.add('input-error');  // Add a class for styling if needed
+            } else {
+                input.classList.remove('input-error');  // Remove the class if input is valid
             }
-        });
-
-        if (!isValid) {
-            alert('Please answer all the questions correctly before proceeding.');
+        } else if (input.tagName === 'INPUT' && input.type === 'number') {
+            if (input.value.trim() === '' || input.value <= 0) {
+                isValid = false;
+                input.classList.add('input-error');  // Add a class for styling if needed
+            } else {
+                input.classList.remove('input-error');  // Remove the class if input is valid
+            }
         }
-        return isValid;
+    });
+
+    if (!isValid) {
+        alert('Please answer all the questions correctly before proceeding.');
     }
-
-
+    return isValid;
+}
 
 
 </script>

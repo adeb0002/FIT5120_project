@@ -53,80 +53,94 @@
 
 <div class="parallax-content" id="emission-calculator" style="padding: 100px 0;">
     <div class="container">
-        <div class="text-content">
-            <h2>Ecological Footprint Calculator</h2>
+        <div class="row">
+            <div class="col-md-3 left-section">
+                <h2>Ecological Footprint Calculator</h2>
+                <div class="line-dec"></div>
+                <p> place holder for calculator instruction</p>
+            </div>
+
 
             <!-- Section 1: Dining Habit Selection -->
-            <div class="form-group">
-                <label for="dining-selection">Select your dining habit.</label>
-                <div id="dining-selection">
-                    <div class="radio">
-                        <label><input type="radio" name="dining-selection" value="vegan"> Vegan</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="dining-selection" value="vegetarian-egg-milk"> Vegetarian - Eggs/Dairy, No Meat</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="dining-selection" value="vegetarian-occasional-meat"> Really Like Veggies - Occasional Meat, Eggs/Dairy</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="dining-selection" value="balanced-meat-veggies"> Balanced Meat/Veggies - Meat a Few Times a Week, Eggs/Dairy Almost Daily</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="dining-selection" value="meat-daily"> Meat Daily</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="dining-selection" value="prefer-not-to-say"> Prefer Not to Say</label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section 2: Unprocessed and Unpackaged Food -->
-            <div class="form-group">
-                <label for="unprocessed-food">How much of the food that you eat is unprocessed and unpackaged?</label>
-                <div id="unprocessed-food">
-                    <div class="radio">
-                        <label><input type="radio" name="unprocessed-food" value="0%"> 0%</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="unprocessed-food" value="30%"> 30%</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="unprocessed-food" value="50%"> 50%</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="unprocessed-food" value="80%"> 80%</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="unprocessed-food" value="100%"> 100%</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="unprocessed-food" value="prefer-not-to-say"> Prefer Not to Say</label>
+            <div class="col-md-9 right-section">
+                <div class="form-group">
+                    <label for="dining-selection">Select your dining habit.</label>
+                    <div id="dining-selection">
+                        <div class="radio">
+                            <label><input type="radio" name="dining-selection" value="vegan"> Vegan</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="dining-selection" value="vegetarian-egg-milk"> Vegetarian -
+                                Eggs/Dairy, No Meat</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="dining-selection" value="vegetarian-occasional-meat">
+                                Really Like Veggies - Occasional Meat, Eggs/Dairy</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="dining-selection" value="balanced-meat-veggies"> Balanced
+                                Meat/Veggies - Meat a Few Times a Week, Eggs/Dairy Almost Daily</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="dining-selection" value="meat-daily"> Meat Daily</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="dining-selection" value="prefer-not-to-say"> Prefer Not to
+                                Say</label>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Section 3: Locally Grown Food -->
-            <div class="form-group">
-                <label for="locally-grown-food">How much of the food that you eat is locally grown?</label>
-                <div id="locally-grown-food">
-                    <div class="radio">
-                        <label><input type="radio" name="locally-grown-food" value="0%"> 0%</label>
+                <!-- Section 2: Unprocessed and Unpackaged Food -->
+                <div class="form-group">
+                    <label for="unprocessed-food">How much of the food that you eat is unprocessed and
+                        unpackaged?</label>
+                    <div id="unprocessed-food">
+                        <div class="radio">
+                            <label><input type="radio" name="unprocessed-food" value="0%"> 0%</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="unprocessed-food" value="30%"> 30%</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="unprocessed-food" value="50%"> 50%</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="unprocessed-food" value="80%"> 80%</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="unprocessed-food" value="100%"> 100%</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="unprocessed-food" value="prefer-not-to-say"> Prefer Not to
+                                Say</label>
+                        </div>
                     </div>
-                    <div class="radio">
-                        <label><input type="radio" name="locally-grown-food" value="30%"> 30%</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="locally-grown-food" value="50%"> 50%</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="locally-grown-food" value="80%"> 80%</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="locally-grown-food" value="100%"> 100%</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="locally-grown-food" value="prefer-not-to-say"> Prefer Not to Say</label>
+                </div>
+
+                <!-- Section 3: Locally Grown Food -->
+                <div class="form-group">
+                    <label for="locally-grown-food">How much of the food that you eat is locally grown?</label>
+                    <div id="locally-grown-food">
+                        <div class="radio">
+                            <label><input type="radio" name="locally-grown-food" value="0%"> 0%</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="locally-grown-food" value="30%"> 30%</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="locally-grown-food" value="50%"> 50%</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="locally-grown-food" value="80%"> 80%</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="locally-grown-food" value="100%"> 100%</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="locally-grown-food" value="prefer-not-to-say"> Prefer Not
+                                to Say</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -136,13 +150,12 @@
 
 <!-- Floating Navigation Buttons -->
 <div class="floating-buttons">
-    <button id="back-button" class="btn btn-primary" onclick="window.location.href='emission_cal_trans.html';"
-            aria-label="Back">
-        <i class="fa fa-arrow-left"></i> Back
-    </button>
-    <button id="next-button" class="btn btn-primary" onclick="validateAndNavigate();" aria-label="Next">
+     <a href="emission_cal_trans.html" class="scroll-link" id="back-button">
+         <i class="fa fa-arrow-left"></i> Back</a>
+
+    <a href="#" class="scroll-link" id="next-button" onclick="validateAndNavigate()">
         Next <i class="fa fa-arrow-right"></i>
-    </button>
+    </a>
 </div>
 
 <!-- JavaScript -->
@@ -181,6 +194,7 @@
             });
         });
     });
+
 </script>
 </body>
 </html>

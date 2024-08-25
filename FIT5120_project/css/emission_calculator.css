@@ -4,8 +4,10 @@
     font-family: 'Roboto', arial, sans-serif;
 }
 
-body {
-	overflow-x: hidden;
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden; /* This prevents scrolling */
 }
 
 ul {
@@ -19,53 +21,6 @@ p {
 	line-height: 24px;
 }
 
-.parallax-content {
-  width: 100%;
-  min-height: 100vh;
-  background-size: cover;
-}
-
-.primary-white-button a {
-	display: inline-block;
-	background-color: #fff;
-	font-size: 13px;
-	padding: 12px 18px;
-	color: #121212;
-	font-weight: 500;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	text-decoration: none;
-	border-radius: 20px;
-}
-
-.primary-blue-button a {
-	display: inline-block;
-	background-color: #33c1cf;
-	font-size: 13px;
-	padding: 12px 18px;
-	color: #fff;
-	font-weight: 500;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	text-decoration: none;
-	border-radius: 20px;
-}
-
-.pop-button h4 {
-	display: inline-block;
-	background-color: #33c1cf;
-	font-size: 13px!important;
-	padding: 12px 18px;
-	color: #fff;
-	font-weight: 400!important;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	text-decoration: none;
-	border-radius: 20px;
-	cursor: pointer;
-}
-
-
 .header {
     position: fixed;
     top: 0;
@@ -75,7 +30,7 @@ p {
     z-index: 10000;
     transition: all 0.2s ease-in-out;
     height: 80px;
-    background-color: rgba(50, 50, 50, 0.9); /* Background color with opacity */
+    background-color: rgba(54, 69, 79, 0.9); /* Charcoal Grey with opacity */
     text-align: center;
     line-height: 40px;
     color: white;
@@ -180,6 +135,11 @@ bootstrap.min.css:5
         float: right;
     }
 }
+.page-section {
+    min-height: 100vh;
+    padding: 0;
+}
+
 @media (max-width: 480px) {
     .page-section h1 {
         font-size: 3em;
@@ -191,12 +151,6 @@ bootstrap.min.css:5
         font-size: 1em;
         margin: 0 0 20px;
     }
-}
-
-.parallax-content {
-  width: 100%;
-  min-height: 100vh;
-  background-size: cover;
 }
 
 .baner-content {
@@ -239,36 +193,51 @@ bootstrap.min.css:5
 	margin-top: 25px;
 }
 
-/* Floating Buttons CSS */
 .floating-buttons {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
-    display: flex;
-    justify-content: space-between;
-    z-index: 1000;
+    position: fixed; /* Ensure buttons stay fixed on the viewport */
+    bottom: 50px; /* Distance from the bottom of the viewport */
+    left: 20px; /* Distance from the left edge of the viewport for the left buttons */
+    right: 20px; /* Distance from the right edge of the viewport for the right buttons */
+    display: flex; /* Use flexbox to arrange buttons */
+    justify-content: space-between; /* Space buttons evenly within the container */
+    gap: 10px; /* Space between buttons */
+    z-index: 1000; /* Ensure buttons are above other content */
+    cursor: pointer; /* Change cursor to pointer on hover */
 }
 
-.floating-buttons .btn {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    border-radius: 50px;
-}
-
+/* Back Button Styling */
 #back-button {
-    background-color: #007bff; /* Adjust color as needed */
-    color: #fff;
+    background-color: white;
+    font-size: 14px;
+    padding: 12px 18px; /* Adjusted for better button size */
+    color: #33c1cf;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center; /* Center text and icon vertically */
 }
 
+/* Next Button Styling */
 #next-button {
-    background-color: #28a745; /* Adjust color as needed */
-    color: #fff;
+    background-color: #33c1cf;
+    font-size: 14px;
+    padding: 12px 18px; /* Adjusted for better button size */
+    color: white;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center; /* Center text and icon vertically */
 }
 
-.floating-buttons .btn i {
-    margin-right: 5px;
+
+#back-button i, #next-button i {
+    margin-right: 8px; /* Space between icon and text */
 }
 
 .is-invalid {
@@ -277,4 +246,89 @@ bootstrap.min.css:5
 
 .input-error {
     border-color: red;
+}
+
+
+.row {
+    display: flex;
+    flex: 1;
+    height: 100%;
+}
+
+/* Define the layout for the ecological calculator section */
+.parallax-content {
+    display: flex;
+    background: linear-gradient(to right, #33c1cf 30%, white 30%);
+    height: flex; /* Example height, adjust as needed */
+    min-height: 90px;
+    width: 100vw;  /* Full viewport width */
+    padding: 100px 0;
+    box-sizing: border-box;
+    margin: 0; /* Ensure no extra margin */
+}
+
+.left-section {
+    flex: 1;
+    text-align: left;
+    width: 100%;
+    min-height: 90vh;
+}
+
+.right-section {
+    flex: 1;
+    padding: 20px;
+    min-height: 90vh;
+}
+
+@media (min-width: 769px) {
+    .col-md-3 {
+        flex: 0 0 25%; /* 3-column width on larger screens */
+    }
+
+    .col-md-9 {
+        flex: 0 0 75%; /* 9-column width on larger screens */
+    }
+}
+.form-group {
+    margin-bottom: 30px;
+}
+
+.left-section h2 {
+    font-size: 2em;
+    font-weight: 600;
+    margin-bottom: 20px;
+    margin-left: -150px; /* Adjust as needed to move the title to the left */
+    margin-top: 50px; /* Adjust as needed to move the title lower */
+    color: white;
+    line-height: 1.2;
+    white-space: nowrap; /* Prevent line break */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ellipsis */
+}
+
+.line-dec {
+    width: 380px; /* Increase the width to make the line longer */
+    height: 5px;
+    background-color: rgba(250, 250, 250, 0.5);
+    margin: 20px 0px 15px 0px; /* Maintain the top and bottom margins */
+    margin-left: -150px; /* Move the line to the left */
+}
+
+label {
+    font-size: 18px; /* Adjust the size as needed */
+    font-weight: bold; /* Optional: Make the text bold */
+    color: #333; /* Optional: Change text color */
+}
+
+.primary-blue-button a {
+	background-color: #33c1cf;
+	font-size: 14px;
+	padding: 12px 12px;
+	color: white;
+	font-weight: 500;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	text-decoration: none;
+	border-radius: 20px;
+	text-align: center;
 }

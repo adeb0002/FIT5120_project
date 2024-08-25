@@ -54,44 +54,55 @@
 <!-- CO2 Emission Calculator Section -->
 <div class="parallax-content" id="emission-calculator" style="padding: 100px 0;">
     <div class="container">
-        <div class="text-content">
-            <h2>Ecological Footprint Calculator</h2>
+        <div class="row">
+            <div class="col-md-3 left-section">
+                <h2>Ecological Footprint Calculator</h2>
+                <div class="line-dec"></div>
+                <p> place holder for calculator instruction</p>
+            </div>
+
 
             <!-- Section 1: Transportation Selection -->
-            <div class="form-group">
-                <label for="transportation-selection">Which mode(s) of transportation do you use?</label>
-                <div id="transportation-selection">
-                    <div class="checkbox">
-                        <label><input type="checkbox" name="transportation-selection[]" value="car"> Car</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" name="transportation-selection[]" value="motorcycle">
-                            Motorcycle</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" name="transportation-selection[]" value="public-transport"> Public
-                            Transport (Bus, Train, Tram)</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" name="transportation-selection[]" value="plane"> Plane</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" name="transportation-selection[]" value="none" id="none-checkbox">
-                            None of the above</label>
+            <div class="col-md-9 right-section">
+                <div class="form-group">
+                    <label for="transportation-selection">Which mode(s) of transportation do you use?</label>
+                    <div id="transportation-selection">
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="transportation-selection[]" value="car"> Car</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="transportation-selection[]" value="motorcycle">
+                                Motorcycle</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="transportation-selection[]"
+                                          value="public-transport"> Public
+                                Transport (Bus, Train, Tram)</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="transportation-selection[]" value="plane">
+                                Plane</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="transportation-selection[]" value="none"
+                                          id="none-checkbox">
+                                None of the above</label>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Buttons for showing questions and submitting -->
-            <div class="form-group">
-                <button type="button" id="show-questions" class="btn btn-primary" style="display: none;">Show
-                    Transportation Questions
-                </button>
-            </div>
+                <!-- Buttons for showing questions and submitting -->
+                    <div class="form-group">
+                        <div class="primary-blue-button">
+                             <a href="#" class="scroll-link" id="show-questions">Show
+                            Transportation Questions</a>
+                        </div>
+                    </div>
 
-            <!-- Section 3: Usage Details (hidden initially) -->
-            <div id="transportation-usage-section" style="display: none;">
-                <div id="usage-questions"></div>
+                <!-- Section 3: Usage Details (hidden initially) -->
+                <div id="transportation-usage-section" style="display: none;">
+                    <div id="usage-questions"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -99,13 +110,12 @@
 
 <!-- Floating Navigation Buttons -->
 <div class="floating-buttons">
-    <button id="back-button" class="btn btn-primary" onclick="window.location.href='emission_cal_appli.html';"
-            aria-label="Back">
-        <i class="fa fa-arrow-left"></i> Back
-    </button>
-    <button id="next-button" class="btn btn-primary" onclick="validateAndNavigate();" aria-label="Next">
+     <a href="emission_cal_appli.html" class="scroll-link" id="back-button">
+         <i class="fa fa-arrow-left"></i> Back</a>
+
+    <a href="#" class="scroll-link" id="next-button" onclick="validateAndNavigate()">
         Next <i class="fa fa-arrow-right"></i>
-    </button>
+    </a>
 </div>
 
 <!-- JavaScript -->
@@ -208,6 +218,8 @@
                 alert('Please provide valid input for all questions.');
             }
         }
+
+
 
 </script>
 </body>
