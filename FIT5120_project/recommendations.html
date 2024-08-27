@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Recommendations</title>
+    <title>Personalised Recommendations</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Fonts and CSS -->
@@ -35,6 +35,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="home.html" class="scroll-top">Home</a></li>
                     <li><a href="emission_cal_appli.html">Emission Calculator</a></li>
+                    <li><a href="emission_cal_appli.html">Emission Analytics</a></li>
                     <li><a href="#" class="scroll-link" data-id="about">About</a></li>
                     <li><a href="#" class="scroll-link" data-id="contact-us">Contact Us</a></li>
                 </ul>
@@ -51,34 +52,29 @@
                 <h2>Personalised Recommendations</h2>
                 <div class="line-dec"></div>
                 <div class="box">
-                    <h3>Recommendation 1:</h3>
-                    <p>Use less water in showers to save on water heating costs.</p>
+                    <h3>Dishwasher Usage:</h3>
+                    <p id="dishwasher-text">[Dishwasher recommendation will appear here]</p>
                     <i class="fas fa-shower icon-right"></i>
                 </div>
                 <div class="box">
-                    <h3>Recommendation 2:</h3>
-                    <p>Only turn on the heater in winter during nighttime to conserve energy.</p>
-                    <i class="fas fa-fire icon-right"></i>
-                </div>
-                <div class="box">
-                    <h3>Recommendation 3:</h3>
-                    <p>Open windows during the day instead of using the air conditioner.</p>
+                    <h3>Air Conditioner Usage:</h3>
+                    <p id="air-conditioner-text">[Air conditioner recommendation will appear here]</p>
                     <i class="fas fa-wind icon-right"></i>
                 </div>
                 <div class="box">
-                    <h3>Recommendation 4:</h3>
-                    <p>Install energy-efficient light bulbs to reduce electricity consumption.</p>
+                    <h3>Refrigerator Usage:</h3>
+                    <p id="refrigerator-text">[Refrigerator recommendation will appear here]</p>
                     <i class="fas fa-lightbulb icon-right"></i>
                 </div>
                 <div class="box">
-                    <h3>Recommendation 5:</h3>
-                    <p>Unplug electronic devices when not in use to avoid phantom energy drain.</p>
+                    <h3>Washing Machine Usage:</h3>
+                    <p id="washing-machine-text">[Washing machine recommendation will appear here]</p>
                     <i class="fas fa-plug icon-right"></i>
                 </div>
                 <div class="box">
-                    <h3>Recommendation 6:</h3>
-                    <p>Consider switching to a renewable energy provider for cleaner energy.</p>
-                    <i class="fas fa-solar-panel icon-right"></i>
+                    <h3>Public Transport Usage:</h3>
+                    <p id="public-transport-text">[Public transport recommendation will appear here]</p>
+                    <i class="fas fa-bus icon-right"></i>
                 </div>
                 <div class="box">
                     <h3>Government Rebates:</h3>
@@ -95,11 +91,13 @@
     </div>
 </div>
 
+
 <!-- JavaScript -->
 <script src="js/vendor/jquery-1.11.1.min.js"></script>
 <script src="js/vendor/bootstrap.min.js"></script>
 <script src="js/vendor/owl.carousel.min.js"></script>
 <script src="js/vendor/lightbox.min.js"></script>
 <script src="js/main.js"></script>
+<script src="js/recommendations.js"></script>
 </body>
 </html>
