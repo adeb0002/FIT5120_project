@@ -88,21 +88,21 @@
                                     Dishwasher</label>
                             </div>
                             <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="hot-water-heater"> Hot
+                                <label><input type="checkbox" name="appliance-selection[]" value="hot_water_heater"> Hot
                                     Water Heater</label>
                             </div>
                             <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="clothes-washer">
+                                <label><input type="checkbox" name="appliance-selection[]" value="clothes_washer">
                                     Clothes
                                     Washer</label>
                             </div>
                             <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="clothes-dryer">
+                                <label><input type="checkbox" name="appliance-selection[]" value="clothes_dryer">
                                     Clothes
                                     Dryer</label>
                             </div>
                             <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="air-conditioner"> Air
+                                <label><input type="checkbox" name="appliance-selection[]" value="air_conditioner"> Air
                                     Conditioner</label>
                             </div>
                             <div class="checkbox">
@@ -110,7 +110,7 @@
                                     Refrigerator</label>
                             </div>
                             <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="pool-pump"> Pool
+                                <label><input type="checkbox" name="appliance-selection[]" value="pool_pump"> Pool
                                     Pump</label>
                             </div>
                             <div class="checkbox">
@@ -227,12 +227,12 @@ document.getElementById('show-questions').addEventListener('click', async functi
     const applianceQuestions = {
         'television': 'How many hours do you watch television a week?',
         'dishwasher': 'How many times do you use the dishwasher a week?',
-        'hot-water-heater': 'How many hours per day is your hot water heater on?',
-        'clothes-washer': 'How many times do you use the clothes washer a week?',
-        'clothes-dryer': 'How many times do you use the clothes dryer a week?',
-        'air-conditioner': 'How many hours per day do you use the air conditioner?',
+        'hot_water_heater': 'How many hours per day is your hot water heater on?',
+        'clothes_washer': 'How many times do you use the clothes washer a week?',
+        'clothes_dryer': 'How many times do you use the clothes dryer a week?',
+        'air_conditioner': 'How many hours per day do you use the air conditioner?',
         'refrigerator': 'Select the brand of your refrigerator:',
-        'pool-pump': 'Select the brand of your pool pump:'
+        'pool_pump': 'Select the brand of your pool pump:'
     };
 
     usageQuestions.innerHTML = ''; // Clear previous questions
@@ -240,47 +240,45 @@ document.getElementById('show-questions').addEventListener('click', async functi
     for (const checkbox of checkboxes) {
         if (checkbox.checked && checkbox.value !== 'none') {
             const question = applianceQuestions[checkbox.value];
-            if (question) {
-                let dropdownHTML = '';
-                if (checkbox.value == 'refrigerator') {
-                    const brands = await loadBrandsFromCSV('new_freezer.csv');
-                    if (brands.length === 0) {
-                        console.error('No brands loaded for refrigerator.');
-                    }
-                    dropdownHTML = `<div class="form-group">
-                        <label for="${checkbox.value}-brand">${question}</label>
-                        <select class="form-control" id="${checkbox.value}-brand" name="${checkbox.value}-brand" required>
-                            <option value="">--Select a Brand--</option>`;
+            let questionHTML = '';
 
-                    brands.forEach(brand => {
-                        dropdownHTML += `<option value="${brand}">${brand}</option>`;
-                    });
-
-                    dropdownHTML += `</select></div>`;
-                } else if (checkbox.value == 'pool-pump') {
-                    const brands = await loadBrandsFromCSV('pool_pump.csv');
-                    if (brands.length === 0) {
-                        console.error('No brands loaded for pool pump.');
-                    }
-                    dropdownHTML = `<div class="form-group">
-                        <label for="${checkbox.value}-brand">${question}</label>
-                        <select class="form-control" id="${checkbox.value}-brand" name="${checkbox.value}-brand" required>
-                            <option value="">--Select a Brand--</option>`;
-
-                    brands.forEach(brand => {
-                        dropdownHTML += `<option value="${brand}">${brand}</option>`;
-                    });
-
-                    dropdownHTML += `</select></div>`;
+            if (checkbox.value === 'refrigerator') {
+                const brands = await loadBrandsFromCSV('new_freezer.csv');
+                if (brands.length > 0) {
+                    questionHTML = `
+                        <div class="form-group">
+                            <label for="${checkbox.value}-brand">${question}</label>
+                            <select class="form-control" id="${checkbox.value}-brand" name="${checkbox.value}-brand" required>
+                                <option value="">--Select a Brand--</option>
+                                ${brands.map(brand => `<option value="${brand}">${brand}</option>`).join('')}
+                            </select>
+                        </div>`;
                 } else {
-                    dropdownHTML = `<div class="form-group">
+                    console.error('No brands loaded for refrigerator.');
+                }
+            } else if (checkbox.value === 'pool_pump') {
+                const brands = await loadBrandsFromCSV('pool_pump.csv');
+                if (brands.length > 0) {
+                    questionHTML = `
+                        <div class="form-group">
+                            <label for="${checkbox.value}-brand">${question}</label>
+                            <select class="form-control" id="${checkbox.value}-brand" name="${checkbox.value}-brand" required>
+                                <option value="">--Select a Brand--</option>
+                                ${brands.map(brand => `<option value="${brand}">${brand}</option>`).join('')}
+                            </select>
+                        </div>`;
+                } else {
+                    console.error('No brands loaded for pool pump.');
+                }
+            } else {
+                questionHTML = `
+                    <div class="form-group">
                         <label for="${checkbox.value}-hours">${question}</label>
                         <input type="number" class="form-control" id="${checkbox.value}-hours" name="${checkbox.value}-hours" min="1" value="1" required>
                     </div>`;
-                }
-
-                usageQuestions.innerHTML += dropdownHTML; // Append each dropdown
             }
+
+            usageQuestions.innerHTML += questionHTML; // Append each question HTML
         }
     }
 
@@ -307,23 +305,55 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function sendDataToLambda(data) {
     try {
-        const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
+        console.log('Original data:', data);
+
+        // Prepare data for each appliance
+        const applianceData = data.appliances.map(appliance => {
+            // Ensure that brand is included where necessary
+            if (appliance.type === 'refrigerator' || appliance.type === 'pool_pump') {
+                return {
+                    type: 'appliance',
+                    appliance_type: appliance.type,
+                    brand: appliance.brand || '',  // Ensure brand is included for these appliances
+                    hours: appliance.hours || 0,
+                    household_size: data.household_size || 0
+                };
+            } else {
+                return {
+                    type: 'appliance',
+                    appliance_type: appliance.type,
+                    hours: appliance.hours || 0,
+                    household_size: data.household_size || 0
+                };
+            }
         });
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
+        console.log('Formatted data to send:', applianceData);
 
-        const result = await response.json();
-        console.log('Data sent successfully:', result);
-        return result;
+        // Send data to Lambda
+        const responses = await Promise.all(applianceData.map(async item => {
+            const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(item),
+            });
+
+            if (!response.ok) {
+                const errorDetails = await response.text();
+                console.error(`Network response was not ok. Status: ${response.status}. Details: ${errorDetails}`);
+                throw new Error(`Network response was not ok. Status: ${response.status}. Details: ${errorDetails}`);
+            }
+
+            return response.json();
+        }));
+
+        console.log('Data sent successfully:', responses);
+        return responses;
     } catch (error) {
         console.error('Error sending data to Lambda:', error);
+        alert('There was an error submitting your data. Please try again.');
     }
 }
 
@@ -334,8 +364,28 @@ async function validateAndNavigate() {
         const formData = new FormData(document.getElementById('emission-form'));
         const data = Object.fromEntries(formData.entries());
 
+        // Transform data to required format
+        const appliances = [];
+        document.querySelectorAll('#usage-questions input[type="number"], #usage-questions select').forEach(input => {
+            if (input.tagName === 'SELECT') {
+                appliances.push({
+                    type: input.id.split('-')[0],
+                    brand: input.value,
+                    hours: 0,  // No hours needed for brand selection
+                });
+            } else if (input.tagName === 'INPUT' && input.type === 'number') {
+                appliances.push({
+                    type: input.id.split('-')[0],
+                    hours: parseInt(input.value, 10),
+                });
+            }
+        });
+
+        // Add household size
+        const householdSize = document.getElementById('household-size').value;
+
         // Send data to Lambda
-        const lambdaResponse = await sendDataToLambda(data);
+        const lambdaResponse = await sendDataToLambda({ appliances, household_size: householdSize });
 
         // Check the response or perform further actions if needed
         if (lambdaResponse) {
@@ -359,7 +409,7 @@ function validateForm() {
                 input.classList.remove('input-error');  // Remove the class if input is valid
             }
         } else if (input.tagName === 'INPUT' && input.type === 'number') {
-            if (input.value.trim() === '' || input.value <= 0) {
+            if (input.value.trim() === '' || Number(input.value) <= 0) {
                 isValid = false;
                 input.classList.add('input-error');  // Add a class for styling if needed
             } else {
@@ -373,6 +423,7 @@ function validateForm() {
     }
     return isValid;
 }
+
 </script>
 </body>
 </html>
