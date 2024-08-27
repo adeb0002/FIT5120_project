@@ -88,7 +88,7 @@
                                     Dishwasher</label>
                             </div>
                             <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="hot-water-heater"> Hot
+                                <label><input type="checkbox" name="appliance-selection[]" value="electric-hot-water-heater"> Electric Hot
                                     Water Heater</label>
                             </div>
                             <div class="checkbox">
@@ -108,10 +108,6 @@
                             <div class="checkbox">
                                 <label><input type="checkbox" name="appliance-selection[]" value="refrigerator">
                                     Refrigerator</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="pool-pump"> Pool
-                                    Pump</label>
                             </div>
                             <div class="checkbox">
                                 <label><input type="checkbox" name="appliance-selection[]" value="none"
@@ -227,12 +223,9 @@ document.getElementById('show-questions').addEventListener('click', async functi
     const applianceQuestions = {
         'television': 'How many hours do you watch television a week?',
         'dishwasher': 'How many times do you use the dishwasher a week?',
-        'hot-water-heater': 'How many hours per day is your hot water heater on?',
         'clothes-washer': 'How many times do you use the clothes washer a week?',
         'clothes-dryer': 'How many times do you use the clothes dryer a week?',
         'air-conditioner': 'How many hours per day do you use the air conditioner?',
-        'refrigerator': 'Select the brand of your refrigerator:',
-        'pool-pump': 'Select the brand of your pool pump:'
     };
 
     usageQuestions.innerHTML = ''; // Clear previous questions
