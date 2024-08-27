@@ -68,16 +68,17 @@
                     <label for="transportation-selection">Which mode(s) of transportation do you use?</label>
                     <div id="transportation-selection">
                         <div class="checkbox">
-                            <label><input type="checkbox" name="transportation-selection[]" value="car"> Car</label>
+                            <label><input type="checkbox" name="transportation-selection[]" value="private-vehicle">Private Vehicle</label>
                         </div>
                         <div class="checkbox">
-                            <label><input type="checkbox" name="transportation-selection[]" value="motorcycle">
-                                Motorcycle</label>
+                            <label><input type="checkbox" name="transportation-selection[]" value="bus">
+                                Bus</label>
                         </div>
                         <div class="checkbox">
-                            <label><input type="checkbox" name="transportation-selection[]"
-                                          value="public-transport"> Public
-                                Transport (Bus, Train, Tram)</label>
+                            <label><input type="checkbox" name="transportation-selection[]" value="train"> Train</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="transportation-selection[]" value="tram"> Tram</label>
                         </div>
                         <div class="checkbox">
                             <label><input type="checkbox" name="transportation-selection[]" value="none"
@@ -167,10 +168,10 @@
 
             // Mapping transportation modes to their respective questions
             const transportationQuestions = {
-                'car': 'How many kilometers do you travel by car in a week (as a driver or a passenger)?',
-                'motorcycle': 'How many kilometers do you travel by motorcycle in a week (as a driver or a passenger)?',
-                'public-transport': 'How many hours do you spend on public transport in a week?',
-                'plane': 'How many hours do you fly in a year?'
+                'private-vehicle': 'How many kilometers do you travel by car in a week?',
+                'bus': 'How many kilometers do you travel by bus in a week?',
+                'train': 'How many kilometers do you travel by train in a week?',
+                'tram': 'How many kilometers do you travel by tram in a week?'
             };
 
             // Clear existing questions
