@@ -214,6 +214,7 @@ p {
 }
 
 /* Recommendation Boxes */
+
 .box {
     background-color: #f5f5f5; /* Adjust the background color to match your theme */
     padding: 20px;
@@ -221,7 +222,19 @@ p {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
+    position: relative;
+    margin-left: 150px; /* Shift the boxes to the right */
 }
+
+.icon-right {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3em; /* Increase the size of the icon */
+    color: #33c1cf; /* Light blue color */
+}
+
 
 .box h3 {
     font-size: 18px;
