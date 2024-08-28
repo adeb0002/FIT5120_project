@@ -267,15 +267,12 @@ async function sendDataToLambda(data) {
                     type: 'appliance',
                     appliance_type: appliance.type,
                     brand: appliance.brand || '',  // Ensure brand is included for these appliances
-                    hours: appliance.hours || 0,
-                    household_size: data.household_size || 0
                 };
             } else {
                 return {
                     type: 'appliance',
                     appliance_type: appliance.type,
                     hours: appliance.hours || 0,
-                    household_size: data.household_size || 0
                 };
             }
         });
@@ -337,11 +334,8 @@ async function validateAndNavigate() {
             }
         });
 
-        // Add household size
-        const householdSize = document.getElementById('household-size').value;
-
         // Send data to Lambda
-        const lambdaResponse = await sendDataToLambda({ appliances, household_size: householdSize });
+        const lambdaResponse = await sendDataToLambda({ appliances });
 
         // Check the response or perform further actions if needed
         if (lambdaResponse) {
