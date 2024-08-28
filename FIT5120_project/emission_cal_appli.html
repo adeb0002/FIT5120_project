@@ -55,27 +55,9 @@
                 <div class="line-dec"></div>
                 <p> place holder for calculator instruction</p>
             </div>
-
-            <!-- Section 1: Household Size -->
-            <div class="col-md-9 right-section">
+             <div class="col-md-9 right-section">
                 <form id="emission-form">
-                    <div class="form-group">
-                        <label for="household-size">How many people are in your household?</label>
-                        <select class="form-control" id="household-size" name="household-size" required>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-                    </div>
-
-                    <!-- Section 2: Appliance Selection -->
+                    <!-- Section 1: Appliance Selection -->
                     <div class="form-group">
                         <label for="appliance-selection">What appliance(s) do you have in your household?</label>
                         <div id="appliance-selection">
@@ -86,10 +68,6 @@
                             <div class="checkbox">
                                 <label><input type="checkbox" name="appliance-selection[]" value="dishwasher">
                                     Dishwasher</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="hot_water_heater"> Hot
-                                    Water Heater</label>
                             </div>
                             <div class="checkbox">
                                 <label><input type="checkbox" name="appliance-selection[]" value="clothes_washer">
@@ -124,7 +102,7 @@
                         </div>
                     </div>
 
-                    <!-- Section 3: Usage Hours (hidden initially) -->
+                    <!-- Section 2: Usage Hours (hidden initially) -->
                     <div id="appliance-usage-section" style="display: none;">
                         <div id="usage-questions"></div>
                     </div>
@@ -228,7 +206,6 @@ document.getElementById('show-questions').addEventListener('click', async functi
     const applianceQuestions = {
         'television': 'How many hours do you watch television a week?',
         'dishwasher': 'How many times do you use the dishwasher a week?',
-        'hot_water_heater': 'How many hours per day is your hot water heater on?',
         'clothes_washer': 'How many times do you use the clothes washer a week?',
         'clothes_dryer': 'How many times do you use the clothes dryer a week?',
         'air_conditioner': 'How many hours per day do you use the air conditioner?',
