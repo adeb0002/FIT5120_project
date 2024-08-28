@@ -14,11 +14,6 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/fontAwesome.css">
-    <link rel="stylesheet" href="css/hero-slider.css">
-    <link rel="stylesheet" href="css/owl-carousel.css">
-    <link rel="stylesheet" href="css/templatemo-style.css">
-    <link rel="stylesheet" href="css/lightbox.css">
     <link rel="stylesheet" href="css/emission_calculator.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
@@ -52,66 +47,66 @@
 </div>
 
 <!-- CO2 Emission Calculator Section -->
-<div class="parallax-content" id="emission-calculator" style="padding: 100px 0;">
+<div class="parallax-content" id="emission-calculator">
     <div class="container">
-        <div class="row">
+        <div class = "row">
             <div class="col-md-3 left-section">
                 <h2>Carbon Footprint Calculator</h2>
                 <div class="line-dec"></div>
                 <p> place holder for calculator instruction</p>
             </div>
 
-
-            <!-- Section 1: Transportation Selection -->
+            <!-- Section 1: Gas Selection -->
             <div class="col-md-9 right-section">
-                <div class="form-group">
-                    <label for="transportation-selection">Which mode(s) of transportation do you use?</label>
-                    <div id="transportation-selection">
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="transportation-selection[]" value="car"> Car</label>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="transportation-selection[]" value="motorcycle">
-                                Motorcycle</label>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="transportation-selection[]"
-                                          value="public-transport"> Public
-                                Transport (Bus, Train, Tram)</label>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="transportation-selection[]" value="none"
-                                          id="none-checkbox">
-                                None of the above</label>
+                <form id="emission-form">
+                    <div class="form-group">
+                        <label for="gas-selection">What gas appliance(s) in your household?</label>
+                        <div id="gas-selection">
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="gas-selection[]" value="gas-water-heater">
+                                    Gas Water Heater</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="gas-selection[]" value="gas-stove">
+                                    Gas Stove</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="gas-selection[]" value="gas-heater"> Hot
+                                    Gas Heater</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="appliance-selection[]" value="none"
+                                              id="none-checkbox">
+                                    None of the above</label>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Buttons for showing questions and submitting -->
+                    <!-- Buttons for showing questions and submitting -->
                     <div class="form-group">
                         <div class="primary-blue-button">
                              <a href="#" class="scroll-link" id="show-questions">Show
-                            Transportation Questions</a>
+                            Appliance Questions</a>
                         </div>
                     </div>
 
-                <!-- Section 3: Usage Details (hidden initially) -->
-                <div id="transportation-usage-section" style="display: none;">
-                    <div id="usage-questions"></div>
-                </div>
+                    <!-- Section 3: Usage Hours (hidden initially) -->
+                    <div id="gas-usage-section" style="display: none;">
+                        <div id="usage-questions"></div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Floating Navigation Buttons -->
+ <!-- Floating Navigation Buttons -->
 <div class="floating-buttons">
      <a href="emission_cal_appli.html" class="scroll-link" id="back-button">
          <i class="fa fa-arrow-left"></i> Back</a>
 
     <a href="#" class="scroll-link" id="next-button" onclick="validateAndNavigate()">
-        Next <i class="fa fa-arrow-right"></i>
-    </a>
+        Next <i class="fa fa-arrow-right"></i></a>
 </div>
 
 <!-- JavaScript -->
@@ -120,22 +115,29 @@
 <script src="js/vendor/owl.carousel.min.js"></script>
 <script src="js/vendor/lightbox.min.js"></script>
 <script src="js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 
 <script>
-        function clearAllSelections() {
-            document.querySelectorAll('#transportation-selection input[type="checkbox"]:not(#none-checkbox)').forEach(checkbox => checkbox.checked = false);
+    function clearAllSelections() {
+            document.querySelectorAll('#gas-selection input[type="checkbox"]:not(#none-checkbox)').forEach(checkbox => checkbox.checked = false);
             document.getElementById('usage-questions').innerHTML = '';
-            document.getElementById('transportation-usage-section').style.display = 'none';
+            document.getElementById('gas-usage-section').style.display = 'none';
         }
 
         document.addEventListener('DOMContentLoaded', function() {
             // Initially hide "Show Transportation Questions" and "Next" buttons
             document.getElementById('show-questions').style.display = 'none';
             document.getElementById('next-button').style.display = 'none';
+
+            // Add event listener to the "Next" button
+            document.getElementById('next-button').addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default action
+                validateAndNavigate(); // Call the function to validate inputs and navigate
+            });
         });
 
-        document.getElementById('transportation-selection').addEventListener('change', function() {
-            const checkboxes = document.querySelectorAll('#transportation-selection input[type="checkbox"]');
+        document.getElementById('gas-selection').addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('#gas-selection input[type="checkbox"]');
             const noneCheckbox = document.getElementById('none-checkbox');
 
             let anyChecked = false;
@@ -160,26 +162,25 @@
         });
 
         document.getElementById('show-questions').addEventListener('click', function() {
-            const usageSection = document.getElementById('transportation-usage-section');
+            const usageSection = document.getElementById('gas-usage-section');
             const usageQuestions = document.getElementById('usage-questions');
-            const checkboxes = document.querySelectorAll('#transportation-selection input[type="checkbox"]');
+            const checkboxes = document.querySelectorAll('#gas-selection input[type="checkbox"]');
             const noneCheckbox = document.getElementById('none-checkbox');
 
-            // Mapping transportation modes to their respective questions
-            const transportationQuestions = {
-                'car': 'How many kilometers do you travel by car in a week (as a driver or a passenger)?',
-                'motorcycle': 'How many kilometers do you travel by motorcycle in a week (as a driver or a passenger)?',
-                'public-transport': 'How many hours do you spend on public transport in a week?',
-                'plane': 'How many hours do you fly in a year?'
+            // Mapping gas appliances to their respective questions
+            const gasQuestions = {
+                'gas-water-heater': 'How many hours per day is your gas water heater on?',
+                'gas-stove': 'How many hours per week do you use your gas stove?',
+                'gas-heater': 'How many hours per week do you use your gas heater?'
             };
 
             // Clear existing questions
             usageQuestions.innerHTML = '';
 
-            // Add questions for selected transportation modes
+            // Add questions for selected gas appliances
             checkboxes.forEach(checkbox => {
                 if (checkbox.checked && checkbox.value !== 'none') {
-                    const question = transportationQuestions[checkbox.value];
+                    const question = gasQuestions[checkbox.value];
                     const questionDiv = document.createElement('div');
                     questionDiv.classList.add('form-group');
                     questionDiv.innerHTML = `<label for="${checkbox.value}-usage">${question}</label><input type="number" class="form-control" id="${checkbox.value}-usage" name="${checkbox.value}-usage" min="1" value="1" required>`;
@@ -196,24 +197,26 @@
         });
 
         function validateAndNavigate() {
-            const questions = document.querySelectorAll('#transportation-usage-section input[type="number"]');
+            const questions = document.querySelectorAll('#gas-usage-section input[type="number"]');
             let valid = true;
 
             questions.forEach(input => {
-                if (input.value.trim() === '' || isNaN(input.value) || input.value < 1) {
+                if (input.value.trim() === '' || isNaN(input.value) || parseInt(input.value) < 1) {
                     valid = false;
-                    input.style.borderColor = 'red';
+                    input.classList.add('input-error');
                 } else {
-                    input.style.borderColor = '';
+                    input.classList.remove('input-error');
                 }
             });
 
             if (valid) {
-                window.location.href = 'emission_result.html';
+                // Redirect to next page or display next section
+                window.location.href = 'emission_cal_trans.html'; // Change this to your actual next page URL
             } else {
-                alert('Please provide valid input for all questions.');
+                alert('Please fill in all fields correctly.');
             }
         }
 </script>
+
 </body>
 </html>
