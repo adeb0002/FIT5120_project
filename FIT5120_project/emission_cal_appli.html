@@ -110,10 +110,6 @@
                                     Refrigerator</label>
                             </div>
                             <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="pool_pump"> Pool
-                                    Pump</label>
-                            </div>
-                            <div class="checkbox">
                                 <label><input type="checkbox" name="appliance-selection[]" value="none"
                                               id="none-checkbox">
                                     None of the above</label>
@@ -124,8 +120,7 @@
                     <!-- Buttons for showing questions and submitting -->
                     <div class="form-group">
                         <div class="primary-blue-button">
-                             <a href="#" class="scroll-link" id="show-questions">Show
-                            Appliance Questions</a>
+                             <a href="#" class="scroll-link" id="show-questions">Show Appliance Questions</a>
                         </div>
                     </div>
 
@@ -164,9 +159,15 @@
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initially hide "Show Appliance Questions" and "Next" buttons
+    // Hide "Show Appliance Questions" and "Next" buttons initially
     document.getElementById('show-questions').style.display = 'none';
     document.getElementById('next-button').style.display = 'none';
+
+    // Add event listener for "Next" button
+    document.getElementById('next-button').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default anchor behavior
+        validateAndNavigate(); // Call function to handle navigation
+    });
 });
 
 document.getElementById('appliance-selection').addEventListener('change', function() {
@@ -232,7 +233,6 @@ document.getElementById('show-questions').addEventListener('click', async functi
         'clothes_dryer': 'How many times do you use the clothes dryer a week?',
         'air_conditioner': 'How many hours per day do you use the air conditioner?',
         'refrigerator': 'Select the brand of your refrigerator:',
-        'pool_pump': 'Select the brand of your pool pump:'
     };
 
     usageQuestions.innerHTML = ''; // Clear previous questions
@@ -256,20 +256,6 @@ document.getElementById('show-questions').addEventListener('click', async functi
                 } else {
                     console.error('No brands loaded for refrigerator.');
                 }
-            } else if (checkbox.value === 'pool_pump') {
-                const brands = await loadBrandsFromCSV('pool_pump.csv');
-                if (brands.length > 0) {
-                    questionHTML = `
-                        <div class="form-group">
-                            <label for="${checkbox.value}-brand">${question}</label>
-                            <select class="form-control" id="${checkbox.value}-brand" name="${checkbox.value}-brand" required>
-                                <option value="">--Select a Brand--</option>
-                                ${brands.map(brand => `<option value="${brand}">${brand}</option>`).join('')}
-                            </select>
-                        </div>`;
-                } else {
-                    console.error('No brands loaded for pool pump.');
-                }
             } else {
                 questionHTML = `
                     <div class="form-group">
@@ -291,17 +277,6 @@ document.getElementById('show-questions').addEventListener('click', async functi
     }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Initially hide "Show Appliance Questions" and "Next" buttons
-    document.getElementById('show-questions').style.display = 'none';
-    document.getElementById('next-button').style.display = 'none';
-
-    // Add event listener for the "Next" button
-    document.getElementById('next-button').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent default anchor behavior
-        validateAndNavigate(); // Call the function to handle navigation
-    });
-});
 
 async function sendDataToLambda(data) {
     try {
@@ -310,7 +285,7 @@ async function sendDataToLambda(data) {
         // Prepare data for each appliance
         const applianceData = data.appliances.map(appliance => {
             // Ensure that brand is included where necessary
-            if (appliance.type === 'refrigerator' || appliance.type === 'pool_pump') {
+            if (appliance.type === 'refrigerator') {
                 return {
                     type: 'appliance',
                     appliance_type: appliance.type,
@@ -352,9 +327,13 @@ async function sendDataToLambda(data) {
         console.log('Data sent successfully:', responses);
         return responses;
     } catch (error) {
-        console.error('Error sending data to Lambda:', error);
-        alert('There was an error submitting your data. Please try again.');
+    if (error.name === 'TypeError' && error.message === 'Failed to fetch') {
+        console.error('Network error: Failed to fetch. This could be due to network issues, CORS problems, or an incorrect URL.');
+    } else {
+        console.error('Unexpected error:', error);
     }
+    alert('There was an error submitting your data. Please try again.');
+}
 }
 
 async function validateAndNavigate() {

@@ -49,65 +49,51 @@
 <!-- CO2 Emission Calculator Section -->
 <div class="parallax-content" id="emission-calculator">
     <div class="container">
-        <div class = "row">
+        <div class="row">
             <div class="col-md-3 left-section">
                 <h2>Carbon Footprint Calculator</h2>
                 <div class="line-dec"></div>
-                <p> place holder for calculator instruction</p>
+                <p>Calculate your carbon footprint by answering a few questions.</p>
             </div>
 
-            <!-- Section 1: Gas Selection -->
             <div class="col-md-9 right-section">
                 <form id="emission-form">
+                    <!-- Section 1: Gas Water Heater Question -->
                     <div class="form-group">
-                        <label for="gas-selection">What gas appliance(s) in your household?</label>
-                        <div id="gas-selection">
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="gas-selection[]" value="gas-water-heater">
-                                    Gas Water Heater</label>
+                        <label for="gas-water-heater">Do you use a gas water heater?</label>
+                        <div id="gas-water-heater">
+                            <div class="radio">
+                                <label><input type="radio" name="gas-water-heater" value="yes"> Yes</label>
                             </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="gas-selection[]" value="gas-stove">
-                                    Gas Stove</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="gas-selection[]" value="gas-heater"> Hot
-                                    Gas Heater</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="none"
-                                              id="none-checkbox">
-                                    None of the above</label>
+                            <div class="radio">
+                                <label><input type="radio" name="gas-water-heater" value="no"> No</label>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Buttons for showing questions and submitting -->
-                    <div class="form-group">
-                        <div class="primary-blue-button">
-                             <a href="#" class="scroll-link" id="show-questions">Show
-                            Appliance Questions</a>
-                        </div>
+                    <!-- Section 2: Instantaneous or Storage Question (Initially Hidden) -->
+                    <div class="form-group" id="instantaneous-storage-section" style="display: none;">
+                        <label for="instantaneous-storage">Is it instantaneous or storage?</label>
+                        <select class="form-control" id="instantaneous-storage" name="instantaneous-storage">
+                            <option value="instantaneous">Instantaneous</option>
+                            <option value="storage">Storage</option>
+                        </select>
                     </div>
 
-                    <!-- Section 3: Usage Hours (hidden initially) -->
-                    <div id="gas-usage-section" style="display: none;">
-                        <div id="usage-questions"></div>
+                    <!-- Floating Navigation Buttons -->
+                    <div class="floating-buttons" id="next-button-section">
+                        <a href="emission_cal_appli.html" class="scroll-link" id="back-button">
+                            <i class="fa fa-arrow-left"></i> Back</a>
+
+                        <a href="#" class="scroll-link" id="next-button" onclick="validateAndNavigate()"
+                           style="display: none;">
+                            Next <i class="fa fa-arrow-right"></i></a>
                     </div>
                 </form>
-            </div>
-        </div>
-    </div>
-</div>
-
- <!-- Floating Navigation Buttons -->
-<div class="floating-buttons">
-     <a href="emission_cal_appli.html" class="scroll-link" id="back-button">
-         <i class="fa fa-arrow-left"></i> Back</a>
-
-    <a href="#" class="scroll-link" id="next-button" onclick="validateAndNavigate()">
-        Next <i class="fa fa-arrow-right"></i></a>
-</div>
+            </div> <!-- End of right-section -->
+        </div> <!-- End of row -->
+    </div> <!-- End of container -->
+</div> <!-- End of parallax-content -->
 
 <!-- JavaScript -->
 <script src="js/vendor/jquery-1.11.1.min.js"></script>
@@ -118,105 +104,51 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 
 <script>
-    function clearAllSelections() {
-            document.querySelectorAll('#gas-selection input[type="checkbox"]:not(#none-checkbox)').forEach(checkbox => checkbox.checked = false);
-            document.getElementById('usage-questions').innerHTML = '';
-            document.getElementById('gas-usage-section').style.display = 'none';
-        }
+    document.addEventListener('DOMContentLoaded', function () {
+        const gasWaterHeaterRadios = document.getElementsByName('gas-water-heater');
+        const instantaneousStorageSection = document.getElementById('instantaneous-storage-section');
+        const nextButton = document.getElementById('next-button');
+        const instantaneousStorage = document.getElementById('instantaneous-storage');
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initially hide "Show Transportation Questions" and "Next" buttons
-            document.getElementById('show-questions').style.display = 'none';
-            document.getElementById('next-button').style.display = 'none';
+        // Initial state
+        instantaneousStorageSection.style.display = 'none';
+        nextButton.style.display = 'none';
 
-            // Add event listener to the "Next" button
-            document.getElementById('next-button').addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent the default action
-                validateAndNavigate(); // Call the function to validate inputs and navigate
-            });
-        });
-
-        document.getElementById('gas-selection').addEventListener('change', function() {
-            const checkboxes = document.querySelectorAll('#gas-selection input[type="checkbox"]');
-            const noneCheckbox = document.getElementById('none-checkbox');
-
-            let anyChecked = false;
-
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked && checkbox.value !== 'none') {
-                    anyChecked = true;
-                }
-            });
-
-            if (noneCheckbox.checked) {
-                clearAllSelections();
-                document.getElementById('show-questions').style.display = 'none';
-                document.getElementById('next-button').style.display = 'block';
-            } else if (anyChecked) {
-                document.getElementById('show-questions').style.display = 'block';
-                document.getElementById('next-button').style.display = 'none';
-            } else {
-                document.getElementById('show-questions').style.display = 'none';
-                document.getElementById('next-button').style.display = 'none';
-            }
-        });
-
-        document.getElementById('show-questions').addEventListener('click', function() {
-            const usageSection = document.getElementById('gas-usage-section');
-            const usageQuestions = document.getElementById('usage-questions');
-            const checkboxes = document.querySelectorAll('#gas-selection input[type="checkbox"]');
-            const noneCheckbox = document.getElementById('none-checkbox');
-
-            // Mapping gas appliances to their respective questions
-            const gasQuestions = {
-                'gas-water-heater': 'How many hours per day is your gas water heater on?',
-                'gas-stove': 'How many hours per week do you use your gas stove?',
-                'gas-heater': 'How many hours per week do you use your gas heater?'
-            };
-
-            // Clear existing questions
-            usageQuestions.innerHTML = '';
-
-            // Add questions for selected gas appliances
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked && checkbox.value !== 'none') {
-                    const question = gasQuestions[checkbox.value];
-                    const questionDiv = document.createElement('div');
-                    questionDiv.classList.add('form-group');
-                    questionDiv.innerHTML = `<label for="${checkbox.value}-usage">${question}</label><input type="number" class="form-control" id="${checkbox.value}-usage" name="${checkbox.value}-usage" min="1" value="1" required>`;
-                    usageQuestions.appendChild(questionDiv);
-                }
-            });
-
-            if (noneCheckbox.checked) {
-                document.getElementById('next-button').style.display = 'block';
-            } else {
-                usageSection.style.display = 'block';
-                document.getElementById('next-button').style.display = 'block';
-            }
-        });
-
-        function validateAndNavigate() {
-            const questions = document.querySelectorAll('#gas-usage-section input[type="number"]');
-            let valid = true;
-
-            questions.forEach(input => {
-                if (input.value.trim() === '' || isNaN(input.value) || parseInt(input.value) < 1) {
-                    valid = false;
-                    input.classList.add('input-error');
+        gasWaterHeaterRadios.forEach(radio => {
+            radio.addEventListener('change', function () {
+                if (this.value === 'yes') {
+                    instantaneousStorageSection.style.display = 'block';
+                    nextButton.style.display = 'none'; // Hide next button until a selection is made
                 } else {
-                    input.classList.remove('input-error');
+                    instantaneousStorageSection.style.display = 'none';
+                    nextButton.style.display = 'block'; // Show next button if "no" is selected
                 }
             });
+        });
 
-            if (valid) {
-                // Redirect to next page or display next section
-                window.location.href = 'emission_cal_trans.html'; // Change this to your actual next page URL
-            } else {
-                alert('Please fill in all fields correctly.');
+        instantaneousStorage.addEventListener('change', function () {
+            nextButton.style.display = 'block'; // Show next button once a valid option is selected
+        });
+    });
+
+    function validateAndNavigate() {
+        const gasWaterHeater = document.querySelector('input[name="gas-water-heater"]:checked');
+        if (!gasWaterHeater) {
+            alert('Please answer the gas water heater question.');
+            return;
+        }
+
+        if (gasWaterHeater.value === 'yes') {
+            const instantaneousStorage = document.getElementById('instantaneous-storage').value;
+            if (!instantaneousStorage) {
+                alert('Please select whether your gas water heater is instantaneous or storage.');
+                return;
             }
         }
-</script>
 
+        // Redirect to the next page or perform the next action
+        window.location.href = 'emission_cal_trans.html'; // Change this to your actual next page URL
+    }
+</script>
 </body>
 </html>
