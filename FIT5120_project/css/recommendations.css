@@ -228,12 +228,13 @@ p {
 
 .icon-right {
     position: absolute;
-    right: 20px;
+    right: -20px; /* Increased from 20px to 40px to move the icons further to the right */
     top: 50%;
     transform: translateY(-50%);
-    font-size: 3em; /* Increase the size of the icon */
-    color: #33c1cf; /* Light blue color */
+    font-size: 3em;
+    color: #33c1cf;
 }
+
 
 
 .box h3 {
