@@ -64,16 +64,16 @@
                         <div id="gas-selection">
                             <div class="checkbox">
                                 <label><input type="checkbox" name="gas-selection[]" value="gas-water-heater">
-                                    Gas Water Heater</label>
+                                    Gas Hot Water Heater</label>
                             </div>
-                            <div class="checkbox">
+                            <!-- <div class="checkbox">
                                 <label><input type="checkbox" name="gas-selection[]" value="gas-stove">
                                     Gas Stove</label>
                             </div>
                             <div class="checkbox">
                                 <label><input type="checkbox" name="gas-selection[]" value="gas-heater"> Hot
                                     Gas Heater</label>
-                            </div>
+                            </div> -->
                             <div class="checkbox">
                                 <label><input type="checkbox" name="appliance-selection[]" value="none"
                                               id="none-checkbox">
@@ -148,53 +148,54 @@
                 }
             });
 
+            // EDITED - so that gas hot water heater is treated the same as electric hot water heater i.e. no question
             if (noneCheckbox.checked) {
                 clearAllSelections();
                 document.getElementById('show-questions').style.display = 'none';
                 document.getElementById('next-button').style.display = 'block';
             } else if (anyChecked) {
-                document.getElementById('show-questions').style.display = 'block';
-                document.getElementById('next-button').style.display = 'none';
+                document.getElementById('show-questions').style.display = 'none';
+                document.getElementById('next-button').style.display = 'block';
             } else {
                 document.getElementById('show-questions').style.display = 'none';
                 document.getElementById('next-button').style.display = 'none';
             }
         });
 
-        document.getElementById('show-questions').addEventListener('click', function() {
-            const usageSection = document.getElementById('gas-usage-section');
-            const usageQuestions = document.getElementById('usage-questions');
-            const checkboxes = document.querySelectorAll('#gas-selection input[type="checkbox"]');
-            const noneCheckbox = document.getElementById('none-checkbox');
+        // document.getElementById('show-questions').addEventListener('click', function() {
+        //     const usageSection = document.getElementById('gas-usage-section');
+        //     const usageQuestions = document.getElementById('usage-questions');
+        //     const checkboxes = document.querySelectorAll('#gas-selection input[type="checkbox"]');
+        //     const noneCheckbox = document.getElementById('none-checkbox');
 
-            // Mapping gas appliances to their respective questions
-            const gasQuestions = {
-                'gas-water-heater': 'How many hours per day is your gas water heater on?',
-                'gas-stove': 'How many hours per week do you use your gas stove?',
-                'gas-heater': 'How many hours per week do you use your gas heater?'
-            };
+        //     // Mapping gas appliances to their respective questions
+        //     const gasQuestions = {
+        //         'gas-water-heater': 'How many hours per day is your gas water heater on?',
+        //         'gas-stove': 'How many hours per week do you use your gas stove?',
+        //         'gas-heater': 'How many hours per week do you use your gas heater?'
+        //     };
 
-            // Clear existing questions
-            usageQuestions.innerHTML = '';
+        //     // Clear existing questions
+        //     usageQuestions.innerHTML = '';
 
-            // Add questions for selected gas appliances
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked && checkbox.value !== 'none') {
-                    const question = gasQuestions[checkbox.value];
-                    const questionDiv = document.createElement('div');
-                    questionDiv.classList.add('form-group');
-                    questionDiv.innerHTML = `<label for="${checkbox.value}-usage">${question}</label><input type="number" class="form-control" id="${checkbox.value}-usage" name="${checkbox.value}-usage" min="1" value="1" required>`;
-                    usageQuestions.appendChild(questionDiv);
-                }
-            });
+        //     // Add questions for selected gas appliances
+        //     checkboxes.forEach(checkbox => {
+        //         if (checkbox.checked && checkbox.value !== 'none') {
+        //             const question = gasQuestions[checkbox.value];
+        //             const questionDiv = document.createElement('div');
+        //             questionDiv.classList.add('form-group');
+        //             questionDiv.innerHTML = `<label for="${checkbox.value}-usage">${question}</label><input type="number" class="form-control" id="${checkbox.value}-usage" name="${checkbox.value}-usage" min="1" value="1" required>`;
+        //             usageQuestions.appendChild(questionDiv);
+        //         }
+        //     });
 
-            if (noneCheckbox.checked) {
-                document.getElementById('next-button').style.display = 'block';
-            } else {
-                usageSection.style.display = 'block';
-                document.getElementById('next-button').style.display = 'block';
-            }
-        });
+        //     if (noneCheckbox.checked) {
+        //         document.getElementById('next-button').style.display = 'block';
+        //     } else {
+        //         usageSection.style.display = 'block';
+        //         document.getElementById('next-button').style.display = 'block';
+        //     }
+        // });
 
         function validateAndNavigate() {
             const questions = document.querySelectorAll('#gas-usage-section input[type="number"]');
