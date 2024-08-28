@@ -88,7 +88,7 @@
 
                     <!-- Floating Navigation Buttons -->
                     <div class="floating-buttons" id="next-button-section">
-                        <a href="emission_cal_appli.html" class="scroll-link" id="back-button">
+                        <a href="emission_cal_personal.html" class="scroll-link" id="back-button">
                             <i class="fa fa-arrow-left"></i> Back
                         </a>
 
@@ -108,33 +108,70 @@
 <script src="js/main.js"></script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var solarPanelsSelect = document.getElementById('solar-panels');
-        var gridDependenceSection = document.getElementById('grid-dependence-section');
-        var nextButton = document.getElementById('next-button');
-        var gridDependenceInput = document.getElementById('grid-dependence');
+   document.addEventListener('DOMContentLoaded', function() {
+    var solarPanelsSelect = document.getElementById('solar-panels');
+    var gridDependenceSection = document.getElementById('grid-dependence-section');
+    var nextButton = document.getElementById('next-button');
+    var gridDependenceInput = document.getElementById('grid-dependence');
+    var form = document.getElementById('emission-form');
 
-        solarPanelsSelect.addEventListener('change', function() {
-            if (solarPanelsSelect.value === 'yes') {
-                gridDependenceSection.style.display = 'block';
-                nextButton.style.display = 'none'; // Hide next button initially
-            } else if (solarPanelsSelect.value === 'no') {
-                gridDependenceSection.style.display = 'none';
-                nextButton.style.display = 'inline'; // Show next button
-            } else {
-                gridDependenceSection.style.display = 'none';
-                nextButton.style.display = 'none';
-            }
-        });
-
-        gridDependenceInput.addEventListener('input', function() {
-            if (solarPanelsSelect.value === 'yes' && gridDependenceInput.value.trim() !== '') {
-                nextButton.style.display = 'inline'; // Show next button when input is provided
-            } else {
-                nextButton.style.display = 'none'; // Hide next button if input is empty
-            }
-        });
+    solarPanelsSelect.addEventListener('change', function() {
+        if (solarPanelsSelect.value === 'yes') {
+            gridDependenceSection.style.display = 'block';
+            nextButton.style.display = 'none'; // Hide next button initially
+        } else if (solarPanelsSelect.value === 'no') {
+            gridDependenceSection.style.display = 'none';
+            nextButton.style.display = 'inline'; // Show next button
+        } else {
+            gridDependenceSection.style.display = 'none';
+            nextButton.style.display = 'none';
+        }
     });
+
+    gridDependenceInput.addEventListener('input', function() {
+        if (solarPanelsSelect.value === 'yes' && gridDependenceInput.value.trim() !== '') {
+            nextButton.style.display = 'inline'; // Show next button when input is provided
+        } else {
+            nextButton.style.display = 'none'; // Hide next button if input is empty
+        }
+    });
+
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        var solarPanels = solarPanelsSelect.value;
+        var gridDependence = solarPanels === 'yes' ? gridDependenceInput.value : '';
+
+        try {
+            // Send data to Lambda function
+            const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/solar', {  // Update to your actual Lambda endpoint
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    type: 'personal',
+                    solar_panels: solarPanels,
+                    grid_dependence: gridDependence
+                })
+            });
+
+            if (!response.ok) {
+                const errorDetails = await response.text();
+                console.error(`Network response was not ok. Status: ${response.status}. Details: ${errorDetails}`);
+                throw new Error(`Network response was not ok. Status: ${response.status}. Details: ${errorDetails}`);
+            }
+
+            const data = await response.json();
+            console.log('Success:', data);
+            // Navigate to the next page after successful submission
+            window.location.href = 'emission_cal_gas.html';
+        } catch (error) {
+            console.error('Error:', error);
+            alert('There was an error submitting your data. Please try again.');
+        }
+    });
+});
 
 </script>
 </body>
