@@ -84,8 +84,10 @@ p {
     text-shadow: none;
 }
 
+
+
 .navbar-brand {
-	line-height: 80px;
+	line-height: normal;
 	padding: 0px;
 }
 
@@ -111,11 +113,11 @@ p {
 	letter-spacing: 0.5px;
 	text-transform: uppercase;
 	text-shadow: none;
-	color: #121212!important;
+	color: #ffffff!important;
 }
 
 .header.active {
-    background-color: rgba(250, 250, 250, 0.98);
+    background-color: #131212fa;
     -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
     -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
@@ -130,7 +132,7 @@ p {
 }
 .navbar-brand em {
 	font-style: normal;
-	color: #f7c552;
+	color: #69d76c;
 	font-size: 32px;
 }
 .header.active .navbar-brand {
@@ -152,8 +154,8 @@ p {
 }
 .navbar-inverse .navbar-toggle {
 	margin-top: 22px;
-    border-color: #f7c552;
-    background-color: #f7c552;
+    border-color: #33c1cf;
+    background-color: #33c1cf;
 }
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
 	background-color: #f7c552;
@@ -202,7 +204,7 @@ bootstrap.min.css:5
 	width: 100%;
   	padding-top: 35vh;
   	text-align: center;
-  	background-image: url(../img/banner_bg.jpeg);
+  	background-image: url(../img/banner-green.jpeg);
   	vertical-align: middle;
 }
 
@@ -218,13 +220,13 @@ bootstrap.min.css:5
 
 .baner-content .text-content h2 span {
 	font-weight: 700;
-	color: #33c1cf!important;
+	color: #fff!important;
 }
 
 .baner-content .text-content h2 em {
 	font-style: normal;
 	font-weight: 700;
-	color: #f89624!important;
+	color: #69d76c!important;
 }
 
 .baner-content .text-content p {
@@ -241,7 +243,7 @@ bootstrap.min.css:5
 
 #about {
 	padding: 150px 0px;
-	background-image: url(../img/about-bg.jpg);
+	background-image: url(../img/about-bg2.jpeg);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
@@ -523,7 +525,7 @@ bootstrap.min.css:5
 }
 
 #contact-us {
-	background-color: #596065;
+	background-color: #131212fa;
 	text-align: center;
 	padding: 80px 0px;
 }
@@ -546,7 +548,7 @@ bootstrap.min.css:5
 
 #contact-us .section-heading p {
 	color: #fff;
-	padding: 0px 33%;
+	padding: 0px 10%;
 }
 
 #contact-us .pop-button {
@@ -650,7 +652,7 @@ footer {
 footer .logo em {
 	font-style: normal;
 	font-size: 28px;
-	color: #f7c552;
+	color: #69d76c;
 }
 footer .logo-ft {
 	display: inline-block;

@@ -110,8 +110,8 @@ p {
 }
 .navbar-inverse .navbar-toggle {
 	margin-top: 22px;
-    border-color: #f7c552;
-    background-color: #f7c552;
+    border-color: #33c1cf;
+    background-color: #33c1cf;
 }
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
 	background-color: #f7c552;
@@ -305,7 +305,7 @@ ul li a:hover {
 
 .parallax-content {
     display: flex;
-    background: linear-gradient(to right, #33c1cf 30%, white 30%);
+    background: linear-gradient(to right, #84a784 30%, white 30%);
     height: flex; /* Example height, adjust as needed */
     min-height: 90px;
     width: 100vw;  /* Full viewport width */

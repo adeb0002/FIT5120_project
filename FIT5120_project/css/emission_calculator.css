@@ -30,7 +30,7 @@ p {
     z-index: 10000;
     transition: all 0.2s ease-in-out;
     height: 80px;
-    background-color: rgba(54, 69, 79, 0.9); /* Charcoal Grey with opacity */
+    background-color: #131212d4; /* Charcoal Grey with opacity */
     text-align: center;
     line-height: 40px;
     color: white;
@@ -108,8 +108,8 @@ p {
 }
 .navbar-inverse .navbar-toggle {
 	margin-top: 22px;
-    border-color: #f7c552;
-    background-color: #f7c552;
+    border-color: #33c1cf;
+    background-color: #33c1cf;
 }
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
 	background-color: #f7c552;
@@ -157,7 +157,7 @@ bootstrap.min.css:5
 	width: 100%;
   	padding-top: 35vh;
   	text-align: center;
-  	background-image: url(../img/banner_bg.jpeg);
+  	background-image: url(../img/blog_item_01.jpg);
   	vertical-align: middle;
 }
 
@@ -258,7 +258,7 @@ bootstrap.min.css:5
 /* Define the layout for the ecological calculator section */
 .parallax-content {
     display: flex;
-    background: linear-gradient(to right, #33c1cf 30%, white 30%);
+    background: linear-gradient(to right, #84a784 30%, white 30%);
     height: flex; /* Example height, adjust as needed */
     min-height: 90px;
     width: 100vw;  /* Full viewport width */
