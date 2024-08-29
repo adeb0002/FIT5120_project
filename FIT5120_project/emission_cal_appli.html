@@ -36,8 +36,13 @@
             </div>
             <div id="main-nav" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
+<<<<<<< Updated upstream
                     <li><a href="home.html" class="scroll-top">Home</a></li>
                     <li><a href="emission_cal_appli.html">Emission Calculator</a></li>
+=======
+                    <li><a href="index.html" class="scroll-top">Home</a></li>
+                    <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
+>>>>>>> Stashed changes
                     <li><a href="#" class="scroll-link" data-id="about">About</a></li>
                     <li><a href="#" class="scroll-link" data-id="contact-us">Contact Us</a></li>
                 </ul>
@@ -423,6 +428,28 @@ function validateForm() {
     }
     return isValid;
 }
+
+function saveApplianceData() {
+    const appliances = [];
+    document.querySelectorAll('#usage-questions input[type="number"], #usage-questions select').forEach(input => {
+        if (input.tagName === 'SELECT') {
+            appliances.push({
+                type: input.id.split('-')[0],
+                brand: input.value,
+                hours: 0,  // No hours needed for brand selection
+            });
+        } else if (input.tagName === 'INPUT' && input.type === 'number') {
+            appliances.push({
+                type: input.id.split('-')[0],
+                hours: parseInt(input.value, 10),
+            });
+        }
+    });
+
+    localStorage.setItem('applianceData', JSON.stringify(appliances));
+    console.log('Appliance data saved to localStorage:', appliances);
+}
+
 
 </script>
 </body>
