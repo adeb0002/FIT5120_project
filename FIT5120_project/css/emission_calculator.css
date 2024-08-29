@@ -108,13 +108,13 @@ p {
 }
 .navbar-inverse .navbar-toggle {
 	margin-top: 22px;
-    border-color: #33c1cf;
-    background-color: #33c1cf;
+    border-color: #69d76c!important;
+    background-color: #69d76c!important;
 }
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
 	background-color: #f7c552;
 }
-bootstrap.min.css:5
+bootstrap.min.css
 .navbar-toggle {
     position: relative;
     float: right;
@@ -210,7 +210,7 @@ bootstrap.min.css:5
     background-color: white;
     font-size: 14px;
     padding: 12px 18px; /* Adjusted for better button size */
-    color: #33c1cf;
+    color: #69d76c!important;
     font-weight: 500;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -222,7 +222,7 @@ bootstrap.min.css:5
 
 /* Next Button Styling */
 #next-button {
-    background-color: #33c1cf;
+    background-color: #69d76c!important;
     font-size: 14px;
     padding: 12px 18px; /* Adjusted for better button size */
     color: white;

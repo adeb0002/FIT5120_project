@@ -146,6 +146,42 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add event listener for "Next" button
     document.getElementById('next-button').addEventListener('click', function(event) {
         event.preventDefault(); // Prevent default anchor behavior
+        saveApplianceData(); // Call function to save data
+        window.location.href = 'emission_cal_gas.html'; // Navigate to the next page
+    });
+});
+
+function saveApplianceData() {
+    const appliances = [];
+    document.querySelectorAll('#usage-questions input[type="number"], #usage-questions select').forEach(input => {
+        if (input.tagName === 'SELECT') {
+            appliances.push({
+                type: input.id.split('-')[0],
+                brand: input.value,
+                hours: 0  // No hours needed for brand selection
+            });
+        } else if (input.tagName === 'INPUT' && input.type === 'number') {
+            appliances.push({
+                type: input.id.split('-')[0],
+                hours: parseInt(input.value, 10)
+            });
+        }
+    });
+
+    // Save data to localStorage
+    localStorage.setItem('applianceData', JSON.stringify(appliances));
+    console.log('Appliance data saved to localStorage:', appliances);
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Hide "Show Appliance Questions" and "Next" buttons initially
+    document.getElementById('show-questions').style.display = 'none';
+    document.getElementById('next-button').style.display = 'none';
+
+    // Add event listener for "Next" button
+    document.getElementById('next-button').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default anchor behavior
         validateAndNavigate(); // Call function to handle navigation
     });
 });

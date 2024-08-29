@@ -186,6 +186,10 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Solar panels value:', solarPanels);
         console.log('Grid dependence value:', gridDependence);
 
+        // Save solar panel data to localStorage
+        localStorage.setItem('solarPanels', solarPanels);
+        localStorage.setItem('gridDependence', gridDependence);
+
         // Prepare data for Lambda
         const lambdaData = {
             type: 'solar',
@@ -204,7 +208,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
-
 </script>
 </body>
 </html>

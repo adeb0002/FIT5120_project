@@ -40,8 +40,7 @@ p {
 
 .primary-blue-button a {
 	display: inline-block;
-	background-color: #33c1cf;
-	font-size: 13px;
+	background-color: #69d76c!important;
 	padding: 12px 18px;
 	color: #fff;
 	font-weight: 500;
@@ -53,7 +52,7 @@ p {
 
 .pop-button h4 {
 	display: inline-block;
-	background-color: #33c1cf;
+	background-color: #69d76c!important;
 	font-size: 13px!important;
 	padding: 12px 18px;
 	color: #fff;
@@ -154,13 +153,13 @@ p {
 }
 .navbar-inverse .navbar-toggle {
 	margin-top: 22px;
-    border-color: #33c1cf;
-    background-color: #33c1cf;
+    border-color: #69d76c!important;
+    background-color: #69d76c!important;
 }
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
 	background-color: #f7c552;
 }
-bootstrap.min.css:5
+bootstrap.min.css
 .navbar-toggle {
     position: relative;
     float: right;
@@ -297,7 +296,7 @@ bootstrap.min.css:5
 	padding: 30px 15px 0px 15px;
 }
 
-.filter-categories {;
+.filter-categories {
   margin-top: 60px;
 }
 
@@ -327,7 +326,7 @@ bootstrap.min.css:5
 #portfolio .section-heading {
 	padding-top: 200px;
 	padding-bottom: 200px;
-	background-color: #33c1cf;
+	background-color: #69d76c!important;
 	height: 732px;
 	margin-left: -100vh;
 	padding-left: 100vh;
@@ -507,11 +506,11 @@ bootstrap.min.css:5
 }
 .tabgroup .text-content span {
 	font-size: 13px;
-	color: #33c1cf;
+	color: #69d76c!important;
 }
 .tabgroup .text-content a {
 	font-size: 13px;
-	color: #33c1cf;
+	color: #69d76c!important;
 	text-decoration: none;
 }
 .tabgroup .text-content p {
@@ -633,7 +632,7 @@ bootstrap.min.css:5
 	line-height: 44px;
 	color: #fff;
 	text-align: center;
-	background-color: #33c1cf;
+	background-color: #69d76c!important;
 }
 
 .pop span:hover {
@@ -789,7 +788,7 @@ footer .connect-us ul li a:hover {
 		text-align: center;
 		padding-top: 100px;
 		padding-bottom: 100px;
-		background-color: #33c1cf;
+		background-color: #69d76c!important;
 		height: 505px;
 		margin-left: -15px;
 		padding-left: 0vh;

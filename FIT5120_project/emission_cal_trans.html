@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="css/emission_calculator.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-    <script src="https://code.jquery.com-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -61,12 +61,11 @@
                 <h2>Carbon Footprint Calculator</h2>
                 <div class="line-dec"></div>
                 <p>Next, tell us which modes of transportation you use. 
-                    <br><br> Private Vehicles include all motor vehicles such as Cars, Vans, Motorcycles, Trucks etc.
+                    <br><br> Private Vehicles include all motor vehicles such as Cars, Vans, Motorcycles, Trucks, etc.
                     <br><br> Bus, Train, Tram refer to public transport only.
                     <br><br> If you do not use any of the listed transport modes, select ‘None of the Above’.
                 </p>
             </div>
-
 
             <!-- Section 1: Transportation Selection -->
             <div class="col-md-9 right-section">
@@ -95,12 +94,12 @@
                 </div>
 
                 <!-- Buttons for showing questions and submitting -->
-                    <div class="form-group">
-                        <div class="primary-blue-button">
-                             <a href="#" class="scroll-link" id="show-questions">Show
-                            Transportation Questions</a>
-                        </div>
+                <div class="form-group">
+                    <div class="primary-blue-button">
+                         <a href="#" class="scroll-link" id="show-questions">Show
+                        Transportation Questions</a>
                     </div>
+                </div>
 
                 <!-- Section 3: Usage Details (hidden initially) -->
                 <div id="transportation-usage-section" style="display: none;">
@@ -129,85 +128,83 @@
 <script src="js/main.js"></script>
 
 <script>
-        function clearAllSelections() {
-            document.querySelectorAll('#transportation-selection input[type="checkbox"]:not(#none-checkbox)').forEach(checkbox => checkbox.checked = false);
-            document.getElementById('usage-questions').innerHTML = '';
-            document.getElementById('transportation-usage-section').style.display = 'none';
-        }
+    function clearAllSelections() {
+        document.querySelectorAll('#transportation-selection input[type="checkbox"]:not(#none-checkbox)').forEach(checkbox => checkbox.checked = false);
+        document.getElementById('usage-questions').innerHTML = '';
+        document.getElementById('transportation-usage-section').style.display = 'none';
+    }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initially hide "Show Transportation Questions" and "Next" buttons
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initially hide "Show Transportation Questions" and "Next" buttons
+        document.getElementById('show-questions').style.display = 'none';
+        document.getElementById('next-button').style.display = 'none';
+    });
+
+    document.getElementById('transportation-selection').addEventListener('change', function() {
+        const checkboxes = document.querySelectorAll('#transportation-selection input[type="checkbox"]');
+        const noneCheckbox = document.getElementById('none-checkbox');
+
+        let anyChecked = false;
+
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked && checkbox.value !== 'none') {
+                anyChecked = true;
+            }
+        });
+
+        if (noneCheckbox.checked) {
+            clearAllSelections();
+            document.getElementById('show-questions').style.display = 'none';
+            document.getElementById('next-button').style.display = 'block';
+        } else if (anyChecked) {
+            document.getElementById('show-questions').style.display = 'block';
+            document.getElementById('next-button').style.display = 'none';
+        } else {
             document.getElementById('show-questions').style.display = 'none';
             document.getElementById('next-button').style.display = 'none';
-        });
+        }
+    });
 
-        document.getElementById('transportation-selection').addEventListener('change', function() {
-            const checkboxes = document.querySelectorAll('#transportation-selection input[type="checkbox"]');
-            const noneCheckbox = document.getElementById('none-checkbox');
+    document.getElementById('show-questions').addEventListener('click', function() {
+        const usageSection = document.getElementById('transportation-usage-section');
+        const usageQuestions = document.getElementById('usage-questions');
+        const checkboxes = document.querySelectorAll('#transportation-selection input[type="checkbox"]');
+        const noneCheckbox = document.getElementById('none-checkbox');
 
-            let anyChecked = false;
+        // Mapping transportation modes to their respective questions
+        const transportationQuestions = {
+            'private-vehicle': 'How many kilometers do you travel by car in a week?',
+            'bus': 'How many kilometers do you travel by bus in a week?',
+            'train': 'How many kilometers do you travel by train in a week?',
+            'tram': 'How many kilometers do you travel by tram in a week?'
+        };
 
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked && checkbox.value !== 'none') {
-                    anyChecked = true;
-                }
-            });
+        // Clear existing questions
+        usageQuestions.innerHTML = '';
 
-            if (noneCheckbox.checked) {
-                clearAllSelections();
-                document.getElementById('show-questions').style.display = 'none';
-                document.getElementById('next-button').style.display = 'block';
-            } else if (anyChecked) {
-                document.getElementById('show-questions').style.display = 'block';
-                document.getElementById('next-button').style.display = 'none';
-            } else {
-                document.getElementById('show-questions').style.display = 'none';
-                document.getElementById('next-button').style.display = 'none';
+        // Add questions for selected transportation modes
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked && checkbox.value !== 'none') {
+                const question = transportationQuestions[checkbox.value];
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('form-group');
+                questionDiv.innerHTML = `
+                    <label for="${checkbox.value}-usage">${question}</label>
+                    <input type="number" class="form-control" id="${checkbox.value}-usage" name="${checkbox.value}-usage" min="1" value="1" required>
+                `;
+                usageQuestions.appendChild(questionDiv);
             }
         });
 
-        document.getElementById('show-questions').addEventListener('click', function() {
-            const usageSection = document.getElementById('transportation-usage-section');
-            const usageQuestions = document.getElementById('usage-questions');
-            const checkboxes = document.querySelectorAll('#transportation-selection input[type="checkbox"]');
-            const noneCheckbox = document.getElementById('none-checkbox');
+        if (noneCheckbox.checked) {
+            document.getElementById('next-button').style.display = 'block';
+        } else {
+            usageSection.style.display = 'block';
+            document.getElementById('next-button').style.display = 'block';
+        }
+    });
 
-            // Mapping transportation modes to their respective questions
-            const transportationQuestions = {
-                'private-vehicle': 'How many kilometers do you travel by car in a week?',
-                'bus': 'How many kilometers do you travel by bus in a week?',
-                'train': 'How many kilometers do you travel by train in a week?',
-                'tram': 'How many kilometers do you travel by tram in a week?'
-            };
-
-            // Clear existing questions
-            usageQuestions.innerHTML = '';
-
-            // Add questions for selected transportation modes
-            // Add questions for selected transportation modes
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked && checkbox.value !== 'none') {
-                    const question = transportationQuestions[checkbox.value];
-                    const questionDiv = document.createElement('div');
-                    questionDiv.classList.add('form-group');
-                    questionDiv.innerHTML = `
-                        <label for="${checkbox.value}-usage">${question}</label>
-                        <input type="number" class="form-control" id="${checkbox.value}-usage" name="${checkbox.value}-usage" min="1" value="1" required>
-                    `;
-                    usageQuestions.appendChild(questionDiv);
-                }
-            });
-
-
-            if (noneCheckbox.checked) {
-                document.getElementById('next-button').style.display = 'block';
-            } else {
-                usageSection.style.display = 'block';
-                document.getElementById('next-button').style.display = 'block';
-            }
-        });
-
-        async function sendDataToLambda(data) {
+    async function sendDataToLambda(data) {
     try {
         console.log('Sending data to Lambda:');
         console.log('Original data:', data); // Log the data being sent
@@ -233,38 +230,73 @@
         alert('Error sending data to the server. Please try again.');
     }
 }
-   function validateAndNavigate() {
-    const questions = document.querySelectorAll('#transportation-usage-section input[type="number"]');
-    let valid = true;
-    const dataToSend = [];
 
-    questions.forEach(input => {
-        if (input.value.trim() === '' || isNaN(input.value) || input.value < 1) {
-            valid = false;
-            input.style.borderColor = 'red';
+    function validateAndNavigate() {
+        const questions = document.querySelectorAll('#transportation-usage-section input[type="number"]');
+        let valid = true;
+        const dataToSend = {
+            type: 'transportation',
+            transport_type: '',  // Note: Ensure the transport type is correctly assigned
+            kms: 0
+        };
+
+        questions.forEach(input => {
+            if (input.value.trim() === '' || isNaN(input.value) || input.value < 1) {
+                valid = false;
+                input.style.borderColor = 'red';
+            } else {
+                input.style.borderColor = '';
+                const type = input.name.replace('-usage', ''); // Get the transportation type from input name
+                const kms = parseInt(input.value); // Convert input value to a number
+
+                // Modify the data object to send
+                dataToSend.transport_type = type;
+                dataToSend.kms = kms;
+            }
+        });
+
+        if (valid) {
+            sendDataToLambda(dataToSend); // Send data to Lambda if all inputs are valid
         } else {
-            input.style.borderColor = '';
-            const type = input.name.replace('-usage', ''); // Get the transportation type from input name
-            const kms = parseInt(input.value); // Convert input value to a number
-            dataToSend.push({ type: 'transportation', transportation_type: type, kms: kms });
+            alert('Please provide valid input for all questions.');
         }
-    });
-
-    // Print the original data and formatted data
-    console.log('Original data (input values):');
-    questions.forEach(input => {
-        console.log(`${input.name}: ${input.value}`);
-    });
-
-    console.log('Formatted data to send:');
-    console.log(dataToSend);
-
-    if (valid) {
-        sendDataToLambda(dataToSend); // Send data to Lambda if all inputs are valid
-    } else {
-        alert('Please provide valid input for all questions.');
     }
-}
+
+
+    function validateAndNavigate() {
+        const questions = document.querySelectorAll('#transportation-usage-section input[type="number"]');
+        let valid = true;
+        const dataToSend = [];
+
+        questions.forEach(input => {
+            if (input.value.trim() === '' || isNaN(input.value) || input.value < 1) {
+                valid = false;
+                input.style.borderColor = 'red';
+            } else {
+                input.style.borderColor = '';
+                const type = input.name.replace('-usage', ''); // Get the transportation type from input name
+                const kms = parseInt(input.value); // Convert input value to a number
+                dataToSend.push({ type: 'transportation', transport_type: type, kms: kms });
+            }
+        });
+
+        // Save data to localStorage
+        localStorage.setItem('transportationData', JSON.stringify(dataToSend));
+
+        console.log('Original data (input values):');
+        questions.forEach(input => {
+            console.log(`${input.name}: ${input.value}`);
+        });
+
+        console.log('Formatted data to send:');
+        console.log(dataToSend);
+
+        if (valid) {
+            sendDataToLambda(dataToSend); // Send data to Lambda if all inputs are valid
+        } else {
+            alert('Please provide valid input for all questions.');
+        }
+    }
 </script>
 </body>
 </html>
