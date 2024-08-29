@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="css/emission_calculator.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <script src="https://code.jquery.com-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -178,15 +179,20 @@
             usageQuestions.innerHTML = '';
 
             // Add questions for selected transportation modes
+            // Add questions for selected transportation modes
             checkboxes.forEach(checkbox => {
                 if (checkbox.checked && checkbox.value !== 'none') {
                     const question = transportationQuestions[checkbox.value];
                     const questionDiv = document.createElement('div');
                     questionDiv.classList.add('form-group');
-                    questionDiv.innerHTML = `<label for="${checkbox.value}-usage">${question}</label><input type="number" class="form-control" id="${checkbox.value}-usage" name="${checkbox.value}-usage" min="1" value="1" required>`;
+                    questionDiv.innerHTML = `
+                        <label for="${checkbox.value}-usage">${question}</label>
+                        <input type="number" class="form-control" id="${checkbox.value}-usage" name="${checkbox.value}-usage" min="1" value="1" required>
+                    `;
                     usageQuestions.appendChild(questionDiv);
                 }
             });
+
 
             if (noneCheckbox.checked) {
                 document.getElementById('next-button').style.display = 'block';
@@ -196,25 +202,64 @@
             }
         });
 
-        function validateAndNavigate() {
-            const questions = document.querySelectorAll('#transportation-usage-section input[type="number"]');
-            let valid = true;
+        async function sendDataToLambda(data) {
+    try {
+        console.log('Sending data to Lambda:');
+        console.log('Original data:', data); // Log the data being sent
+        const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
 
-            questions.forEach(input => {
-                if (input.value.trim() === '' || isNaN(input.value) || input.value < 1) {
-                    valid = false;
-                    input.style.borderColor = 'red';
-                } else {
-                    input.style.borderColor = '';
-                }
-            });
-
-            if (valid) {
-                window.location.href = 'emission_result.html';
-            } else {
-                alert('Please provide valid input for all questions.');
-            }
+        if (response.ok) {
+            const result = await response.json();
+            console.log('Data sent successfully:', result);
+            window.location.href = 'emission_result.html'; // Redirect to the results page
+        } else {
+            const errorText = await response.text(); // Read the error response
+            console.error('Error sending data:', response.status, errorText);
+            alert('Error sending data to the server. Please try again.');
         }
+    } catch (error) {
+        console.error('Error sending data:', error);
+        alert('Error sending data to the server. Please try again.');
+    }
+}
+   function validateAndNavigate() {
+    const questions = document.querySelectorAll('#transportation-usage-section input[type="number"]');
+    let valid = true;
+    const dataToSend = [];
+
+    questions.forEach(input => {
+        if (input.value.trim() === '' || isNaN(input.value) || input.value < 1) {
+            valid = false;
+            input.style.borderColor = 'red';
+        } else {
+            input.style.borderColor = '';
+            const type = input.name.replace('-usage', ''); // Get the transportation type from input name
+            const kms = parseInt(input.value); // Convert input value to a number
+            dataToSend.push({ type: 'transportation', transportation_type: type, kms: kms });
+        }
+    });
+
+    // Print the original data and formatted data
+    console.log('Original data (input values):');
+    questions.forEach(input => {
+        console.log(`${input.name}: ${input.value}`);
+    });
+
+    console.log('Formatted data to send:');
+    console.log(dataToSend);
+
+    if (valid) {
+        sendDataToLambda(dataToSend); // Send data to Lambda if all inputs are valid
+    } else {
+        alert('Please provide valid input for all questions.');
+    }
+}
 </script>
 </body>
 </html>
