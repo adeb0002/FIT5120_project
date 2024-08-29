@@ -1,4 +1,3 @@
-/* Reset and base styles */
 * {
     margin: 0;
     padding: 0;
@@ -8,21 +7,21 @@
 html, body {
     height: 100%;
     margin: 0;
-    overflow-x: hidden;
+    overflow-x: hidden; /* This prevents scrolling */
 }
 
 ul {
-    list-style: none;
-    margin: 0px;
+	list-style: none;
+	margin: 0px;
 }
 
 p {
-    color: #7a7a7a;
-    font-size: 14px;
+    color: white;
+    font-size: 20px;
     line-height: 24px;
 }
 
-/* Header styles */
+
 .header {
     position: fixed;
     top: 0;
@@ -32,7 +31,7 @@ p {
     z-index: 10000;
     transition: all 0.2s ease-in-out;
     height: 80px;
-    background-color: rgba(54, 69, 79, 0.9); /* Charcoal Grey with opacity */
+    background-color: #131212d4; /* Charcoal Grey with opacity */
     text-align: center;
     line-height: 40px;
     color: white;
@@ -110,13 +109,13 @@ p {
 }
 .navbar-inverse .navbar-toggle {
 	margin-top: 22px;
-    border-color: #33c1cf;
-    background-color: #33c1cf;
+    border-color: #69d76c!important;
+    background-color: #69d76c!important;
 }
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
 	background-color: #f7c552;
 }
-
+bootstrap.min.css
 .navbar-toggle {
     position: relative;
     float: right;
@@ -129,12 +128,37 @@ p {
     border: 1px solid transparent;
     border-radius: 4px;
 }
+@media (min-width: 768px) {
+    .header .navbar-brand {
+        padding-left: 0;
+    }
+    .navbar-nav {
+        float: right;
+    }
+}
+.page-section {
+    min-height: 100vh;
+    padding: 0;
+}
+
+@media (max-width: 480px) {
+    .page-section h1 {
+        font-size: 3em;
+    }
+    .page-section h2 {
+        font-size: 2em;
+    }
+    .page-section p {
+        font-size: 1em;
+        margin: 0 0 20px;
+    }
+}
 
 .baner-content {
 	width: 100%;
   	padding-top: 35vh;
   	text-align: center;
-  	background-image: url(../img/banner_bg.jpeg);
+  	background-image: url(../img/blog_item_01.jpg);
   	vertical-align: middle;
 }
 
@@ -168,18 +192,6 @@ p {
 
 .baner-content .text-content .primary-white-button {
 	margin-top: 25px;
-}
-
-.floating-buttons {
-    position: fixed; /* Ensure buttons stay fixed on the viewport */
-    bottom: 50px; /* Distance from the bottom of the viewport */
-    left: 20px; /* Distance from the left edge of the viewport for the left buttons */
-    right: 20px; /* Distance from the right edge of the viewport for the right buttons */
-    display: flex; /* Use flexbox to arrange buttons */
-    justify-content: space-between; /* Space buttons evenly within the container */
-    gap: 10px; /* Space between buttons */
-    z-index: 1000; /* Ensure buttons are above other content */
-    cursor: pointer; /* Change cursor to pointer on hover */
 }
 
 /* Recommendation Section */
