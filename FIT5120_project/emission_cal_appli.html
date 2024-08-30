@@ -133,285 +133,298 @@
 
 <script>
     function clearAllSelections() {
-    document.querySelectorAll('#appliance-selection input[type="checkbox"]:not(#none-checkbox)').forEach(checkbox => checkbox.checked = false);
-    document.getElementById('usage-questions').innerHTML = '';
-    document.getElementById('appliance-usage-section').style.display = 'none';
-}
+        document.querySelectorAll('#appliance-selection input[type="checkbox"]:not(#none-checkbox)').forEach(checkbox => checkbox.checked = false);
+        document.getElementById('usage-questions').innerHTML = '';
+        document.getElementById('appliance-usage-section').style.display = 'none';
+    }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Hide "Show Appliance Questions" and "Next" buttons initially
-    document.getElementById('show-questions').style.display = 'none';
-    document.getElementById('next-button').style.display = 'none';
-
-    // Add event listener for "Next" button
-    document.getElementById('next-button').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent default anchor behavior
-        saveApplianceData(); // Call function to save data
-        window.location.href = 'emission_cal_gas.html'; // Navigate to the next page
-    });
-});
-
-function saveApplianceData() {
-    const appliances = [];
-    document.querySelectorAll('#usage-questions input[type="number"], #usage-questions select').forEach(input => {
-        if (input.tagName === 'SELECT') {
-            appliances.push({
-                type: input.id.split('-')[0],
-                brand: input.value,
-                hours: 0  // No hours needed for brand selection
-            });
-        } else if (input.tagName === 'INPUT' && input.type === 'number') {
-            appliances.push({
-                type: input.id.split('-')[0],
-                hours: parseInt(input.value, 10)
-            });
-        }
-    });
-
-    // Save data to localStorage
-    localStorage.setItem('applianceData', JSON.stringify(appliances));
-    console.log('Appliance data saved to localStorage:', appliances);
-}
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Hide "Show Appliance Questions" and "Next" buttons initially
-    document.getElementById('show-questions').style.display = 'none';
-    document.getElementById('next-button').style.display = 'none';
-
-    // Add event listener for "Next" button
-    document.getElementById('next-button').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent default anchor behavior
-        validateAndNavigate(); // Call function to handle navigation
-    });
-});
-
-document.getElementById('appliance-selection').addEventListener('change', function() {
-    const checkboxes = document.querySelectorAll('#appliance-selection input[type="checkbox"]');
-    const noneCheckbox = document.getElementById('none-checkbox');
-
-    let anyChecked = false;
-
-    checkboxes.forEach(checkbox => {
-        if (checkbox.checked && checkbox.value !== 'none') {
-            anyChecked = true;
-        }
-    });
-
-    if (noneCheckbox.checked) {
-        clearAllSelections();
-        document.getElementById('show-questions').style.display = 'none';
-        document.getElementById('next-button').style.display = 'block';
-    } else if (anyChecked) {
-        document.getElementById('show-questions').style.display = 'block';
-        document.getElementById('next-button').style.display = 'none';
-    } else {
+    document.addEventListener('DOMContentLoaded', function() {
+        // Hide "Show Appliance Questions" and "Next" buttons initially
         document.getElementById('show-questions').style.display = 'none';
         document.getElementById('next-button').style.display = 'none';
-    }
-});
 
-async function loadBrandsFromCSV(url) {
-    try {
-        const response = await fetch(url);
-        const csvText = await response.text();
-        return new Promise((resolve, reject) => {
-            Papa.parse(csvText, {
-                header: true,
-                skipEmptyLines: true,
-                complete: function(results) {
-                    const brands = results.data.map(row => row.Brand ? row.Brand.toUpperCase() : '').filter(brand => brand);
-                    const uniqueBrands = [...new Set(brands)];
-                    uniqueBrands.sort();
-                    resolve(uniqueBrands);
-                },
-                error: function(error) {
-                    reject(error);
-                }
-            });
+        // Add event listener for "Next" button
+        document.getElementById('next-button').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default anchor behavior
+            validateAndNavigate(); // Call function to validate and navigate
         });
-    } catch (error) {
-        console.error('Error loading CSV:', error);
-        return [];
-    }
-}
+    });
 
-document.getElementById('show-questions').addEventListener('click', async function() {
-    const usageSection = document.getElementById('appliance-usage-section');
-    const usageQuestions = document.getElementById('usage-questions');
-    const checkboxes = document.querySelectorAll('#appliance-selection input[type="checkbox"]');
-
-    const applianceQuestions = {
-        'television': 'How many hours do you watch television a week?',
-        'dishwasher': 'How many times do you use the dishwasher a week?',
-        'clothes_washer': 'How many times do you use the clothes washer a week?',
-        'clothes_dryer': 'How many times do you use the clothes dryer a week?',
-        'air_conditioner': 'How many hours per day do you use the air conditioner?',
-        'refrigerator': 'Select the brand of your refrigerator:',
-    };
-
-    usageQuestions.innerHTML = ''; // Clear previous questions
-
-    for (const checkbox of checkboxes) {
-        if (checkbox.checked && checkbox.value !== 'none') {
-            const question = applianceQuestions[checkbox.value];
-            let questionHTML = '';
-
-            if (checkbox.value === 'refrigerator') {
-                const brands = await loadBrandsFromCSV('new_freezer.csv');
-                if (brands.length > 0) {
-                    questionHTML = `
-                        <div class="form-group">
-                            <label for="${checkbox.value}-brand">${question}</label>
-                            <select class="form-control" id="${checkbox.value}-brand" name="${checkbox.value}-brand" required>
-                                <option value="">--Select a Brand--</option>
-                                ${brands.map(brand => `<option value="${brand}">${brand}</option>`).join('')}
-                            </select>
-                        </div>`;
-                } else {
-                    console.error('No brands loaded for refrigerator.');
-                }
-            } else {
-                questionHTML = `
-                    <div class="form-group">
-                        <label for="${checkbox.value}-hours">${question}</label>
-                        <input type="number" class="form-control" id="${checkbox.value}-hours" name="${checkbox.value}-hours" min="1" value="1" required>
-                    </div>`;
-            }
-
-            usageQuestions.innerHTML += questionHTML; // Append each question HTML
-        }
-    }
-
-    if (usageQuestions.innerHTML) {
-        usageSection.style.display = 'block';
-        document.getElementById('next-button').style.display = 'block';
-    } else {
-        usageSection.style.display = 'none';
-        document.getElementById('next-button').style.display = 'none';
-    }
-});
-
-
-async function sendDataToLambda(data) {
-    try {
-        console.log('Original data:', data);
-
-        // Prepare data for each appliance
-        const applianceData = data.appliances.map(appliance => {
-            // Ensure that brand is included where necessary
-            if (appliance.type === 'refrigerator') {
-                return {
-                    type: 'appliance',
-                    appliance_type: appliance.type,
-                    brand: appliance.brand || '',  // Ensure brand is included for these appliances
-                };
-            } else {
-                return {
-                    type: 'appliance',
-                    appliance_type: appliance.type,
-                    hours: appliance.hours || 0,
-                };
-            }
-        });
-
-        console.log('Formatted data to send:', applianceData);
-
-        // Send data to Lambda
-        const responses = await Promise.all(applianceData.map(async item => {
-            const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(item),
-            });
-
-            if (!response.ok) {
-                const errorDetails = await response.text();
-                console.error(`Network response was not ok. Status: ${response.status}. Details: ${errorDetails}`);
-                throw new Error(`Network response was not ok. Status: ${response.status}. Details: ${errorDetails}`);
-            }
-
-            return response.json();
-        }));
-
-        console.log('Data sent successfully:', responses);
-        return responses;
-    } catch (error) {
-    if (error.name === 'TypeError' && error.message === 'Failed to fetch') {
-        console.error('Network error: Failed to fetch. This could be due to network issues, CORS problems, or an incorrect URL.');
-    } else {
-        console.error('Unexpected error:', error);
-    }
-    alert('There was an error submitting your data. Please try again.');
-}
-}
-
-async function validateAndNavigate() {
-    // Validate form input
-    if (validateForm()) {
-        // Collect form data
-        const formData = new FormData(document.getElementById('emission-form'));
-        const data = Object.fromEntries(formData.entries());
-
-        // Transform data to required format
+    function saveApplianceData() {
         const appliances = [];
+        let isRefrigeratorBrandSelected = false;
+
         document.querySelectorAll('#usage-questions input[type="number"], #usage-questions select').forEach(input => {
             if (input.tagName === 'SELECT') {
+                const type = input.id.split('-')[0];
+                if (type === 'refrigerator' && input.value) {
+                    isRefrigeratorBrandSelected = true;
+                }
                 appliances.push({
-                    type: input.id.split('-')[0],
+                    type: type,
                     brand: input.value,
-                    hours: 0,  // No hours needed for brand selection
+                    hours: 0  // No hours needed for brand selection
                 });
             } else if (input.tagName === 'INPUT' && input.type === 'number') {
                 appliances.push({
                     type: input.id.split('-')[0],
-                    hours: parseInt(input.value, 10),
+                    hours: parseInt(input.value, 10)
                 });
             }
         });
 
-        // Send data to Lambda
-        const lambdaResponse = await sendDataToLambda({ appliances });
-
-        // Check the response or perform further actions if needed
-        if (lambdaResponse) {
-            // If validation passes and data is sent successfully, navigate to the next page
-            window.location.href = 'emission_cal_gas.html';
+        if (!isRefrigeratorBrandSelected) {
+            //alert('Please select a brand for the refrigerator.');
+            return;
         }
+
+        // Save data to localStorage
+        localStorage.setItem('applianceData', JSON.stringify(appliances));
+        console.log('Appliance data saved to localStorage:', appliances);
     }
-    // If validation fails, stay on the same page and show an alert (this happens automatically by not changing the href)
-}
 
-function validateForm() {
-    const usageQuestions = document.querySelectorAll('#usage-questions input[type="number"], #usage-questions select');
-    let isValid = true;
+    document.getElementById('appliance-selection').addEventListener('change', function() {
+        const checkboxes = document.querySelectorAll('#appliance-selection input[type="checkbox"]');
+        const noneCheckbox = document.getElementById('none-checkbox');
 
-    usageQuestions.forEach(input => {
-        if (input.tagName === 'SELECT') {
-            if (input.value === '') {
-                isValid = false;
-                input.classList.add('input-error');  // Add a class for styling if needed
-            } else {
-                input.classList.remove('input-error');  // Remove the class if input is valid
+        let anyChecked = false;
+
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked && checkbox.value !== 'none') {
+                anyChecked = true;
             }
-        } else if (input.tagName === 'INPUT' && input.type === 'number') {
-            if (input.value.trim() === '' || Number(input.value) <= 0) {
-                isValid = false;
-                input.classList.add('input-error');  // Add a class for styling if needed
-            } else {
-                input.classList.remove('input-error');  // Remove the class if input is valid
-            }
+        });
+
+        if (noneCheckbox.checked) {
+            clearAllSelections();
+            document.getElementById('show-questions').style.display = 'none';
+            document.getElementById('next-button').style.display = 'block';
+        } else if (anyChecked) {
+            document.getElementById('show-questions').style.display = 'block';
+            document.getElementById('next-button').style.display = 'none';
+        } else {
+            document.getElementById('show-questions').style.display = 'none';
+            document.getElementById('next-button').style.display = 'none';
         }
     });
 
-    if (!isValid) {
-        alert('Please answer all the questions correctly before proceeding.');
+    async function loadBrandsFromCSV(url) {
+        try {
+            const response = await fetch(url);
+            const csvText = await response.text();
+            return new Promise((resolve, reject) => {
+                Papa.parse(csvText, {
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: function(results) {
+                        const brands = results.data.map(row => row.Brand ? row.Brand.toUpperCase() : '').filter(brand => brand);
+                        const uniqueBrands = [...new Set(brands)];
+                        uniqueBrands.sort();
+                        resolve(uniqueBrands);
+                    },
+                    error: function(error) {
+                        reject(error);
+                    }
+                });
+            });
+        } catch (error) {
+            console.error('Error loading CSV:', error);
+            return [];
+        }
     }
-    return isValid;
-}
 
+    document.getElementById('show-questions').addEventListener('click', async function() {
+        const usageSection = document.getElementById('appliance-usage-section');
+        const usageQuestions = document.getElementById('usage-questions');
+        const checkboxes = document.querySelectorAll('#appliance-selection input[type="checkbox"]');
+
+        const applianceQuestions = {
+            'television': 'How many hours do you watch television a week?',
+            'dishwasher': 'How many times do you use the dishwasher a week?',
+            'clothes_washer': 'How many times do you use the clothes washer a week?',
+            'clothes_dryer': 'How many times do you use the clothes dryer a week?',
+            'air_conditioner': 'How many hours per day do you use the air conditioner?',
+            'refrigerator': 'Select the brand of your refrigerator:',
+        };
+
+        usageQuestions.innerHTML = ''; // Clear previous questions
+
+        for (const checkbox of checkboxes) {
+            if (checkbox.checked && checkbox.value !== 'none') {
+                const question = applianceQuestions[checkbox.value];
+                let questionHTML = '';
+
+                if (checkbox.value === 'refrigerator') {
+                    const brands = await loadBrandsFromCSV('new_freezer.csv');
+                    if (brands.length > 0) {
+                        questionHTML = `
+                            <div class="form-group">
+                                <label for="${checkbox.value}-brand">${question}</label>
+                                <select class="form-control" id="${checkbox.value}-brand" name="${checkbox.value}-brand" required>
+                                    <option value="">--Select a Brand--</option>
+                                    ${brands.map(brand => `<option value="${brand}">${brand}</option>`).join('')}
+                                </select>
+                            </div>`;
+                    } else {
+                        console.error('No brands loaded for refrigerator.');
+                    }
+                } else {
+                    questionHTML = `
+                        <div class="form-group">
+                            <label for="${checkbox.value}-hours">${question}</label>
+                            <input type="number" class="form-control" id="${checkbox.value}-hours" name="${checkbox.value}-hours" min="1" value="1" required>
+                        </div>`;
+                }
+
+                usageQuestions.innerHTML += questionHTML; // Append each question HTML
+            }
+        }
+
+        if (usageQuestions.innerHTML) {
+            usageSection.style.display = 'block';
+            document.getElementById('next-button').style.display = 'block';
+        } else {
+            usageSection.style.display = 'none';
+            document.getElementById('next-button').style.display = 'none';
+        }
+    });
+
+    async function sendDataToLambda(data) {
+        try {
+            console.log('Original data:', data);
+
+            // Prepare data for each appliance
+            const applianceData = data.appliances.map(appliance => {
+                // Ensure that brand is included where necessary
+                if (appliance.type === 'refrigerator') {
+                    return {
+                        type: 'appliance',
+                        appliance_type: appliance.type,
+                        brand: appliance.brand || '',  // Ensure brand is included for these appliances
+                    };
+                } else {
+                    return {
+                        type: 'appliance',
+                        appliance_type: appliance.type,
+                        hours: appliance.hours || 0,
+                    };
+                }
+            });
+
+            console.log('Formatted data to send:', applianceData);
+
+            // Send data to Lambda
+            const responses = await Promise.all(applianceData.map(async item => {
+                const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(item),
+                });
+
+                if (!response.ok) {
+                    const errorDetails = await response.text();
+                    console.error(`Network response was not ok. Status: ${response.status}. Details: ${errorDetails}`);
+                    throw new Error(`Network response was not ok. Status: ${response.status}. Details: ${errorDetails}`);
+                }
+
+                return response.json();
+            }));
+
+            console.log('Data sent successfully:', responses);
+            return responses;
+        } catch (error) {
+            if (error.name === 'TypeError' && error.message === 'Failed to fetch') {
+                console.error('Network error: Failed to fetch. This could be due to network issues, CORS problems, or an incorrect URL.');
+            } else {
+                console.error('Unexpected error:', error);
+            }
+            alert('There was an error submitting your data. Please try again.');
+        }
+    }
+
+    async function validateAndNavigate() {
+        // Validate form input
+        if (validateForm()) {
+            // Collect form data
+            const formData = new FormData(document.getElementById('emission-form'));
+            const data = Object.fromEntries(formData.entries());
+
+            // Transform data to required format
+            const appliances = [];
+            document.querySelectorAll('#usage-questions input[type="number"], #usage-questions select').forEach(input => {
+                if (input.tagName === 'SELECT') {
+                    appliances.push({
+                        type: input.id.split('-')[0],
+                        brand: input.value,
+                        hours: 0  // No hours needed for brand selection
+                    });
+                } else if (input.tagName === 'INPUT' && input.type === 'number') {
+                    appliances.push({
+                        type: input.id.split('-')[0],
+                        hours: parseInt(input.value, 10)
+                    });
+                }
+            });
+
+            try {
+                // Send data to Lambda or server
+                const lambdaResponse = await sendDataToLambda({ appliances });
+
+                // Check the response or perform further actions if needed
+                if (lambdaResponse) {
+                    // If validation passes and data is sent successfully, navigate to the next page
+                    window.location.href = 'emission_cal_gas.html';
+                } else {
+                    alert('There was an issue sending your data. Please try again.');
+                }
+            } catch (error) {
+                alert('An error occurred while processing your request. Please try again.');
+            }
+        } else {
+            // If validation fails, display an error
+            alert('Please answer all the questions correctly before proceeding.');
+        }
+    }
+
+    function validateForm() {
+        const usageQuestions = document.querySelectorAll('#usage-questions input[type="number"], #usage-questions select');
+        let isValid = true;
+
+        let isRefrigeratorBrandSelected = false;
+
+        usageQuestions.forEach(input => {
+            if (input.tagName === 'SELECT') {
+                if (input.value === '' && input.id.startsWith('refrigerator')) {
+                    isRefrigeratorBrandSelected = false;
+                } else if (input.value === '') {
+                    isValid = false;
+                    input.classList.add('input-error');
+                } else {
+                    if (input.id.startsWith('refrigerator')) {
+                        isRefrigeratorBrandSelected = true;
+                    }
+                    input.classList.remove('input-error');
+                }
+            } else if (input.tagName === 'INPUT' && input.type === 'number') {
+                if (input.value.trim() === '' || Number(input.value) <= 0) {
+                    isValid = false;
+                    input.classList.add('input-error');
+                } else {
+                    input.classList.remove('input-error');
+                }
+            }
+        });
+
+        if (!isRefrigeratorBrandSelected) {
+            isValid = false;
+            //alert('Please select a brand for the refrigerator.');
+        }
+
+        return isValid;
+    }
 </script>
+
 </body>
 </html>
