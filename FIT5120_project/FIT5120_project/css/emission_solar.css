@@ -5,6 +5,7 @@
 }
 
 html, body {
+    background-color: #f2e8d5;
     height: 100%;
     margin: 0;
     overflow-x: hidden; /* This prevents scrolling */
@@ -13,18 +14,6 @@ html, body {
 ul {
 	list-style: none;
 	margin: 0px;
-}
-
-p {
-    color: #f2e8d5; /* Soft cream color for text */
-    font-size: 20px; /* Larger base font size */
-    line-height: 2.0; /* Increased line height for better readability */
-    margin-left: -150px; /* Moves text further to the left */
-    margin-right: 15px; /* Adds right margin for spacing */
-    margin-bottom: 24px; /* Adjusted bottom margin for better spacing */
-    font-family: 'Roboto', sans-serif; /* Clean, modern font */
-    font-weight: bold; /* Makes the text bolder */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for better readability */
 }
 
 .header {
@@ -199,38 +188,38 @@ bootstrap.min.css
 	margin-top: 25px;
 }
 
+/* Floating Buttons Container */
+/* Common floating buttons styles */
 .floating-buttons {
-    position: fixed; /* Ensure buttons stay fixed on the viewport */
-    bottom: 50px; /* Distance from the bottom of the viewport */
-    left: 20px; /* Distance from the left edge of the viewport for the left buttons */
-    right: 20px; /* Distance from the right edge of the viewport for the right buttons */
-    display: flex; /* Use flexbox to arrange buttons */
-    justify-content: space-between; /* Space buttons evenly within the container */
-    gap: 10px; /* Space between buttons */
-    z-index: 1000; /* Ensure buttons are above other content */
-    cursor: pointer; /* Change cursor to pointer on hover */
+position: absolute;
+    bottom: -170px; /* Adjust this value to position the buttons correctly */
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    width: 200%;
 }
 
 /* Back Button Styling */
 #back-button {
     background-color: white;
-    font-size: 14px;
-    padding: 12px 18px; /* Adjusted for better button size */
-    color: #84a784;
+    font-size: 16px;
+    padding: 20px 25px;
+    color: #28a745;
     font-weight: 500;
     letter-spacing: 1px;
     text-transform: uppercase;
     border-radius: 20px;
     text-align: center;
     display: inline-flex;
-    align-items: center; /* Center text and icon vertically */
+    align-items: center;
+    margin-left: 600px;
 }
 
 /* Next Button Styling */
 #next-button {
-    background-color: #84a784;
-    font-size: 14px;
-    padding: 12px 18px; /* Adjusted for better button size */
+    background-color: #28a745;
+    font-size: 16px;
+    padding: 20px 25px;
     color: white;
     font-weight: 500;
     letter-spacing: 1px;
@@ -238,16 +227,157 @@ bootstrap.min.css
     border-radius: 20px;
     text-align: center;
     display: inline-flex;
-    align-items: center; /* Center text and icon vertically */
+    align-items: center;
 }
 
-
+/* Icon Styling inside Buttons */
 #back-button i, #next-button i {
     margin-right: 8px; /* Space between icon and text */
 }
 
-.is-invalid {
-    border: 2px solid red;
+/* Ensure no conflicting styles for floating-buttons links */
+.floating-buttons a {
+    background: #28a745; /* Green background */
+    color: white;
+    padding: 20px 30px; /* Adjusted padding for better button size */
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    display: inline-flex;
+    align-items: center; /* Center text and icon vertically */
+    transition: background-color .3s ease;
+}
+.floating-buttons a:hover {
+    background-color: #00332b; /* Darker shade for hover effect */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header .navbar-nav {
+        float: none;
+        text-align: center;
+    }
+
+    .navbar-nav>li {
+        margin-left: 0;
+        display: inline-block;
+    }
+
+    .floating-buttons {
+        flex-direction: column;
+        bottom: 10px;
+        left: auto;
+        right: auto;
+        width: auto;
+    }
+
+    .floating-buttons a {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-section h1 {
+        font-size: 3em;
+    }
+
+    .page-section h2 {
+        font-size: 2em;
+    }
+
+    .page-section p {
+        font-size: 1em;
+        margin: 0 0 20px;
+    }
+}
+
+
+form .form-group label[for="solar-panels-hidden"] {
+    display: block; /* Makes the label a block-level element */
+    margin-top: 350px; /* Adjust this value as needed for positioning */
+    font-size: 1.5em; /* Adjust the size of the text */
+    font-weight: bold; /* Makes the text bold */
+    color: #333; /* Optional: Adjust the text color */
+}
+
+form .form-group label[for="grid-dependence"] {
+    display: block; /* Makes the label a block-level element */
+    margin-top: 40px; /* Adjust this value as needed for positioning */
+    font-size: 1.5em; /* Adjust the size of the text */
+    font-weight: bold; /* Makes the text bold */
+    color: #333; /* Optional: Adjust the text color */
+}
+
+.icon-label-container {
+    display: flex;
+    align-items: center; /* Align items vertically center */
+    margin-bottom: 20px; /* Add space between the label and slider */
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    margin-left: 70px;
+}
+
+.button-group .btn {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button-group .btn.active {
+    background-color: #28a745;
+    color: white;
+}
+
+
+/* Progress bar styling */
+.progress {
+    width: 400%;
+    margin: 30px auto;
+}
+
+.progress-bar {
+    background-color: #28a745;
+    height: 20px;
+}
+
+h2 {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-top: 120px;
+    margin-left: 200px;
+    margin-bottom: 20px; /* Space below the heading */
+    color: #28a745;
+    line-height: 1.4;
+    text-transform: uppercase;
+    width: 100%; /* Ensure the heading takes full width of the container */
+    white-space: nowrap;
+}
+
+.sun-icon-1 {
+    width: 30px;
+    height: 30px;
+    background-image: url('../img/sun.png');
+    background-size: cover;
+    margin-right: 10px;
+    margin-top: 350px;
+}
+
+.sun-icon-2 {
+    width: 30px;
+    height: 30px;
+    background-image: url('../img/sun.png');
+    background-size: cover;
+    margin-right: 10px;
+    margin-top: 40px;
 }
 
 .input-error {
@@ -255,86 +385,10 @@ bootstrap.min.css
 }
 
 
-.row {
-    display: flex;
-    flex: 1;
-    height: 100%;
-}
 
-/* Define the layout for the ecological calculator section */
-.parallax-content {
-    display: flex;
-    background: linear-gradient(to right, #84a784 30%, white 30%);
-    height: flex; /* Example height, adjust as needed */
-    min-height: 90px;
-    width: 100vw;  /* Full viewport width */
-    padding: 100px 0;
-    box-sizing: border-box;
-    margin: 0; /* Ensure no extra margin */
-}
 
-.left-section {
-    flex: 1;
-    text-align: left;
-    width: 100%;
-    min-height: 90vh;
-}
 
-.right-section {
-    flex: 1;
-    padding: 20px;
-    min-height: 90vh;
-}
 
-@media (min-width: 769px) {
-    .col-md-3 {
-        flex: 0 0 25%; /* 3-column width on larger screens */
-    }
 
-    .col-md-9 {
-        flex: 0 0 75%; /* 9-column width on larger screens */
-    }
-}
-.form-group {
-    margin-bottom: 30px;
-}
 
-.left-section h2 {
-    font-size: 2em;
-    font-weight: 600;
-    margin-bottom: 20px;
-    margin-left: -150px; /* Adjust as needed to move the title to the left */
-    margin-top: 50px; /* Adjust as needed to move the title lower */
-    color: white;
-    line-height: 1.2;
-    white-space: nowrap; /* Prevent line break */
-    overflow: hidden; /* Hide overflow */
-    text-overflow: ellipsis; /* Add ellipsis */
-}
 
-.line-dec {
-    width: 380px; /* Increase the width to make the line longer */
-    height: 5px;
-    background-color: rgba(250, 250, 250, 0.5);
-    margin: 20px 0px 15px 0px; /* Maintain the top and bottom margins */
-    margin-left: -150px; /* Move the line to the left */
-}
-
-label {
-    font-size: 18px; /* Adjust the size as needed */
-    font-weight: bold; /* Optional: Make the text bold */
-    color: #333; /* Optional: Change text color */
-}
-
-.primary-blue-button a {
-	background-color: #84a784;
-	font-size: 14px;
-	padding: 12px 12px;
-	color: white;
-	font-weight: 500;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	text-decoration: none;
-	border-radius: 20px;
-	text-align: center;
-}

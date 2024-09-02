@@ -12,18 +12,11 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/emission_calculator.css">
+    <link rel="stylesheet" href="css/bootstrap-calculator.min.css">
+    <link rel="stylesheet" href="css/emission_personal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-        /* Hide the next button initially */
-        .floating-buttons #next-button {
-            display: none;
-        }
-    </style>
 </head>
 <body>
 <!-- Header Section with Navigation Bar -->
@@ -38,7 +31,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <img href="index.html" class="navbar-brand scroll-top" src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
+                <img href="index.html" class="navbar-brand scroll-top" src="img/logo.png" alt="EcoInsight Logo"
+                     style="height: 80px; margin-right: 10px;">
             </div>
             <div id="main-nav" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -56,35 +50,32 @@
 <!-- CO2 Emission Calculator Section -->
 <div class="parallax-content" id="emission-calculator">
     <div class="container">
-        <div class="row">
-            <div class="col-md-3 left-section">
-                <h2>Carbon Footprint Calculator</h2>
-                <div class="line-dec"></div>
-                <p>To use the emissions calculator, begin by inputting the number of people in your household.</p>
+        <div class="col-md-3">
+            <h2>Carbon Footprint Calculator</h2>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 20%;" aria-valuemin="0"
+                     aria-valuemax="100"></div>
             </div>
+        </div>
 
-            <!-- Section 1: Household Size -->
-            <div class="col-md-9 right-section">
-                <form id="emission-form">
-                    <div class="form-group">
+        <!-- Section 1: Household Size -->
+        <div class="col-md-9">
+            <form id="emission-form">
+                <div class="form-group">
+                    <div class="icon-label-container">
+                        <div class="house-icon"></div>
                         <label for="household-size">How many people are in your household?</label>
-                        <select class="form-control" id="household-size" name="household-size" required>
-                            <option value="" disabled selected>Select number of people</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
                     </div>
-                </form>
-            </div> <!-- End of right-section -->
-        </div> <!-- End of row -->
+                    <div class="slider-container">
+                        <input type="range" class="slider" id="household-size" name="household-size" min="1" max="10"
+                               step="1" value="1" required>
+                        <div id="slider-value-container">
+                            <span id="slider-value" class="slider-value">1</span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div> <!-- End of right-section -->
     </div> <!-- End of container -->
 
     <!-- Floating Navigation Buttons -->
@@ -105,12 +96,13 @@
         console.log('DOM fully loaded and parsed');
 
         var nextButton = document.querySelector('#next-button');
-        var householdSizeSelect = document.querySelector('#household-size');
+        var householdSizeSlider = document.querySelector('#household-size');
+        var sliderValue = document.querySelector('#slider-value');
 
-        // Show the "Next" button when a number is selected
-        householdSizeSelect.addEventListener('change', function() {
-            console.log('Household size selected:', householdSizeSelect.value);
-            if (householdSizeSelect.value) {
+        // Update slider value display
+        householdSizeSlider.addEventListener('input', function() {
+            sliderValue.textContent = householdSizeSlider.value;
+            if (householdSizeSlider.value) {
                 nextButton.style.display = 'inline-block'; // Show the button
             } else {
                 nextButton.style.display = 'none'; // Hide the button
@@ -179,6 +171,32 @@
             }
         }
     });
+
+    // Function to update the slider value and its position
+    function updateSliderValue() {
+        var slider = document.getElementById('household-size');
+        var sliderValue = document.getElementById('slider-value');
+        var sliderValueContainer = document.getElementById('slider-value-container');
+
+        var value = slider.value;
+        sliderValue.textContent = value;
+
+        // Calculate the position of the thumb and adjust the value container position
+        var sliderWidth = slider.offsetWidth;
+        var thumbWidth = 24; // Width of the thumb
+        var thumbPosition = (value - slider.min) / (slider.max - slider.min) * (sliderWidth - thumbWidth);
+
+        sliderValueContainer.style.left = `${thumbPosition + thumbWidth / 2}px`;
+    }
+
+    // Initialize the slider value and position on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        updateSliderValue();
+    });
+
+    // Update the slider value and position when the slider is moved
+    document.getElementById('household-size').addEventListener('input', updateSliderValue);
+
 </script>
 </body>
 </html>
