@@ -13,11 +13,11 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/emission_calculator.css">
+    <link rel="stylesheet" href="css/bootstrap-calculator.min.css">
+    <link rel="stylesheet" href="css/emission_appli.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-    <script src="https://code.jquery.com-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -33,7 +33,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <img href="index.html" class="navbar-brand scroll-top" src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
+                <img href="index.html" class="navbar-brand scroll-top" src="img/logo.png" alt="EcoInsight Logo"
+                     style="height: 80px; margin-right: 10px;">
             </div>
             <div id="main-nav" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -51,73 +52,74 @@
 <!-- CO2 Emission Calculator Section -->
 <div class="parallax-content" id="emission-calculator">
     <div class="container">
-        <div class = "row">
-            <div class="col-md-3 left-section">
-                <h2>Carbon Footprint Calculator</h2>
-                <div class="line-dec"></div>
-                <p>Please select the appliances you have in your household using the checkboxes on the right pane.<br><br>Then, click the ‘Show Appliance Questions’ button to input your usage habits for each selected appliance. If you do not use any of the listed appliances, select ‘None of the Above’. <br><br>After completing all required fields, the ‘Next’ button will become available to proceed.</p>
+        <div class="col-md-3">
+            <h2>Carbon Footprint Calculator</h2>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuemin="0"
+                     aria-valuemax="100"></div>
             </div>
-             <div class="col-md-9 right-section">
-                <form id="emission-form">
-                    <!-- Section 1: Appliance Selection -->
-                    <div class="form-group">
+        </div>
+        <div class="col-md-9">
+            <form id="emission-form">
+                <!-- Section 1: Appliance Selection -->
+                <div class="form-group">
+                    <div class="icon-label-container">
+                        <div class="appliance-icon-1"></div>
                         <label for="appliance-selection">What appliance(s) do you have in your household?</label>
-                        <div id="appliance-selection">
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="television">
-                                    Television</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="dishwasher">
-                                    Dishwasher</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="clothes_washer">
-                                    Clothes
-                                    Washer</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="clothes_dryer">
-                                    Clothes
-                                    Dryer</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="air_conditioner"> Air
-                                    Conditioner</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="refrigerator">
-                                    Refrigerator</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="none"
-                                              id="none-checkbox">
-                                    None of the above</label>
-                            </div>
+                    </div>
+                    <div id="appliance-selection">
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="appliance-selection[]" value="television">
+                                <span>Television</span></label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="appliance-selection[]" value="dishwasher">
+                                <span>Dishwasher</span></label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="appliance-selection[]" value="clothes_washer">
+                                <span>Clothes Washer</span></label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="appliance-selection[]" value="clothes_dryer">
+                                <span>Clothes Dryer</span></label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="appliance-selection[]" value="air_conditioner">
+                                <span>Air Conditioner</span></label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="appliance-selection[]" value="refrigerator">
+                                <span>Refrigerator</span></label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="appliance-selection[]" value="none"
+                                          id="none-checkbox">
+                                <span>None of the above</span></label>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Buttons for showing questions and submitting -->
-                    <div class="form-group">
-                        <div class="primary-blue-button">
-                             <a href="#" class="scroll-link" id="show-questions">Show Appliance Questions</a>
-                        </div>
+                <!-- Buttons for showing questions and submitting -->
+                <div class="form-group">
+                    <div class="primary-green-button">
+                        <a href="#" class="scroll-link" id="show-questions">Show Appliance Questions</a>
                     </div>
+                </div>
 
-                    <!-- Section 2: Usage Hours (hidden initially) -->
-                    <div id="appliance-usage-section" style="display: none;">
-                        <div id="usage-questions"></div>
-                    </div>
-                </form>
-            </div>
+                <!-- Section 2: Usage Hours (hidden initially) -->
+                <div id="appliance-usage-section" style="display: none;">
+                    <div id="usage-questions"></div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
 <!-- Floating Navigation Buttons -->
 <div class="floating-buttons">
-     <a href="emission_cal_solar.html" class="scroll-link" id="back-button">
-         <i class="fa fa-arrow-left"></i> Back</a>
+    <a href="emission_cal_solar.html" class="scroll-link" id="back-button">
+        <i class="fa fa-arrow-left"></i> Back</a>
 
     <a href="#" class="scroll-link" id="next-button">
         Next <i class="fa fa-arrow-right"></i></a>
@@ -252,7 +254,7 @@
                         questionHTML = `
                             <div class="form-group">
                                 <label for="${checkbox.value}-brand">${question}</label>
-                                <select class="form-control" id="${checkbox.value}-brand" name="${checkbox.value}-brand" required>
+                                <select class="form-control" id="${checkbox.value}-brand" name="${checkbox.value}-brand" required style="width: 500px;">
                                     <option value="">--Select a Brand--</option>
                                     ${brands.map(brand => `<option value="${brand}">${brand}</option>`).join('')}
                                 </select>
@@ -362,7 +364,7 @@
 
                 // Check lambdaResponse and navigate accordingly
                 if (lambdaResponse && Array.isArray(lambdaResponse) && lambdaResponse.length > 0) {
-    window.location.href = 'emission_cal_gas.html'; // Redirect to a success page
+                window.location.href = 'emission_cal_trans.html'; // Redirect to a success page
 }
             } catch (error) {
                 console.error('Error during form submission:', error);

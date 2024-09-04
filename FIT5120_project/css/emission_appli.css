@@ -188,15 +188,157 @@ bootstrap.min.css
 	margin-top: 25px;
 }
 
-/* Floating Buttons Container */
+.is-invalid {
+    border: 2px solid red;
+}
+
+.input-error {
+    border-color: red;
+}
+
+/* Define the layout for the ecological calculator section */
+h2 {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-top: 120px;
+    margin-left: 200px;
+    margin-bottom: 20px; /* Space below the heading */
+    color: #28a745;
+    line-height: 1.4;
+    text-transform: uppercase;
+    width: 100%; /* Ensure the heading takes full width of the container */
+    white-space: nowrap;
+}
+
+.icon-label-container {
+    display: flex;
+    align-items: center; /* Align items vertically center */
+    margin-bottom: 20px; /* Add space between the label and slider */
+}
+
+label[for="appliance-selection"] {
+    display: block; /* Makes the label a block-level element */
+    margin-top: 300px; /* Adjust this value as needed for positioning */
+    font-size: 1.5em; /* Adjust the size of the text */
+    font-weight: bold; /* Makes the text bold */
+    color: #333; /* Optional: Adjust the text color */
+}
+
+/* Style for the actual checkbox input */
+#appliance-selection .checkbox input[type="checkbox"] {
+    margin-right: 10px; /* Increase space between checkbox and label text */
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    border-radius: 3px; /* Optional: adds a slight rounding to the corners */
+    border: 2px solid #555; /* Dark border for the checkbox */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Checkbox hover effect */
+#appliance-selection .checkbox input[type="checkbox"]:hover {
+    border-color: #000; /* Darker border on hover */
+}
+
+/* Checked state for the checkbox */
+#appliance-selection .checkbox input[type="checkbox"]:checked {
+    background-color: #007bff; /* Blue background when checked */
+    border-color: #007bff; /* Border matches the background */
+}
+
+/* Special styling for the "None of the above" checkbox */
+#appliance-selection #none-checkbox + label {
+    color: #b30000; /* Dark red for the label text */
+    margin-right: 40px; /* Adjust margin-right if needed */
+}
+
+#appliance-selection #none-checkbox + label:hover {
+    color: #ff0000; /* Bright red on hover */
+}
+
+#appliance-selection #none-checkbox:checked + label {
+    color: #007bff; /* Change label color when checked */
+}
+
+#appliance-selection .checkbox label span {
+    margin-left: 10px;
+    font-size: 1.25em;
+
+}
+
+/* Style for each question group */
+#usage-questions .form-group {
+    margin-bottom: 40px; /* Space between questions */
+}
+
+/* Style for labels */
+#usage-questions label {
+    margin-top: 5px;
+    font-weight: bold; /* Bold text for labels */
+    display: block;
+    margin-bottom: 5px; /* Space between label and input */
+    color: #333;
+    font-size: 1.5em;/* Dark grey color for text */
+}
+
+/* Style for labels inside #usage-questions */
+#usage-questions label::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-image: url('../img/appliance.png');
+    background-size: cover;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* Style for inputs */
+#usage-questions input[type="number"] {
+    width: 100%; /* Full width of the container */
+    padding: 10px; /* Padding inside the input */
+    border: 1px solid #ccc; /* Border around the input */
+    border-radius: 4px; /* Slightly rounded corners */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Style for invalid inputs */
+#usage-questions input[type="number"].is-invalid {
+    border-color: #e74c3c; /* Red border for invalid inputs */
+    background-color: #fdd; /* Light red background */
+}
+
+/* Container for the button */
+.primary-green-button {
+    display: inline-block; /* Allow margin and padding to be applied */
+    margin: 10px 0; /* Space above and below the button */
+}
+
+/* Style for the button link */
+.primary-green-button a.scroll-link {
+    display: inline-block; /* Ensure button-like appearance */
+    padding: 10px 20px; /* Padding inside the button */
+    font-size: 16px; /* Font size for the button text */
+    color: #fff; /* White text color */
+    background-color: #28a745; /* Primary blue background color */
+    border: none; /* Remove default border */
+    border-radius: 10px; /* Rounded corners */
+    text-decoration: none; /* Remove underline from link */
+    text-align: center; /* Center text inside button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for hover effect */
+}
+
 /* Common floating buttons styles */
 .floating-buttons {
-position: absolute;
-    bottom: -170px; /* Adjust this value to position the buttons correctly */
+    position: relative;
+    margin-top: 80px;
+    bottom: 50px;
+    margin-left: 500px;
     transform: translateX(-50%);
     display: flex;
     justify-content: space-between;
-    width: 200%;
+    width: 110%;
 }
 
 /* Back Button Styling */
@@ -254,22 +396,13 @@ position: absolute;
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .header .navbar-nav {
-        float: none;
-        text-align: center;
-    }
-
-    .navbar-nav>li {
-        margin-left: 0;
-        display: inline-block;
+    .container {
+        flex-direction: column;
     }
 
     .floating-buttons {
         flex-direction: column;
         bottom: 10px;
-        left: auto;
-        right: auto;
-        width: auto;
     }
 
     .floating-buttons a {
@@ -277,71 +410,9 @@ position: absolute;
     }
 }
 
-@media (max-width: 480px) {
-    .page-section h1 {
-        font-size: 3em;
-    }
-
-    .page-section h2 {
-        font-size: 2em;
-    }
-
-    .page-section p {
-        font-size: 1em;
-        margin: 0 0 20px;
-    }
-}
-
-
-form .form-group label[for="solar-panels-hidden"] {
-    display: block; /* Makes the label a block-level element */
-    margin-top: 350px; /* Adjust this value as needed for positioning */
-    font-size: 1.5em; /* Adjust the size of the text */
-    font-weight: bold; /* Makes the text bold */
-    color: #333; /* Optional: Adjust the text color */
-}
-
-form .form-group label[for="grid-dependence"] {
-    display: block; /* Makes the label a block-level element */
-    margin-top: 40px; /* Adjust this value as needed for positioning */
-    font-size: 1.5em; /* Adjust the size of the text */
-    font-weight: bold; /* Makes the text bold */
-    color: #333; /* Optional: Adjust the text color */
-}
-
-.icon-label-container {
-    display: flex;
-    align-items: center; /* Align items vertically center */
-    margin-bottom: 20px; /* Add space between the label and slider */
-}
-
-.button-group {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-    margin-left: 70px;
-}
-
-.button-group .btn {
-    padding: 10px 20px;
-    font-size: 1.2em;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f5f5f5;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.button-group .btn.active {
-    background-color: #28a745;
-    color: white;
-}
-
-
-/* Progress bar styling */
 .progress {
-    width: 400%;
-    margin: 30px auto;
+    width: 400%; /* Make the progress bar container take full width of the column */
+    margin: 30px auto; /* Add some margin and center it */
 }
 
 .progress-bar {
@@ -349,46 +420,18 @@ form .form-group label[for="grid-dependence"] {
     height: 20px;
 }
 
-h2 {
-    font-size: 4rem;
-    font-weight: 800;
-    margin-top: 120px;
-    margin-left: 200px;
-    margin-bottom: 20px; /* Space below the heading */
-    color: #28a745;
-    line-height: 1.4;
-    text-transform: uppercase;
-    width: 100%; /* Ensure the heading takes full width of the container */
-    white-space: nowrap;
-}
-
-.sun-icon-1 {
+.appliance-icon-1 {
     width: 30px;
     height: 30px;
-    background-image: url('../img/sun.png');
+    background-image: url('../img/appliance.png');
     background-size: cover;
     margin-right: 10px;
-    margin-top: 350px;
+    margin-top: 300px;
 }
 
-.sun-icon-2 {
-    width: 30px;
-    height: 30px;
-    background-image: url('../img/sun.png');
-    background-size: cover;
-    margin-right: 10px;
-    margin-top: 40px;
+/* Add this in your CSS file or within a <style> block in the <head> */
+input[type="number"] {
+    width: 50%; /* Adjust the percentage to make the input bar shorter */
+    max-width: 500px; /* Optional: Set a maximum width */
+    display: inline-block;
 }
-
-.input-error {
-    border-color: red;
-}
-
-
-
-
-
-
-
-
-
