@@ -83,8 +83,13 @@
                 const result = await response.json();
                 console.log(`Lambda response for ${type}:`, result);
 
+                // Save the emissions for each category to local storage
                 if (type === 'total') {
                     localStorage.setItem('totalEmissions', result.total_emissions || 0);
+                    localStorage.setItem('applianceEmissions', result.appliance_emissions || 0);
+                    localStorage.setItem('gasEmissions', result.gas_emissions || 0);
+                    localStorage.setItem('transportEmissions', result.transport_emissions || 0);
+                    localStorage.setItem('solarEmissions', result.solar_emissions || 0);
                 }
 
                 return result;
@@ -127,16 +132,26 @@
     }
 
     function displayResults() {
-        const totalEmissions = localStorage.getItem('totalEmissions') || 0;
+        // Fetch each emission type from localStorage
+        const totalEmissions = parseFloat(localStorage.getItem('totalEmissions') || 0).toFixed(2);
+        const applianceEmissions = parseFloat(localStorage.getItem('applianceEmissions') || 0).toFixed(2);
+        const gasEmissions = parseFloat(localStorage.getItem('gasEmissions') || 0).toFixed(2);
+        const transportEmissions = parseFloat(localStorage.getItem('transportEmissions') || 0).toFixed(2);
+        const solarEmissions = parseFloat(localStorage.getItem('solarEmissions') || 0).toFixed(2);
+
 
         const resultsTable = document.getElementById('results-table');
         let tableHTML = `
             <table class="table table-bordered">
                 <thead>
-                    <tr><th>Total Emissions (kg CO2)</th></tr>
+                    <tr><th>Category</th><th>Emissions (kg CO2)</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>${totalEmissions} kg</td></tr>
+                    <tr><td>Appliance</td><td>${applianceEmissions} kg</td></tr>
+                    <tr><td>Gas</td><td>${gasEmissions} kg</td></tr>
+                    <tr><td>Transport</td><td>${transportEmissions} kg</td></tr>
+                    <tr><td>Solar</td><td>${solarEmissions} kg</td></tr>
+                    <tr><td><strong>Total</strong></td><td><strong>${totalEmissions} kg</strong></td></tr>
                 </tbody>
             </table>`;
         resultsTable.innerHTML = tableHTML;
