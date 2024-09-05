@@ -123,6 +123,17 @@
         </div>
     </div>
 
+    <!-- Inputs for Appliance Type, Hours, and Brand -->
+    <div style="margin: 20px;">
+        <label for="applianceType">Appliance Type:</label>
+        <input type="text" id="applianceType" placeholder="e.g., television">
+        <label for="hours">Hours Used:</label>
+        <input type="number" id="hours" placeholder="e.g., 5">
+        <label for="brand">Brand (if applicable):</label>
+        <input type="text" id="brand" placeholder="e.g., Samsung">
+        <button onclick="fetchApplianceEmissions()">Fetch Emissions</button>
+    </div>
+
     <!-- Chart Container -->
     <div class="chart-container">
         <div id="category-chart" class="chart">
@@ -140,63 +151,93 @@
     </div>
 
     <script>
-
         // Show the loading animation
         function showLoading() {
             document.getElementById('loading-animation').style.display = 'flex';
         }
-
+    
         // Hide the loading animation
         function hideLoading() {
             document.getElementById('loading-animation').style.display = 'none';
         }
-
+    
+        // Function to determine the request body based on the appliance type
+        function getRequestBody(applianceType, hours, brand) {
+            let requestBody = { type: 'appliance', appliance_type: applianceType };
+    
+            // Add hours if applicable
+            if (['television', 'dishwasher', 'clothes_washer', 'clothes_dryer', 'air_conditioner'].includes(applianceType) && !isNaN(hours)) {
+                requestBody.hours = hours;
+            }
+    
+            // Add brand for refrigerator
+            if (applianceType === 'refrigerator' && brand) {
+                requestBody.brand = brand;
+            }
+    
+            return requestBody;
+        }
+    
         async function fetchApplianceEmissions() {
             showLoading();
             try {
+                // Get input values
+                const applianceType = document.getElementById('applianceType').value.trim();
+                const hours = parseFloat(document.getElementById('hours').value);
+                const brand = document.getElementById('brand').value.trim();
+    
+                // Validate input values
+                if (!applianceType) {
+                    alert('Please enter an appliance type.');
+                    hideLoading();
+                    return;
+                }
+    
+                const requestBody = getRequestBody(applianceType, hours, brand);
+                console.log('Request body:', requestBody);
+    
                 const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({
-                        type: 'appliance',
-                        appliance_type: 'television',
-                        hours: 5
-                    }),
+                    body: JSON.stringify(requestBody),
                 });
-
-                // Check if the response is ok
+    
                 if (!response.ok) {
-                    console.error('Response not OK:', response.status, response.statusText);
-                    throw new Error('Failed to fetch appliance emissions data');
+                    const errorText = await response.text();
+                    console.error('Error response from API:', errorText);
+                    alert('Failed to fetch appliance emissions data.');
+                    hideLoading();
+                    return;
                 }
-
+    
                 const data = await response.json();
-
-                // Check if the response data has the expected format
                 console.log('Fetched Data:', data);
-
-                if (data.appliance_emissions !== undefined && data.individual_appliance_emissions) {
+    
+                // Check if the data has the expected structure
+                if (data && typeof data === 'object' && data.appliance_emissions !== undefined && data.individual_appliance_emissions) {
                     localStorage.setItem('applianceEmissions', data.appliance_emissions);
                     localStorage.setItem('individualApplianceEmissions', JSON.stringify(data.individual_appliance_emissions));
                     console.log('Data successfully stored in localStorage');
+    
+                    // Reinitialize charts after data fetch
+                    initCharts();  
                 } else {
                     console.error('Unexpected data format:', data);
-                    throw new Error('Unexpected data format');
+                    alert('Unexpected data format received from API.');
                 }
             } catch (error) {
                 console.error('Error in fetchApplianceEmissions:', error);
-                // Return an empty object or handle the error as appropriate
-                throw error;  // Re-throw error to prevent initCharts from running
-            }
-                finally{
+                alert('An error occurred while fetching appliance emissions.');
+            } finally {
                 hideLoading();
             }
         }
-
+    
         // Function to retrieve emissions data from localStorage dynamically
         function getEmissionsData() {
+            // Retrieve and parse data from local storage
             const categoryData = [
                 { category: 'Electricity', emissions: parseFloat(localStorage.getItem('applianceEmissions') || 0) },
                 { category: 'Transport', emissions: parseFloat(localStorage.getItem('transportEmissions') || 0) },
@@ -211,102 +252,98 @@
                 emissions: parseFloat(emissions)
             }));
 
+            console.log('Category Data:', categoryData);
+            console.log('Appliance Data:', applianceData);
+
+            // Check if data is correctly retrieved
+            if (!applianceData.length) {
+                console.warn('No appliance data found in localStorage.');
+            }
+
             return { categoryData, applianceData };
         }
 
+    
         // Function to create a pie chart with legend
         function createPieChart(data, selector, valueKey, labelKey) {
             const width = 300;
             const height = 300;
             const radius = Math.min(width, height) / 2;
-
+    
             const svg = d3.select(selector)
+                .html('')  // Clear existing SVG content before drawing new chart
                 .append('svg')
                 .attr('width', width)
                 .attr('height', height + 50) // Extra space for legend
                 .append('g')
                 .attr('transform', `translate(${width / 2}, ${height / 2})`);
-
+    
             const color = d3.scaleOrdinal(d3.schemeCategory10);
-
+    
             const pie = d3.pie()
                 .value(d => d[valueKey]);
-
+    
             const arc = d3.arc()
                 .innerRadius(0)
                 .outerRadius(radius);
-
+    
             const arcs = svg.selectAll('arc')
                 .data(pie(data))
                 .enter()
                 .append('g')
                 .attr('class', 'arc');
-
+    
             arcs.append('path')
                 .attr('d', arc)
                 .attr('fill', d => color(d.data[labelKey]));
-
+    
             // Add labels to the pie slices
             arcs.append('text')
                 .attr('transform', d => `translate(${arc.centroid(d)})`)
                 .attr('text-anchor', 'middle')
                 .style('font-size', '12px')
                 .text(d => `${d.data[labelKey]} (${d.data[valueKey].toFixed(2)} kg)`);
-
+    
             // Add a legend below the pie chart
             const legend = d3.select(selector)
                 .append('div')
                 .attr('class', 'legend');
-
+    
             const legendItems = legend.selectAll('.legend-item')
                 .data(data)
                 .enter()
                 .append('div')
                 .attr('class', 'legend-item');
-
+    
             legendItems.append('div')
                 .attr('class', 'legend-color-box')
                 .style('background-color', d => color(d[labelKey]));
-
+    
             legendItems.append('span')
                 .attr('class', 'legend-text')
                 .text(d => `${d[labelKey]}: ${d[valueKey].toFixed(2)} kg CO2`);
         }
-
+    
         // Initialize charts using the dynamic data
         function initCharts() {
             const { categoryData, applianceData } = getEmissionsData();
-
-            // Log the data to ensure it is being correctly retrieved
-            console.log('Category Data:', categoryData);
-            console.log('Appliance Data:', applianceData);
-
+    
             // Check if appliance data is available; otherwise, log a message
             if (applianceData.length === 0) {
                 console.warn('No appliance data found in localStorage.');
             }
-
+    
             // Create charts with the retrieved data
             createPieChart(categoryData, '#category-chart', 'emissions', 'category');
             createPieChart(applianceData, '#appliance-chart', 'emissions', 'type');
         }
-
-
-        // Run when the page loads
-
+    
         // Correctly call fetch and init functions in sequence
-        window.onload = async function() {
-            try {
-                await fetchApplianceEmissions();
-                console.log('Data fetching completed, initializing charts...');
-                initCharts();
-            } catch (error) {
-                console.error('Failed to fetch data, charts will not be initialized:', error);
-            }
+        window.onload = function() {
+            initCharts(); // Initialize charts on page load
         };
-
-
     </script>
+
 </body>
 
 </html>

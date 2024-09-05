@@ -150,24 +150,65 @@
         document.getElementById('loading-animation').style.display = 'none';
     }
 
+    // Use sessionStorage to manage the flow properly
+    document.addEventListener('DOMContentLoaded', function() {
+        const visitedResultPage = sessionStorage.getItem('visitedResultPage');
 
+        // Check if local storage should be cleared, but do not clear immediately here
+        if (!visitedResultPage) {
+            console.log('First visit to the result page. Local storage remains intact.');
+        }
+
+        // Clear session storage flag for the next visit check
+        sessionStorage.removeItem('visitedResultPage');
+
+        // Initialize the form and UI elements
+        document.getElementById('show-questions').style.display = 'none';
+        document.getElementById('next-button').style.display = 'none';
+
+        // Handle navigation to the next step
+        document.getElementById('next-button').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default link behavior
+            validateAndNavigate(); // Validate and navigate to the next page
+        });
+
+        // Handle back navigation and clear local storage only if starting over
+        document.getElementById('back-button').addEventListener('click', function(event) {
+            event.preventDefault();
+            // Only clear on explicit restart or user-confirmed action
+            if (confirm('Are you sure you want to start over? This will clear all current data.')) {
+                clearLocalStorage();
+            }
+            window.history.back();
+        });
+    });
+
+    // Function to clear local storage data when restarting or resetting
+    function clearLocalStorage() {
+        localStorage.removeItem('applianceData'); // Remove specific appliance data
+        localStorage.removeItem('applianceEmissions'); // Remove emission data if necessary
+        localStorage.removeItem('individualApplianceEmissions'); // Remove individual appliance emissions
+        console.log('Local storage cleared due to explicit user action.');
+    }
+
+
+    // Clear all selections and ensure local storage management is correct
     function clearAllSelections() {
         document.querySelectorAll('#appliance-selection input[type="checkbox"]:not(#none-checkbox)').forEach(checkbox => checkbox.checked = false);
         document.getElementById('usage-questions').innerHTML = '';
         document.getElementById('appliance-usage-section').style.display = 'none';
+        // Optionally clear data specifically related to the selection
+        localStorage.removeItem('applianceData');
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        // Hide "Show Appliance Questions" and "Next" buttons initially
-        document.getElementById('show-questions').style.display = 'none';
-        document.getElementById('next-button').style.display = 'none';
+    // Manage clearing based on page context or user actions
+    function handleNavigationClearance() {
+        // Check context: only clear if restarting or leaving the entire process
+        if (window.location.href.includes('start') || userConfirmedRestart) {
+            clearLocalStorage();
+        }
+    }
 
-        // Add event listener for "Next" button
-        document.getElementById('next-button').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default anchor behavior
-            validateAndNavigate(); // Call function to validate and navigate
-        });
-    });
 
     document.querySelectorAll('#appliance-selection input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('change', function() {
@@ -358,11 +399,9 @@
         return true;
     }
 
+    // Save appliance data when form is validated and user proceeds to the next step
     async function validateAndNavigate() {
         if (validateForm()) {
-            const formData = new FormData(document.getElementById('emission-form'));
-            const data = Object.fromEntries(formData.entries());
-
             const appliances = [];
             document.querySelectorAll('#usage-questions input[type="number"], #usage-questions select').forEach(input => {
                 if (input.tagName === 'SELECT') {
@@ -379,18 +418,22 @@
                 }
             });
 
+            // Save the appliances data to local storage
+            localStorage.setItem('applianceData', JSON.stringify(appliances));
+            console.log('Updated appliance data saved before navigation:', appliances);
+
             try {
                 const lambdaResponse = await sendDataToLambda({ appliances });
-
-                // Check lambdaResponse and navigate accordingly
                 if (lambdaResponse && Array.isArray(lambdaResponse) && lambdaResponse.length > 0) {
-                window.location.href = 'emission_cal_trans.html'; // Redirect to a success page
-}
+                    sessionStorage.setItem('visitedResultPage', 'true'); // Set session flag before navigating
+                    window.location.href = 'result_graph.html'; // Redirect to the graph page
+                }
             } catch (error) {
                 console.error('Error during form submission:', error);
             }
         }
     }
+
 </script>
 </body>
 </html>
