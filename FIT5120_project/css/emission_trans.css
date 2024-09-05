@@ -225,51 +225,9 @@ label[for="transportation-selection"] {
     color: #333; /* Optional: Adjust the text color */
 }
 
-/* Style for the actual checkbox input */
-#transportation-selection .checkbox input[type="checkbox"] {
-    margin-right: 10px; /* Increase space between checkbox and label text */
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-    border-radius: 3px; /* Optional: adds a slight rounding to the corners */
-    border: 2px solid #555; /* Dark border for the checkbox */
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-/* Checkbox hover effect */
-#transportation-selection .checkbox input[type="checkbox"]:hover {
-    border-color: #000; /* Darker border on hover */
-}
-
-/* Checked state for the checkbox */
-#transportation-selection .checkbox input[type="checkbox"]:checked {
-    background-color: #007bff; /* Blue background when checked */
-    border-color: #007bff; /* Border matches the background */
-}
-
-/* Special styling for the "None of the above" checkbox */
-#transportation-selection #none-checkbox + label {
-    color: #b30000; /* Dark red for the label text */
-    margin-right: 40px; /* Adjust margin-right if needed */
-}
-
-#transportation-selection #none-checkbox + label:hover {
-    color: #ff0000; /* Bright red on hover */
-}
-
-#transportation-selection #none-checkbox:checked + label {
-    color: #007bff; /* Change label color when checked */
-}
-
-
-#transportation-selection .checkbox label span {
-    margin-left: 10px;
-    font-size: 1.25em;
-
-}
-
 /* Style for each question group */
 #usage-questions .form-group {
+    margin-top: 50px;
     margin-bottom: 40px; /* Space between questions */
 }
 
@@ -438,3 +396,36 @@ input[type="number"] {
     display: inline-block;
 }
 
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    margin-left: 70px;
+}
+
+.transportation-button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.transportation-button.active {
+    background-color: #0056b3; /* Active state background color */
+    color: white; /* Active state text color */
+}
+
+.transportation-button.selected-green {
+    background-color: #28a745; /* Green background */
+    color: white; /* White text */
+}
+
+.transportation-button.selected-green.active {
+    background-color: #28a745; /* Green background */
+    color: white; /* White text */
+}
