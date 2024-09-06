@@ -56,7 +56,7 @@
                     <p>Below is the total result of your carbon footprint calculation.</p>
                 </div>
                 <div class="col-md-9 right-section">
-                    <div id="results-table">
+                    <div id="results-table" style="margin-top: 200px;>
                         <!-- Total result will be dynamically injected here -->
                     </div>
                     <div class="primary-blue-button">
@@ -144,7 +144,6 @@
         const applianceEmissions = parseFloat(localStorage.getItem('applianceEmissions') || 0).toFixed(2);
         const gasEmissions = parseFloat(localStorage.getItem('gasEmissions') || 0).toFixed(2);
         const transportEmissions = parseFloat(localStorage.getItem('transportEmissions') || 0).toFixed(2);
-        const solarEmissions = parseFloat(localStorage.getItem('solarEmissions') || 0).toFixed(2);
 
 
         const resultsTable = document.getElementById('results-table');
@@ -157,7 +156,6 @@
                     <tr><td>Appliance</td><td>${applianceEmissions} kg</td></tr>
                     <tr><td>Gas</td><td>${gasEmissions} kg</td></tr>
                     <tr><td>Transport</td><td>${transportEmissions} kg</td></tr>
-                    <tr><td>Solar</td><td>${solarEmissions} kg</td></tr>
                     <tr><td><strong>Total</strong></td><td><strong>${totalEmissions} kg</strong></td></tr>
                 </tbody>
             </table>`;

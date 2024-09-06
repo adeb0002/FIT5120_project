@@ -52,7 +52,7 @@
 <!-- Loading Animation with Tree GIF -->
 <div id="loading-animation" style="display: none;">
     <img src="img/tree.gif" alt="Loading..." style="width: 100px; height: auto;">
-    <p>Loading, please wait...</p>
+    <p>Calculating, please wait...</p>
 </div>
 
 <!-- CO2 Emission Calculator Section -->
@@ -128,6 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('next-button').addEventListener('click', function(event) {
         event.preventDefault();
+        saveDataToLocalStorage();
         validateAndNavigate(); // Validate and navigate to the next page
     });
 
@@ -136,18 +137,47 @@ document.addEventListener('DOMContentLoaded', function() {
         if (confirm('Are you sure you want to start over? This will clear all current data.')) {
             clearLocalStorage();
         }
+        clearLocalStorage();
         window.history.back();
     });
 });
 
+function saveDataToLocalStorage() {
+    const selectedAppliances = Array.from(document.querySelectorAll('#appliance-selection .btn.selected-green')).map(button => button.getAttribute('data-value'));
 
-    // Function to clear local storage data when restarting or resetting
-    function clearLocalStorage() {
-        localStorage.removeItem('applianceData'); // Remove specific appliance data
-        localStorage.removeItem('applianceEmissions'); // Remove emission data if necessary
-        localStorage.removeItem('individualApplianceEmissions'); // Remove individual appliance emissions
-        console.log('Local storage cleared due to explicit user action.');
-    }
+    // Save selected appliances
+    localStorage.setItem('applianceData', JSON.stringify(selectedAppliances));
+
+    // Save usage data
+    selectedAppliances.forEach(appliance => {
+        const usageElement = document.getElementById(`${appliance}-hours`);
+        if (usageElement) {
+            localStorage.setItem(`${appliance}-hours`, usageElement.value);
+        }
+
+        const brandElement = document.getElementById(`${appliance}-brand`);
+        if (brandElement) {
+            localStorage.setItem(`${appliance}-brand`, brandElement.value);
+        }
+    });
+
+    console.log('Appliance data and usage data saved to localStorage.');
+}
+
+
+   function clearLocalStorage() {
+    localStorage.removeItem('applianceData');
+
+    // Remove each appliance's associated data
+    const selectedAppliances = JSON.parse(localStorage.getItem('applianceData')) || [];
+    selectedAppliances.forEach(appliance => {
+        localStorage.removeItem(`${appliance}-hours`);
+        localStorage.removeItem(`${appliance}-brand`);
+    });
+
+    console.log('LocalStorage cleared.');
+}
+
 
     // Clear all selections and ensure local storage management is correct
     function clearAllSelections() {
