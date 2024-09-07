@@ -96,7 +96,6 @@
                     localStorage.setItem('applianceEmissions', result.appliance_emissions || 0);
                     localStorage.setItem('gasEmissions', result.gas_emissions || 0);
                     localStorage.setItem('transportEmissions', result.transport_emissions || 0);
-                    localStorage.setItem('solarEmissions', result.solar_emissions || 0);
                 }
 
                 return result;
@@ -120,7 +119,6 @@
         const applianceEmissions = localStorage.getItem('applianceEmissions') || 0;
         const gasEmissions = localStorage.getItem('gasEmissions') || 0;
         const transportEmissions = localStorage.getItem('transportEmissions') || 0;
-        const solarEmissions = localStorage.getItem('solarEmissions') || 0;
 
         // Combine emissions data into a single request
         const dataToSend = {
@@ -128,7 +126,6 @@
             appliance_emissions: parseFloat(applianceEmissions),
             gas_emissions: parseFloat(gasEmissions),
             transport_emissions: parseFloat(transportEmissions),
-            solar_emissions: parseFloat(solarEmissions)
         };
 
         // Fetch the total emissions result

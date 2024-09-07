@@ -429,3 +429,17 @@ input[type="number"] {
     background-color: #28a745; /* Green background */
     color: white; /* White text */
 }
+
+.map-button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    font-weight: bold; /* Corrected property name */
+    width: 150px;
+    border: 1px solid #28a745;
+    border-radius: 20px;
+    background-color: #d9e7d4; /* Existing background color */
+    color: #333; /* Improved color for better readability */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 20px;
+}

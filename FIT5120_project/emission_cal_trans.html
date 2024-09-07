@@ -33,13 +33,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <img href="index.html" class="navbar-brand scroll-top" src="img/logo.png" alt="EcoInsight Logo"
-                     style="height: 80px; margin-right: 10px;">
+                <a href="index.html" class="navbar-brand scroll-top">
+                    <img src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
+                </a>
             </div>
             <div id="main-nav" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="index.html" class="scroll-top">Home</a></li>
-                    <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">our mission</a></li>
+                    <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a></li>
                     <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
                     <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
                     <li><a href="recommendations.html">Recommendations</a></li>
@@ -69,16 +70,20 @@
                 </div>
                 <div id="transportation-selection">
                     <div class="button-group">
-    <button type="button" data-value="private-vehicle" class="transportation-button">Private Vehicle</button>
-    <button type="button" data-value="bus" class="transportation-button">Bus</button>
-    <button type="button" data-value="train" class="transportation-button">Train</button>
-    <button type="button" data-value="tram" class="transportation-button">Tram</button>
-    <button type="button" data-value="none" id="none-button" class="transportation-button">None of the above</button>
-</div>
+                        <button type="button" data-value="private-vehicle" class="transportation-button">Private
+                            Vehicle
+                        </button>
+                        <button type="button" data-value="bus" class="transportation-button">Bus</button>
+                        <button type="button" data-value="train" class="transportation-button">Train</button>
+                        <button type="button" data-value="tram" class="transportation-button">Tram</button>
+                        <button type="button" data-value="none" id="none-button" class="transportation-button">None of
+                            the above
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Section 3: Usage Details (hidden initially) -->
+            <!-- Section 2: Usage Details (hidden initially) -->
             <div id="transportation-usage-section" style="display: none;">
                 <div id="usage-questions"></div>
             </div>
@@ -86,11 +91,11 @@
     </div>
 </div>
 
-
 <!-- Floating Navigation Buttons -->
 <div class="floating-buttons">
     <a href="emission_cal_gas.html" class="scroll-link" id="back-button">
-        <i class="fa fa-arrow-left"></i> Back</a>
+        <i class="fa fa-arrow-left"></i> Back
+    </a>
 
     <a href="#" class="scroll-link" id="next-button" onclick="validateAndNavigate()">
         Next <i class="fa fa-arrow-right"></i>
@@ -105,153 +110,155 @@
 <script src="js/main.js"></script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const buttons = document.querySelectorAll('#transportation-selection .transportation-button');
-        const noneButton = document.getElementById('none-button');
-        const usageSection = document.getElementById('transportation-usage-section');
-        const usageQuestions = document.getElementById('usage-questions');
-        const nextButton = document.getElementById('next-button');
+document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('#transportation-selection .transportation-button');
+    const noneButton = document.getElementById('none-button');
+    const usageSection = document.getElementById('transportation-usage-section');
+    const usageQuestions = document.getElementById('usage-questions');
+    const nextButton = document.getElementById('next-button');
 
-        // Initially hide the "Next" button
-        nextButton.style.display = 'none';
+    // Load saved state
+    const savedState = JSON.parse(localStorage.getItem('transportationState')) || {};
+    buttons.forEach(button => {
+        if (savedState.selectedModes && savedState.selectedModes.includes(button.dataset.value)) {
+            button.classList.add('selected-green');
+        }
+    });
+    if (savedState.noneSelected) {
+        noneButton.classList.add('selected-green');
+    }
+    if (savedState.anySelected) {
+        showQuestions();
+        nextButton.style.display = 'block';
+    }
 
-        // Event listener for button clicks
-        buttons.forEach(button => {
-            button.addEventListener('click', function() {
-                // If "None of the above" is clicked
-                if (this === noneButton) {
-                    // Turn "None of the above" button green
-                    noneButton.classList.add('selected-green');
+    // Load the total distance if available
+    const storedTotalDistance = localStorage.getItem('totalDistance');
+    if (storedTotalDistance) {
+        const privateVehicleInput = document.querySelector('#private-vehicle-usage');
+        if (privateVehicleInput) {
+            privateVehicleInput.value = storedTotalDistance;
+        }
+        localStorage.removeItem('totalDistance'); // Clean up after using it
+    }
 
-                    // Turn all other buttons white
-                    buttons.forEach(btn => {
-                        if (btn !== noneButton) {
-                            btn.classList.remove('selected-green');
-                        }
-                    });
-
-                    // Hide the questions section and show "Next" button
-                    usageSection.style.display = 'none';
+    // Event listener for button clicks
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            if (this === noneButton) {
+                noneButton.classList.add('selected-green');
+                buttons.forEach(btn => {
+                    if (btn !== noneButton) {
+                        btn.classList.remove('selected-green');
+                    }
+                });
+                usageSection.style.display = 'none';
+                nextButton.style.display = 'block';
+            } else {
+                this.classList.toggle('selected-green');
+                if (noneButton.classList.contains('selected-green')) {
+                    noneButton.classList.remove('selected-green');
+                }
+                const anySelected = Array.from(buttons).some(btn => btn.classList.contains('selected-green'));
+                if (anySelected) {
+                    showQuestions();
                     nextButton.style.display = 'block';
                 } else {
-                    // Toggle the button's selected state
-                    this.classList.toggle('selected-green');
-
-                    // If "None of the above" is selected, unselect it
-                    if (noneButton.classList.contains('selected-green')) {
-                        noneButton.classList.remove('selected-green');
-                    }
-
-                    // Determine if at least one button is selected
-                    const anySelected = Array.from(buttons).some(btn => btn.classList.contains('selected-green'));
-
-                    if (anySelected) {
-                        // Show the questions section and "Next" button
-                        showQuestions();
-                        nextButton.style.display = 'block';
-                    } else {
-                        // Hide the questions section and "Next" button
-                        usageSection.style.display = 'none';
-                        nextButton.style.display = 'none';
-                    }
+                    usageSection.style.display = 'none';
+                    nextButton.style.display = 'none';
                 }
-            });
+            }
+            saveState();
         });
+    });
 
-        function showQuestions() {
-            const transportationQuestions = {
-                'private-vehicle': 'How many kilometers do you travel by car in a week?',
-                'bus': 'How many kilometers do you travel by bus in a week?',
-                'train': 'How many kilometers do you travel by train in a week?',
-                'tram': 'How many kilometers do you travel by tram in a week?'
-            };
+    function showQuestions() {
+        const transportationQuestions = {
+            'private-vehicle': 'How many kilometers do you travel by car in a week?',
+            'bus': 'How many kilometers do you travel by bus in a week?',
+            'train': 'How many kilometers do you travel by train in a week?',
+            'tram': 'How many kilometers do you travel by tram in a week?'
+        };
 
-            // Clear existing questions
-            usageQuestions.innerHTML = '';
+        usageQuestions.innerHTML = '';
+        buttons.forEach(btn => {
+            if (btn.classList.contains('selected-green') && btn !== noneButton) {
+                const question = transportationQuestions[btn.dataset.value];
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('form-group');
+                questionDiv.innerHTML = `
+                    <label for="${btn.dataset.value}-usage">${question}</label>
+                    <input type="text" class="form-control" id="${btn.dataset.value}-usage">
+                    ${btn.dataset.value === 'private-vehicle' ?
+                        '<button type="button" id="display-map-button" class="map-button">Display Map</button>'
+                        : ''}
+                `;
+                usageQuestions.appendChild(questionDiv);
+            }
+        });
+        usageSection.style.display = 'block';
 
-            // Add questions for selected transportation modes
-            buttons.forEach(btn => {
-                if (btn.classList.contains('selected-green') && btn !== noneButton) {
-                    const question = transportationQuestions[btn.dataset.value];
-                    const questionDiv = document.createElement('div');
-                    questionDiv.classList.add('form-group');
-                    questionDiv.innerHTML = `
-                        <label for="${btn.dataset.value}-usage">${question}</label>
-                        <input type="number" class="form-control" id="${btn.dataset.value}-usage" name="${btn.dataset.value}-usage" min="1" value="1" required>
-                    `;
-                    usageQuestions.appendChild(questionDiv);
-                }
+        // Attach click event to the "Display Map" button
+        const displayMapButton = document.getElementById('display-map-button');
+        if (displayMapButton) {
+            displayMapButton.addEventListener('click', function() {
+                // Save the state before navigating
+                saveState();
+                window.location.href = 'emission_cal_trans_car.html';
             });
-
-            usageSection.style.display = 'block';
         }
+    }
+
+    function saveState() {
+        const state = {
+            anySelected: Array.from(buttons).some(btn => btn.classList.contains('selected-green')),
+            noneSelected: noneButton.classList.contains('selected-green'),
+            selectedModes: Array.from(buttons).filter(btn => btn.classList.contains('selected-green')).map(btn => btn.dataset.value)
+        };
+        localStorage.setItem('transportationState', JSON.stringify(state));
+    }
+
 
         async function sendDataToLambda(data) {
             try {
                 console.log('Sending data to Lambda:');
                 console.log('Original data:', data); // Log the data being sent
-                const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
+                const response = await fetch('https://t7w0n0ye7s.execute-api.ap-southeast-2.amazonaws.com/prod/emissions-data', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(data)
+                    body: JSON.stringify(data),
                 });
-
-                if (response.ok) {
-                    const result = await response.json();
-                    console.log('Data sent successfully:', result);
-                    window.location.href = 'emission_cal_appli.html'; // Redirect to the results page
-                } else {
-                    const errorText = await response.text(); // Read the error response
-                    console.error('Error sending data:', response.status, errorText);
-                    alert('Error sending data to the server. Please try again.');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
+                const result = await response.json();
+                console.log('Lambda response:', result);
             } catch (error) {
-                console.error('Error sending data:', error);
-                alert('Error sending data to the server. Please try again.');
+                console.error('Error sending data to Lambda:', error);
             }
         }
 
         function validateAndNavigate() {
-            const questions = document.querySelectorAll('#transportation-usage-section input[type="number"]');
-            let valid = true;
-            const dataToSend = [];
+            // Validation logic
+            const isValid = true; // Replace with actual validation logic
+            if (isValid) {
+                const selectedTransportModes = Array.from(buttons)
+                    .filter(btn => btn.classList.contains('selected-green'))
+                    .map(btn => btn.dataset.value);
 
-            questions.forEach(input => {
-                if (input.value.trim() === '' || isNaN(input.value) || input.value < 1) {
-                    valid = false;
-                    input.style.borderColor = 'red';
-                } else {
-                    input.style.borderColor = '';
-                    const type = input.name.replace('-usage', ''); // Get the transportation type from input name
-                    const kms = parseInt(input.value); // Convert input value to a number
-                    dataToSend.push({ type: 'transportation', transport_type: type, kms: kms });
-                }
-            });
+                const data = { selectedTransportModes };
 
-            // Save data to localStorage
-            localStorage.setItem('transportationData', JSON.stringify(dataToSend));
+                // Optionally, add more data to send
+                sendDataToLambda(data);
 
-            console.log('Original data (input values):');
-            questions.forEach(input => {
-                console.log(`${input.name}: ${input.value}`);
-            });
-
-            console.log('Formatted data to send:');
-            console.log(dataToSend);
-
-            if (valid) {
-                sendDataToLambda(dataToSend); // Send data to Lambda if all inputs are valid
+                handleButtonClick();
             } else {
-                alert('Please provide valid input for all questions.');
+                alert('Please complete all required fields.');
             }
         }
-
-        // Add event listener to the "Next" button
-        nextButton.addEventListener('click', validateAndNavigate);
     });
 </script>
-
 </body>
 </html>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Travel Distance Estimator</title>
+    <style>
+body {
+    font-family: 'Roboto', arial, sans-serif;
+    top: 30px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the container */
+    background-color: #f2e8d5;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.route-section {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    background-color: #d9e7d4;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: dark-gray;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px;
+}
+
+.form-group input:focus {
+    border-color: #007BFF;
+    outline: none;
+    box-shadow: 0 0 3px rgba(0, 123, 255, 0.5); /* Add a subtle focus effect */
+}
+
+#add-more {
+    margin-top: 15px;
+    background-color: #28a745;
+}
+
+#add-more:hover {
+    background-color: #218838;
+}
+
+#error-message {
+    color: red;
+    font-weight: bold;
+}
+
+#distance-result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#total-distance {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #333; /* Darker color for better readability */
+}
+
+.map {
+    height: 400px;
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 8px; /* Rounded corners for maps */
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 30px; /* Space below the heading */
+    color: #28a745;
+    line-height: 1.4;
+    text-transform: uppercase;
+    width: 100%;
+    text-align: center; /* Center align heading */
+    white-space: nowrap;
+}
+
+#button {
+    padding: 12px 20px; /* Adjust the padding for a larger clickable area */
+    border: none; /* Remove default border */
+    background-color: #28a745;
+    color: white; /* Text color */
+    font-size: 16px; /* Font size */
+    font-weight: bold; /* Make the text bold */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+#button:hover {
+    background-color: #218838;
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+#button:active {
+    background-color: #1e7e34; /* Even darker shade when button is pressed */
+    transform: scale(1); /* Return to normal size */
+}
+
+#button:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 3px rgba(0, 123, 255, 0.5); /* Add a subtle focus effect */
+}
+
+#add-more {
+    margin-top: 15px;
+    background-color: #28a745; /* Green background */
+    color: white; /* White icon color */
+    font-size: 24px; /* Icon size */
+    width: 40px; /* Button width */
+    height: 40px; /* Button height */
+    display: flex; /* Center icon */
+    align-items: center;
+    justify-content: center;
+    border: none; /* Remove default border */
+    border-radius: 50%; /* Circular button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+#add-more:hover {
+    background-color: #218838; /* Darker green on hover */
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+#add-more:active {
+    background-color: #1e7e34; /* Even darker green when button is pressed */
+    transform: scale(1); /* Return to normal size */
+}
+
+#add-more i {
+    margin: 0; /* Remove default margin */
+}
+
+.summary-section {
+    width: 100%;
+    max-width: 600px; /* Restrict the width for better readability */
+    padding: 20px;
+    margin-top: 60px;
+}
+
+#total-distance {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333; /* Darker color for better readability */
+    margin-bottom: 20px;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Travel Distance Estimator</h1>
+    <div id="route-container">
+        <div class="route-section" id="route-section-0">
+            <div id="map-0" class="map"></div>
+            <div class="form-group">
+                <label for="start-0">Starting Point:</label>
+                <input type="text" id="start-0" placeholder="Enter starting point">
+            </div>
+            <div class="form-group">
+                <label for="end-0">Destination:</label>
+                <input type="text" id="end-0" placeholder="Enter destination">
+            </div>
+            <div class="form-group">
+                <label for="trips-0">How many times do you travel this route in a week?</label>
+                <input type="number" id="trips-0" min="0" placeholder="Enter number of trips">
+            </div>
+            <div class="form-group">
+                <button id="button" onclick="estimateRoute(0)">ESTIMATE DISTANCE</button>
+            </div>
+            <div id="error-message-0"></div>
+            <div id="distance-result-0"></div>
+        </div>
+    </div>
+    <div class="form-group">
+    <button id="add-more" onclick="addMoreRoutes()">
+        <i class="fas fa-plus"></i>
+    </button>
+</div>
+ <div class="summary-section">
+    <div id="total-distance">Total Distance: 0 km</div>
+    <div class="form-group">
+        <button id="button" onclick="finish()">Finish</button>
+    </div>
+</div>
+</div>
+
+<script>
+let routeCount = 1;
+let maps = [];
+let directionsRenderers = [];
+let totalDistance = 0;
+let totalDistancePerRoute = {}; // Track distances for each route
+
+function initMap(index) {
+    const map = new google.maps.Map(document.getElementById(`map-${index}`), {
+        center: { lat: -37.8136, lng: 144.9631 },
+        zoom: 12
+    });
+
+    const directionsRenderer = new google.maps.DirectionsRenderer({
+        polylineOptions: {
+            strokeColor: '#FF0000',
+            strokeWeight: 5
+        },
+        suppressMarkers: true
+    });
+
+    directionsRenderer.setMap(map);
+    maps[index] = map;
+    directionsRenderers[index] = directionsRenderer;
+
+    const startInput = document.getElementById(`start-${index}`);
+    const endInput = document.getElementById(`end-${index}`);
+
+    const autocompleteOptions = {
+        bounds: new google.maps.LatLngBounds(
+            new google.maps.LatLng(-38.0574, 144.4188),
+            new google.maps.LatLng(-37.5114, 145.4116)
+        ),
+        componentRestrictions: { country: 'au' },
+        fields: ['place_id', 'geometry', 'name']
+    };
+
+    const startAutocomplete = new google.maps.places.Autocomplete(startInput, autocompleteOptions);
+    const endAutocomplete = new google.maps.places.Autocomplete(endInput, autocompleteOptions);
+
+    const startIcon = 'img/car.png';
+    const endIcon = 'img/car.png';
+
+    const iconSize = new google.maps.Size(40, 40);
+    const iconScaledSize = new google.maps.Size(40, 40);
+
+    let startMarker, endMarker;
+
+    function addMarkers() {
+        const startPlace = startAutocomplete.getPlace();
+        const endPlace = endAutocomplete.getPlace();
+
+        if (startMarker) startMarker.setMap(null);
+        if (endMarker) endMarker.setMap(null);
+
+        if (startPlace && startPlace.geometry) {
+            startMarker = new google.maps.Marker({
+                position: startPlace.geometry.location,
+                map: map,
+                icon: {
+                    url: startIcon,
+                    scaledSize: iconScaledSize
+                },
+                title: 'Start'
+            });
+            map.setCenter(startPlace.geometry.location);
+        }
+
+        if (endPlace && endPlace.geometry) {
+            endMarker = new google.maps.Marker({
+                position: endPlace.geometry.location,
+                map: map,
+                icon: {
+                    url: endIcon,
+                    scaledSize: iconScaledSize
+                },
+                title: 'End'
+            });
+        }
+    }
+
+    startAutocomplete.addListener('place_changed', addMarkers);
+    endAutocomplete.addListener('place_changed', addMarkers);
+}
+
+function estimateRoute(index) {
+    const start = document.getElementById(`start-${index}`).value;
+    const end = document.getElementById(`end-${index}`).value;
+    const trips = parseFloat(document.getElementById(`trips-${index}`).value) || 0;
+
+    if (!start || !end) {
+        alert("Please enter both starting point and destination.");
+        return;
+    }
+
+    if (trips < 1) {
+        alert("The number of trips must be at least 1.");
+        return;
+    }
+
+    const directionsService = new google.maps.DirectionsService();
+
+    // Subtract the previous distance for this route section from totalDistance
+    const previousDistance = totalDistancePerRoute[index] || 0;
+    totalDistance -= previousDistance;
+
+    directionsService.route({
+        origin: start,
+        destination: end,
+        travelMode: google.maps.TravelMode.DRIVING // Restrict to driving mode
+    }, function(response, status) {
+        if (status === google.maps.DirectionsStatus.OK) {
+            directionsRenderers[index].setDirections(response);
+            const route = response.routes[0];
+            const distanceValue = route.legs[0].distance.value; // distance in meters
+            const distanceKm = distanceValue / 1000; // convert meters to kilometers
+            const totalRouteDistance = distanceKm * trips; // multiply by the number of trips
+            totalDistancePerRoute[index] = totalRouteDistance; // Update the distance for this route section
+            totalDistance += totalRouteDistance; // accumulate total distance
+            const distanceResult = document.getElementById(`distance-result-${index}`);
+            distanceResult.innerHTML = `Estimated Distance: ${distanceKm.toFixed(2)} km (Total for this route: ${totalRouteDistance.toFixed(2)} km)`;
+            updateTotalDistance(); // Update the total distance display
+        } else {
+            alert(`Directions request failed due to ${status}.`);
+        }
+    });
+}
+
+function updateTotalDistance() {
+    const totalDistanceElement = document.getElementById('total-distance');
+    if (totalDistanceElement) {
+        totalDistanceElement.textContent = `Total Distance: ${totalDistance.toFixed(2)} km`;
+    }
+}
+
+function addMoreRoutes() {
+    const routeContainer = document.getElementById('route-container');
+    const newRouteSection = document.createElement('div');
+    newRouteSection.classList.add('route-section');
+    newRouteSection.id = `route-section-${routeCount}`;
+    newRouteSection.innerHTML = `
+        <div id="map-${routeCount}" class="map"></div>
+        <div class="form-group">
+            <label for="start-${routeCount}">Starting Point:</label>
+            <input type="text" id="start-${routeCount}" placeholder="Enter starting point">
+        </div>
+        <div class="form-group">
+            <label for="end-${routeCount}">Destination:</label>
+            <input type="text" id="end-${routeCount}" placeholder="Enter destination">
+        </div>
+        <div class="form-group">
+            <label for="trips-${routeCount}">How many times do you travel this route in a week?</label>
+            <input type="number" id="trips-${routeCount}" min="0" placeholder="Enter number of trips">
+        </div>
+        <div class="form-group">
+            <button onclick="estimateRoute(${routeCount})">Estimate Distance</button>
+        </div>
+        <div id="error-message-${routeCount}"></div>
+        <div id="distance-result-${routeCount}"></div>
+    `;
+
+    routeContainer.appendChild(newRouteSection);
+    initMap(routeCount);
+    routeCount++;
+}
+
+function finish() {
+    // Save the total distance to localStorage
+    localStorage.setItem('totalDistance', totalDistance);
+
+    // Redirect back to the original page
+    window.location.href = 'emission_cal_trans.html';
+}
+
+function initMapZero() {
+    initMap(0);
+}
+document.getElementById('finish').addEventListener('click', finish);
+</script>
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAStRwGjyxxLEMoa7E32sKxu2puxRvtFXs&libraries=places&callback=initMapZero">
+</script>
+</body>
+</html>
