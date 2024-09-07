@@ -239,7 +239,7 @@ function initMap(index) {
 
     const directionsRenderer = new google.maps.DirectionsRenderer({
         polylineOptions: {
-            strokeColor: '#FF0000',
+            strokeColor: 'orange',
             strokeWeight: 5
         },
         suppressMarkers: true
@@ -266,11 +266,13 @@ function initMap(index) {
     const startAutocomplete = new google.maps.places.Autocomplete(startInput, autocompleteOptions);
     const endAutocomplete = new google.maps.places.Autocomplete(endInput, autocompleteOptions);
 
-    const startIcon = 'img/car.png';
-    const endIcon = 'img/car.png';
+    // Define custom icon URL
+    const startIcon = 'img/train.png';
+    const endIcon = 'img/train.png';
 
-    const iconSize = new google.maps.Size(40, 40);
-    const iconScaledSize = new google.maps.Size(40, 40);
+    // Define icon size and scaled size
+    const iconSize = new google.maps.Size(40, 40); // Original size of the icon
+    const iconScaledSize = new google.maps.Size(40, 40); // Scaled size of the icon
 
     let startMarker, endMarker;
 
@@ -291,8 +293,9 @@ function initMap(index) {
                     position: startPlace.geometry.location,
                     map: map,
                     icon: {
-                        url: startIcon,
-                        scaledSize: iconScaledSize
+                        url: startIcon, // Use custom icon
+                        size: iconSize,
+                        scaledSize: iconScaledSize // Set the scaled size
                     },
                     title: 'Start'
                 });
@@ -310,8 +313,9 @@ function initMap(index) {
                     position: endPlace.geometry.location,
                     map: map,
                     icon: {
-                        url: endIcon,
-                        scaledSize: iconScaledSize
+                        url: endIcon, // Use custom icon
+                        size: iconSize,
+                        scaledSize: iconScaledSize // Set the scaled size
                     },
                     title: 'End'
                 });
@@ -351,16 +355,22 @@ function estimateRoute(index) {
     directionsService.route({
         origin: start,
         destination: end,
-        travelMode: google.maps.TravelMode.DRIVING // Restrict to driving mode
+        travelMode: google.maps.TravelMode.TRANSIT, // Use public transit
+        transitOptions: {
+            modes: ['TRAIN'], // Use train routes
+        }
     }, function(response, status) {
         if (status === google.maps.DirectionsStatus.OK) {
             directionsRenderers[index].setDirections(response);
             const route = response.routes[0];
-            const distanceValue = route.legs[0].distance.value; // distance in meters
-            const distanceKm = distanceValue / 1000; // convert meters to kilometers
-            const totalRouteDistance = distanceKm * trips; // multiply by the number of trips
+            let distanceValue = 0;
+            route.legs.forEach(leg => {
+                distanceValue += leg.distance.value; // Sum up distances from each leg
+            });
+            const distanceKm = distanceValue / 1000; // Convert meters to kilometers
+            const totalRouteDistance = distanceKm * trips; // Multiply by the number of trips
             totalDistancePerRoute[index] = totalRouteDistance; // Update the distance for this route section
-            totalDistance += totalRouteDistance; // accumulate total distance
+            totalDistance += totalRouteDistance; // Accumulate total distance
             const distanceResult = document.getElementById(`distance-result-${index}`);
             distanceResult.innerHTML = `Estimated Distance: ${distanceKm.toFixed(2)} km (Total for this route: ${totalRouteDistance.toFixed(2)} km)`;
             updateTotalDistance(); // Update the total distance display
@@ -413,7 +423,7 @@ function finish() {
     const roundedTotalDistance = totalDistance.toFixed(2);
 
     // Save the rounded total distance to localStorage
-    localStorage.setItem('totalDistance_car', roundedTotalDistance);
+    localStorage.setItem('totalDistance_train', roundedTotalDistance);
 
     // Redirect back to the original page
     window.location.href = 'emission_cal_trans.html';
@@ -423,7 +433,6 @@ function initMapZero() {
     initMap(0);
 }
 document.getElementById('finish').addEventListener('click', finish);
-
 </script>
 
 <script async defer
