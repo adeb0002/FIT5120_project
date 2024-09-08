@@ -451,6 +451,7 @@ function validateAndNavigate() {
             if (!brand) {
                 alert('Please select a brand for the refrigerator.');
                 isValid = false;
+                input.style.borderColor = 'red';
             } else {
                 applianceData.push({ type: applianceType, brand: brand });
             }
@@ -459,8 +460,9 @@ function validateAndNavigate() {
             const input = document.querySelector(`#${applianceType}-hours`);
             const value = input ? parseInt(input.value, 10) : 0;
             if (isNaN(value) || value < 1) {
-                alert(`Please enter a valid number greater than or equal to 1.`);
+                alert(`Please enter a valid number greater than 0.`);
                 isValid = false;
+                input.style.borderColor = 'red';
             } else {
                 applianceData.push({ type: applianceType, hours: value });
             }
@@ -472,7 +474,6 @@ function validateAndNavigate() {
     if (isValid) {
         const data = { appliances: applianceData };
         sendDataToLambda(data);
-
     }
 }
 
