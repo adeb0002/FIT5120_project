@@ -56,7 +56,7 @@
                     <p>Below is the total result of your carbon footprint calculation.</p>
                 </div>
                 <div class="col-md-9 right-section">
-                    <div id="results-table" style="margin-top: 200px;>
+                    <div id="results-table" style="margin-top: 200px;">
                         <!-- Total result will be dynamically injected here -->
                     </div>
                     <div class="primary-blue-button">
@@ -96,6 +96,12 @@
                     localStorage.setItem('applianceEmissions', result.appliance_emissions || 0);
                     localStorage.setItem('gasEmissions', result.gas_emissions || 0);
                     localStorage.setItem('transportEmissions', result.transport_emissions || 0);
+                }
+
+                if (result.individual_appliance_emissions) {
+                    console.log('Saving individualApplianceEmissions:', result.individual_appliance_emissions);
+                    localStorage.setItem('individualApplianceEmissions', JSON.stringify(result.individual_appliance_emissions));
+
                 }
 
                 return result;

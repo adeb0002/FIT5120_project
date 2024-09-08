@@ -245,24 +245,21 @@
                 { category: 'Gas', emissions: parseFloat(localStorage.getItem('gasEmissions') || 0) }
             ];
 
-            const individualApplianceEmissions = JSON.parse(localStorage.getItem('individualApplianceEmissions')) || {};
+            const individualApplianceEmissions = JSON.parse(localStorage.getItem('individualApplianceEmissions') || '{}');
 
-            // Convert individual appliance emissions to a suitable format for D3
+            // Log data to ensure it's correctly retrieved
+            console.log('Retrieved individualApplianceEmissions:', individualApplianceEmissions);
+
             const applianceData = Object.entries(individualApplianceEmissions).map(([type, emissions]) => ({
                 type: type,
                 emissions: parseFloat(emissions)
             }));
 
-            console.log('Category Data:', categoryData);
-            console.log('Appliance Data:', applianceData);
-
-            // Check if data is correctly retrieved
-            if (!applianceData.length) {
-                console.warn('No appliance data found in localStorage.');
-            }
+            console.log('Formatted Appliance Data for Charts:', applianceData);
 
             return { categoryData, applianceData };
         }
+
 
     
         // Function to create a pie chart with legend
