@@ -58,6 +58,10 @@
             align-items: center;
             justify-content: flex-start;
         }
+        h2 {
+            margin: 50px; /* Removes default margin */
+            text-align: center; /* Centers text within the heading */
+        }
 
         .chart {
             width: 100%;
@@ -142,10 +146,10 @@
     <!-- Dashboard Container -->
     <div class="dashboard-container">
         <!-- Header Section -->
-        <div class="section">
+        <div class="section" id="emission-comparison">
             <h2>Emission Analytics</h2>
-            <p>Your estimated emissions are 1900 kg CO2 per week</p>
-            <p>You currently emit <span style="color:red;">27.87% more</span> CO2 than the average Melbournian</p>
+            <p>Your estimated emissions are <span id="user-emissions">0</span> kg CO2 per week</p>
+            <p>You currently emit <span id="comparison-percentage" style="color:red;">0% more</span> CO2 than the average Melbournian</p>
         </div>
 
         <!-- Equivalence Section -->
@@ -157,7 +161,7 @@
                     <p>11,145 km Travelled by petrol car</p>
                 </div>
                 <div>
-                    <img src="img/icecap.png" alt="Ice Cap" style="width: 100px;">
+                    <img src="img/melting-ice.png" alt="Ice Cap" style="width: 100px;">
                     <p>5.7 m<sup>2</sup> Melted polar ice caps</p>
                 </div>
             </div>
@@ -168,15 +172,15 @@
             <h3>To offset this you would need to...</h3>
             <div class="offset-container">
                 <div>
-                    <img src="img/tree.png" alt="Plant Trees" style="width: 100px;">
+                    <img src="img/forest.png" alt="Plant Trees" style="width: 100px;">
                     <p>Plant 4,538 Trees</p>
                 </div>
                 <div>
-                    <img src="img/solar_panel.png" alt="Install Solar Panels" style="width: 100px;">
+                    <img src="img/solar-energy.png" alt="Install Solar Panels" style="width: 100px;">
                     <p>Install 49 Solar panels</p>
                 </div>
                 <div>
-                    <img src="img/remove_car.png" alt="Remove Cars" style="width: 100px;">
+                    <img src="img/car (1).png" alt="Remove Cars" style="width: 100px;">
                     <p>Remove 22 Cars from the road</p>
                 </div>
             </div>
@@ -206,6 +210,9 @@
     </div>
 
     <script>
+        // Constants
+        const AVERAGE_WEEKLY_EMISSIONS = 234.6153846; // Average Melbournian weekly emissions in kg CO2
+
         // Show the loading animation
         function showLoading() {
             document.getElementById('loading-animation').style.display = 'flex';
@@ -215,6 +222,24 @@
         function hideLoading() {
             document.getElementById('loading-animation').style.display = 'none';
         }
+
+        window.onload = function () {
+            // Retrieve total emissions from localStorage
+            const totalEmissions = parseFloat(localStorage.getItem('totalEmissions'));
+            const transportEmissions = parseFloat(localStorage.getItem('transportEmissions') || 0);
+
+
+            // Log to verify what is stored in localStorage
+            console.log('Attempting to load totalEmissions from localStorage:', totalEmissions);
+
+            if (!isNaN(totalEmissions) && totalEmissions !== 0) {
+                console.log('Loaded totalEmissions:', totalEmissions); 
+                updateEmissionComparison(totalEmissions);
+            } else {
+                console.error('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
+                alert('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
+            }
+        };
 
         // Function to determine the request body based on the appliance type
         function getRequestBody(applianceType, hours, brand) {
@@ -276,6 +301,9 @@
                     localStorage.setItem('individualApplianceEmissions', JSON.stringify(data.individual_appliance_emissions));
                     console.log('Data successfully stored in localStorage');
 
+                    // Calculate and display the comparison with average Melbournian
+                    updateEmissionComparison(data.appliance_emissions);
+
                     // Reinitialize charts after data fetch
                     initCharts();
                 } else {
@@ -289,6 +317,51 @@
                 hideLoading();
             }
         }
+
+        async function fetchTransportEmissions() {
+            try {
+                const response = await fetch('https://your-api-url/transport-emissions', {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('transportEmissions', data.transport_emissions || 0);
+                    return data.transport_emissions;
+                } else {
+                    console.error('Failed to fetch transport emissions:', response.status);
+                    alert('Failed to fetch transport emissions data.');
+                    return 0;
+                }
+            } catch (error) {
+                console.error('Error fetching transport emissions:', error);
+                alert('An error occurred while fetching transport emissions.');
+                return 0;
+            }
+        }
+
+
+        // Function to update the emission comparison with the average Melbournian
+        function updateEmissionComparison(userEmissions) {
+            const difference = (userEmissions - AVERAGE_WEEKLY_EMISSIONS) / AVERAGE_WEEKLY_EMISSIONS;
+            const percentageDifference = (difference * 100).toFixed(2);
+            const comparisonElement = document.getElementById('comparison-percentage');
+
+            if (difference > 0) {
+                comparisonElement.textContent = `${percentageDifference}% more`;
+                comparisonElement.style.color = 'red';
+            } else if (difference < 0) {
+                comparisonElement.textContent = `${Math.abs(percentageDifference)}% less`;
+                comparisonElement.style.color = 'green';
+            } else {
+                comparisonElement.textContent = `equal to the average`;
+                comparisonElement.style.color = 'blue';
+            }
+
+            document.getElementById('user-emissions').textContent = userEmissions.toFixed(2);
+        }
+
 
         // Function to retrieve emissions data from localStorage dynamically
         function getEmissionsData() {
@@ -377,10 +450,10 @@
         // Initialize charts using the dynamic data
         function initCharts() {
             const { categoryData, applianceData } = getEmissionsData();
+            const transportData = getTransportEmissionsData();
 
-            if (!categoryData.length && !applianceData.length) {
+            if (!categoryData.length && !applianceData.length && !transportData.length) {
                 console.warn('No data available to display.');
-                // Optionally, you can display a message to the user
                 alert('No emissions data available to display.');
                 return;
             }
@@ -388,12 +461,21 @@
             // Create charts with the retrieved data
             createPieChart(categoryData, '#category-chart', 'emissions', 'category');
             createPieChart(applianceData, '#appliance-chart', 'emissions', 'type');
+            createPieChart(transportData, '#transport-chart', 'emissions', 'type'); // Add this line
         }
+
 
         // Correctly call fetch and init functions in sequence
         window.onload = function () {
             initCharts(); // Initialize charts on page load
+            const totalEmissions = parseFloat(localStorage.getItem('totalEmissions'));
+            if (!isNaN(totalEmissions) && totalEmissions !== 0) {
+                updateEmissionComparison(totalEmissions);
+            } else {
+                console.error('Total emissions data is missing or invalid.');
+            }
         };
+
     </script>
 
 </body>
