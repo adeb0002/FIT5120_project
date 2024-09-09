@@ -450,10 +450,10 @@
         // Initialize charts using the dynamic data
         function initCharts() {
             const { categoryData, applianceData } = getEmissionsData();
-            const transportData = getTransportEmissionsData();
 
-            if (!categoryData.length && !applianceData.length && !transportData.length) {
+            if (!categoryData.length && !applianceData.length) {
                 console.warn('No data available to display.');
+                // Optionally, you can display a message to the user
                 alert('No emissions data available to display.');
                 return;
             }
@@ -461,9 +461,7 @@
             // Create charts with the retrieved data
             createPieChart(categoryData, '#category-chart', 'emissions', 'category');
             createPieChart(applianceData, '#appliance-chart', 'emissions', 'type');
-            createPieChart(transportData, '#transport-chart', 'emissions', 'type'); // Add this line
         }
-
 
         // Correctly call fetch and init functions in sequence
         window.onload = function () {
