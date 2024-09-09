@@ -257,33 +257,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function sendDataToLambda(data) {
     try {
-        console.log('Sending data to Lambda:');
-        console.log('Original data:', data); // Log the data being sent
+        console.log('Sending data to Lambda:', data); // Log the data being sent
 
-        // Update each item to replace hyphens with underscores in transportation_type
-        const formattedData = data.map(item => ({
-            type: item.type,
-            transportation_type: item.transportation_type.replace(/-/g, '_'), // Replace hyphens with underscores
-            kms: item.kms
-        }));
-
-        console.log('Formatted data to send:', formattedData);
-
+        // Send the data to the API
         const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(formattedData)
+            body: JSON.stringify(data)
         });
 
         if (response.ok) {
             const result = await response.json();
             console.log('Data sent successfully:', result);
-            window.location.href = 'emission_cal_appli.html'; // Redirect to the results page
+
+            // Check the response to ensure transport emissions are correctly calculated
+            if (result.transport_emissions === 0) {
+                console.warn('Transport emissions are zero, please check the input values and API logic.');
+            }
+
+            window.location.href = 'emission_cal_appli.html'; // Redirect to the next page
         } else {
-            const errorText = await response.text(); // Read the error response
-            console.error('Error sending data:', response.status, errorText);
+            const errorText = await response.text(); // Log the error response
+            console.error('Error response from server:', response.status, errorText);
             alert('Error sending data to the server. Please try again.');
         }
     } catch (error) {
@@ -304,11 +301,11 @@ function validateAndNavigate() {
         } else {
             input.style.borderColor = '';
             const type = input.id.replace('-usage', ''); // Get the transportation type from input id
-            dataToSend.push({ type: 'transportation', transportation_type: type, kms: parseFloat(input.value) });
+            dataToSend.push({ type: 'transportation', transportation_type: type.replace(/-/g, '_'), kms: parseFloat(input.value) });
         }
     });
 
-    // Save data to localStorage
+    // Save data to localStorage for debugging or future use
     localStorage.setItem('transportationData', JSON.stringify(dataToSend));
 
     console.log('Original data (input values):');
@@ -316,8 +313,7 @@ function validateAndNavigate() {
         console.log(`${input.id}: ${input.value}`);
     });
 
-    console.log('Formatted data to send:');
-    console.log(dataToSend);
+    console.log('Formatted data to send:', dataToSend);
 
     if (valid) {
         sendDataToLambda(dataToSend); // Send data to Lambda if all inputs are valid
@@ -325,6 +321,7 @@ function validateAndNavigate() {
         alert('Please enter a value greater than 0.');
     }
 }
+
 </script>
 </body>
 </html>
