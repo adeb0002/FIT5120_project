@@ -1,0 +1,393 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', arial, sans-serif;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden; /* This prevents scrolling */
+}
+
+ul {
+	list-style: none;
+	margin: 0px;
+}
+
+p {
+    color: white;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0;
+    z-index: 10000;
+    transition: all 0.2s ease-in-out;
+    height: 80px;
+    background-color: #131212d4; /* Charcoal Grey with opacity */
+    text-align: center;
+    line-height: 40px;
+    color: white;
+}
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
+    text-shadow: none;
+}
+
+.navbar-brand {
+	line-height: 80px;
+	padding: 0px;
+}
+
+.navbar-nav>li>a {
+	color: #fff!important;
+	font-size: 13px;
+	font-weight: 300;
+	text-transform: uppercase;
+	text-shadow: none;
+	line-height: 80px;
+	padding: 0px;
+	letter-spacing: 0.5px;
+}
+
+.navbar-nav>li {
+	margin-left: 45px;
+}
+
+.header.active .navbar-nav>li>a {
+	font-family: 'Open Sans', arial, sans-serif;
+	font-size: 13px;
+	font-weight: 500;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	text-shadow: none;
+	color: #121212!important;
+}
+
+.header.active {
+    background-color: rgba(250, 250, 250, 0.98);
+    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+}
+.navbar-brand {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 25px;
+	text-transform: uppercase;
+	color: #fff!important;
+	transition: all 0.5s;
+
+}
+.navbar-brand em {
+	font-style: normal;
+	color: #f7c552;
+	font-size: 32px;
+}
+.header.active .navbar-brand {
+	color: #121212!important;
+}
+.header .navbar-brand {
+    font-weight: 800;
+}
+.navbar-inverse {
+	background-image: none;
+	background-color: transparent;
+}
+.header .navbar {
+    margin: 0;
+    border: none;
+}
+.page-section {
+    padding: 80px 0;
+}
+.navbar-inverse .navbar-toggle {
+	margin-top: 22px;
+    border-color: #69d76c!important;
+    background-color: #69d76c!important;
+}
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+	background-color: #f7c552;
+}
+bootstrap.min.css
+.navbar-toggle {
+    position: relative;
+    float: right;
+    padding: 9px 10px;
+    margin-top: 15px!important;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+@media (min-width: 768px) {
+    .header .navbar-brand {
+        padding-left: 0;
+    }
+    .navbar-nav {
+        float: right;
+    }
+}
+.page-section {
+    min-height: 100vh;
+    padding: 0;
+}
+
+@media (max-width: 480px) {
+    .page-section h1 {
+        font-size: 3em;
+    }
+    .page-section h2 {
+        font-size: 2em;
+    }
+    .page-section p {
+        font-size: 1em;
+        margin: 0 0 20px;
+    }
+}
+
+.baner-content {
+	width: 100%;
+  	padding-top: 35vh;
+  	text-align: center;
+  	background-image: url(../img/blog_item_01.jpg);
+  	vertical-align: middle;
+}
+
+.baner-content .text-content {
+	text-align: center;
+}
+
+.baner-content .text-content h2 {
+	font-size: 36px;
+	font-weight: 400;
+	color: #fff;
+}
+
+.baner-content .text-content h2 span {
+	font-weight: 700;
+	color: #33c1cf!important;
+}
+
+.baner-content .text-content h2 em {
+	font-style: normal;
+	font-weight: 700;
+	color: #f89624!important;
+}
+
+.baner-content .text-content p {
+	color: #fff;
+	font-size: 14px;
+	line-height: 24px;
+	padding: 0px 25%;
+}
+
+.baner-content .text-content .primary-white-button {
+	margin-top: 25px;
+}
+
+/* Recommendation Section */
+#recommendations {
+    padding: 100px 20px;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: flex-start; /* Align content to the left */
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+#recommendations h2 {
+    font-size: 2em;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 20px; /* Reduced margin */
+    margin-left: -150px; /* Move the title to the left, similar to the left-section */
+    margin-top: 50px; /* Adjust as needed to move the title lower */
+    line-height: 1.2;
+    white-space: nowrap; /* Prevent line break */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ellipsis */
+}
+
+.line-dec {
+    width: 380px; /* Match the width with the left-section title */
+    height: 5px;
+    background-color: #33c1cf; /* Match the blue color */
+    margin: 20px 0 15px 0; /* Adjusted margin */
+    margin-left: -150px; /* Move the line to the left */
+}
+
+/* Recommendation Boxes */
+
+.box {
+    background-color: #f5f5f5; /* Adjust the background color to match your theme */
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    margin-left: 150px; /* Shift the boxes to the right */
+}
+
+.icon-right {
+    position: absolute;
+    right: -20px; /* Increased from 20px to 40px to move the icons further to the right */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3em;
+    color: #33c1cf;
+}
+
+
+
+.box h3 {
+    font-size: 18px;
+    color: black; /* Darker grey for headings */
+    margin-bottom: 10px;
+}
+
+.box p {
+    color: black;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.box:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+/* Links */
+ul li a {
+    color: #33c1cf;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Floating Buttons */
+.floating-buttons {
+    position: fixed;
+    bottom: 50px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    z-index: 1000;
+}
+
+#back-button, #next-button {
+    padding: 12px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    border-radius: 20px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#back-button {
+    background-color: white;
+    color: #33c1cf;
+}
+
+#next-button {
+    background-color: #33c1cf;
+    color: white;
+}
+
+#back-button i, #next-button i {
+    margin-right: 8px;
+}
+
+.parallax-content {
+    display: flex;
+    background: linear-gradient(to right, #84a784 30%, white 30%);
+    height: flex; /* Example height, adjust as needed */
+    min-height: 90px;
+    width: 100vw;  /* Full viewport width */
+    padding: 100px 0;
+    box-sizing: border-box;
+    margin: 0; /* Ensure no extra margin */
+}
+
+.left-section {
+    flex: 1;
+    text-align: left;
+    width: 100%;
+    min-height: 90vh;
+}
+
+.right-section {
+    flex: 1;
+    padding: 20px;
+    min-height: 90vh;
+}
+
+@media (min-width: 769px) {
+    .col-md-3 {
+        flex: 0 0 25%; /* 3-column width on larger screens */
+    }
+
+    .col-md-9 {
+        flex: 0 0 75%; /* 9-column width on larger screens */
+    }
+}
+.form-group {
+    margin-bottom: 30px;
+}
+
+.left-section h2 {
+    font-size: 2em;
+    font-weight: 600;
+    margin-bottom: 20px;
+    margin-left: -150px; /* Adjust as needed to move the title to the left */
+    margin-top: 50px; /* Adjust as needed to move the title lower */
+    color: white;
+    line-height: 1.2;
+    white-space: nowrap; /* Prevent line break */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ellipsis */
+}
+
+.line-dec {
+    width: 380px; /* Increase the width to make the line longer */
+    height: 5px;
+    background-color: rgba(250, 250, 250, 0.5);
+    margin: 20px 0px 15px 0px; /* Maintain the top and bottom margins */
+    margin-left: -150px; /* Move the line to the left */
+}
+
+label {
+    font-size: 18px; /* Adjust the size as needed */
+    font-weight: bold; /* Optional: Make the text bold */
+    color: #333; /* Optional: Change text color */
+}
+
+.primary-blue-button a {
+	background-color: #33c1cf;
+	font-size: 14px;
+	padding: 12px 12px;
+	color: white;
+	font-weight: 500;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	text-decoration: none;
+	border-radius: 20px;
+	text-align: center;
+}
