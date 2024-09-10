@@ -59,10 +59,17 @@
             justify-content: flex-start;
         }
         h2 {
-            margin: 50px; /* Removes default margin */
-            text-align: center; /* Centers text within the heading */
+            font-size: 2em; /* Relative to the body font size */
+            text-align: center;
+            margin: 20px 0; /* Margin for spacing */
         }
 
+        /*@media (max-width: 768px) {
+            .equivalence-container div,
+            .offset-container div {
+                flex: 1 1 100%; 
+            }*/
+        
         .chart {
             width: 100%;
             margin-top: 20px;
@@ -72,19 +79,22 @@
         .equivalence-container,
         .offset-container {
             display: flex;
+            flex-wrap: wrap; /* Allows items to wrap onto the next line */
             justify-content: space-around;
             width: 100%;
         }
 
         .equivalence-container div,
         .offset-container div {
+            flex: 1 1 45%; /* Allows each item to take 45% of the width, adjust as needed */
+            margin: 10px; /* Adds spacing around items */
+            min-width: 150px; /* Minimum width to maintain some size */
             text-align: center;
-            flex: 1;
-            margin: 0 10px;
         }
 
+
         .chart-title {
-            font-size: 18px;
+            font-size: 1.2em;
             font-weight: bold;
         }
 
@@ -110,6 +120,12 @@
         .legend-text {
             white-space: nowrap;
         }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
     </style>
 </head>
 
@@ -158,11 +174,11 @@
             <div class="equivalence-container">
                 <div>
                     <img src="img/car.png" alt="Car" style="width: 100px;">
-                    <p>11,145 km Travelled by petrol car</p>
+                    <p id="car-equivalent">Calculating...</p> <!-- Dynamic update -->
                 </div>
                 <div>
                     <img src="img/melting-ice.png" alt="Ice Cap" style="width: 100px;">
-                    <p>5.7 m<sup>2</sup> Melted polar ice caps</p>
+                    <p id="ice-equivalent">Calculating...</p> <!-- Dynamic update -->
                 </div>
             </div>
         </div>
@@ -173,18 +189,19 @@
             <div class="offset-container">
                 <div>
                     <img src="img/forest.png" alt="Plant Trees" style="width: 100px;">
-                    <p>Plant 4,538 Trees</p>
+                    <p id="trees-equivalent">Calculating...</p> <!-- Update this to dynamic -->
                 </div>
                 <div>
                     <img src="img/solar-energy.png" alt="Install Solar Panels" style="width: 100px;">
-                    <p>Install 49 Solar panels</p>
+                    <p id="solar-panels-equivalent">Calculating...</p> <!-- Dynamic solar panels -->
                 </div>
                 <div>
                     <img src="img/car (1).png" alt="Remove Cars" style="width: 100px;">
-                    <p>Remove 22 Cars from the road</p>
+                    <p id="cars-removed-equivalent">Calculating...</p> <!-- Dynamic cars removed -->
                 </div>
             </div>
         </div>
+
 
         <!-- Chart Container -->
         <div class="section chart">
@@ -210,7 +227,12 @@
     </div>
 
     <script>
-        // Constants
+       // Constants for equivalences and offsets
+        const CO2_PER_KM_PETROL_CAR = 0.17048; // in kg per km
+        const CO2_PER_ICE_SQUARE_METER = 333.33; // in kg per m^2 (1000kg CO2 = 3 m^2 ice)
+        const TREES_TO_OFFSET_CO2 = 21.77; // Each tree offsets 21.77 kg of CO2 per year
+        const CO2_SAVED_PER_SOLAR_PANEL = 38.46; // Each solar panel saves 38.46 kg CO2 per week
+        const CO2_EMITTED_PER_CAR = 88.46; // Each car emits 88.46 kg CO2 per week
         const AVERAGE_WEEKLY_EMISSIONS = 234.6153846; // Average Melbournian weekly emissions in kg CO2
 
         // Show the loading animation
@@ -223,23 +245,23 @@
             document.getElementById('loading-animation').style.display = 'none';
         }
 
-        window.onload = function () {
-            // Retrieve total emissions from localStorage
-            const totalEmissions = parseFloat(localStorage.getItem('totalEmissions'));
-            const transportEmissions = parseFloat(localStorage.getItem('transportEmissions') || 0);
+        // Function to calculate and display the equivalence of emissions
+        function displayEquivalences(totalEmissions) {
+            // Calculate equivalent values
+            const kmsEquivalent = (totalEmissions / CO2_PER_KM_PETROL_CAR).toFixed(2); // KMs for car travel
+            const iceEquivalent = (totalEmissions / CO2_PER_ICE_SQUARE_METER).toFixed(2); // m^2 of melted ice
+            const treesEquivalent = (totalEmissions / TREES_TO_OFFSET_CO2).toFixed(2); // Number of trees
+            const solarPanelsEquivalent = (totalEmissions / CO2_SAVED_PER_SOLAR_PANEL).toFixed(2); // Number of solar panels
+            const carsRemovedEquivalent = (totalEmissions / CO2_EMITTED_PER_CAR).toFixed(2); // Number of cars removed
 
+            // Update the DOM elements with calculated values
+            document.getElementById('car-equivalent').innerText = `${kmsEquivalent} km travelled by petrol car`;
+            document.getElementById('ice-equivalent').innerText = `${iceEquivalent} m² of melted polar ice caps`;
+            document.getElementById('trees-equivalent').innerText = `Plant ${treesEquivalent} trees to offset`;
+            document.getElementById('solar-panels-equivalent').innerText = `Install ${solarPanelsEquivalent} solar panels to offset`;
+            document.getElementById('cars-removed-equivalent').innerText = `Remove ${carsRemovedEquivalent} cars from the road to offset`;
+        }
 
-            // Log to verify what is stored in localStorage
-            console.log('Attempting to load totalEmissions from localStorage:', totalEmissions);
-
-            if (!isNaN(totalEmissions) && totalEmissions !== 0) {
-                console.log('Loaded totalEmissions:', totalEmissions); 
-                updateEmissionComparison(totalEmissions);
-            } else {
-                console.error('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
-                alert('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
-            }
-        };
 
         // Function to determine the request body based on the appliance type
         function getRequestBody(applianceType, hours, brand) {
@@ -463,16 +485,27 @@
             createPieChart(applianceData, '#appliance-chart', 'emissions', 'type');
         }
 
-        // Correctly call fetch and init functions in sequence
+        // Initialize the page on window load
         window.onload = function () {
-            initCharts(); // Initialize charts on page load
+            // Initialize charts on page load
+            initCharts();
+            
+            // Retrieve total emissions from localStorage
             const totalEmissions = parseFloat(localStorage.getItem('totalEmissions'));
+
+            // Log to verify what is stored in localStorage
+            console.log('Attempting to load totalEmissions from localStorage:', totalEmissions);
+
             if (!isNaN(totalEmissions) && totalEmissions !== 0) {
+                console.log('Loaded totalEmissions:', totalEmissions); 
                 updateEmissionComparison(totalEmissions);
+                displayEquivalences(totalEmissions); // Ensure this function is called
             } else {
-                console.error('Total emissions data is missing or invalid.');
+                console.error('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
+                alert('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
             }
         };
+
 
     </script>
 
