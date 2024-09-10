@@ -10,8 +10,11 @@
       <change beforePath="$PROJECT_DIR$/FIT5120_project/emission_cal_appli.html" beforeDir="false" afterPath="$PROJECT_DIR$/FIT5120_project/emission_cal_appli.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FIT5120_project/emission_cal_gas.html" beforeDir="false" afterPath="$PROJECT_DIR$/FIT5120_project/emission_cal_gas.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FIT5120_project/emission_cal_trans.html" beforeDir="false" afterPath="$PROJECT_DIR$/FIT5120_project/emission_cal_trans.html" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/FIT5120_project/emission_result.html" beforeDir="false" afterPath="$PROJECT_DIR$/FIT5120_project/emission_result.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FIT5120_project/result_graph.html" beforeDir="false" afterPath="$PROJECT_DIR$/FIT5120_project/result_graph.html" afterDir="false" />
+=======
+>>>>>>> 89baad80fab930a21e21467cc6d45c18d03a9f4c
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +24,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+<<<<<<< HEAD
         <option value="Python Script" />
         <option value="HTML File" />
+=======
+        <option value="HTML File" />
+        <option value="Python Script" />
+>>>>>>> 89baad80fab930a21e21467cc6d45c18d03a9f4c
       </list>
     </option>
   </component>
