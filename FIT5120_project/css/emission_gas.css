@@ -224,27 +224,6 @@ label[for="gas-water-heater"] {
     color: #333; /* Optional: Adjust the text color */
 }
 
-
-/* Styles for the radio button options */
-#gas-water-heater .radio,
-#instantaneous-storage .radio {
-    margin-top: 10px; /* Adds space above each radio button */
-}
-
-#gas-water-heater .radio label,
-#instantaneous-storage .radio label {
-    display: block; /* Ensures each radio button label is on a new line */
-    font-size: 1.2em; /* Adjusts the size of the radio button labels */
-    color: #555; /* Sets the radio button label color */
-    margin-bottom: 5px; /* Adds space below each radio button label */
-}
-
-/* Optional: Style the radio button itself */
-#gas-water-heater input[type="radio"],
-#instantaneous-storage input[type="radio"] {
-    margin-right: 10px; /* Adds space between the radio button and the label */
-}
-
 label[for="instantaneous-storage"] {
     display: block; /* Makes the label a block-level element */
     margin-top: 50px; /* Adjust this value as needed for positioning */

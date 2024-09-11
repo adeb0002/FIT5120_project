@@ -241,12 +241,12 @@ label[for="appliance-selection"] {
 }
 
 /* Style for labels inside #usage-questions */
-#usage-questions label::before {
+.television-label::before {
     content: '';
     display: inline-block;
     width: 30px;
     height: 30px;
-    background-image: url('../img/appliance.png');
+    background-image: url('../img/television.png');
     background-size: cover;
     margin-right: 10px;
     vertical-align: middle;
@@ -380,8 +380,8 @@ label[for="appliance-selection"] {
 }
 
 .appliance-icon-1 {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     background-image: url('../img/appliance.png');
     background-size: cover;
     margin-right: 10px;
@@ -412,7 +412,6 @@ input[type="number"] {
 .button-group {
     display: flex;
     flex-direction: column;
-
     gap: 10px;
     margin-top: 20px;
     margin-left: 70px;
@@ -437,4 +436,163 @@ input[type="number"] {
 .button-group .btn.selected-green.active {
     background-color: #28a745; /* Green background */
     color: white; /* White text */
+}
+
+.radio-option {
+    margin-top: 20px;
+    margin-right: 15px; /* Adjust spacing between options */
+    display: inline-block; /* Display options in a row */
+}
+
+input[type="radio"] {
+    display: none; /* Hide the default radio button */
+}
+
+.radio-label {
+    cursor: pointer;
+    padding: 8px 15px; /* Smaller padding */
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+    display: inline-block; /* Make labels behave like inline-blocks */
+    font-size: 16px !important; /* Ensure font size is smaller */
+    font-weight: normal !important;
+}
+
+input[type="radio"]:checked + .radio-label {
+    background-color: #28a745 !important;  /* Green background when selected */
+    color: white !important;  /* White text when selected */
+    border-color: #007bff !important; /* Blue border when selected */
+}
+
+.dishwasher-label::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-image: url('../img/dishwasher.png');
+    background-size: cover;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin-top: 50px;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 20px;
+    background: #ddd;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .15s ease-in-out, background-color .15s ease-in-out;
+    border-radius: 20px;
+    /* Remove position: center; as it's not a valid property */
+}
+
+.slider:hover {
+    opacity: 1;
+    background-color: #bbb;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 32px;
+    height: 32px;
+    background: #4CAF50;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(0,0,0,0.3);
+    transition: background-color .15s ease-in-out;
+    position: relative; /* Keeps the thumb in the normal flow of the layout */
+    margin-top: 8px; /* Adjust to position the thumb below the track */
+    z-index: 2; /* Ensures the thumb is above the track */
+}
+
+/* Ensure consistency across different browsers */
+.slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    background: #4CAF50;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(0,0,0,0.3);
+    transition: background-color .15s ease-in-out;
+}
+
+.slider::-moz-range-thumb:hover {
+    background: #45a049;
+}
+
+#load-size-value {
+    font-size: 1.2em; /* Make text larger */
+    font-weight: bold; /* Make text bold */
+}
+
+#slider-value-container {
+     position: relative; /* Change to relative to align it properly */
+     margin-top: 20px; /* Add margin to move it lower below the slider */
+    text-align: center; /* Center align the text within the container */
+    white-space: nowrap;
+}
+
+.slider-icon {
+    position: absolute;
+    left: 10px; /* Adjust as needed */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px; /* Icon width */
+    height: 24px; /* Icon height */
+    background-image: url(../img/home.1024x910.png); /* Path to your icon */
+    background-size: cover;
+}
+
+.clotheswasher-label::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-image: url('../img/clotheswasher.png');
+    background-size: cover;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.clothesdryer-label::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-image: url('../img/clothesdryer.png');
+    background-size: cover;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.ac-label::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-image: url('../img/air_conditioner.png');
+    background-size: cover;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.fridge-label::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-image: url('../img/refrigerator.png');
+    background-size: cover;
+    margin-right: 10px;
+    vertical-align: middle;
 }

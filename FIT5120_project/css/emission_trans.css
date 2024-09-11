@@ -241,18 +241,6 @@ label[for="transportation-selection"] {
     font-size: 1.5em;/* Dark grey color for text */
 }
 
-/* Style for labels inside #usage-questions */
-#usage-questions label::before {
-    content: '';
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    background-image: url('../img/delivery.png');
-    background-size: cover;
-    margin-right: 10px;
-    vertical-align: middle;
-}
-
 /* Style for inputs */
 #usage-questions input[type="number"] {
     width: 100%; /* Full width of the container */
@@ -417,17 +405,17 @@ input[type="number"] {
 
 .transportation-button.active {
     background-color: #0056b3; /* Active state background color */
-    color: white; /* Active state text color */
+    color: white;
 }
 
 .transportation-button.selected-green {
     background-color: #28a745; /* Green background */
-    color: white; /* White text */
+    color: white;
 }
 
 .transportation-button.selected-green.active {
     background-color: #28a745; /* Green background */
-    color: white; /* White text */
+    color: white;
 }
 
 .map-button {
@@ -459,3 +447,46 @@ input[type="number"] {
     box-sizing: border-box; /* Ensure padding and border are included in the height */
 }
 
+.icon-private-vehicle {
+    background-image: url('../img/car.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.icon-train {
+    background-image: url('../img/train.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.icon-tram {
+    background-image: url('../img/tram.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.icon-bus {
+    background-image: url('../img/bus.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}

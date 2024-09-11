@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -7,196 +8,209 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Fonts and CSS -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-calculator.min.css">
+
+    <!-- Bootstrap CSS (CDN) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- Other CSS files -->
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/fontAwesome.css">
+    <link rel="stylesheet" href="css/hero-slider.css">
+    <link rel="stylesheet" href="css/owl-carousel.css">
     <link rel="stylesheet" href="css/emission_personal.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="css/lightbox.css">
+
+    <!-- JavaScript files -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
+
 <body>
-<!-- Header Section with Navigation Bar -->
-<div class="header">
-    <div class="container">
-        <nav class="navbar navbar-inverse" role="navigation">
-            <div class="navbar-header">
-                <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse"
-                        data-target="#main-nav">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <img href="index.html" class="navbar-brand scroll-top" src="img/logo.png" alt="EcoInsight Logo"
-                     style="height: 80px; margin-right: 10px;">
-            </div>
-            <div id="main-nav" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="index.html" class="scroll-top">Home</a></li>
-                    <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">our mission</a></li>
-                    <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
-                    <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
-                    <li><a href="recommendations.html">Recommendations</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-</div>
-
-<!-- CO2 Emission Calculator Section -->
-<div class="parallax-content" id="emission-calculator">
-    <div class="container">
-        <div class="col-md-3">
-            <h2>Carbon Footprint Calculator</h2>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuemin="0"
-                     aria-valuemax="100"></div>
-            </div>
+    <!-- Header Section with Navigation Bar -->
+    <div class="header">
+        <div class="container">
+            <nav class="navbar navbar-inverse">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="index.html" class="navbar-brand">
+                        <img src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-nav">
+                    <ul class="nav navbar-nav">
+                        <li><a href="index.html" class="scroll-top">Home</a></li>
+                        <li><a href="#" class="scroll-link" data-id="contact-us">our mission</a></li>
+                        <li><a href="#" class="scroll-link" data-id="about">Services</a></li>
+                        <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
+                        <li><a href="recommendations.html">Recommendations</a></li>
+                    </ul>
+                </div>
+            </nav>
         </div>
+    </div>
 
-        <!-- Section 1: Household Size -->
-        <div class="col-md-9">
-            <form id="emission-form">
-                <div class="form-group">
-                    <div class="icon-label-container">
-                        <div class="house-icon"></div>
-                        <label for="household-size">How many people are in your household?</label>
-                    </div>
-                    <div class="slider-container">
-                        <input type="range" class="slider" id="household-size" name="household-size" min="1" max="10"
-                               step="1" value="1" required>
-                        <div id="slider-value-container">
-                            <span id="slider-value" class="slider-value">1</span>
+    <!-- CO2 Emission Calculator Section -->
+    <div class="parallax-content" id="emission-calculator">
+        <div class="container">
+            <div class="col-md-3">
+                <h2>Carbon Footprint Calculator</h2>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuemin="0"
+                        aria-valuemax="100"></div>
+                </div>
+            </div>
+
+            <!-- Section 1: Household Size -->
+            <div class="col-md-9">
+                <form id="emission-form">
+                    <div class="form-group">
+                        <div class="icon-label-container">
+                            <div class="house-icon"></div>
+                            <label for="household-size">How many people are in your household?</label>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" class="slider" id="household-size" name="household-size" min="1"
+                                max="10" step="1" value="1" required>
+                            <div id="slider-value-container">
+                                <span id="slider-value" class="slider-value">1</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
-        </div> <!-- End of right-section -->
-    </div> <!-- End of container -->
+                </form>
+            </div> <!-- End of right-section -->
+        </div> <!-- End of container -->
 
-    <!-- Floating Navigation Buttons -->
-    <div class="floating-buttons" id="next-button-section">
-        <a href="index.html" class="scroll-link" id="back-button">
-            <i class="fa fa-arrow-left"></i> Back
-        </a>
-        <a href="#" class="scroll-link" id="next-button">
-            Next <i class="fa fa-arrow-right"></i>
-        </a>
-    </div>
-</div> <!-- End of parallax-content -->
+        <!-- Floating Navigation Buttons -->
+        <div class="floating-buttons" id="next-button-section">
+            <a href="index.html" class="scroll-link" id="back-button">
+                <i class="fa fa-arrow-left"></i> Back
+            </a>
+            <a href="#" class="scroll-link" id="next-button">
+                Next <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </div> <!-- End of parallax-content -->
 
-<!-- JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM fully loaded and parsed');
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('DOM fully loaded and parsed');
 
-        var nextButton = document.querySelector('#next-button');
-        var householdSizeSlider = document.querySelector('#household-size');
-        var sliderValue = document.querySelector('#slider-value');
+            var nextButton = document.querySelector('#next-button');
+            var householdSizeSlider = document.querySelector('#household-size');
+            var sliderValue = document.querySelector('#slider-value');
 
-        // Update slider value display
-        householdSizeSlider.addEventListener('input', function() {
-            sliderValue.textContent = householdSizeSlider.value;
-            if (householdSizeSlider.value) {
-                nextButton.style.display = 'inline-block'; // Show the button
-            } else {
-                nextButton.style.display = 'none'; // Hide the button
-            }
-        });
-
-        // Add event listener for "Next" button
-        nextButton.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default anchor behavior
-            validateAndNavigate(); // Call function to handle navigation
-        });
-
-        async function sendDataToLambda(data) {
-            try {
-                console.log('Sending data:', data);
-
-                const householdData = {
-                    type: 'personal',
-                    household_size: data.household_size || 0
-                };
-
-                console.log('Formatted data:', householdData);
-
-                const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(householdData),
-                });
-
-                console.log('Response status:', response.status);
-                console.log('Response headers:', response.headers);
-
-                if (!response.ok) {
-                    const errorDetails = await response.text();
-                    console.error(`Error details: ${errorDetails}`);
-                    throw new Error(`Response not ok. Status: ${response.status}. Details: ${errorDetails}`);
+            // Update slider value display
+            householdSizeSlider.addEventListener('input', function () {
+                sliderValue.textContent = householdSizeSlider.value;
+                if (householdSizeSlider.value) {
+                    nextButton.style.display = 'inline-block'; // Show the button
+                } else {
+                    nextButton.style.display = 'none'; // Hide the button
                 }
+            });
 
-                const responseData = await response.json();
-                console.log('Response data:', responseData);
-                return responseData;
+            // Add event listener for "Next" button
+            nextButton.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent default anchor behavior
+                validateAndNavigate(); // Call function to handle navigation
+            });
 
-            } catch (error) {
-                console.error('Error occurred:', error);
-                alert('Error submitting your data. Please try again.');
+            async function sendDataToLambda(data) {
+                try {
+                    console.log('Sending data:', data);
+
+                    const householdData = {
+                        type: 'personal',
+                        household_size: data.household_size || 0
+                    };
+
+                    console.log('Formatted data:', householdData);
+
+                    const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(householdData),
+                    });
+
+                    console.log('Response status:', response.status);
+                    console.log('Response headers:', response.headers);
+
+                    if (!response.ok) {
+                        const errorDetails = await response.text();
+                        console.error(`Error details: ${errorDetails}`);
+                        throw new Error(`Response not ok. Status: ${response.status}. Details: ${errorDetails}`);
+                    }
+
+                    const responseData = await response.json();
+                    console.log('Response data:', responseData);
+                    return responseData;
+
+                } catch (error) {
+                    console.error('Error occurred:', error);
+                    alert('Error submitting your data. Please try again.');
+                }
             }
+
+            async function validateAndNavigate() {
+                const householdSize = document.getElementById('household-size').value;
+                console.log('Household size value:', householdSize);
+
+                // Save household size to localStorage
+                localStorage.setItem('householdSize', householdSize);
+
+                // Send data to Lambda
+                const lambdaResponse = await sendDataToLambda({ type: 'personal', household_size: householdSize });
+                console.log('Lambda response:', lambdaResponse);
+
+                // Check the response or perform further actions if needed
+                if (lambdaResponse) {
+                    // If validation passes and data is sent successfully, navigate to the next page
+                    window.location.href = 'emission_cal_solar.html';
+                }
+            }
+        });
+
+        // Function to update the slider value and its position
+        function updateSliderValue() {
+            var slider = document.getElementById('household-size');
+            var sliderValue = document.getElementById('slider-value');
+            var sliderValueContainer = document.getElementById('slider-value-container');
+
+            var value = slider.value;
+            sliderValue.textContent = value;
+
+            // Calculate the position of the thumb and adjust the value container position
+            var sliderWidth = slider.offsetWidth;
+            var thumbWidth = 24; // Width of the thumb
+            var thumbPosition = (value - slider.min) / (slider.max - slider.min) * (sliderWidth - thumbWidth);
+
+            sliderValueContainer.style.left = `${thumbPosition + thumbWidth / 2}px`;
         }
 
-        async function validateAndNavigate() {
-            const householdSize = document.getElementById('household-size').value;
-            console.log('Household size value:', householdSize);
+        // Initialize the slider value and position on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            updateSliderValue();
+        });
 
-            // Save household size to localStorage
-            localStorage.setItem('householdSize', householdSize);
+        // Update the slider value and position when the slider is moved
+        document.getElementById('household-size').addEventListener('input', updateSliderValue);
 
-            // Send data to Lambda
-            const lambdaResponse = await sendDataToLambda({ type: 'personal', household_size: householdSize });
-            console.log('Lambda response:', lambdaResponse);
 
-            // Check the response or perform further actions if needed
-            if (lambdaResponse) {
-                // If validation passes and data is sent successfully, navigate to the next page
-                window.location.href = 'emission_cal_solar.html';
-            }
-        }
-    });
-
-    // Function to update the slider value and its position
-    function updateSliderValue() {
-        var slider = document.getElementById('household-size');
-        var sliderValue = document.getElementById('slider-value');
-        var sliderValueContainer = document.getElementById('slider-value-container');
-
-        var value = slider.value;
-        sliderValue.textContent = value;
-
-        // Calculate the position of the thumb and adjust the value container position
-        var sliderWidth = slider.offsetWidth;
-        var thumbWidth = 24; // Width of the thumb
-        var thumbPosition = (value - slider.min) / (slider.max - slider.min) * (sliderWidth - thumbWidth);
-
-        sliderValueContainer.style.left = `${thumbPosition + thumbWidth / 2}px`;
-    }
-
-    // Initialize the slider value and position on page load
-    document.addEventListener('DOMContentLoaded', function() {
-        updateSliderValue();
-    });
-
-    // Update the slider value and position when the slider is moved
-    document.getElementById('household-size').addEventListener('input', updateSliderValue);
-
-</script>
+    </script>
 </body>
+
 </html>

@@ -17,15 +17,15 @@ ul {
 }
 
 .header {
-    position: fixed;
-    top: 0;
+    position: relative;
+    top: 0px;
     left: 0;
     width: 100%;
     padding: 0;
     z-index: 10000;
     transition: all 0.2s ease-in-out;
     height: 80px;
-    background-color: #131212d4; /* Charcoal Grey with opacity */
+    background-color: #131212d4;
     text-align: center;
     line-height: 40px;
     color: white;
@@ -404,3 +404,37 @@ h2 {
     margin-top: 345px;
 }
 
+@media (max-width: 768px){
+	.baner-content .text-content p {
+		padding: 0px 10%;
+	}
+	#main-nav {
+		margin-left: -15px;
+		margin-right: -15px;
+		border-top: none;
+		margin-top: 15px;
+		background-color: rgba(250, 250, 250, 0.95);
+	}
+
+	.navbar-nav {
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+
+	.navbar-inverse .navbar-nav>li {
+		margin-left: 0px;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	}
+
+	.navbar-inverse .navbar-nav>li:last-child {
+		border-bottom: none;
+	}
+
+
+	.navbar-inverse .navbar-nav>li>a {
+		font-family: 'Roboto', sans-serif!important;
+		line-height: 55px;
+		color: #343434!important;
+	}
+
+}
