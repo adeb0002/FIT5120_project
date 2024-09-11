@@ -349,19 +349,29 @@
 
                 if (response.ok) {
                     const data = await response.json();
-                    localStorage.setItem('transportEmissions', data.transport_emissions || 0);
-                    return data.transport_emissions;
+                    console.log('Fetched Transport Data:', data); // Debugging log
+
+                    // Check if data contains transport emissions
+                    if (data && data.transport_emissions) {
+                        localStorage.setItem('individualTransportEmissions', JSON.stringify(data.transport_emissions));
+                        return data.transport_emissions;
+                    } else {
+                        console.warn('Transport emissions data is missing in response.');
+                        return {};
+                    }
                 } else {
-                    console.error('Failed to fetch transport emissions:', response.status);
+                    const errorText = await response.text();
+                    console.error('Error fetching transport emissions:', response.status, errorText);
                     alert('Failed to fetch transport emissions data.');
-                    return 0;
+                    return {};
                 }
             } catch (error) {
                 console.error('Error fetching transport emissions:', error);
                 alert('An error occurred while fetching transport emissions.');
-                return 0;
+                return {};
             }
         }
+
 
 
         // Function to update the emission comparison with the average Melbournian
@@ -384,6 +394,79 @@
             document.getElementById('user-emissions').textContent = userEmissions.toFixed(2);
         }
 
+        // Function to create a bar chart with legend
+        function createBarChart(data, selector, valueKey, labelKey) {
+            // Debugging: Check if data is valid
+            console.log('Bar chart data:', data);
+            if (!data || data.length === 0) {
+                console.warn('No data available for the bar chart.');
+                return; // Exit if no data is available
+            }
+
+            const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+            const width = 500 - margin.left - margin.right;
+            const height = 300 - margin.top - margin.bottom;
+
+            const svg = d3.select(selector)
+                .html('')  // Clear existing SVG content before drawing new chart
+                .append('svg')
+                .attr('width', width + margin.left + margin.right)
+                .attr('height', height + margin.top + margin.bottom)
+                .append('g')
+                .attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+            // Ensure the data contains valid numbers for the emissions values
+            const maxEmission = d3.max(data, d => d[valueKey]);
+            console.log('Max emission value:', maxEmission);
+
+            // Create scales
+            const x = d3.scaleBand()
+                .domain(data.map(d => d[labelKey]))
+                .range([0, width])
+                .padding(0.1);
+
+            const y = d3.scaleLinear()
+                .domain([0, maxEmission || 1]) // Ensure we have a valid domain
+                .nice()
+                .range([height, 0]);
+
+            // Create axes
+            svg.append('g')
+                .attr('transform', `translate(0, ${height})`)
+                .call(d3.axisBottom(x))
+                .selectAll('text')
+                .attr('transform', 'rotate(-45)')
+                .style('text-anchor', 'end');
+
+            svg.append('g')
+                .call(d3.axisLeft(y));
+
+            // Draw bars
+            svg.selectAll('.bar')
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr('class', 'bar')
+                .attr('x', d => x(d[labelKey]))
+                .attr('y', d => y(d[valueKey]))
+                .attr('width', x.bandwidth())
+                .attr('height', d => height - y(d[valueKey]))
+                .attr('fill', '#69b3a2');
+
+            // Add labels to the bars
+            svg.selectAll('.label')
+                .data(data)
+                .enter()
+                .append('text')
+                .attr('class', 'label')
+                .attr('x', d => x(d[labelKey]) + x.bandwidth() / 2)
+                .attr('y', d => y(d[valueKey]) - 5)
+                .attr('text-anchor', 'middle')
+                .text(d => `${d[valueKey].toFixed(2)} kg`);
+        }
+
+
+
 
         // Function to retrieve emissions data from localStorage dynamically
         function getEmissionsData() {
@@ -395,19 +478,27 @@
             ];
 
             const individualApplianceEmissions = JSON.parse(localStorage.getItem('individualApplianceEmissions') || '{}');
+            const individualTransportEmissions = JSON.parse(localStorage.getItem('individualTransportEmissions') || '{}'); // Retrieve transport emissions
 
-            // Log data to ensure it's correctly retrieved
-            console.log('Retrieved individualApplianceEmissions:', individualApplianceEmissions);
-
+            // Format appliance data for charts
             const applianceData = Object.entries(individualApplianceEmissions).map(([type, emissions]) => ({
                 type: type,
                 emissions: parseFloat(emissions)
             }));
 
-            console.log('Formatted Appliance Data for Charts:', applianceData);
+            // Format transport data for charts
+            const transportData = Object.entries(individualTransportEmissions).map(([type, emissions]) => ({
+                type: type,
+                emissions: parseFloat(emissions)
+            }));
 
-            return { categoryData, applianceData };
+            // Log data to ensure it's correctly retrieved
+            console.log('Retrieved individualApplianceEmissions:', individualApplianceEmissions);
+            console.log('Retrieved individualTransportEmissions:', individualTransportEmissions);
+
+            return { categoryData, applianceData, transportData };
         }
+
 
         // Function to create a pie chart with legend
         function createPieChart(data, selector, valueKey, labelKey) {
@@ -471,18 +562,21 @@
 
         // Initialize charts using the dynamic data
         function initCharts() {
-            const { categoryData, applianceData } = getEmissionsData();
+            const { categoryData, applianceData, transportData } = getEmissionsData();
 
-            if (!categoryData.length && !applianceData.length) {
+            if (!categoryData.length && !applianceData.length && !transportData.length) {
                 console.warn('No data available to display.');
                 // Optionally, you can display a message to the user
                 alert('No emissions data available to display.');
                 return;
             }
 
-            // Create charts with the retrieved data
+            // Create pie charts with the retrieved data
             createPieChart(categoryData, '#category-chart', 'emissions', 'category');
             createPieChart(applianceData, '#appliance-chart', 'emissions', 'type');
+            
+            // Create bar chart for transport emissions
+            createBarChart(transportData, '#transport-chart', 'emissions', 'type'); // Use bar chart for transport data
         }
 
         // Initialize the page on window load
