@@ -25,7 +25,7 @@ ul {
     z-index: 10000;
     transition: all 0.2s ease-in-out;
     height: 80px;
-    background-color: #131212d4; /* Charcoal Grey with opacity */
+    background-color: #131212d4;
     text-align: center;
     line-height: 40px;
     color: white;
@@ -403,4 +403,3 @@ h2 {
     margin-right: 10px;
     margin-top: 345px;
 }
-

@@ -134,6 +134,7 @@ p {
 	color: #69d76c;
 	font-size: 32px;
 }
+
 .header.active .navbar-brand {
 	color: #121212!important;
 }
@@ -407,9 +408,6 @@ bootstrap.min.css
   border-radius: 20px;
   background: #fff;
 }
-
-
-
 
 #blog {
 	background-image: url(../img/blog-bg.jpg);
