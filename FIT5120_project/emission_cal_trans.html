@@ -132,6 +132,8 @@
             if (savedState.anySelected) {
                 showQuestions();
                 nextButton.style.display = 'block';
+            } else {
+                nextButton.style.display = 'none';
             }
 
             // Load the total distance if available
