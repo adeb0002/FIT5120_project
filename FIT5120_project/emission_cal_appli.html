@@ -432,110 +432,132 @@
         });
 
         async function sendDataToLambda(data) {
-            showLoading();
-            try {
-                console.log('Original data:', data);
+    showLoading();
+    try {
+        console.log('Original data:', data);
 
-                const applianceData = data.appliances.map(appliance => {
-                    if (appliance.type === 'refrigerator') {
-                        return {
-                            type: 'appliance',
-                            appliance_type: 'refrigerator',
-                            brand: appliance.brand || ''
-                        };
-                    } else {
-                        return {
-                            type: 'appliance',
-                            appliance_type: appliance.type,
-                            hours: appliance.hours || 0
-                        };
-                    }
-                });
+        // Ensure each item has a correct type before sending
+        const formattedData = data.appliances.map(item => {
+            let formattedItem = { type: 'appliance', ...item };
 
-                console.log('Formatted data to send:', applianceData);
-
-                const responses = await Promise.all(applianceData.map(async item => {
-                    const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(item),
-                    });
-
-                    if (!response.ok) {
-                        const errorDetails = await response.text();
-                        console.error(`Network response was not ok. Status: ${response.status}. Details: ${errorDetails}`);
-                        throw new Error(`Network response was not ok. Status: ${response.status}. Details: ${errorDetails}`);
-                    }
-
-                    return response.json();
-                }));
-
-                console.log('Data sent successfully:', responses);
-                //window.location.href = 'emission_result.html';
-                return responses;
-            } catch (error) {
-                console.error('Error sending data:', error);
-                alert('There was an error submitting your data. Please try again.');
-            } finally {
-                hideLoading();
+            // Specific handling for televisions and refrigerators
+            if (item.appliance_type === 'television') {
+                formattedItem.screen_size_category = item.screen_size_category || '';
+                formattedItem.screen_technology = item.screen_technology || '';
+            } else if (item.appliance_type === 'refrigerator') {
+                formattedItem.volume_category = item.volume_category || '';
             }
-        }
 
-        function validateAndNavigate() {
-            let isValid = true;
-            const applianceData = [];
+            // Ensure appliance_type does not have extra suffixes like '-usage'
+            formattedItem.appliance_type = formattedItem.appliance_type.replace('-usage', '');
 
-            // Get all appliance sections
-            const applianceSections = document.querySelectorAll('#usage-questions .form-group');
+            return formattedItem;
+        });
 
-            applianceSections.forEach(section => {
-                // Check for dropdowns
-                const dropdown = section.querySelector('select');
-                if (dropdown) {
-                    const selectedValue = dropdown.value;
-                    if (!selectedValue) {
-                        alert(`Please select a value for ${dropdown.previousElementSibling.textContent}`);
-                        isValid = false;
-                        dropdown.style.borderColor = 'red';
-                    } else {
-                        dropdown.style.borderColor = ''; // Reset border color if valid
-                    }
-                }
+        console.log('Formatted data to send:', formattedData);
 
-                // Check for radio buttons
-                const radioButtons = section.querySelectorAll('input[type="radio"]');
-                if (radioButtons.length > 0) {
-                    const selectedRadio = Array.from(radioButtons).find(radio => radio.checked);
-                    if (!selectedRadio) {
-                        alert(`Please select an option for ${section.querySelector('label').textContent}`);
-                        isValid = false;
-                        section.querySelector('label').style.color = 'red'; // Optional: highlight the label
-                    } else {
-                        section.querySelector('label').style.color = ''; // Reset label color if valid
-                    }
-                }
-
-                // Check for numeric inputs
-                const numberInput = section.querySelector('input[type="number"]');
-                if (numberInput) {
-                    const value = parseInt(numberInput.value, 10);
-                    if (isNaN(value) || value <= 0) {
-                        alert(`Please enter a valid number greater than 0 for ${numberInput.previousElementSibling.textContent}`);
-                        isValid = false;
-                        numberInput.style.borderColor = 'red';
-                    } else {
-                        numberInput.style.borderColor = ''; // Reset border color if valid
-                        applianceData.push({ type: numberInput.name, value: value });
-                    }
-                }
+        const responses = await Promise.all(formattedData.map(async item => {
+            const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(item),
             });
 
-            // Proceed to the next page if all validations pass
-            if (isValid) {
-                const data = { appliances: applianceData };
-                sendDataToLambda(data);
+            if (!response.ok) {
+                const errorDetails = await response.text();
+                console.error(`Network response was not ok. Status: ${response.status}. Details: ${errorDetails}`);
+                throw new Error(`Network response was not ok. Status: ${response.status}. Details: ${errorDetails}`);
+            }
+
+            return response.json();
+        }));
+
+        console.log('Data sent successfully:', responses);
+        return responses;
+    } catch (error) {
+        console.error('Error sending data:', error);
+        alert('There was an error submitting your data. Please try again.');
+    } finally {
+        hideLoading();
+    }
+}
+
+function validateAndNavigate() {
+    let isValid = true;
+    const applianceData = [];
+
+    // Get all appliance sections
+    const applianceSections = document.querySelectorAll('#usage-questions .form-group');
+
+    applianceSections.forEach(section => {
+        // Check for dropdowns
+        const dropdown = section.querySelector('select');
+        if (dropdown) {
+            const selectedValue = dropdown.value;
+            if (!selectedValue) {
+                alert(`Please select a value for ${dropdown.previousElementSibling.textContent}`);
+                isValid = false;
+                dropdown.style.borderColor = 'red';
+            } else {
+                dropdown.style.borderColor = ''; // Reset border color if valid
+                if (dropdown.id === 'tv-screen-size') {
+                    applianceData.push({
+                        appliance_type: 'television',
+                        screen_size_category: selectedValue,
+                        screen_technology: document.querySelector('input[name="television-screen-tech"]:checked') ? document.querySelector('input[name="television-screen-tech"]:checked').value : '',
+                        hours: parseInt(document.getElementById('television-hours').value, 10) || 0
+                    });
+                } else if (dropdown.id === 'refrigerator-volume') {
+                    applianceData.push({
+                        appliance_type: 'refrigerator',
+                        volume_category: selectedValue,
+                        hours: parseInt(document.getElementById('refrigerator-hours').value, 10) || 0
+                    });
+                }
             }
         }
+
+        // Check for radio buttons
+        const radioButtons = section.querySelectorAll('input[type="radio"]');
+        if (radioButtons.length > 0) {
+            const selectedRadio = Array.from(radioButtons).find(radio => radio.checked);
+            if (!selectedRadio) {
+                alert(`Please select an option for ${section.querySelector('label').textContent}`);
+                isValid = false;
+                section.querySelector('label').style.color = 'red'; // Optional: highlight the label
+            } else {
+                section.querySelector('label').style.color = ''; // Reset label color if valid
+            }
+        }
+
+        // Check for numeric inputs
+        const numberInput = section.querySelector('input[type="number"]');
+        if (numberInput) {
+            const value = parseInt(numberInput.value, 10);
+            if (isNaN(value) || value <= 0) {
+                alert(`Please enter a valid number greater than 0 for ${numberInput.previousElementSibling.textContent}`);
+                isValid = false;
+                numberInput.style.borderColor = 'red';
+            } else {
+                numberInput.style.borderColor = ''; // Reset border color if valid
+
+                // Correct the appliance type extraction from input name to match backend expectations
+                let applianceType = numberInput.name.replace('-hours', '').replace('-usage', '');
+                applianceData.push({
+                    appliance_type: applianceType,
+                    hours: value
+                });
+            }
+        }
+    });
+
+    // Proceed to the next page if all validations pass
+    if (isValid) {
+        const data = { appliances: applianceData };
+        sendDataToLambda(data);
+    }
+}
+
     </script>
 </body>
 
