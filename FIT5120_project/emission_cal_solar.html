@@ -21,219 +21,222 @@
 </head>
 
 <body>
-<!-- Header Section with Navigation Bar -->
-<div class="header">
-    <div class="container">
-        <nav class="navbar navbar-inverse" role="navigation">
-            <div class="navbar-header">
-                <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse"
+    <!-- Header Section with Navigation Bar -->
+    <div class="header">
+        <div class="container">
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse"
                         data-target="#main-nav">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <img href="index.html" class="navbar-brand scroll-top" src="img/logo.png" alt="EcoInsight Logo"
-                     style="height: 80px; margin-right: 10px;">
-            </div>
-            <div id="main-nav" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="index.html" class="scroll-top">Home</a></li>
-                    <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">our mission</a></li>
-                    <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
-                    <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
-                    <li><a href="recommendations.html">Recommendations</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-</div>
-
-<!-- CO2 Emission Calculator Section -->
-<div class="parallax-content" id="emission-calculator">
-    <div class="container">
-        <div class="col-md-3">
-            <h2>Carbon Footprint Calculator</h2>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 20%;" aria-valuemin="0"
-                     aria-valuemax="100"></div>
-            </div>
-        </div>
-
-        <!-- Section 1: Solar Panels and Grid Dependence -->
-        <div class="col-md-9">
-            <form id="emission-form">
-                <div class="form-group">
-                    <div class="icon-label-container">
-                        <div class="sun-icon-1"></div>
-                        <label for="solar-panels-hidden">Do you have solar panels?</label>
-                    </div>
-                    <div class="button-group">
-                        <button type="button" class="btn" data-value="yes">Yes</button>
-                        <button type="button" class="btn" data-value="no">No</button>
-                    </div>
-                    <input type="hidden" name="solar-panels" id="solar-panels-hidden" required>
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="index.html" class="navbar-brand scroll-top">
+                        <img src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
+                    </a>
                 </div>
+                <div id="main-nav" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="index.html" class="scroll-top">Home</a></li>
+                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">our mission</a>
+                        </li>
+                        <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
+                        <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
+                        <li><a href="recommendations.html">Recommendations</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
 
-                <!-- Conditional Input for Grid Dependence -->
-                <div class="form-group" id="grid-dependence-section" style="display: none;">
-                    <div class="icon-label-container">
-                        <div class="sun-icon-2"></div>
-                        <label for="grid-dependence">How much do you depend on the grid?</label>
+    <!-- CO2 Emission Calculator Section -->
+    <div class="parallax-content" id="emission-calculator">
+        <div class="container">
+            <div class="col-md-3">
+                <h2>Carbon Footprint Calculator</h2>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 20%;" aria-valuemin="0"
+                        aria-valuemax="100"></div>
+                </div>
+            </div>
+
+            <!-- Section 1: Solar Panels and Grid Dependence -->
+            <div class="col-md-9">
+                <form id="emission-form">
+                    <div class="form-group">
+                        <div class="icon-label-container">
+                            <div class="sun-icon-1"></div>
+                            <label for="solar-panels-hidden">Do you have solar panels?</label>
+                        </div>
+                        <div class="button-group">
+                            <button type="button" class="btn" data-value="yes">Yes</button>
+                            <button type="button" class="btn" data-value="no">No</button>
+                        </div>
+                        <input type="hidden" name="solar-panels" id="solar-panels-hidden" required>
                     </div>
-                    <select class="form-control" id="grid-dependence" name="grid-dependence" required
+
+                    <!-- Conditional Input for Grid Dependence -->
+                    <div class="form-group" id="grid-dependence-section" style="display: none;">
+                        <div class="icon-label-container">
+                            <div class="sun-icon-2"></div>
+                            <label for="grid-dependence">How much do you depend on the grid?</label>
+                        </div>
+                        <select class="form-control" id="grid-dependence" name="grid-dependence" required
                             style="width: 500px;">
-                        <option value="" disabled selected>Select a percentage</option>
-                        <option value="10">10%</option>
-                        <option value="20">20%</option>
-                        <option value="30">30%</option>
-                        <option value="40">40%</option>
-                        <option value="50">50%</option>
-                        <option value="60">60%</option>
-                        <option value="70">70%</option>
-                        <option value="80">80%</option>
-                        <option value="90">90%</option>
-                        <option value="100">100%</option>
-                    </select>
-                </div>
+                            <option value="" disabled selected>Select a percentage</option>
+                            <option value="10">10%</option>
+                            <option value="20">20%</option>
+                            <option value="30">30%</option>
+                            <option value="40">40%</option>
+                            <option value="50">50%</option>
+                            <option value="60">60%</option>
+                            <option value="70">70%</option>
+                            <option value="80">80%</option>
+                            <option value="90">90%</option>
+                            <option value="100">100%</option>
+                        </select>
+                    </div>
 
-                <!-- Floating Navigation Buttons -->
-                <div class="floating-buttons" id="next-button-section">
-                    <a href="emission_cal_personal.html" class="scroll-link" id="back-button">
-                        <i class="fa fa-arrow-left"></i> Back
-                    </a>
+                    <!-- Floating Navigation Buttons -->
+                    <div class="floating-buttons" id="next-button-section">
+                        <a href="emission_cal_personal.html" class="scroll-link" id="back-button">
+                            <i class="fa fa-arrow-left"></i> Back
+                        </a>
 
-                    <a href="#" class="scroll-link" id="next-button" style="display: none;">
-                        Next <i class="fa fa-arrow-right"></i>
-                    </a>
-                </div>
-            </form>
+                        <a href="#" class="scroll-link" id="next-button" style="display: none;">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
 
-<!-- JavaScript -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM fully loaded and parsed');
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('DOM fully loaded and parsed');
 
-    var solarPanelsButtons = document.querySelectorAll('.button-group .btn');
-    var gridDependenceSection = document.querySelector('#grid-dependence-section');
-    var gridDependenceSelect = document.querySelector('#grid-dependence');
-    var nextButton = document.querySelector('#next-button');
+            var solarPanelsButtons = document.querySelectorAll('.button-group .btn');
+            var gridDependenceSection = document.querySelector('#grid-dependence-section');
+            var gridDependenceSelect = document.querySelector('#grid-dependence');
+            var nextButton = document.querySelector('#next-button');
 
-    // Function to handle button clicks
-    function handleSolarPanelSelection() {
-        solarPanelsButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                solarPanelsButtons.forEach(btn => {
-                    btn.classList.remove('active'); // Remove 'active' class from all buttons
+            // Function to handle button clicks
+            function handleSolarPanelSelection() {
+                solarPanelsButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        solarPanelsButtons.forEach(btn => {
+                            btn.classList.remove('active'); // Remove 'active' class from all buttons
+                        });
+                        this.classList.add('active'); // Add 'active' class to the clicked button
+                        document.getElementById('solar-panels-hidden').value = this.getAttribute('data-value'); // Update hidden input
+
+                        // Show or hide the grid dependence section based on the selection
+                        if (this.getAttribute('data-value') === 'yes') {
+                            gridDependenceSection.style.display = 'block'; // Show grid dependence question
+                        } else {
+                            gridDependenceSection.style.display = 'none';  // Hide grid dependence question
+                        }
+
+                        checkFormCompletion(); // Update button visibility
+                    });
                 });
-                this.classList.add('active'); // Add 'active' class to the clicked button
-                document.getElementById('solar-panels-hidden').value = this.getAttribute('data-value'); // Update hidden input
-
-                // Show or hide the grid dependence section based on the selection
-                if (this.getAttribute('data-value') === 'yes') {
-                    gridDependenceSection.style.display = 'block'; // Show grid dependence question
-                } else {
-                    gridDependenceSection.style.display = 'none';  // Hide grid dependence question
-                }
-
-                checkFormCompletion(); // Update button visibility
-            });
-        });
-    }
-
-    // Function to check form completion
-    function checkFormCompletion() {
-        var solarPanels = document.getElementById('solar-panels-hidden').value;
-        var gridDependence = gridDependenceSelect.value;
-
-        if (solarPanels === 'yes' && !gridDependence) {
-            nextButton.style.display = 'none';  // Hide the "Next" button if "Yes" is selected but no grid dependence value
-        } else if (solarPanels) {
-            nextButton.style.display = 'inline-block';  // Show the "Next" button if any solar panel option is selected
-        } else {
-            nextButton.style.display = 'none';  // Hide the "Next" button if no option is selected
-        }
-    }
-
-    // Add event listeners for the form fields
-    handleSolarPanelSelection();
-    gridDependenceSelect.addEventListener('change', checkFormCompletion);
-
-    // Add event listener for "Next" button
-    nextButton.addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent default anchor behavior
-        validateAndNavigate(); // Call function to handle navigation
-    });
-
-    async function sendDataToLambda(data) {
-        try {
-            console.log('Sending data:', data);
-
-            const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
-
-            console.log('Response status:', response.status);
-            console.log('Response headers:', response.headers);
-
-            if (!response.ok) {
-                const errorDetails = await response.text();
-                console.error(`Error details: ${errorDetails}`);
-                throw new Error(`Response not ok. Status: ${response.status}. Details: ${errorDetails}`);
             }
 
-            const responseData = await response.json();
-            console.log('Response data:', responseData);
-            return responseData;
+            // Function to check form completion
+            function checkFormCompletion() {
+                var solarPanels = document.getElementById('solar-panels-hidden').value;
+                var gridDependence = gridDependenceSelect.value;
 
-        } catch (error) {
-            console.error('Error occurred:', error);
-            alert('Error submitting your data. Please try again.');
-        }
-    }
+                if (solarPanels === 'yes' && !gridDependence) {
+                    nextButton.style.display = 'none';  // Hide the "Next" button if "Yes" is selected but no grid dependence value
+                } else if (solarPanels) {
+                    nextButton.style.display = 'inline-block';  // Show the "Next" button if any solar panel option is selected
+                } else {
+                    nextButton.style.display = 'none';  // Hide the "Next" button if no option is selected
+                }
+            }
 
-    async function validateAndNavigate() {
-        const solarPanels = document.getElementById('solar-panels-hidden').value;
-        const gridDependence = gridDependenceSelect.value;
+            // Add event listeners for the form fields
+            handleSolarPanelSelection();
+            gridDependenceSelect.addEventListener('change', checkFormCompletion);
 
-        console.log('Solar panels value:', solarPanels);
-        console.log('Grid dependence value:', gridDependence);
+            // Add event listener for "Next" button
+            nextButton.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent default anchor behavior
+                validateAndNavigate(); // Call function to handle navigation
+            });
 
-        // Save solar panel data to localStorage
-        localStorage.setItem('solarPanels', solarPanels);
-        localStorage.setItem('gridDependence', gridDependence);
+            async function sendDataToLambda(data) {
+                try {
+                    console.log('Sending data:', data);
 
-        // Prepare data for Lambda
-        const lambdaData = {
-            type: 'solar',
-            solar_panels: solarPanels,
-            grid_dependence: gridDependence
-        };
+                    const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    });
 
-        // Send data to Lambda
-        const lambdaResponse = await sendDataToLambda(lambdaData);
-        console.log('Lambda response:', lambdaResponse);
+                    console.log('Response status:', response.status);
+                    console.log('Response headers:', response.headers);
 
-        // Check the response or perform further actions if needed
-        if (lambdaResponse) {
-            // If validation passes and data is sent successfully, navigate to the next page
-            window.location.href = 'emission_cal_gas.html';
-        }
-    }
-});
+                    if (!response.ok) {
+                        const errorDetails = await response.text();
+                        console.error(`Error details: ${errorDetails}`);
+                        throw new Error(`Response not ok. Status: ${response.status}. Details: ${errorDetails}`);
+                    }
+
+                    const responseData = await response.json();
+                    console.log('Response data:', responseData);
+                    return responseData;
+
+                } catch (error) {
+                    console.error('Error occurred:', error);
+                    alert('Error submitting your data. Please try again.');
+                }
+            }
+
+            async function validateAndNavigate() {
+                const solarPanels = document.getElementById('solar-panels-hidden').value;
+                const gridDependence = gridDependenceSelect.value;
+
+                console.log('Solar panels value:', solarPanels);
+                console.log('Grid dependence value:', gridDependence);
+
+                // Save solar panel data to localStorage
+                localStorage.setItem('solarPanels', solarPanels);
+                localStorage.setItem('gridDependence', gridDependence);
+
+                // Prepare data for Lambda
+                const lambdaData = {
+                    type: 'solar',
+                    solar_panels: solarPanels,
+                    grid_dependence: gridDependence
+                };
+
+                // Send data to Lambda
+                const lambdaResponse = await sendDataToLambda(lambdaData);
+                console.log('Lambda response:', lambdaResponse);
+
+                // Check the response or perform further actions if needed
+                if (lambdaResponse) {
+                    // If validation passes and data is sent successfully, navigate to the next page
+                    window.location.href = 'emission_cal_gas.html';
+                }
+            }
+        });
 
 
 
 
 
-</script>
+    </script>
 </body>
+
 </html>

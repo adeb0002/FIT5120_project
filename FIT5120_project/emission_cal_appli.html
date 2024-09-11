@@ -33,8 +33,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <img href="index.html" class="navbar-brand scroll-top" src="img/logo.png" alt="EcoInsight Logo"
-                        style="height: 80px; margin-right: 10px;">
+                    <a href="index.html" class="navbar-brand scroll-top">
+                        <img src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
+                    </a>
                 </div>
                 <div id="main-nav" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
@@ -224,9 +225,16 @@
             const applianceQuestions = {
                 'television': `
             <div class="form-group">
-    <label for="television-screen-size" class="television-label">What screen size is your television?</label>
-    <select class="form-control" id="television-screen-size" name="television-screen-size" required>
-        <option value="">--Select Screen Size--</option>
+    <label for="tv-screen-size">What screen size is your television?</label>
+    <select id="tv-screen-size" class="form-control">
+        <option value="<40">Less than 40"</option>
+        <option value="40-49">40 - 49"</option>
+        <option value="50-59">50 - 59"</option>
+        <option value="60-69">60 - 69"</option>
+        <option value="70-79">70 - 79"</option>
+        <option value="80-89">80 - 89"</option>
+        <option value="90-99">90 - 99"</option>
+        <option value=">100">Greater than 100"</option>
     </select>
 </div>
 <div class="form-group">
@@ -340,7 +348,14 @@
     <label for="refrigerator-volume" class="question-label fridge-label fridge-icon">What volume is your refrigerator?</label>
     <select class="form-control" id="refrigerator-volume" name="refrigerator-volume" required>
         <option value="">--Select Volume--</option>
-        <!-- Add additional options here -->
+        <option value="<99L">Less than 99L</option>
+        <option value="100-199L">100 - 199L</option>
+        <option value="200-299L">200 - 299L</option>
+        <option value="300-399L">300 - 399L</option>
+        <option value="400-499L">400 - 499L</option>
+        <option value="500-599L">500 - 599L</option>
+        <option value="600-699L">600 - 699L</option>
+        <option value=">700L">More than 700L</option>
     </select>
 </div>
         `

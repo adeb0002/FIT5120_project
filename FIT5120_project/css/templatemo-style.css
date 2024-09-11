@@ -134,7 +134,6 @@ p {
 	color: #69d76c;
 	font-size: 32px;
 }
-
 .header.active .navbar-brand {
 	color: #121212!important;
 }
@@ -387,7 +386,7 @@ bootstrap.min.css
 	font-weight: 300;
 	background-color: #fff;
 	padding: 30px;
-	border-radius: 5px;	
+	border-radius: 5px;
 }
 
 .owl-pagination {
@@ -408,6 +407,9 @@ bootstrap.min.css
   border-radius: 20px;
   background: #fff;
 }
+
+
+
 
 #blog {
 	background-image: url(../img/blog-bg.jpg);
