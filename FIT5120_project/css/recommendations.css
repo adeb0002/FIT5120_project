@@ -5,14 +5,15 @@
 }
 
 html, body {
+    background-color: #f2e8d5;
     height: 100%;
     margin: 0;
     overflow-x: hidden; /* This prevents scrolling */
 }
 
 ul {
-	list-style: none;
-	margin: 0px;
+    list-style: none;
+    margin: 0px;
 }
 
 p {
@@ -20,7 +21,6 @@ p {
     font-size: 20px;
     line-height: 24px;
 }
-
 
 .header {
     position: fixed;
@@ -42,33 +42,33 @@ p {
 }
 
 .navbar-brand {
-	line-height: 80px;
-	padding: 0px;
+    line-height: 80px;
+    padding: 0px;
 }
 
 .navbar-nav>li>a {
-	color: #fff!important;
-	font-size: 13px;
-	font-weight: 300;
-	text-transform: uppercase;
-	text-shadow: none;
-	line-height: 80px;
-	padding: 0px;
-	letter-spacing: 0.5px;
+    color: #fff!important;
+    font-size: 13px;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-shadow: none;
+    line-height: 80px;
+    padding: 0px;
+    letter-spacing: 0.5px;
 }
 
 .navbar-nav>li {
-	margin-left: 45px;
+    margin-left: 45px;
 }
 
 .header.active .navbar-nav>li>a {
-	font-family: 'Open Sans', arial, sans-serif;
-	font-size: 13px;
-	font-weight: 500;
-	letter-spacing: 0.5px;
-	text-transform: uppercase;
-	text-shadow: none;
-	color: #121212!important;
+    font-family: 'Open Sans', arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-shadow: none;
+    color: #121212!important;
 }
 
 .header.active {
@@ -77,45 +77,53 @@ p {
     -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
 }
-.navbar-brand {
-	font-family: 'Open Sans', sans-serif;
-	font-size: 25px;
-	text-transform: uppercase;
-	color: #fff!important;
-	transition: all 0.5s;
 
+.navbar-brand {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #fff!important;
+    transition: all 0.5s;
 }
+
 .navbar-brand em {
-	font-style: normal;
-	color: #f7c552;
-	font-size: 32px;
+    font-style: normal;
+    color: #f7c552;
+    font-size: 32px;
 }
+
 .header.active .navbar-brand {
-	color: #121212!important;
+    color: #121212!important;
 }
+
 .header .navbar-brand {
     font-weight: 800;
 }
+
 .navbar-inverse {
-	background-image: none;
-	background-color: transparent;
+    background-image: none;
+    background-color: transparent;
 }
+
 .header .navbar {
     margin: 0;
     border: none;
 }
+
 .page-section {
     padding: 80px 0;
 }
+
 .navbar-inverse .navbar-toggle {
-	margin-top: 22px;
+    margin-top: 22px;
     border-color: #69d76c!important;
     background-color: #69d76c!important;
 }
+
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
-	background-color: #f7c552;
+    background-color: #f7c552;
 }
-bootstrap.min.css
+
 .navbar-toggle {
     position: relative;
     float: right;
@@ -128,6 +136,7 @@ bootstrap.min.css
     border: 1px solid transparent;
     border-radius: 4px;
 }
+
 @media (min-width: 768px) {
     .header .navbar-brand {
         padding-left: 0;
@@ -136,6 +145,7 @@ bootstrap.min.css
         float: right;
     }
 }
+
 .page-section {
     min-height: 100vh;
     padding: 0;
@@ -155,115 +165,118 @@ bootstrap.min.css
 }
 
 .baner-content {
-	width: 100%;
-  	padding-top: 35vh;
-  	text-align: center;
-  	background-image: url(../img/blog_item_01.jpg);
-  	vertical-align: middle;
+    width: 100%;
+    padding-top: 35vh;
+    text-align: center;
+    background-image: url(../img/blog_item_01.jpg);
+    vertical-align: middle;
 }
 
 .baner-content .text-content {
-	text-align: center;
+    text-align: center;
 }
 
 .baner-content .text-content h2 {
-	font-size: 36px;
-	font-weight: 400;
-	color: #fff;
+    font-size: 36px;
+    font-weight: 400;
+    color: #fff;
 }
 
 .baner-content .text-content h2 span {
-	font-weight: 700;
-	color: #33c1cf!important;
+    font-weight: 700;
+    color: #33c1cf!important;
 }
 
 .baner-content .text-content h2 em {
-	font-style: normal;
-	font-weight: 700;
-	color: #f89624!important;
+    font-style: normal;
+    font-weight: 700;
+    color: #f89624!important;
 }
 
 .baner-content .text-content p {
-	color: #fff;
-	font-size: 14px;
-	line-height: 24px;
-	padding: 0px 25%;
+    color: #fff;
+    font-size: 14px;
+    line-height: 24px;
+    padding: 0px 25%;
 }
 
 .baner-content .text-content .primary-white-button {
-	margin-top: 25px;
+    margin-top: 25px;
 }
 
 /* Recommendation Section */
 #recommendations {
     padding: 100px 20px;
-    background-color: #f4f4f4;
     display: flex;
-    justify-content: flex-start; /* Align content to the left */
+    justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
 }
 
 #recommendations h2 {
-    font-size: 2em;
-    font-weight: 600;
-    color: white;
-    margin-bottom: 20px; /* Reduced margin */
-    margin-left: -150px; /* Move the title to the left, similar to the left-section */
-    margin-top: 50px; /* Adjust as needed to move the title lower */
-    line-height: 1.2;
-    white-space: nowrap; /* Prevent line break */
-    overflow: hidden; /* Hide overflow */
-    text-overflow: ellipsis; /* Add ellipsis */
+    font-size: 4rem; /* Large size for the title */
+    font-weight: 800; /* Bold font */
+    color: #28a745; /* Green color */
+    text-align: center; /* Center the text */
+    text-transform: uppercase; /* Uppercase for the title */
+    margin-bottom: 20px;
+    margin-top: 50px;
+    line-height: 1.4;
 }
 
-.line-dec {
-    width: 380px; /* Match the width with the left-section title */
-    height: 5px;
-    background-color: #33c1cf; /* Match the blue color */
-    margin: 20px 0 15px 0; /* Adjusted margin */
-    margin-left: -150px; /* Move the line to the left */
+/* White bar under the title */
+.title-bar {
+    width: 80%; /* Adjust this width if necessary */
+    height: 15px;
+    background-color: white;
+    margin: 20px auto 40px; /* Centering with top and bottom margins */
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for a subtle 3D effect */
+}
+
+.page-description {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #28a745; /* Same green color as the title */
+    margin-bottom: 20px;
+    padding: 0 20px;
+    line-height: 1.6;
 }
 
 /* Recommendation Boxes */
-
 .box {
-    background-color: #f5f5f5; /* Adjust the background color to match your theme */
+    background-color: #ffffff;
+    border: 1px solid #ddd;
     padding: 20px;
     margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
     position: relative;
-    margin-left: 150px; /* Shift the boxes to the right */
 }
-
-.icon-right {
-    position: absolute;
-    right: -20px; /* Increased from 20px to 40px to move the icons further to the right */
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 3em;
-    color: #33c1cf;
-}
-
-
 
 .box h3 {
-    font-size: 18px;
-    color: black; /* Darker grey for headings */
-    margin-bottom: 10px;
+    font-size: 20px;
+    color: #333;
 }
 
 .box p {
-    color: black;
-    font-size: 14px;
-    line-height: 24px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #666;
+}
+
+.box i {
+    font-size: 3em;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #33c1cf;
 }
 
 .box:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    transform: translateY(-5px);
+    transform: translateY(-10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Links */
@@ -317,13 +330,43 @@ ul li a:hover {
 
 .parallax-content {
     display: flex;
-    background: linear-gradient(to right, #84a784 30%, white 30%);
-    height: flex; /* Example height, adjust as needed */
+    background-color: #f2e8d5; 
     min-height: 90px;
-    width: 100vw;  /* Full viewport width */
+    width: 100vw;
     padding: 100px 0;
     box-sizing: border-box;
-    margin: 0; /* Ensure no extra margin */
+    margin: 0;
+}
+
+/* Button Toggle Styles */
+.button-toggle {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.button-toggle .btn {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.button-toggle .btn.active-toggle {
+    background-color: #33c1cf;
+    color: white;
+    border-color: #33c1cf;
+}
+
+.button-toggle .btn:not(.active-toggle) {
+    background-color: lightgrey;
+    color: black;
+    border-color: grey;
+}
+
+.button-toggle .btn:hover {
+    opacity: 0.8;
 }
 
 .left-section {
@@ -341,53 +384,27 @@ ul li a:hover {
 
 @media (min-width: 769px) {
     .col-md-3 {
-        flex: 0 0 25%; /* 3-column width on larger screens */
+        flex: 0 0 25%;
     }
 
     .col-md-9 {
-        flex: 0 0 75%; /* 9-column width on larger screens */
+        flex: 0 0 75%;
     }
 }
+
 .form-group {
     margin-bottom: 30px;
 }
 
-.left-section h2 {
-    font-size: 2em;
-    font-weight: 600;
-    margin-bottom: 20px;
-    margin-left: -150px; /* Adjust as needed to move the title to the left */
-    margin-top: 50px; /* Adjust as needed to move the title lower */
-    color: white;
-    line-height: 1.2;
-    white-space: nowrap; /* Prevent line break */
-    overflow: hidden; /* Hide overflow */
-    text-overflow: ellipsis; /* Add ellipsis */
-}
-
-.line-dec {
-    width: 380px; /* Increase the width to make the line longer */
-    height: 5px;
-    background-color: rgba(250, 250, 250, 0.5);
-    margin: 20px 0px 15px 0px; /* Maintain the top and bottom margins */
-    margin-left: -150px; /* Move the line to the left */
-}
-
-label {
-    font-size: 18px; /* Adjust the size as needed */
-    font-weight: bold; /* Optional: Make the text bold */
-    color: #333; /* Optional: Change text color */
-}
-
 .primary-blue-button a {
-	background-color: #33c1cf;
-	font-size: 14px;
-	padding: 12px 12px;
-	color: white;
-	font-weight: 500;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	text-decoration: none;
-	border-radius: 20px;
-	text-align: center;
+    background-color: #33c1cf;
+    font-size: 14px;
+    padding: 12px 12px;
+    color: white;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 20px;
+    text-align: center;
 }
