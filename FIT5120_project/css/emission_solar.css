@@ -4,65 +4,68 @@
     font-family: 'Roboto', arial, sans-serif;
 }
 
-html, body {
+html,
+body {
     background-color: #f2e8d5;
     height: 100%;
     margin: 0;
-    overflow-x: hidden; /* This prevents scrolling */
+    overflow-x: hidden;
+    /* This prevents scrolling */
 }
 
 ul {
-	list-style: none;
-	margin: 0px;
+    list-style: none;
+    margin: 0px;
 }
 
 .header {
     position: fixed;
-    top: 0;
+    top: 0px;
     left: 0;
     width: 100%;
     padding: 0;
     z-index: 10000;
     transition: all 0.2s ease-in-out;
     height: 80px;
-    background-color: #131212d4; /* Charcoal Grey with opacity */
+    background-color: #131212d4;
     text-align: center;
     line-height: 40px;
     color: white;
 }
 
-.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-nav>li>a {
     text-shadow: none;
 }
 
 .navbar-brand {
-	line-height: 80px;
-	padding: 0px;
+    line-height: 80px;
+    padding: 0px;
 }
 
 .navbar-nav>li>a {
-	color: #fff!important;
-	font-size: 13px;
-	font-weight: 300;
-	text-transform: uppercase;
-	text-shadow: none;
-	line-height: 80px;
-	padding: 0px;
-	letter-spacing: 0.5px;
+    color: #fff !important;
+    font-size: 13px;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-shadow: none;
+    line-height: 80px;
+    padding: 0px;
+    letter-spacing: 0.5px;
 }
 
 .navbar-nav>li {
-	margin-left: 45px;
+    margin-left: 45px;
 }
 
 .header.active .navbar-nav>li>a {
-	font-family: 'Open Sans', arial, sans-serif;
-	font-size: 13px;
-	font-weight: 500;
-	letter-spacing: 0.5px;
-	text-transform: uppercase;
-	text-shadow: none;
-	color: #121212!important;
+    font-family: 'Open Sans', arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-shadow: none;
+    color: #121212 !important;
 }
 
 .header.active {
@@ -71,50 +74,60 @@ ul {
     -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
 }
+
 .navbar-brand {
-	font-family: 'Open Sans', sans-serif;
-	font-size: 25px;
-	text-transform: uppercase;
-	color: #fff!important;
-	transition: all 0.5s;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #fff !important;
+    transition: all 0.5s;
 
 }
+
 .navbar-brand em {
-	font-style: normal;
-	color: #f7c552;
-	font-size: 32px;
+    font-style: normal;
+    color: #f7c552;
+    font-size: 32px;
 }
+
 .header.active .navbar-brand {
-	color: #121212!important;
+    color: #121212 !important;
 }
+
 .header .navbar-brand {
     font-weight: 800;
 }
+
 .navbar-inverse {
-	background-image: none;
-	background-color: transparent;
+    background-image: none;
+    background-color: transparent;
 }
+
 .header .navbar {
     margin: 0;
     border: none;
 }
+
 .page-section {
     padding: 80px 0;
 }
+
 .navbar-inverse .navbar-toggle {
-	margin-top: 22px;
-    border-color: #69d76c!important;
-    background-color: #69d76c!important;
+    margin-top: 22px;
+    border-color: #69d76c !important;
+    background-color: #69d76c !important;
 }
-.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
-	background-color: #f7c552;
+
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+    background-color: #f7c552;
 }
-bootstrap.min.css
-.navbar-toggle {
+
+bootstrap.min.css .navbar-toggle {
     position: relative;
     float: right;
     padding: 9px 10px;
-    margin-top: 15px!important;
+    margin-top: 15px !important;
     margin-right: 15px;
     margin-bottom: 8px;
     background-color: transparent;
@@ -122,14 +135,17 @@ bootstrap.min.css
     border: 1px solid transparent;
     border-radius: 4px;
 }
+
 @media (min-width: 768px) {
     .header .navbar-brand {
         padding-left: 0;
     }
+
     .navbar-nav {
         float: right;
     }
 }
+
 .page-section {
     min-height: 100vh;
     padding: 0;
@@ -139,9 +155,11 @@ bootstrap.min.css
     .page-section h1 {
         font-size: 3em;
     }
+
     .page-section h2 {
         font-size: 2em;
     }
+
     .page-section p {
         font-size: 1em;
         margin: 0 0 20px;
@@ -149,50 +167,50 @@ bootstrap.min.css
 }
 
 .baner-content {
-	width: 100%;
-  	padding-top: 35vh;
-  	text-align: center;
-  	background-image: url(../img/blog_item_01.jpg);
-  	vertical-align: middle;
+    width: 100%;
+    padding-top: 35vh;
+    text-align: center;
+    background-image: url(../img/blog_item_01.jpg);
+    vertical-align: middle;
 }
 
 .baner-content .text-content {
-	text-align: center;
+    text-align: center;
 }
 
 .baner-content .text-content h2 {
-	font-size: 36px;
-	font-weight: 400;
-	color: #fff;
+    font-size: 36px;
+    font-weight: 400;
+    color: #fff;
 }
 
 .baner-content .text-content h2 span {
-	font-weight: 700;
-	color: #33c1cf!important;
+    font-weight: 700;
+    color: #33c1cf !important;
 }
 
 .baner-content .text-content h2 em {
-	font-style: normal;
-	font-weight: 700;
-	color: #f89624!important;
+    font-style: normal;
+    font-weight: 700;
+    color: #f89624 !important;
 }
 
 .baner-content .text-content p {
-	color: #fff;
-	font-size: 14px;
-	line-height: 24px;
-	padding: 0px 25%;
+    color: #fff;
+    font-size: 14px;
+    line-height: 24px;
+    padding: 0px 25%;
 }
 
 .baner-content .text-content .primary-white-button {
-	margin-top: 25px;
+    margin-top: 25px;
 }
 
 /* Common floating buttons styles */
 .floating-buttons {
     position: relative;
-    margin-top: 200px;
-    margin-left:-60px;
+    margin-top: 269px;
+    margin-left: -97px;
     transform: translateX(-50%);
     display: flex;
     justify-content: space-between;
@@ -232,88 +250,281 @@ bootstrap.min.css
 }
 
 /* Icon Styling inside Buttons */
-#back-button i, #next-button i {
-    margin-right: 8px; /* Space between icon and text */
+#back-button i,
+#next-button i {
+    margin-right: 8px;
+    /* Space between icon and text */
 }
 
 /* Ensure no conflicting styles for floating-buttons links */
 .floating-buttons a {
-    background: #28a745; /* Green background */
+    background: #28a745;
+    /* Green background */
     color: white;
-    padding: 20px 30px; /* Adjusted padding for better button size */
+    padding: 20px 25px;
+    /* Adjusted padding for better button size */
     border-radius: 20px;
     text-decoration: none;
     font-weight: bold;
     text-align: center;
     display: inline-flex;
-    align-items: center; /* Center text and icon vertically */
+    align-items: center;
+    /* Center text and icon vertically */
     transition: background-color .3s ease;
 }
+
 .floating-buttons a:hover {
-    background-color: #00332b; /* Darker shade for hover effect */
+    background-color: #00332b;
+    /* Darker shade for hover effect */
 }
 
-/* Responsive Design */
+/* Media query for tablets (max-width: 768px) */
 @media (max-width: 768px) {
-    .header .navbar-nav {
-        float: none;
-        text-align: center;
-    }
-
-    .navbar-nav>li {
-        margin-left: 0;
-        display: inline-block;
-    }
-
     .floating-buttons {
-        flex-direction: column;
+        position: fixed;
+        /* Fix position relative to the viewport */
         bottom: 10px;
-        left: auto;
-        right: auto;
-        width: auto;
+        /* Distance from bottom */
+        width: calc(100% - 20px);
+        /* Full width minus padding */
+        display: flex;
+        justify-content: space-between;
+        /* Space between buttons */
+        gap: 10px;
+        /* Space between buttons */
+        margin: 0;
+        /* Reset margin */
+        transform: none;
+        /* Remove any existing transform */
     }
 
-    .floating-buttons a {
-        margin-bottom: 10px;
+    #back-button {
+        position: absolute;
+        /* Absolute positioning within the container */
+        left: 0;
+        /* Align to the left */
+    }
+
+    #next-button {
+        position: absolute;
+        /* Absolute positioning within the container */
+        right: 0;
+        /* Align to the right */
+    }
+
+    #back-button,
+    #next-button {
+        font-size: 14px;
+        /* Adjust font size */
+        padding: 12px 16px;
+        /* Adjust padding */
+    }
+}
+
+/* Media query for mobile devices (max-width: 576px) */
+@media (max-width: 576px) {
+    .floating-buttons {
+        position: fixed;
+        /* Fix position relative to the viewport */
+        bottom: 5px;
+        /* Distance from bottom */
+        width: calc(100% - 10px);
+        /* Full width minus padding */
+        display: flex;
+        justify-content: space-between;
+        /* Space between buttons */
+        gap: 8px;
+        /* Space between buttons */
+        margin: 0;
+        /* Reset margin */
+        transform: none;
+        /* Remove any existing transform */
+    }
+
+    #back-button {
+        position: absolute;
+        /* Absolute positioning within the container */
+        left: -610px;
+        /* Align to the left */
+    }
+
+    #next-button {
+        position: absolute;
+        /* Absolute positioning within the container */
+        right: 40px;
+        /* Align to the right */
+    }
+
+    #back-button,
+    #next-button {
+        font-size: 12px;
+        /* Adjust font size */
+        padding: 10px 14px;
+        /* Adjust padding */
+        bottom: 70px;
+    }
+}
+
+.button-group .btn.active {
+    background-color: #28a745;
+    color: white;
+    /* Ensure no size-changing styles here */
+}
+
+
+.icon-label-container {
+    display: flex;
+    align-items: center;
+    /* Align items vertically center */
+    margin-bottom: 20px;
+    /* Add space between the label and slider */
+}
+
+form .form-group label[for="solar-panels-hidden"] {
+    display: block;
+    /* Makes the label a block-level element */
+    margin-top: 35vh;
+    /* Adjust this value as needed for vertical positioning */
+    font-size: 1.5em;
+    /* Adjust the size of the text */
+    font-weight: bold;
+    /* Makes the text bold */
+    color: #333;
+    /* Optional: Adjust the text color */
+    margin-left: 1vh;
+}
+
+form .form-group label[for="grid-dependence"] {
+    display: block;
+    /* Makes the label a block-level element */
+    margin-top: 40px;
+    /* Adjust this value as needed for positioning */
+    font-size: 1.5em;
+    /* Adjust the size of the text */
+    font-weight: bold;
+    /* Makes the text bold */
+    color: #333;
+    /* Optional: Adjust the text color */
+}
+
+.sun-icon-1 {
+    width: 30px;
+    height: 30px;
+    background-image: url('../img/sun.png');
+    background-size: cover;
+    margin-top: 300px;
+}
+
+.sun-icon-2 {
+    width: 30px;
+    height: 30px;
+    background-image: url('../img/sun.png');
+    background-size: cover;
+    margin-right: 10px;
+    margin-top: 40px;
+}
+
+css Copy code
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .icon-label-container {
+        flex-direction: column;
+        /* Stack items vertically on smaller screens */
+        align-items: flex-start;
+        /* Align items to the start of the container */
+    }
+
+    form .form-group label[for="solar-panels-hidden"] {
+        font-size: 1.2em;
+        /* Slightly smaller text on smaller screens */
+        margin-top: 20px;
+        text-align: left;
+        /* Align text to the left */
+        margin-left: 0;
+        /* Remove left margin to align to the left */
+    }
+
+    form .form-group label[for="grid-dependence"] {
+        font-size: 1.2em;
+        /* Slightly smaller text on smaller screens */
+        margin-top: 20px;
+        text-align: left;
+        /* Align text to the left */
+        margin-left: 0;
+        /* Remove left margin to align to the left */
+    }
+
+    .sun-icon-1,
+    .sun-icon-2 {
+        width: 25px;
+        /* Slightly smaller icons */
+        height: 25px;
+    }
+
+    .sun-icon-1 {
+        margin-top: 150px;
+        /* Adjust margin for better positioning */
+        margin-left: 0;
+        /* Align icon to the left */
+    }
+
+    .sun-icon-2 {
+        margin-top: 20px;
+        /* Adjust margin for better positioning */
+        margin-left: 0;
+        /* Align icon to the left */
     }
 }
 
 @media (max-width: 480px) {
-    .page-section h1 {
-        font-size: 3em;
+    .icon-label-container {
+        margin-bottom: 15px;
+        /* Less space between the label and slider */
     }
 
-    .page-section h2 {
-        font-size: 2em;
+    form .form-group label[for="solar-panels-hidden"] {
+        font-size: 1.1em;
+        /* Even smaller text on very small screens */
+        margin-top: 45px;
+        /* Adjust margin for better spacing */
+        text-align: left;
+        /* Align text to the left */
+        margin-left: 10px;
+        /* Remove left margin to align to the left */
     }
 
-    .page-section p {
-        font-size: 1em;
-        margin: 0 0 20px;
+    form .form-group label[for="grid-dependence"] {
+        font-size: 1.1em;
+        /* Even smaller text on very small screens */
+        margin-top: 45px;
+        /* Adjust margin for better spacing */
+        text-align: left;
+        /* Align text to the left */
+        margin-left: 0;
+        /* Remove left margin to align to the left */
     }
-}
 
+    .sun-icon-1,
+    .sun-icon-2 {
+        width: 25px;
+        /* Smaller icons for very small screens */
+        height: 25px;
+    }
 
-form .form-group label[for="solar-panels-hidden"] {
-    display: block; /* Makes the label a block-level element */
-    margin-top: 350px; /* Adjust this value as needed for positioning */
-    font-size: 1.5em; /* Adjust the size of the text */
-    font-weight: bold; /* Makes the text bold */
-    color: #333; /* Optional: Adjust the text color */
-}
+    .sun-icon-1 {
+        margin-top: 40px;
+        /* Adjust margin for better positioning */
+        margin-left: 0;
+        /* Align icon to the left */
+    }
 
-form .form-group label[for="grid-dependence"] {
-    display: block; /* Makes the label a block-level element */
-    margin-top: 40px; /* Adjust this value as needed for positioning */
-    font-size: 1.5em; /* Adjust the size of the text */
-    font-weight: bold; /* Makes the text bold */
-    color: #333; /* Optional: Adjust the text color */
-}
-
-.icon-label-container {
-    display: flex;
-    align-items: center; /* Align items vertically center */
-    margin-bottom: 20px; /* Add space between the label and slider */
+    .sun-icon-2 {
+        margin-top: 40px;
+        /* Adjust margin for better positioning */
+        margin-left: 0;
+        /* Align icon to the left */
+    }
 }
 
 .button-group {
@@ -321,6 +532,7 @@ form .form-group label[for="grid-dependence"] {
     gap: 10px;
     margin-top: 20px;
     margin-left: 70px;
+    color: black;
 }
 
 .button-group .btn {
@@ -338,11 +550,48 @@ form .form-group label[for="grid-dependence"] {
     color: white;
 }
 
+/* Responsive styles for tablets and below */
+@media (max-width: 768px) {
+    .button-group {
+        margin-left: 10px;
+        /* Reduced margin for smaller screens */
+        justify-content: left;
+        /* Center buttons in the container */
+    }
 
-/* Progress bar styling */
+    .button-group .btn {
+        font-size: 1em;
+        /* Adjust font size for better readability on smaller screens */
+        padding: 8px 16px;
+        /* Adjust padding for better button size */
+    }
+}
+
+/* Responsive styles for mobile phones and below */
+@media (max-width: 480px) {
+    .button-group {
+        margin-left: 30px;
+        /* Remove margin for very small screens */
+        flex-direction: row;
+        /* Stack buttons vertically */
+        align-items: left;
+        /* Center buttons horizontally */
+    }
+
+    .button-group .btn {
+        font-size: 0.9em;
+        /* Further reduce font size */
+        padding: 6px 12px;
+        /* Further reduce padding */
+    }
+}
+
+
 .progress {
     width: 400%;
+    /* Make the progress bar container take full width of the column */
     margin: 30px auto;
+    /* Add some margin and center it */
 }
 
 .progress-bar {
@@ -350,37 +599,132 @@ form .form-group label[for="grid-dependence"] {
     height: 20px;
 }
 
+@media (max-width: 768px) {
+
+    /* Tablets and small desktops */
+    .progress {
+        width: 90%;
+        /* Slightly smaller for tablets */
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* Mobile devices */
+    .progress {
+        width: 100%;
+        /* Full width for mobile */
+        margin: 20px auto;
+        /* Adjust margin for better spacing */
+    }
+
+    .progress-bar {
+        height: 15px;
+        /* Slightly reduce height for smaller screens */
+    }
+}
+
 h2 {
     font-size: 4rem;
     font-weight: 800;
     margin-top: 120px;
     margin-left: 200px;
-    margin-bottom: 20px; /* Space below the heading */
+    margin-bottom: 20px;
+    /* Space below the heading */
     color: #28a745;
     line-height: 1.4;
     text-transform: uppercase;
-    width: 100%; /* Ensure the heading takes full width of the container */
+    width: 100%;
+    /* Ensure the heading takes full width of the container */
     white-space: nowrap;
 }
 
-.sun-icon-1 {
-    width: 30px;
-    height: 30px;
-    background-image: url('../img/sun.png');
-    background-size: cover;
-    margin-right: 10px;
-    margin-top: 350px;
+@media (max-width: 768px) {
+
+    /* Tablets and small desktops */
+    h2 {
+        font-size: 2.5rem;
+        margin-left: 7.2%;
+        width: 90%;
+        margin-top: 30vw;
+        white-space: normal;
+        text-align: center;
+    }
 }
 
-.sun-icon-2 {
-    width: 30px;
-    height: 30px;
-    background-image: url('../img/sun.png');
-    background-size: cover;
-    margin-right: 10px;
-    margin-top: 40px;
+@media (max-width: 480px) {
+
+    /* Mobile devices */
+    h2 {
+        font-size: 2rem;
+        margin-left: 7.7%;
+        margin-top: 30vw;
+        width: 96%;
+        white-space: normal;
+        text-align: center;
+    }
 }
 
 .input-error {
     border-color: red;
+}
+
+@media (max-width: 768px) {
+    .baner-content .text-content p {
+        padding: 0px 10%;
+    }
+
+    #main-nav {
+        margin-left: -15px;
+        margin-right: -15px;
+        border-top: none;
+        margin-top: 15px;
+        background-color: rgba(250, 250, 250, 0.95);
+    }
+
+    .navbar-nav {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .navbar-inverse .navbar-nav>li {
+        margin-left: 0px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-inverse .navbar-nav>li:last-child {
+        border-bottom: none;
+    }
+
+
+    .navbar-inverse .navbar-nav>li>a {
+        font-family: 'Roboto', sans-serif !important;
+        line-height: 55px;
+        color: #343434 !important;
+    }
+}
+
+/* Base styles for the select element */
+.responsive-select {
+    width: 100%;
+    /* Full width on smaller screens */
+    max-width: 500px;
+    /* Maximum width to prevent it from growing too large */
+    box-sizing: border-box;
+    /* Ensure padding and border are included in the width */
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .responsive-select {
+        width: 90%;
+        /* Adjust width to be a bit smaller on tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .responsive-select {
+        width: 70%;
+        /* Full width on very small screens */
+    }
 }
