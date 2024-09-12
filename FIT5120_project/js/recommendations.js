@@ -66,6 +66,56 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
     }
 
+    // Dishwasher Hours Recommendations
+    if (dishwasherHours) {
+        const dishwasherUsage = parseInt(dishwasherHours);
+        if (dishwasherUsage > 7) {
+            recommendationsHTML += `
+                <div class="recommendation">
+                    <h3>Reduce Your Dishwasher Usage</h3>
+                    <p>You use your dishwasher for ${dishwasherUsage} hours a week. To reduce energy consumption, try to run it only when it's full and use eco-friendly modes whenever possible.</p>
+                </div>
+            `;
+        } else {
+            recommendationsHTML += `
+                <div class="recommendation">
+                    <h3>Optimize Your Dishwasher Usage</h3>
+                    <p>Although you use your dishwasher for ${dishwasherUsage} hours a week which is great, ensure that you're maximising energy efficiency by using it in eco mode and running it only when full.</p>
+                </div>
+            `;
+        }
+    }
+
+    // Washing Machine Hours Recommendations
+    if (washingMachineHours) {
+        const washerUsage = parseInt(washingMachineHours);
+        if (washerUsage > 7) {
+            recommendationsHTML += `
+                <div class="recommendation">
+                    <h3>Reduce Your Washing Machine Usage</h3>
+                    <p>You use your washing machine for ${washerUsage} hours a week. Try reducing the number of loads by washing full loads, and use cold water settings to reduce energy consumption and reduce energy bills.</p>
+                </div>
+            `;
+        } else {
+            recommendationsHTML += `
+                <div class="recommendation">
+                    <h3>Optimize Your Washing Machine Usage</h3>
+                    <p>Your washing machine usage is ${washerUsage} hours a week. To maximise energy savings, use cold water settings and run the machine only when it's full.</p>
+                </div>
+            `;
+        }
+    }
+
+    // Clothes Dryer Recommendations
+    if (clothesDryer === 'yes') {
+        recommendationsHTML += `
+            <div class="recommendation">
+                <h3>Reduce Clothes Dryer Usage</h3>
+                <p>Using a clothes dryer can significantly increase energy consumption. Consider air-drying your clothes whenever possible, especially during warmer months, to reduce both emissions and energy bills.</p>
+            </div>
+        `;
+    }
+
     // Transportation Recommendations
     if (carDistance > 50) {
         recommendationsHTML += `
