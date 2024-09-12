@@ -227,147 +227,139 @@
             // Clear previous questions
             usageQuestions.innerHTML = '';
 
-            // Define the HTML for each appliance's questions
+            // Define the HTML for each appliance's questions with headers and corresponding images
             const applianceQuestions = {
                 'television': `
-            <div class="form-group">
-                <label for="tv-screen-size" class="television-label">What screen size is your television?</label>
-                <select id="tv-screen-size" class="form-control" style="width: 500px;">
-                    <option value="">--Select Size--</option>
-                    <option value="Less than 40">Less than 40"</option>
-                    <option value="40-49">40 - 49"</option>
-                    <option value="50-59">50 - 59"</option>
-                    <option value="60-69">60 - 69"</option>
-                    <option value="70-79">70 - 79"</option>
-                    <option value="80-89">80 - 89"</option>
-                    <option value="90-99">90 - 99"</option>
-                    <option value="Greater than 100">Greater than 100"</option>
-                </select>
-            </div>
-            <div class="form-group radio-question">
-                <label for="television-screen-tech" class="television-label">What screen technology does your television use?</label>
-                <div class="radio-option">
-                    <input type="radio" id="tech-lcd" name="television-screen-tech" value="LCD" required>
-                    <label for="tech-lcd" class="radio-label">LCD</label>
-                </div>
-                <div class="radio-option">
-                    <input type="radio" id="tech-plasma" name="television-screen-tech" value="Plasma" required>
-                    <label for="tech-plasma" class="radio-label">Plasma</label>
-                </div>
-                <div class="radio-option">
-                    <input type="radio" id="tech-led" name="television-screen-tech" value="LED" required>
-                    <label for="tech-led" class="radio-label">LED</label>
-                </div>
-                <div class="radio-option">
-                    <input type="radio" id="tech-oled" name="television-screen-tech" value="OLED" required>
-                    <label for="tech-oled" class="radio-label">OLED</label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="television-hours" class="television-label">How many hours do you watch television a week?</label>
-                <input type="number" class="form-control" id="television-hours" name="television-hours" min="1" value="1" required>
-            </div>
-        `,
+                    <h3><img src="img/television.png" alt="Television Icon" style="height: 30px; margin-right: 10px;">Television</h3>
+                    <div class="form-group">
+                        <label for="tv-screen-size">What screen size is your television?</label>
+                        <select id="tv-screen-size" class="form-control" style="width: 500px;">
+                            <option value="">--Select Size--</option>
+                            <option value="Less than 40">Less than 40"</option>
+                            <option value="40-49">40 - 49"</option>
+                            <option value="50-59">50 - 59"</option>
+                            <option value="60-69">60 - 69"</option>
+                            <option value="70-79">70 - 79"</option>
+                            <option value="80-89">80 - 89"</option>
+                            <option value="90-99">90 - 99"</option>
+                            <option value="Greater than 100">Greater than 100"</option>
+                        </select>
+                    </div>
+                    <div class="form-group radio-question">
+                        <label for="television-screen-tech">What screen technology does your television use?</label>
+                        <div class="radio-option">
+                            <input type="radio" id="tech-lcd" name="television-screen-tech" value="LCD" required>
+                            <label for="tech-lcd" class="radio-label">LCD</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="tech-plasma" name="television-screen-tech" value="Plasma" required>
+                            <label for="tech-plasma" class="radio-label">Plasma</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="tech-led" name="television-screen-tech" value="LED" required>
+                            <label for="tech-led" class="radio-label">LED</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="tech-oled" name="television-screen-tech" value="OLED" required>
+                            <label for="tech-oled" class="radio-label">OLED</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="television-hours">How many hours do you watch television a week?</label>
+                        <input type="number" class="form-control" id="television-hours" name="television-hours" min="1" value="1" required>
+                    </div>
+                `,
                 'dishwasher': `
-            <div class="form-group">
-                <label for="dishwasher-usage" class="dishwasher-label">How many times do you use the dishwasher a week?</label>
-                <input type="number" class="form-control" id="dishwasher-usage" name="dishwasher-usage" min="1" value="1" required>
-            </div>
-        `,
+                    <h3><img src="img/dishwasher.png" alt="Dishwasher Icon" style="height: 30px; margin-right: 10px;">Dishwasher</h3>
+                    <div class="form-group">
+                        <label for="dishwasher-usage">How many times do you use the dishwasher a week?</label>
+                        <input type="number" class="form-control" id="dishwasher-usage" name="dishwasher-usage" min="1" value="1" required>
+                    </div>
+                `,
                 'clothes_washer': `
-            <div class="form-group radio-question">
-                <label for="clothes-washer-loading" class="question-label clotheswasher-label loading-icon">What type of loading is your clothes washer?</label>
-                <div class="radio-option">
-                    <label class="radio-inline">
-                        <input type="radio" id="washer-loading-front" name="clothes-washer-loading" value="Front" required>
-                        <span class="radio-label">Front</span>
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label class="radio-inline">
-                        <input type="radio" id="washer-loading-top" name="clothes-washer-loading" value="Top" required>
-                        <span class="radio-label">Top</span>
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="clothes-washer-load-size" class="question-label clotheswasher-label load-size-icon">What load size is your clothes washer?</label>
-            </div>
-            <div class="slider-container">
-                <input type="range" class="slider" id="clothes-washer-load-size" name="clothes-washer-load-size" min="2" max="19" step="0.5" value="10.5" required>
-                <div id="slider-value-container">
-                    <span id="load-size-value">10.5 kg</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="clothes-washer-usage" class="question-label clotheswasher-label usage-icon">How many times do you use the clothes washer a week?</label>
-                <input type="number" class="form-control" id="clothes-washer-usage" name="clothes-washer-usage" min="1" value="1" required>
-            </div>
-        `,
+                    <h3><img src="img/clotheswasher.png" alt="Clothes Washer Icon" style="height: 30px; margin-right: 10px;">Clothes Washer</h3>
+                    <div class="form-group radio-question">
+                        <label for="clothes-washer-loading">What type of loading is your clothes washer?</label>
+                        <div class="radio-option">
+                            <input type="radio" id="washer-loading-front" name="clothes-washer-loading" value="Front" required>
+                            <label for="washer-loading-front" class="radio-label">Front</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="washer-loading-top" name="clothes-washer-loading" value="Top" required>
+                            <label for="washer-loading-top" class="radio-label">Top</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clothes-washer-load-size">What load size is your clothes washer?</label>
+                    </div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" id="clothes-washer-load-size" name="clothes-washer-load-size" min="2" max="19" step="0.5" value="10.5" required>
+                        <div id="slider-value-container">
+                            <span id="load-size-value">10.5 kg</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clothes-washer-usage">How many times do you use the clothes washer a week?</label>
+                        <input type="number" class="form-control" id="clothes-washer-usage" name="clothes-washer-usage" min="1" value="1" required>
+                    </div>
+                `,
                 'clothes_dryer': `
-            <div class="form-group radio-question">
-                <label for="clothes-dryer-type" class="question-label clothesdryer-label dryer-icon">What type of clothes dryer do you use?</label>
-                <div class="radio-option">
-                    <label class="radio-inline">
-                        <input type="radio" id="dryer-type-vented" name="clothes-dryer-type" value="Vented" required>
-                        <span class="radio-label">Vented</span>
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label class="radio-inline">
-                        <input type="radio" id="dryer-type-condenser" name="clothes-dryer-type" value="Condenser" required>
-                        <span class="radio-label">Condenser</span>
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="clothes-dryer-usage" class="question-label clothesdryer-label dryer-icon">How many times do you use the clothes dryer a week?</label>
-                <input type="number" class="form-control" id="clothes-dryer-usage" name="clothes-dryer-usage" min="1" value="1" required>
-            </div>
-        `,
+                    <h3><img src="img/clothesdryer.png" alt="Clothes Dryer Icon" style="height: 30px; margin-right: 10px;">Clothes Dryer</h3>
+                    <div class="form-group radio-question">
+                        <label for="clothes-dryer-type">What type of clothes dryer do you use?</label>
+                        <div class="radio-option">
+                            <input type="radio" id="dryer-type-vented" name="clothes-dryer-type" value="Vented" required>
+                            <label for="dryer-type-vented" class="radio-label">Vented</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="dryer-type-condenser" name="clothes-dryer-type" value="Condenser" required>
+                            <label for="dryer-type-condenser" class="radio-label">Condenser</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clothes-dryer-usage">How many times do you use the clothes dryer a week?</label>
+                        <input type="number" class="form-control" id="clothes-dryer-usage" name="clothes-dryer-usage" min="1" value="1" required>
+                    </div>
+                `,
                 'air_conditioner': `
-            <div class="form-group radio-question">
-                <label for="air-conditioner-type" class="question-label ac-label ac-icon">Is your air conditioner ducted or non-ducted?</label>
-                <div class="radio-option">
-                    <label class="radio-inline">
-                        <input type="radio" id="ac-type-ducted" name="air-conditioner-type" value="Ducted" required>
-                        <span class="radio-label">Ducted</span>
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label class="radio-inline">
-                        <input type="radio" id="ac-type-non-ducted" name="air-conditioner-type" value="Non Ducted" required>
-                        <span class="radio-label">Non Ducted</span>
-                    </label>
-                </div>
-                <div class="radio-option">
-                    <label class="radio-inline">
-                        <input type="radio" id="ac-type-both" name="air-conditioner-type" value="Both" required>
-                        <span class="radio-label">Both</span>
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="air-conditioner-hours" class="question-label ac-label ac-icon">How many hours do you use the air conditioner in a week?</label>
-                <input type="number" class="form-control" id="air-conditioner-hours" name="air-conditioner-hours" min="1" value="1" required>
-            </div>
-        `,
+                    <h3><img src="img/air_conditioner.png" alt="Air Conditioner Icon" style="height: 30px; margin-right: 10px;">Air Conditioner</h3>
+                    <div class="form-group radio-question">
+                        <label for="air-conditioner-type">Is your air conditioner ducted or non-ducted?</label>
+                        <div class="radio-option">
+                            <input type="radio" id="ac-type-ducted" name="air-conditioner-type" value="Ducted" required>
+                            <label for="ac-type-ducted" class="radio-label">Ducted</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="ac-type-non-ducted" name="air-conditioner-type" value="Non Ducted" required>
+                            <label for="ac-type-non-ducted" class="radio-label">Non Ducted</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="ac-type-both" name="air-conditioner-type" value="Both" required>
+                            <label for="ac-type-both" class="radio-label">Both</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="air-conditioner-hours">How many hours do you use the air conditioner in a week?</label>
+                        <input type="number" class="form-control" id="air-conditioner-hours" name="air-conditioner-hours" min="1" value="1" required>
+                    </div>
+                `,
                 'refrigerator': `
-            <div class="form-group">
-                <label for="refrigerator-volume" class="question-label fridge-label fridge-icon">What volume is your refrigerator?</label>
-                <select class="form-control" id="refrigerator-volume" name="refrigerator-volume" style="width: 500px;" required>
-                    <option value="">--Select Volume--</option>
-                    <option value="<99L">Less than 99L</option>
-                    <option value="100-199L">100 - 199L</option>
-                    <option value="200-299L">200 - 299L</option>
-                    <option value="300-399L">300 - 399L</option>
-                    <option value="400-499L">400 - 499L</option>
-                    <option value="500-599L">500 - 599L</option>
-                    <option value="600-699L">600 - 699L</option>
-                    <option value=">700L">More than 700L</option>
-                </select>
-            </div>
-        `
+                    <h3><img src="img/refrigerator.png" alt="Refrigerator Icon" style="height: 30px; margin-right: 10px;">Refrigerator</h3>
+                    <div class="form-group">
+                        <label for="refrigerator-volume">What volume is your refrigerator?</label>
+                        <select class="form-control" id="refrigerator-volume" name="refrigerator-volume" style="width: 500px;" required>
+                            <option value="">--Select Volume--</option>
+                            <option value="<99L">Less than 99L</option>
+                            <option value="100-199L">100 - 199L</option>
+                            <option value="200-299L">200 - 299L</option>
+                            <option value="300-399L">300 - 399L</option>
+                            <option value="400-499L">400 - 499L</option>
+                            <option value="500-599L">500 - 599L</option>
+                            <option value="600-699L">600 - 699L</option>
+                            <option value=">700L">More than 700L</option>
+                        </select>
+                    </div>
+                `
             };
 
             // Generate the HTML based on the selected appliances
@@ -389,6 +381,7 @@
                 document.getElementById('next-button').style.display = 'none';
             }
         }
+
 
         function showQuestions() {
             const selectedAppliances = Array.from(document.querySelectorAll('#appliance-selection .btn.selected-green'))
