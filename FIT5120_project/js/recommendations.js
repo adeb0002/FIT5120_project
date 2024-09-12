@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // going to have to have a localStorage for each calculator question
-    const solarOption = localStorage.getItem('solarOption'); // Solar energy option
-    const gasWaterHeater = localStorage.getItem('gasWaterHeater'); // Gas water heater option
-    const selectedAppliance = localStorage.getItem('selectedAppliance'); // Selected appliance type
-    const carDistance = parseFloat(localStorage.getItem('totalDistance_car')) || 0;
-    const busDistance = parseFloat(localStorage.getItem('totalDistance_bus')) || 0;
-    const trainDistance = parseFloat(localStorage.getItem('totalDistance_train')) || 0;
-    const tramDistance = parseFloat(localStorage.getItem('totalDistance_tram')) || 0;
+    // going to have to have some sort of storage system to get the results for each calculator question
+    // replace x with what storage system
+    const solarOption = x.getItem('solarOption'); // Solar energy option
+    const gasWaterHeater = x.getItem('gasWaterHeater'); // Gas water heater option
+    const selectedAppliance = x.getItem('selectedAppliance'); // Selected appliance type
+    const carDistance = parseFloat(x.getItem('totalDistance_car')) || 0;
+    const busDistance = parseFloat(x.getItem('totalDistance_bus')) || 0;
+    const trainDistance = parseFloat(x.getItem('totalDistance_train')) || 0;
+    const tramDistance = parseFloat(x.getItem('totalDistance_tram')) || 0;
 
     const recommendationsContainer = document.getElementById('recommendations');
     let recommendationsHTML = '<h2>Your Personalized Recommendations</h2>';
