@@ -424,8 +424,6 @@ form .form-group label[for="grid-dependence"] {
     margin-top: 40px;
 }
 
-css Copy code
-
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
     .icon-label-container {
@@ -486,22 +484,22 @@ css Copy code
     form .form-group label[for="solar-panels-hidden"] {
         font-size: 1.1em;
         /* Even smaller text on very small screens */
-        margin-top: 45px;
+        margin-top: -25px;
         /* Adjust margin for better spacing */
         text-align: left;
         /* Align text to the left */
-        margin-left: 10px;
+        margin-left: 30px;
         /* Remove left margin to align to the left */
     }
 
     form .form-group label[for="grid-dependence"] {
         font-size: 1.1em;
         /* Even smaller text on very small screens */
-        margin-top: 45px;
+        margin-top: -25px;
         /* Adjust margin for better spacing */
         text-align: left;
         /* Align text to the left */
-        margin-left: 0;
+        margin-left: 30px;
         /* Remove left margin to align to the left */
     }
 
