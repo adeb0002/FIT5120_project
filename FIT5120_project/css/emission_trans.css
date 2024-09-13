@@ -210,6 +210,30 @@ h2 {
     white-space: nowrap;
 }
 
+@media (max-width: 768px) {
+    /* Tablets and small desktops */
+    h2 {
+        font-size: 2.5rem;
+        margin-left: 7.2%;
+        width: 90%;
+        margin-top: 30vw;
+        white-space: normal;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Mobile devices */
+    h2 {
+        font-size: 2rem;
+        margin-left: 7.7%;
+        margin-top: 8.7vw;
+        width: 96%;
+        white-space: normal;
+        text-align: center;
+    }
+}
+
 .icon-label-container {
     display: flex;
     align-items: center; /* Align items vertically center */
@@ -256,118 +280,6 @@ label[for="transportation-selection"] {
     background-color: #fdd; /* Light red background */
 }
 
-/* Container for the button */
-.primary-green-button {
-    display: inline-block; /* Allow margin and padding to be applied */
-    margin: 10px 0; /* Space above and below the button */
-}
-
-/* Style for the button link */
-.primary-green-button a.scroll-link {
-    display: inline-block; /* Ensure button-like appearance */
-    padding: 10px 20px; /* Padding inside the button */
-    font-size: 16px; /* Font size for the button text */
-    color: #fff; /* White text color */
-    background-color: #28a745; /* Primary blue background color */
-    border: none; /* Remove default border */
-    border-radius: 10px; /* Rounded corners */
-    text-decoration: none; /* Remove underline from link */
-    text-align: center; /* Center text inside button */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for hover effect */
-}
-
-/* Common floating buttons styles */
-.floating-buttons {
-    position: relative;
-    margin-top: -60px;
-    bottom: 30px;
-    margin-left: 500px;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: space-between;
-    width: 110%;
-}
-
-/* Back Button Styling */
-#back-button {
-    background-color: white;
-    font-size: 16px;
-    padding: 20px 25px;
-    color: #28a745;
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    border-radius: 20px;
-    text-align: center;
-    display: inline-flex;
-    align-items: center;
-    margin-left: 600px;
-}
-
-/* Next Button Styling */
-#next-button {
-    background-color: #28a745;
-    font-size: 16px;
-    padding: 20px 25px;
-    color: white;
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    border-radius: 20px;
-    text-align: center;
-    display: inline-flex;
-    align-items: center;
-}
-
-/* Icon Styling inside Buttons */
-#back-button i, #next-button i {
-    margin-right: 8px; /* Space between icon and text */
-}
-
-/* Ensure no conflicting styles for floating-buttons links */
-.floating-buttons a {
-    background: #28a745; /* Green background */
-    color: white;
-    padding: 20px 30px; /* Adjusted padding for better button size */
-    border-radius: 20px;
-    text-decoration: none;
-    font-weight: bold;
-    text-align: center;
-    display: inline-flex;
-    align-items: center; /* Center text and icon vertically */
-    transition: background-color .3s ease;
-}
-.floating-buttons a:hover {
-    background-color: #00332b; /* Darker shade for hover effect */
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-
-    .floating-buttons {
-        flex-direction: column;
-        bottom: 10px;
-    }
-
-    .floating-buttons a {
-        margin-bottom: 10px;
-    }
-}
-
-.progress {
-    width: 400%; /* Make the progress bar container take full width of the column */
-    margin: 30px auto; /* Add some margin and center it */
-}
-
-.progress-bar {
-    background-color: #28a745;
-    height: 20px;
-}
-
 .trans-icon-1 {
     width: 30px;
     height: 30px;
@@ -375,76 +287,6 @@ label[for="transportation-selection"] {
     background-size: cover;
     margin-right: 10px;
     margin-top: 195px;
-}
-
-/* Add this in your CSS file or within a <style> block in the <head> */
-input[type="number"] {
-    width: 50%; /* Adjust the percentage to make the input bar shorter */
-    max-width: 500px; /* Optional: Set a maximum width */
-    display: inline-block;
-}
-
-.button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
-    margin-left: 70px;
-}
-
-.transportation-button {
-    padding: 10px 20px;
-    font-size: 1.2em;
-    width: 300px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f5f5f5;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.transportation-button.active {
-    background-color: #0056b3; /* Active state background color */
-    color: white;
-}
-
-.transportation-button.selected-green {
-    background-color: #28a745; /* Green background */
-    color: white;
-}
-
-.transportation-button.selected-green.active {
-    background-color: #28a745; /* Green background */
-    color: white;
-}
-
-.map-button {
-    padding: 10px 20px;
-    font-size: 1.2em;
-    font-weight: bold; /* Corrected property name */
-    width: 150px;
-    border: 1px solid #28a745;
-    border-radius: 20px;
-    background-color: #d9e7d4; /* Existing background color */
-    color: #333; /* Improved color for better readability */
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.input-container {
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.form-control {
-    flex: 1;
-    margin-right: 10px;
-    max-width: 200px; /* Adjust width as needed */
-    height: 40px; /* Increase the height */
-    padding: 10px; /* Increase padding for better text alignment */
-    font-size: 16px; /* Adjust font size if necessary */
-    box-sizing: border-box; /* Ensure padding and border are included in the height */
 }
 
 .icon-private-vehicle {
@@ -489,4 +331,405 @@ input[type="number"] {
     display: inline-block;
     vertical-align: middle;
     margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+    label[for="transportation-selection"] {
+        margin-top: 150px; /* Adjust positioning for tablets */
+        font-size: 1.4em; /* Slightly smaller font size for tablets */
+    }
+
+    #usage-questions label {
+        font-size: 1.4em; /* Slightly smaller font size for labels on tablets */
+    }
+
+    .icon-label-container {
+        flex-direction: column; /* Stack icons and labels vertically */
+        align-items: flex-start; /* Align items to the left */
+    }
+
+    .icon-private-vehicle,
+    .icon-train,
+    .icon-tram,
+    .icon-bus {
+        width: 28px; /* Smaller icons for tablets */
+        height: 28px;
+    }
+
+    #usage-questions input[type="number"] {
+        padding: 9px; /* Reduced padding for tablets */
+    }
+
+    .trans-icon-1 {
+        margin-top: 150px; /* Adjust the margin for better positioning on tablets */
+    }
+}
+
+/* Screens up to 480px (mobile devices) */
+@media (max-width: 480px) {
+    label[for="transportation-selection"] {
+        margin-top: -25px; /* Adjust positioning for mobile */
+        font-size: 1.1em;
+        margin-left: 35px;
+    }
+
+    #usage-questions label {
+        font-size: 1.1em;
+        margin-top: -25px;
+         margin-left: 35px;
+    }
+
+    .icon-label-container {
+        flex-direction: column; /* Stack icons and labels vertically */
+        align-items: flex-start; /* Align items to the left */
+    }
+
+    .icon-private-vehicle,
+    .icon-train,
+    .icon-tram,
+    .icon-bus {
+        width: 30px; /* Smaller icons for mobile */
+        height: 30px;
+    }
+
+    #usage-questions input[type="number"] {
+        padding: 8px; /* Reduced padding for mobile screens */
+    }
+
+    .trans-icon-1 {
+        margin-top: 30px; /* Adjust the margin for better positioning on mobile */
+    }
+}
+
+/* Common floating buttons styles */
+.floating-buttons {
+    position: relative;
+    margin-top: -60px;
+    bottom: 30px;
+    margin-left: 500px;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    width: 110%;
+}
+
+/* Back Button Styling */
+#back-button {
+    background-color: white;
+    font-size: 16px;
+    padding: 20px 25px;
+    color: #28a745;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    margin-left: 580px;
+}
+
+/* Next Button Styling */
+#next-button {
+    background-color: #28a745;
+    font-size: 16px;
+    padding: 20px 25px;
+    color: white;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 50px;
+}
+
+/* Icon Styling inside Buttons */
+#back-button i, #next-button i {
+    margin-right: 8px; /* Space between icon and text */
+}
+
+/* Ensure no conflicting styles for floating-buttons links */
+.floating-buttons a {
+    background: #28a745; /* Green background */
+    color: white;
+    padding: 20px 30px; /* Adjusted padding for better button size */
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    display: inline-flex;
+    align-items: center; /* Center text and icon vertically */
+    transition: background-color .3s ease;
+}
+.floating-buttons a:hover {
+    background-color: #00332b; /* Darker shade for hover effect */
+}
+
+/* Media query for tablets (max-width: 768px) */
+@media (max-width: 768px) {
+    .floating-buttons {
+        position: relative;
+        /* Fix position relative to the viewport */
+        bottom: 10px;
+        /* Distance from bottom */
+        width: calc(100% - 20px);
+        /* Full width minus padding */
+        display: flex;
+        justify-content: space-between;
+        /* Space between buttons */
+        gap: 10px;
+        /* Space between buttons */
+        margin: 0;
+        /* Reset margin */
+        transform: none;
+        /* Remove any existing transform */
+    }
+
+    #back-button {
+        position: absolute;
+        /* Absolute positioning within the container */
+        left: 0;
+        /* Align to the left */
+    }
+
+    #next-button {
+        position: absolute;
+        /* Absolute positioning within the container */
+        right: 0;
+        /* Align to the right */
+    }
+
+    #back-button,
+    #next-button {
+        font-size: 14px;
+        /* Adjust font size */
+        padding: 12px 16px;
+        /* Adjust padding */
+    }
+}
+
+/* Media query for mobile devices (max-width: 576px) */
+@media (max-width: 480px) {
+    .floating-buttons {
+        position: relative;
+        /* Fix position relative to the viewport */
+        bottom: 5px;
+        /* Distance from bottom */
+        width: calc(100% - 10px);
+        /* Full width minus padding */
+        display: flex;
+        justify-content: space-between;
+        /* Space between buttons */
+        gap: 8px;
+        /* Space between buttons */
+        margin-top: 153px;
+        /* Reset margin */
+        transform: none;
+        /* Remove any existing transform */
+    }
+
+    #back-button {
+        position: absolute;
+        /* Absolute positioning within the container */
+        left: -560px;
+        /* Align to the left */
+    }
+
+    #next-button {
+        position: absolute;
+        /* Absolute positioning within the container */
+        right: -40px;
+    }
+
+    #back-button,
+    #next-button {
+        font-size: 12px;
+        /* Adjust font size */
+        padding: 10px 14px;
+        /* Adjust padding */
+        bottom: 70px;
+    }
+}
+
+.progress {
+    width: 400%; /* Make the progress bar container take full width of the column */
+    margin: 30px auto; /* Add some margin and center it */
+}
+
+.progress-bar {
+    background-color: #28a745;
+    height: 20px;
+}
+
+@media (max-width: 768px) {
+
+    /* Tablets and small desktops */
+    .progress {
+        width: 90%;
+        /* Slightly smaller for tablets */
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* Mobile devices */
+    .progress {
+        width: 100%;
+        /* Full width for mobile */
+        margin: 20px auto;
+        /* Adjust margin for better spacing */
+    }
+
+    .progress-bar {
+        height: 15px;
+        /* Slightly reduce height for smaller screens */
+    }
+}
+
+/* Add this in your CSS file or within a <style> block in the <head> */
+input[type="number"] {
+    width: 50%; /* Adjust the percentage to make the input bar shorter */
+    max-width: 500px; /* Optional: Set a maximum width */
+    display: inline-block;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    margin-left: 70px;
+}
+
+.transportation-button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.transportation-button.active {
+    background-color: #0056b3; /* Active state background color */
+    color: white;
+}
+
+.transportation-button.selected-green {
+    background-color: #28a745; /* Green background */
+    color: white;
+}
+
+.transportation-button.selected-green.active {
+    background-color: #28a745; /* Green background */
+    color: white;
+}
+
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .button-group {
+        margin-left: 30px; /* Adjust margin for smaller screens */
+    }
+
+    .transportation-button {
+        padding: 8px 14px; /* Make buttons full width */
+        font-size: 1.1em; /* Slightly reduce font size */
+    }
+}
+
+@media (max-width: 480px) {
+    .button-group {
+        margin-left: 10px; /* Further reduce margin */
+    }
+
+    .transportation-button {
+        padding: 8px 14px; /* Reduce padding */
+        font-size: 1.1em; /* Further reduce font size */
+    }
+}
+
+.map-button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    font-weight: bold; /* Corrected property name */
+    width: 150px;
+    border: 1px solid #28a745;
+    border-radius: 20px;
+    background-color: #d9e7d4; /* Existing background color */
+    color: #333; /* Improved color for better readability */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+@media (max-width: 768px) {
+    .map-button {
+        padding: 6px 12px;
+        font-size: 1em;
+        width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .map-button {
+        padding: 8px 16px; /* Reduce padding */
+        font-size: 1em; /* Adjust font size */
+        width: 120px; /* Narrower width */
+        border-radius: 15px; /* Smaller border radius */
+    }
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.form-control {
+    flex: 1;
+    margin-right: 10px;
+    max-width: 200px; /* Adjust width as needed */
+    height: 40px; /* Increase the height */
+    padding: 10px; /* Increase padding for better text alignment */
+    font-size: 16px; /* Adjust font size if necessary */
+    box-sizing: border-box; /* Ensure padding and border are included in the height */
+}
+
+@media (max-width: 768px) {
+    .baner-content .text-content p {
+        padding: 0px 10%;
+    }
+
+    #main-nav {
+        margin-left: -15px;
+        margin-right: -15px;
+        border-top: none;
+        margin-top: 15px;
+        background-color: rgba(250, 250, 250, 0.95);
+    }
+
+    .navbar-nav {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .navbar-inverse .navbar-nav>li {
+        margin-left: 0px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-inverse .navbar-nav>li:last-child {
+        border-bottom: none;
+    }
+
+
+    .navbar-inverse .navbar-nav>li>a {
+        font-family: 'Roboto', sans-serif !important;
+        line-height: 55px;
+        color: #343434 !important;
+    }
 }
