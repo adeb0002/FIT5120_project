@@ -552,35 +552,26 @@
                     .text(d => `${d[labelKey]}: ${d[valueKey].toFixed(2)} kg CO2`);
             }
 
-            // Function to retrieve and format transport emissions data from localStorage
             function getTransportEmissionsData() {
                 // Retrieve data from local storage
-                const transportData = JSON.parse(localStorage.getItem('transportationData')) || {};
-                
+                const transportData = JSON.parse(localStorage.getItem('transportationData') || '{}');
+
                 console.log('Transport data retrieved from localStorage:', transportData); // Log retrieved data
 
-                // Check if data is properly structured
-                if (!Object.keys(transportData).length) {
-                    console.warn('No transport data found in localStorage or data is empty.');
-                    return [];
-                }
-                
-                // Format data for chart
+                // Map data to the expected format for your chart
                 const formattedData = Object.entries(transportData).map(([type, emissions]) => ({
-                    type: type.replace('_', ' '), // Make type readable if needed
-                    emissions: parseFloat(emissions)
+                    type: type.replace('_', ' '), // Adjust type format if necessary
+                    emissions: parseFloat(emissions) // Convert emissions to number
                 }));
 
                 console.log('Formatted transport emissions data for chart:', formattedData); // Log formatted data
                 return formattedData;
             }
 
-
-
-
             function initCharts() {
                 const { categoryData, applianceData } = getEmissionsData();
 
+                // Check for both category and appliance data
                 if (!categoryData.length && !applianceData.length) {
                     console.warn('No data available to display.');
                     alert('No emissions data available to display.');
@@ -590,7 +581,7 @@
                 createPieChart(categoryData, '#category-chart', 'emissions', 'category');
                 createPieChart(applianceData, '#appliance-chart', 'emissions', 'type');
 
-                const transportData = getTransportEmissionsData();
+                const transportData = getTransportEmissionsData(); // Ensure this retrieves correctly
 
                 if (!transportData.length) {
                     console.warn('No data available to display for transport chart.');
@@ -598,15 +589,14 @@
                     return;
                 }
 
-                createBarChart(transportData, '#transport-chart', 'emissions', 'type'); // Ensure correct data and keys
+                createBarChart(transportData, '#transport-chart', 'emissions', 'type'); // Make sure these keys align
             }
-
 
             // Initialize the page on window load
             window.onload = function () {
                 // Initialize charts on page load
                 initCharts();
-                
+
                 // Retrieve total emissions from localStorage
                 const totalEmissions = parseFloat(localStorage.getItem('totalEmissions'));
 
