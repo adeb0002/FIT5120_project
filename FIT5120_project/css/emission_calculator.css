@@ -16,9 +16,15 @@ ul {
 }
 
 p {
-	color: #7a7a7a;
-	font-size: 14px;
-	line-height: 24px;
+    color: #f2e8d5; /* Soft cream color for text */
+    font-size: 20px; /* Larger base font size */
+    line-height: 2.0; /* Increased line height for better readability */
+    margin-left: -150px; /* Moves text further to the left */
+    margin-right: 15px; /* Adds right margin for spacing */
+    margin-bottom: 24px; /* Adjusted bottom margin for better spacing */
+    font-family: 'Roboto', sans-serif; /* Clean, modern font */
+    font-weight: bold; /* Makes the text bolder */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for better readability */
 }
 
 .header {
@@ -30,7 +36,7 @@ p {
     z-index: 10000;
     transition: all 0.2s ease-in-out;
     height: 80px;
-    background-color: rgba(54, 69, 79, 0.9); /* Charcoal Grey with opacity */
+    background-color: #131212d4; /* Charcoal Grey with opacity */
     text-align: center;
     line-height: 40px;
     color: white;
@@ -108,13 +114,13 @@ p {
 }
 .navbar-inverse .navbar-toggle {
 	margin-top: 22px;
-    border-color: #f7c552;
-    background-color: #f7c552;
+    border-color: #69d76c!important;
+    background-color: #69d76c!important;
 }
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
 	background-color: #f7c552;
 }
-bootstrap.min.css:5
+bootstrap.min.css
 .navbar-toggle {
     position: relative;
     float: right;
@@ -157,7 +163,7 @@ bootstrap.min.css:5
 	width: 100%;
   	padding-top: 35vh;
   	text-align: center;
-  	background-image: url(../img/banner_bg.jpeg);
+  	background-image: url(../img/blog_item_01.jpg);
   	vertical-align: middle;
 }
 
@@ -210,7 +216,7 @@ bootstrap.min.css:5
     background-color: white;
     font-size: 14px;
     padding: 12px 18px; /* Adjusted for better button size */
-    color: #33c1cf;
+    color: #84a784;
     font-weight: 500;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -222,7 +228,7 @@ bootstrap.min.css:5
 
 /* Next Button Styling */
 #next-button {
-    background-color: #33c1cf;
+    background-color: #84a784;
     font-size: 14px;
     padding: 12px 18px; /* Adjusted for better button size */
     color: white;
@@ -248,87 +254,161 @@ bootstrap.min.css:5
     border-color: red;
 }
 
-
-.row {
+/* Define the layout for the ecological calculator section */
+/* Parallax Content */
+.parallax-content {
+    position: relative;
+    background: linear-gradient(to bottom, #84a784 30%, white 30%);
+    overflow: hidden;
     display: flex;
-    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+/* Container Styling */
+.container {
+    display: flex;
+    flex-direction: column;
     height: 100%;
 }
 
-/* Define the layout for the ecological calculator section */
-.parallax-content {
-    display: flex;
-    background: linear-gradient(to right, #33c1cf 30%, white 30%);
-    height: flex; /* Example height, adjust as needed */
-    min-height: 90px;
-    width: 100vw;  /* Full viewport width */
-    padding: 100px 0;
-    box-sizing: border-box;
-    margin: 0; /* Ensure no extra margin */
+h2 {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-top: 120px; /* Remove top margin */
+    margin-bottom: 20px; /* Space below the heading */
+    color: #f2e8d5;
+    line-height: 1.4;
+    text-transform: uppercase;
+    width: 100%; /* Ensure the heading takes full width of the container */
+    white-space: nowrap;
 }
 
-.left-section {
-    flex: 1;
-    text-align: left;
-    width: 100%;
-    min-height: 90vh;
+p {
+    font-size: 1rem;
+    color: #333; /* Darker text color */
+    font-weight: bold;
+    line-height: 1.6;
+    margin: 0 15px;
 }
 
-.right-section {
-    flex: 1;
-    padding: 20px;
-    min-height: 90vh;
-}
 
-@media (min-width: 769px) {
-    .col-md-3 {
-        flex: 0 0 25%; /* 3-column width on larger screens */
-    }
-
-    .col-md-9 {
-        flex: 0 0 75%; /* 9-column width on larger screens */
-    }
-}
 .form-group {
     margin-bottom: 30px;
 }
 
-.left-section h2 {
-    font-size: 2em;
-    font-weight: 600;
-    margin-bottom: 20px;
-    margin-left: -150px; /* Adjust as needed to move the title to the left */
-    margin-top: 50px; /* Adjust as needed to move the title lower */
-    color: white;
-    line-height: 1.2;
-    white-space: nowrap; /* Prevent line break */
-    overflow: hidden; /* Hide overflow */
-    text-overflow: ellipsis; /* Add ellipsis */
-}
-
-.line-dec {
-    width: 380px; /* Increase the width to make the line longer */
-    height: 5px;
-    background-color: rgba(250, 250, 250, 0.5);
-    margin: 20px 0px 15px 0px; /* Maintain the top and bottom margins */
-    margin-left: -150px; /* Move the line to the left */
-}
-
 label {
-    font-size: 18px; /* Adjust the size as needed */
-    font-weight: bold; /* Optional: Make the text bold */
-    color: #333; /* Optional: Change text color */
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 10px;
 }
 
-.primary-blue-button a {
-	background-color: #33c1cf;
-	font-size: 14px;
-	padding: 12px 12px;
-	color: white;
-	font-weight: 500;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	text-decoration: none;
-	border-radius: 20px;
-	text-align: center;
+.slider-container {
+    display: flex;
+    align-items: center;
+    max-width: 400px;
+    margin: auto;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    background: #ddd;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .15s ease-in-out, background-color .15s ease-in-out;
+    border-radius: 5px;
+}
+
+.slider:hover {
+    opacity: 1;
+    background-color: #bbb;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    background: #4CAF50;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(0,0,0,0.3);
+    transition: background-color .15s ease-in-out;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    background: #45a049;
+}
+
+.slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    background: #4CAF50;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(0,0,0,0.3);
+    transition: background-color .15s ease-in-out;
+}
+
+.slider::-moz-range-thumb:hover {
+    background: #45a049;
+}
+
+.slider-value {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+/* Floating Navigation Buttons */
+.floating-buttons {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.floating-buttons a {
+    background: #004d40; /* Darker shade of green */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color .3s ease;
+}
+
+.floating-buttons a:hover {
+    background-color: #00332b; /* Even darker shade for hover effect */
+}
+
+.floating-buttons i {
+    margin-right: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .section_1, .section_2 {
+        min-height: auto;
+    }
+
+    .floating-buttons {
+        flex-direction: column;
+        bottom: 10px;
+    }
+
+    .floating-buttons a {
+        margin-bottom: 10px;
+    }
 }

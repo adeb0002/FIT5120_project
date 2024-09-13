@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Personalised Recommendations</title>
+    <title>Recommendations</title>
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Fonts and CSS -->
@@ -17,86 +18,147 @@
 </head>
 
 <body>
-<!-- Header Section with Navigation Bar -->
-<div class="header">
-    <div class="container">
-        <nav class="navbar navbar-inverse" role="navigation">
-            <div class="navbar-header">
-                <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse"
-                        data-target="#main-nav">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="#" class="navbar-brand scroll-top"><em>Eco</em>Insight</a>
-            </div>
-            <div id="main-nav" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="home.html" class="scroll-top">Home</a></li>
-                    <li><a href="emission_cal_appli.html">Emission Calculator</a></li>
-                    <li><a href="emission_cal_appli.html">Emission Analytics</a></li>
-                    <li><a href="#" class="scroll-link" data-id="about">About</a></li>
-                    <li><a href="#" class="scroll-link" data-id="contact-us">Contact Us</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-</div>
-
-<!-- Recommendations Section -->
-<div class="parallax-content" id="recommendations">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Personalised Recommendations</h2>
-                <div class="line-dec"></div>
-                <div class="box">
-                    <h3>Dishwasher Usage:</h3>
-                    <p id="dishwasher-text">[Dishwasher recommendation will appear here]</p>
-                    <i class="fas fa-shower icon-right"></i>
+    <!-- Header Section with Navigation Bar -->
+    <div class="header">
+        <div class="container">
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <img href="index.html" class="navbar-brand scroll-top" src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
                 </div>
-                <div class="box">
-                    <h3>Air Conditioner Usage:</h3>
-                    <p id="air-conditioner-text">[Air conditioner recommendation will appear here]</p>
-                    <i class="fas fa-wind icon-right"></i>
-                </div>
-                <div class="box">
-                    <h3>Refrigerator Usage:</h3>
-                    <p id="refrigerator-text">[Refrigerator recommendation will appear here]</p>
-                    <i class="fas fa-lightbulb icon-right"></i>
-                </div>
-                <div class="box">
-                    <h3>Washing Machine Usage:</h3>
-                    <p id="washing-machine-text">[Washing machine recommendation will appear here]</p>
-                    <i class="fas fa-plug icon-right"></i>
-                </div>
-                <div class="box">
-                    <h3>Public Transport Usage:</h3>
-                    <p id="public-transport-text">[Public transport recommendation will appear here]</p>
-                    <i class="fas fa-bus icon-right"></i>
-                </div>
-                <div class="box">
-                    <h3>Government Rebates:</h3>
-                    <p>Explore the available government rebates and save money!</p>
-                    <i class="fas fa-dollar-sign icon-right"></i>
-                    <ul>
-                        <li><a href="https://www.energy.vic.gov.au/victorian-energy-upgrades/homes">Victorian Energy Upgrades</a></li>
-                        <li><a href="https://www.solar.vic.gov.au/solar-panel-rebate">Solar Panel Rebate</a></li>
-                        <li><a href="https://www.energy.vic.gov.au/households/help-paying-your-energy-bills/energy-bill-relief-fund#:~:text=Eligible%20Victorian%20households%20will%20receive%20rebates%20of%20up%20to%20%24300,four%20quarterly%20instalments%20of%20%2475,">Energy Bill Relief Fund</a></li>
+                <div id="main-nav" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="index.html" class="scroll-top">Home</a></li>
+                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a></li>
+                        <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
+                        <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
+                        <li><a href="recommendations.html">Recommendations</a></li>
                     </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Recommendations Section -->
+    <div class="parallax-content" id="recommendations">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>General Recommendations</h2>
+                    <div class="title-bar"></div>
+                    
+                    <!-- Description for the page -->
+                    <p class="page-description">
+                        This page provides tailored recommendations to help you reduce emissions and save on energy costs. 
+                        Use the buttons below to switch between emissions-reducing tips and cost-saving recommendations.
+                    </p>
+
+                    <!-- Buttons for toggling between recommendations -->
+                    <div class="button-toggle">
+                        <button id="emissions-btn" class="btn btn-primary active-toggle">Emissions Recommendations</button>
+                        <button id="cost-saving-btn" class="btn btn-secondary">Cost-Saving Recommendations</button>
+                    </div>
+
+                    <!-- Emissions Recommendations -->
+                    <div class="recommendations-section" id="emissions-recommendations">
+                        <div class="box">
+                            <h3>Dishwasher Usage:</h3>
+                            <p>Run your dishwasher only when it's full and use the energy-saving mode. Reducing the frequency of washes and opting for cooler water settings can lower energy consumption, reducing your carbon footprint.</p>
+                            <i class="fas fa-shower icon-right"></i>
+                        </div>
+
+                        <div class="box">
+                            <h3>Air Conditioner Usage:</h3>
+                            <p>Set your air conditioner to a higher temperature in summer and lower in winter to reduce energy usage. This small adjustment can decrease greenhouse gas emissions.</p>
+                            <i class="fas fa-wind icon-right"></i>
+                        </div>
+
+                        <div class="box">
+                            <h3>Refrigerator Efficiency:</h3>
+                            <p>Keep your refrigerator between 3°C and 5°C, and defrost it regularly to improve energy efficiency. Doing so reduces emissions and prolongs the appliance's life.</p>
+                            <i class="fas fa-thermometer-half icon-right"></i>
+                        </div>
+
+                        <div class="box">
+                            <h3>Public Transport Usage:</h3>
+                            <p>Use public transport instead of driving when possible. This helps reduce your transportation emissions and promotes cleaner air quality in your city.</p>
+                            <i class="fas fa-bus icon-right"></i>
+                        </div>
+                    </div>
+
+                    <!-- Cost-Saving Recommendations (Hidden by default) -->
+                    <div class="recommendations-section" id="cost-saving-recommendations" style="display: none;">
+                        <div class="box">
+                            <h3>Maximise Solar Energy:</h3>
+                            <p>If you have solar panels, use high-energy appliances like washing machines and dishwashers during the day to reduce reliance on the grid and save money on electricity bills.</p>
+                            <i class="fas fa-sun icon-right"></i>
+                        </div>
+
+                        <div class="box">
+                            <h3>Cold Water for Laundry:</h3>
+                            <p>Washing clothes in cold water can reduce energy use by up to 80% per wash. This simple switch can lead to significant savings on your energy bills while still getting your clothes clean.</p>
+                            <i class="fas fa-water icon-right"></i>
+                        </div>
+
+                        <div class="box">
+                            <h3>Air-Dry Clothes:</h3>
+                            <p>Skipping the dryer and air-drying clothes can save energy and lower your electricity costs. This eco-friendly habit is especially effective during warmer months.</p>
+                            <i class="fas fa-plug icon-right"></i>
+                        </div>
+                    </div>
+
+                    <!-- Government Rebates (Visible all the time) -->
+                    <div class="box">
+                        <h3>Government Rebates:</h3>
+                        <p>Take advantage of government rebates to offset costs. Explore the following programs:</p>
+                        <ul>
+                            <li><a href="https://www.energy.vic.gov.au/victorian-energy-upgrades/homes" target="_blank">Victorian Energy Upgrades</a></li>
+                            <li><a href="https://www.solar.vic.gov.au/solar-panel-rebate" target="_blank">Solar Panel Rebate</a></li>
+                            <li><a href="https://www.energy.vic.gov.au/households/help-paying-your-energy-bills/energy-bill-relief-fund#:~:text=Eligible%20Victorian%20households%20will%20receive%20rebates%20of%20up%20to%20%24300,four%20quarterly%20instalments%20of%20%2475," target="_blank">Energy Bill Relief Fund</a></li>
+                        </ul>
+                        <i class="fas fa-dollar-sign icon-right"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- JavaScript -->
-<script src="js/vendor/jquery-1.11.1.min.js"></script>
-<script src="js/vendor/bootstrap.min.js"></script>
-<script src="js/vendor/owl.carousel.min.js"></script>
-<script src="js/vendor/lightbox.min.js"></script>
-<script src="js/recommendations.js"></script> <!-- Link to your custom JavaScript file -->
-<script src="js/main.js"></script>
+    <!-- JavaScript to toggle between Emissions and Cost-Saving recommendations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const emissionsBtn = document.getElementById('emissions-btn');
+            const costSavingBtn = document.getElementById('cost-saving-btn');
+            const emissionsSection = document.getElementById('emissions-recommendations');
+            const costSavingSection = document.getElementById('cost-saving-recommendations');
+
+            // Show emissions recommendations by default
+            emissionsSection.style.display = 'block';
+            costSavingSection.style.display = 'none';
+
+            emissionsBtn.addEventListener('click', function() {
+                emissionsSection.style.display = 'block';
+                costSavingSection.style.display = 'none';
+
+                // Highlight the selected button and grey out the other
+                emissionsBtn.classList.add('active-toggle');
+                costSavingBtn.classList.remove('active-toggle');
+            });
+
+            costSavingBtn.addEventListener('click', function() {
+                emissionsSection.style.display = 'none';
+                costSavingSection.style.display = 'block';
+
+                // Highlight the selected button and grey out the other
+                costSavingBtn.classList.add('active-toggle');
+                emissionsBtn.classList.remove('active-toggle');
+            });
+        });
+    </script>
+
 </body>
 </html>

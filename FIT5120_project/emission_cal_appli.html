@@ -13,444 +13,631 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/emission_calculator.css">
+    <link rel="stylesheet" href="css/bootstrap-calculator.min.css">
+    <link rel="stylesheet" href="css/emission_appli.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
-<!-- Header Section with Navigation Bar -->
-<div class="header">
-    <div class="container">
-        <nav class="navbar navbar-inverse" role="navigation">
-            <div class="navbar-header">
-                <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse"
+    <!-- Header Section with Navigation Bar -->
+    <div class="header">
+        <div class="container">
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse"
                         data-target="#main-nav">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="#" class="navbar-brand scroll-top"><em>Eco</em>Insight</a>
-            </div>
-            <div id="main-nav" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="home.html" class="scroll-top">Home</a></li>
-                    <li><a href="emission_cal_appli.html">Emission Calculator</a></li>
-                    <li><a href="#" class="scroll-link" data-id="about">About</a></li>
-                    <li><a href="#" class="scroll-link" data-id="contact-us">Contact Us</a></li>
-                </ul>
-            </div>
-        </nav>
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="index.html" class="navbar-brand scroll-top">
+                        <img src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
+                    </a>
+                </div>
+                <div id="main-nav" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="index.html" class="scroll-top">Home</a></li>
+                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">our mission</a>
+                        </li>
+                        <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
+                        <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
+                        <li><a href="recommendations.html">Recommendations</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
     </div>
-</div>
 
-<!-- CO2 Emission Calculator Section -->
-<div class="parallax-content" id="emission-calculator">
-    <div class="container">
-        <div class = "row">
-            <div class="col-md-3 left-section">
+    <!-- Loading Animation with Tree GIF -->
+    <div id="loading-animation" style="display: none;">
+        <img src="img/tree.gif" alt="Loading..." style="width: 100px; height: auto;">
+        <p>Calculating, please wait...</p>
+    </div>
+
+    <!-- CO2 Emission Calculator Section -->
+    <div class="parallax-content" id="emission-calculator">
+        <div class="container">
+            <div class="col-md-3">
                 <h2>Carbon Footprint Calculator</h2>
-                <div class="line-dec"></div>
-                <p> place holder for calculator instruction</p>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuemin="0"
+                        aria-valuemax="100"></div>
+                </div>
             </div>
-
-            <!-- Section 1: Household Size -->
-            <div class="col-md-9 right-section">
+            <div class="col-md-9">
                 <form id="emission-form">
+                    <!-- Section 1: Appliance Selection -->
                     <div class="form-group">
-                        <label for="household-size">How many people are in your household?</label>
-                        <select class="form-control" id="household-size" name="household-size" required>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-                    </div>
-
-                    <!-- Section 2: Appliance Selection -->
-                    <div class="form-group">
-                        <label for="appliance-selection">What appliance(s) do you have in your household?</label>
-                        <div id="appliance-selection">
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="television">
-                                    Television</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="dishwasher">
-                                    Dishwasher</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="hot_water_heater">
-                                    Electric Hot Water Heater</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="clothes_washer">
-                                    Clothes
-                                    Washer</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="clothes_dryer">
-                                    Clothes
-                                    Dryer</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="air_conditioner"> Air
-                                    Conditioner</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="refrigerator">
-                                    Refrigerator</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="appliance-selection[]" value="none"
-                                              id="none-checkbox">
-                                    None of the above</label>
-                            </div>
+                        <div class="icon-label-container">
+                            <div class="appliance-icon-1"></div>
+                            <label for="appliance-selection">What appliance(s) do you have in your household?</label>
                         </div>
-                    </div>
-
-                    <!-- Buttons for showing questions and submitting -->
-                    <div class="form-group">
-                        <div class="primary-blue-button">
-                             <a href="#" class="scroll-link" id="show-questions">Show
-                            Appliance Questions</a>
+                        <div id="appliance-selection" class="button-group">
+                            <button type="button" class="btn" data-value="television">Television</button>
+                            <button type="button" class="btn" data-value="dishwasher">Dishwasher</button>
+                            <button type="button" class="btn" data-value="clothes_washer">Clothes Washer</button>
+                            <button type="button" class="btn" data-value="clothes_dryer">Clothes Dryer</button>
+                            <button type="button" class="btn" data-value="air_conditioner">Air Conditioner</button>
+                            <button type="button" class="btn" data-value="refrigerator">Refrigerator</button>
+                            <button type="button" class="btn" data-value="none" id="none-checkbox">None of the above
+                            </button>
                         </div>
-                    </div>
 
-                    <!-- Section 3: Usage Hours (hidden initially) -->
-                    <div id="appliance-usage-section" style="display: none;">
-                        <div id="usage-questions"></div>
+                        <!-- Section 2: Usage Hours (hidden initially) -->
+                        <div id="appliance-usage-section" style="display: none;">
+                            <div id="usage-questions"></div>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Floating Navigation Buttons -->
-<div class="floating-buttons">
-     <a href="home.html" class="scroll-link" id="back-button">
-         <i class="fa fa-arrow-left"></i> Back</a>
+    <!-- Floating Navigation Buttons -->
+    <div class="floating-buttons">
+        <a href="emission_cal_trans.html" class="scroll-link" id="back-button">
+            <i class="fa fa-arrow-left"></i> Back</a>
 
-    <a href="#" class="scroll-link" id="next-button">
-        Next <i class="fa fa-arrow-right"></i></a>
-</div>
+        <a href="#" class="scroll-link" id="next-button">
+            Next <i class="fa fa-arrow-right"></i></a>
+    </div>
 
-<!-- JavaScript -->
-<script src="js/vendor/jquery-1.11.1.min.js"></script>
-<script src="js/vendor/bootstrap.min.js"></script>
-<script src="js/vendor/owl.carousel.min.js"></script>
-<script src="js/vendor/lightbox.min.js"></script>
-<script src="js/main.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <!-- JavaScript -->
+    <script src="js/vendor/jquery-1.11.1.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/owl.carousel.min.js"></script>
+    <script src="js/vendor/lightbox.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 
-<script>
-    function clearAllSelections() {
-    document.querySelectorAll('#appliance-selection input[type="checkbox"]:not(#none-checkbox)').forEach(checkbox => checkbox.checked = false);
-    document.getElementById('usage-questions').innerHTML = '';
-    document.getElementById('appliance-usage-section').style.display = 'none';
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Initially hide "Show Appliance Questions" and "Next" buttons
-    document.getElementById('show-questions').style.display = 'none';
-    document.getElementById('next-button').style.display = 'none';
-});
-
-document.getElementById('appliance-selection').addEventListener('change', function() {
-    const checkboxes = document.querySelectorAll('#appliance-selection input[type="checkbox"]');
-    const noneCheckbox = document.getElementById('none-checkbox');
-
-    let anyChecked = false;
-
-    checkboxes.forEach(checkbox => {
-        if (checkbox.checked && checkbox.value !== 'none') {
-            anyChecked = true;
+    <script>
+        // Show the loading animation
+        function showLoading() {
+            document.getElementById('loading-animation').style.display = 'flex';
         }
-    });
 
-    if (noneCheckbox.checked) {
-        clearAllSelections();
-        document.getElementById('show-questions').style.display = 'none';
-        document.getElementById('next-button').style.display = 'block';
-    } else if (anyChecked) {
-        document.getElementById('show-questions').style.display = 'block';
-        document.getElementById('next-button').style.display = 'none';
-    } else {
-        document.getElementById('show-questions').style.display = 'none';
-        document.getElementById('next-button').style.display = 'none';
-    }
-});
+        // Hide the loading animation
+        function hideLoading() {
+            document.getElementById('loading-animation').style.display = 'none';
+        }
 
-async function loadBrandsFromCSV(url) {
-    try {
-        const response = await fetch(url);
-        const csvText = await response.text();
-        return new Promise((resolve, reject) => {
-            Papa.parse(csvText, {
-                header: true,
-                skipEmptyLines: true,
-                complete: function(results) {
-                    const brands = results.data.map(row => row.Brand ? row.Brand.toUpperCase() : '').filter(brand => brand);
-                    const uniqueBrands = [...new Set(brands)];
-                    uniqueBrands.sort();
-                    resolve(uniqueBrands);
-                },
-                error: function(error) {
-                    reject(error);
+        // Use sessionStorage to manage the flow properly
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('next-button').style.display = 'none';
+
+            document.getElementById('next-button').addEventListener('click', function (event) {
+                event.preventDefault();
+                saveDataToLocalStorage();
+                validateAndNavigate(); // Validate and navigate to the next page
+            });
+
+            document.getElementById('back-button').addEventListener('click', function (event) {
+                event.preventDefault();
+                if (confirm('Are you sure you want to start over? This will clear all current data.')) {
+                    clearLocalStorage();
+                }
+                clearLocalStorage();
+                window.history.back();
+            });
+        });
+
+        function saveDataToLocalStorage() {
+            const selectedAppliances = Array.from(document.querySelectorAll('#appliance-selection .btn.selected-green')).map(button => button.getAttribute('data-value'));
+
+            // Save selected appliances
+            localStorage.setItem('applianceData', JSON.stringify(selectedAppliances));
+
+            // Save usage data
+            selectedAppliances.forEach(appliance => {
+                const usageElement = document.getElementById(`${appliance}-hours`);
+                if (usageElement) {
+                    localStorage.setItem(`${appliance}-hours`, usageElement.value);
+                }
+
+                const brandElement = document.getElementById(`${appliance}-brand`);
+                if (brandElement) {
+                    localStorage.setItem(`${appliance}-brand`, brandElement.value);
                 }
             });
-        });
-    } catch (error) {
-        console.error('Error loading CSV:', error);
-        return [];
-    }
-}
 
-
-// COMMENTED OUT - Replaced this code for iteration 1 - JACK
-// document.getElementById('show-questions').addEventListener('click', async function() {
-//     const usageSection = document.getElementById('appliance-usage-section');
-//     const usageQuestions = document.getElementById('usage-questions');
-//     const checkboxes = document.querySelectorAll('#appliance-selection input[type="checkbox"]');
-
-//     const applianceQuestions = {
-//         'television': 'How many hours do you watch television a week?',
-//         'dishwasher': 'How many times do you use the dishwasher a week?',
-//         'hot_water_heater': 'How many hours per day is your hot water heater on?',
-//         'clothes_washer': 'How many times do you use the clothes washer a week?',
-//         'clothes_dryer': 'How many times do you use the clothes dryer a week?',
-//         'air_conditioner': 'How many hours per day do you use the air conditioner?',
-//         'refrigerator': 'Select the brand of your refrigerator:',
-//         'pool_pump': 'Select the brand of your pool pump:'
-//     };
-
-//     usageQuestions.innerHTML = ''; // Clear previous questions
-
-//     for (const checkbox of checkboxes) {
-//         if (checkbox.checked && checkbox.value !== 'none') {
-//             const question = applianceQuestions[checkbox.value];
-//             let questionHTML = '';
-
-//             if (checkbox.value === 'refrigerator') {
-//                 const brands = await loadBrandsFromCSV('new_freezer.csv');
-//                 if (brands.length > 0) {
-//                     questionHTML = `
-//                         <div class="form-group">
-//                             <label for="${checkbox.value}-brand">${question}</label>
-//                             <select class="form-control" id="${checkbox.value}-brand" name="${checkbox.value}-brand" required>
-//                                 <option value="">--Select a Brand--</option>
-//                                 ${brands.map(brand => `<option value="${brand}">${brand}</option>`).join('')}
-//                             </select>
-//                         </div>`;
-//                 } else {
-//                     console.error('No brands loaded for refrigerator.');
-//                 }
-//             } 
-//             if (checkbox.value === 'pool_pump') {
-//                 const brands = await loadBrandsFromCSV('pool_pump.csv');
-//                 if (brands.length > 0) {
-//                     questionHTML = `
-//                         <div class="form-group">
-//                             <label for="${checkbox.value}-brand">${question}</label>
-//                             <select class="form-control" id="${checkbox.value}-brand" name="${checkbox.value}-brand" required>
-//                                 <option value="">--Select a Brand--</option>
-//                                 ${brands.map(brand => `<option value="${brand}">${brand}</option>`).join('')}
-//                             </select>
-//                         </div>`;
-//                 } else {
-//                     console.error('No brands loaded for pool pump.');
-//                 }
-//             } else {
-//                 questionHTML = `
-//                     <div class="form-group">
-//                         <label for="${checkbox.value}-hours">${question}</label>
-//                         <input type="number" class="form-control" id="${checkbox.value}-hours" name="${checkbox.value}-hours" min="1" value="1" required>
-//                     </div>`;
-//             }
-
-//             usageQuestions.innerHTML += questionHTML; // Append each question HTML
-//         }
-//     }
-
-document.getElementById('show-questions').addEventListener('click', async function() {
-    const usageSection = document.getElementById('appliance-usage-section');
-    const usageQuestions = document.getElementById('usage-questions');
-    const checkboxes = document.querySelectorAll('#appliance-selection input[type="checkbox"]');
-
-    const applianceQuestions = {
-        'television': 'How many hours do you watch television a week?',
-        'dishwasher': 'How many times do you use the dishwasher a week?',
-        'clothes_washer': 'How many times do you use the clothes washer a week?',
-        'clothes_dryer': 'How many times do you use the clothes dryer a week?',
-        'air_conditioner': 'How many hours per day do you use the air conditioner?',
-    };
-
-    usageQuestions.innerHTML = ''; // Clear previous questions
-
-    for (const checkbox of checkboxes) {
-        if (checkbox.checked && checkbox.value !== 'none' && applianceQuestions.hasOwnProperty(checkbox.value)) {
-            const question = applianceQuestions[checkbox.value];
-            const questionHTML = `
-                <div class="form-group">
-                    <label for="${checkbox.value}-hours">${question}</label>
-                    <input type="number" class="form-control" id="${checkbox.value}-hours" name="${checkbox.value}-hours" min="1" value="1" required>
-                </div>`;
-            
-            usageQuestions.innerHTML += questionHTML; // Append each question HTML
+            console.log('Appliance data and usage data saved to localStorage.');
         }
-    }
 
-    if (usageQuestions.innerHTML) {
-        usageSection.style.display = 'block';
-        document.getElementById('next-button').style.display = 'block';
-    } else {
-        usageSection.style.display = 'none';
-        document.getElementById('next-button').style.display = 'none';
-    }
-});
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Initially hide "Show Appliance Questions" and "Next" buttons
-    document.getElementById('show-questions').style.display = 'none';
-    document.getElementById('next-button').style.display = 'none';
+        function clearLocalStorage() {
+            localStorage.removeItem('applianceData');
 
-    // Add event listener for the "Next" button
-    document.getElementById('next-button').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent default anchor behavior
-        validateAndNavigate(); // Call the function to handle navigation
-    });
-});
-
-async function sendDataToLambda(data) {
-    try {
-        console.log('Original data:', data);
-
-        // Prepare data for each appliance
-        const applianceData = data.appliances.map(appliance => {
-            // Ensure that brand is included where necessary
-            if (appliance.type === 'refrigerator' || appliance.type === 'pool_pump') {
-                return {
-                    type: 'appliance',
-                    appliance_type: appliance.type,
-                    brand: appliance.brand || '',  // Ensure brand is included for these appliances
-                    hours: appliance.hours || 0,
-                    household_size: data.household_size || 0
-                };
-            } else {
-                return {
-                    type: 'appliance',
-                    appliance_type: appliance.type,
-                    hours: appliance.hours || 0,
-                    household_size: data.household_size || 0
-                };
-            }
-        });
-
-        console.log('Formatted data to send:', applianceData);
-
-        // Send data to Lambda
-        const responses = await Promise.all(applianceData.map(async item => {
-            const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(item),
+            // Remove each appliance's associated data
+            const selectedAppliances = JSON.parse(localStorage.getItem('applianceData')) || [];
+            selectedAppliances.forEach(appliance => {
+                localStorage.removeItem(`${appliance}-hours`);
+                localStorage.removeItem(`${appliance}-brand`);
             });
 
-            if (!response.ok) {
-                const errorDetails = await response.text();
-                console.error(`Network response was not ok. Status: ${response.status}. Details: ${errorDetails}`);
-                throw new Error(`Network response was not ok. Status: ${response.status}. Details: ${errorDetails}`);
+            console.log('LocalStorage cleared.');
+        }
+
+
+        // Clear all selections and ensure local storage management is correct
+        function clearAllSelections() {
+            document.querySelectorAll('#appliance-selection .appliance-btn').forEach(button => button.classList.remove('selected'));
+            document.getElementById('usage-questions').innerHTML = '';
+            document.getElementById('appliance-usage-section').style.display = 'none';
+            // Optionally clear data specifically related to the selection
+            localStorage.removeItem('applianceData');
+        }
+
+        // Manage clearing based on page context or user actions
+        function handleNavigationClearance() {
+            // Check context: only clear if restarting or leaving the entire process
+            if (window.location.href.includes('start') || userConfirmedRestart) {
+                clearLocalStorage();
+            }
+        }
+
+        let isRefrigeratorSelected = false;
+        let isRefrigeratorBrandSelected = false;
+
+        function selectAppliance() {
+            const selectedAppliances = Array.from(document.querySelectorAll('#appliance-selection .btn.selected-green')).map(button => button.getAttribute('data-value'));
+
+            if (selectedAppliances.length === 0) {
+                document.getElementById('usage-questions').innerHTML = '';
+                document.getElementById('appliance-usage-section').style.display = 'none';
+                document.getElementById('next-button').style.display = 'block'; // Ensure 'Next' button is shown
+                return;
             }
 
-            return response.json();
-        }));
+            // Save selected appliances to localStorage
+            localStorage.setItem('applianceData', JSON.stringify(selectedAppliances));
+            console.log('Appliance data saved to localStorage:', selectedAppliances);
 
-        console.log('Data sent successfully:', responses);
-        return responses;
-    } catch (error) {
-        console.error('Error sending data to Lambda:', error);
-        alert('There was an error submitting your data. Please try again.');
-    }
-}
+            updateQuestions(selectedAppliances);
+            updateUsageSectionVisibility();
+        }
 
-async function validateAndNavigate() {
-    // Validate form input
-    if (validateForm()) {
-        // Collect form data
-        const formData = new FormData(document.getElementById('emission-form'));
-        const data = Object.fromEntries(formData.entries());
 
-        // Transform data to required format
-        const appliances = [];
-        document.querySelectorAll('#usage-questions input[type="number"], #usage-questions select').forEach(input => {
-            if (input.tagName === 'SELECT') {
-                appliances.push({
-                    type: input.id.split('-')[0],
-                    brand: input.value,
-                    hours: 0,  // No hours needed for brand selection
-                });
-            } else if (input.tagName === 'INPUT' && input.type === 'number') {
-                appliances.push({
-                    type: input.id.split('-')[0],
-                    hours: parseInt(input.value, 10),
-                });
+        function updateQuestions(selectedAppliances) {
+            const usageSection = document.getElementById('appliance-usage-section');
+            const usageQuestions = document.getElementById('usage-questions');
+
+            // Clear previous questions
+            usageQuestions.innerHTML = '';
+
+            // Define the HTML for each appliance's questions with headers and corresponding images
+            const applianceQuestions = {
+                'television': `
+                    <h3><img src="img/television.png" alt="Television Icon" style="height: 30px; margin-right: 10px;">Television</h3>
+                    <div class="form-group">
+                        <label for="tv-screen-size">What screen size is your television?</label>
+                        <select id="tv-screen-size" class="form-control" style="width: 500px;">
+                            <option value="">--Select Size--</option>
+                            <option value="Less than 40">Less than 40"</option>
+                            <option value="40-49">40 - 49"</option>
+                            <option value="50-59">50 - 59"</option>
+                            <option value="60-69">60 - 69"</option>
+                            <option value="70-79">70 - 79"</option>
+                            <option value="80-89">80 - 89"</option>
+                            <option value="90-99">90 - 99"</option>
+                            <option value="Greater than 100">Greater than 100"</option>
+                        </select>
+                    </div>
+                    <div class="form-group radio-question">
+                        <label for="television-screen-tech">What screen technology does your television use?</label>
+                        <div class="radio-option">
+                            <input type="radio" id="tech-lcd" name="television-screen-tech" value="LCD" required>
+                            <label for="tech-lcd" class="radio-label">LCD</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="tech-plasma" name="television-screen-tech" value="Plasma" required>
+                            <label for="tech-plasma" class="radio-label">Plasma</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="tech-led" name="television-screen-tech" value="LED" required>
+                            <label for="tech-led" class="radio-label">LED</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="tech-oled" name="television-screen-tech" value="OLED" required>
+                            <label for="tech-oled" class="radio-label">OLED</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="television-hours">How many hours do you watch television a week?</label>
+                        <input type="number" class="form-control" id="television-hours" name="television-hours" min="1" value="1" required>
+                    </div>
+                `,
+                'dishwasher': `
+                    <h3><img src="img/dishwasher.png" alt="Dishwasher Icon" style="height: 30px; margin-right: 10px;">Dishwasher</h3>
+                    <div class="form-group">
+                        <label for="dishwasher-usage">How many times do you use the dishwasher a week?</label>
+                        <input type="number" class="form-control" id="dishwasher-usage" name="dishwasher-usage" min="1" value="1" required>
+                    </div>
+                `,
+                'clothes_washer': `
+                    <h3><img src="img/clotheswasher.png" alt="Clothes Washer Icon" style="height: 30px; margin-right: 10px;">Clothes Washer</h3>
+                    <div class="form-group radio-question">
+                        <label for="clothes-washer-loading">What type of loading is your clothes washer?</label>
+                        <div class="radio-option">
+                            <input type="radio" id="washer-loading-front" name="clothes-washer-loading" value="Front" required>
+                            <label for="washer-loading-front" class="radio-label">Front</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="washer-loading-top" name="clothes-washer-loading" value="Top" required>
+                            <label for="washer-loading-top" class="radio-label">Top</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clothes-washer-load-size">What load size is your clothes washer?</label>
+                    </div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" id="clothes-washer-load-size" name="clothes-washer-load-size" min="2" max="19" step="0.5" value="10.5" required>
+                        <div id="slider-value-container">
+                            <span id="load-size-value">10.5 kg</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clothes-washer-usage">How many times do you use the clothes washer a week?</label>
+                        <input type="number" class="form-control" id="clothes-washer-usage" name="clothes-washer-usage" min="1" value="1" required>
+                    </div>
+                `,
+                'clothes_dryer': `
+                    <h3><img src="img/clothesdryer.png" alt="Clothes Dryer Icon" style="height: 30px; margin-right: 10px;">Clothes Dryer</h3>
+                    <div class="form-group radio-question">
+                        <label for="clothes-dryer-type">What type of clothes dryer do you use?</label>
+                        <div class="radio-option">
+                            <input type="radio" id="dryer-type-vented" name="clothes-dryer-type" value="Vented" required>
+                            <label for="dryer-type-vented" class="radio-label">Vented</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="dryer-type-condenser" name="clothes-dryer-type" value="Condenser" required>
+                            <label for="dryer-type-condenser" class="radio-label">Condenser</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clothes-dryer-usage">How many times do you use the clothes dryer a week?</label>
+                        <input type="number" class="form-control" id="clothes-dryer-usage" name="clothes-dryer-usage" min="1" value="1" required>
+                    </div>
+                `,
+                'air_conditioner': `
+                    <h3><img src="img/air_conditioner.png" alt="Air Conditioner Icon" style="height: 30px; margin-right: 10px;">Air Conditioner</h3>
+                    <div class="form-group radio-question">
+                        <label for="air-conditioner-type">Is your air conditioner ducted or non-ducted?</label>
+                        <div class="radio-option">
+                            <input type="radio" id="ac-type-ducted" name="air-conditioner-type" value="Ducted" required>
+                            <label for="ac-type-ducted" class="radio-label">Ducted</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="ac-type-non-ducted" name="air-conditioner-type" value="Non Ducted" required>
+                            <label for="ac-type-non-ducted" class="radio-label">Non Ducted</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="ac-type-both" name="air-conditioner-type" value="Both" required>
+                            <label for="ac-type-both" class="radio-label">Both</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="air-conditioner-hours">How many hours do you use the air conditioner in a week?</label>
+                        <input type="number" class="form-control" id="air-conditioner-hours" name="air-conditioner-hours" min="1" value="1" required>
+                    </div>
+                `,
+                'refrigerator': `
+                    <h3><img src="img/refrigerator.png" alt="Refrigerator Icon" style="height: 30px; margin-right: 10px;">Refrigerator</h3>
+                    <div class="form-group">
+                        <label for="refrigerator-volume">What volume is your refrigerator?</label>
+                        <select class="form-control" id="refrigerator-volume" name="refrigerator-volume" style="width: 500px;" required>
+                            <option value="">--Select Volume--</option>
+                            <option value="<99L">Less than 99L</option>
+                            <option value="100-199L">100 - 199L</option>
+                            <option value="200-299L">200 - 299L</option>
+                            <option value="300-399L">300 - 399L</option>
+                            <option value="400-499L">400 - 499L</option>
+                            <option value="500-599L">500 - 599L</option>
+                            <option value="600-699L">600 - 699L</option>
+                            <option value=">700L">More than 700L</option>
+                        </select>
+                    </div>
+                `
+            };
+
+            // Generate the HTML based on the selected appliances
+            selectedAppliances.forEach(appliance => {
+                if (applianceQuestions[appliance]) {
+                    const questionHTML = applianceQuestions[appliance];
+                    usageQuestions.innerHTML += questionHTML;
+                } else {
+                    console.warn('Unknown or unsupported appliance type:', appliance);
+                }
+            });
+
+            // Show the usage section if questions are added
+            if (usageQuestions.innerHTML.trim()) {
+                usageSection.style.display = 'block';
+                document.getElementById('next-button').style.display = 'block';
+            } else {
+                usageSection.style.display = 'none';
+                document.getElementById('next-button').style.display = 'none';
+            }
+        }
+
+
+        function showQuestions() {
+            const selectedAppliances = Array.from(document.querySelectorAll('#appliance-selection .btn.selected-green'))
+                .map(button => button.getAttribute('data-value'));
+
+            // Debugging output
+            console.log('Selected Appliances:', selectedAppliances);
+
+            // Call the function to update questions
+            updateQuestions(selectedAppliances);
+        }
+
+        function updateUsageSectionVisibility() {
+            const usageSection = document.getElementById('appliance-usage-section');
+            const usageQuestions = document.getElementById('usage-questions');
+
+            if (usageQuestions.innerHTML.trim()) {
+                usageSection.style.display = 'block';
+                document.getElementById('next-button').style.display = 'block';
+            } else {
+                usageSection.style.display = 'none';
+                document.getElementById('next-button').style.display = 'none';
+            }
+        }
+
+        document.getElementById('appliance-selection').addEventListener('click', function (event) {
+            if (event.target.classList.contains('btn')) {
+                const noneButton = document.getElementById('none-checkbox');
+                const applianceButtons = document.querySelectorAll('#appliance-selection .btn');
+
+                if (event.target.id === 'none-checkbox') {
+                    noneButton.classList.add('selected-green');
+                    applianceButtons.forEach(button => {
+                        if (button.id !== 'none-checkbox') {
+                            button.classList.remove('selected-green');
+                        }
+                    });
+                    document.getElementById('usage-questions').innerHTML = '';
+                    document.getElementById('appliance-usage-section').style.display = 'none';
+                    document.getElementById('next-button').style.display = 'block'; // Ensure 'Next' button is shown
+                } else {
+                    event.target.classList.toggle('selected-green');
+                    noneButton.classList.remove('selected-green');
+                    selectAppliance();
+                }
             }
         });
 
-        // Add household size
-        const householdSize = document.getElementById('household-size').value;
+        async function sendDataToLambda(data) {
+            showLoading();
+            try {
+                console.log('Original data:', data);
 
-        // Send data to Lambda
-        const lambdaResponse = await sendDataToLambda({ appliances, household_size: householdSize });
+                // Ensure correct handling for each appliance type
+                const formattedData = data.appliances.map(item => {
+                    let formattedItem = {
+                        type: 'appliance',
+                        appliance_type: item.appliance_type
+                    };
 
-        // Check the response or perform further actions if needed
-        if (lambdaResponse) {
-            // If validation passes and data is sent successfully, navigate to the next page
-            window.location.href = 'emission_cal_gas.html';
-        }
-    }
-    // If validation fails, stay on the same page and show an alert (this happens automatically by not changing the href)
-}
+                    if (item.appliance_type === 'clothes_washer') {
+                        formattedItem = {
+                            ...formattedItem,
+                            Loading: item.Loading,
+                            Cap: item.Cap,
+                            usage_per_week: item.usage_per_week
+                        };
+                    } else if (item.appliance_type === 'refrigerator') {
+                        formattedItem.volume_category = item.volume_category.trim(); // Remove extra spaces
+                    } else if (item.appliance_type === 'television') {
+                        formattedItem.screen_size_category = item.screen_size_category.replace('-', ' - ');
+                        formattedItem.screen_technology = item.screen_technology || '';
+                        formattedItem.hours = item.hours;
+                    } else if (item.appliance_type === 'air_conditioner') {
+                        // Ensure both Configuration1 and hours_per_day are correctly assigned
+                        formattedItem.Configuration1 = item.Configuration1;
+                        formattedItem.hours_per_day = item.hours_per_day;
+                    } else {
+                        formattedItem.hours = item.hours; // Add hours for other appliances
+                    }
 
-function validateForm() {
-    const usageQuestions = document.querySelectorAll('#usage-questions input[type="number"], #usage-questions select');
-    let isValid = true;
+                    return formattedItem;
+                });
 
-    usageQuestions.forEach(input => {
-        if (input.tagName === 'SELECT') {
-            if (input.value === '') {
-                isValid = false;
-                input.classList.add('input-error');  // Add a class for styling if needed
-            } else {
-                input.classList.remove('input-error');  // Remove the class if input is valid
+                console.log('Formatted data to send:', formattedData);
+
+                const responses = await Promise.all(formattedData.map(async item => {
+                    const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(item),
+                    });
+
+                    if (!response.ok) {
+                        const errorDetails = await response.text();
+                        console.error(`Network response was not ok. Status: ${response.status}. Details: ${errorDetails}`);
+                        throw new Error(`Network response was not ok. Status: ${response.status}. Details: ${errorDetails}`);
+                    }
+
+                    return response.json();
+                }));
+
+                console.log('Data sent successfully:', responses);
+                window.location.href = 'emission_result.html'; 
+            } catch (error) {
+                console.error('Error sending data:', error);
+                alert('There was an error submitting your data. Please try again.');
+            } finally {
+                hideLoading();
             }
-        } else if (input.tagName === 'INPUT' && input.type === 'number') {
-            if (input.value.trim() === '' || Number(input.value) <= 0) {
-                isValid = false;
-                input.classList.add('input-error');  // Add a class for styling if needed
-            } else {
-                input.classList.remove('input-error');  // Remove the class if input is valid
+        }
+
+        function validateAndNavigate() {
+            let isValid = true;
+            const applianceData = [];
+
+            // Get all appliance sections
+            const applianceSections = document.querySelectorAll('#usage-questions .form-group');
+
+            applianceSections.forEach(section => {
+                // Check for dropdowns
+                const dropdown = section.querySelector('select');
+                if (dropdown) {
+                    const selectedValue = dropdown.value;
+                    if (!selectedValue) {
+                        alert(`Please select a value for ${dropdown.previousElementSibling.textContent}`);
+                        isValid = false;
+                        dropdown.style.borderColor = 'red';
+                    } else {
+                        dropdown.style.borderColor = ''; // Reset border color if valid
+
+                        // Handle television inputs
+                        if (dropdown.id === 'tv-screen-size') {
+                            const screenTech = document.querySelector('input[name="television-screen-tech"]:checked');
+                            const hours = parseInt(document.getElementById('television-hours').value, 10) || 0;
+
+                            // Check for all necessary inputs for television
+                            if (!screenTech || hours <= 0) {
+                                alert('Please complete all fields for the television.');
+                                isValid = false;
+                            } else {
+                                // Push the correct data format for the television
+                                applianceData.push({
+                                    appliance_type: 'television',
+                                    screen_size_category: selectedValue,  // Ensure correct format like "40 - 49"
+                                    screen_technology: screenTech.value,
+                                    hours: hours
+                                });
+                            }
+                        } 
+                        
+                        // Handle refrigerator inputs
+                        else if (dropdown.id === 'refrigerator-volume') {
+                            // For refrigerators, no hours are needed, just capture the volume
+                            applianceData.push({
+                                appliance_type: 'refrigerator',
+                                volume_category: selectedValue
+                            });
+                        }
+                    }
+                }
+
+                // Check for radio buttons
+                const radioButtons = section.querySelectorAll('input[type="radio"]');
+                if (radioButtons.length > 0) {
+                    const selectedRadio = Array.from(radioButtons).find(radio => radio.checked);
+                    if (!selectedRadio) {
+                        alert(`Please select an option for ${section.querySelector('label').textContent}`);
+                        isValid = false;
+                        section.querySelector('label').style.color = 'red'; // Optional: highlight the label
+                    } else {
+                        section.querySelector('label').style.color = ''; // Reset label color if valid
+
+                        // Handle clothes washer inputs
+                        // Validate Clothes Washer inputs
+                        if (section.querySelector('input[name="clothes-washer-loading"]')) {
+                            const loadSize = parseFloat(document.getElementById('clothes-washer-load-size').value);
+                            const usagePerWeek = parseInt(document.getElementById('clothes-washer-usage').value, 10);
+                            if (isNaN(loadSize) || loadSize <= 0 || isNaN(usagePerWeek) || usagePerWeek <= 0) {
+                                alert('Please complete all fields for the clothes washer.');
+                                isValid = false;
+                            } else {
+                                applianceData.push({
+                                    appliance_type: 'clothes_washer',
+                                    Loading: selectedRadio.value,
+                                    Cap: loadSize,  // Correctly fetch the value from slider
+                                    usage_per_week: usagePerWeek
+                                });
+                            }
+                        }
+
+
+                        // Handle clothes dryer inputs
+                        else if (section.querySelector('input[name="clothes-dryer-type"]')) {
+                            const usagePerWeek = parseInt(document.getElementById('clothes-dryer-usage').value, 10);
+                            if (isNaN(usagePerWeek) || usagePerWeek <= 0) {
+                                alert('Please complete all fields for the clothes dryer.');
+                                isValid = false;
+                            } else {
+                                applianceData.push({
+                                    appliance_type: 'clothes_dryer',
+                                    Type: selectedRadio.value,
+                                    usage_per_week: usagePerWeek
+                                });
+                            }
+                        }
+
+                        // Handle air conditioner inputs
+                        else if (section.querySelector('input[name="air-conditioner-type"]')) {
+                            const hoursPerDay = parseFloat(document.getElementById('air-conditioner-hours').value);
+                            if (isNaN(hoursPerDay) || hoursPerDay <= 0) {
+                                alert('Please complete all fields for the air conditioner.');
+                                isValid = false;
+                            } else {
+                                applianceData.push({
+                                    appliance_type: 'air_conditioner',
+                                    Configuration1: selectedRadio.value,
+                                    hours_per_day: hoursPerDay
+                                });
+                            }
+                        }
+                    }
+                }
+
+                // Check for numeric inputs not covered above
+                const numberInput = section.querySelector('input[type="number"]');
+                if (numberInput && numberInput.name.includes('hours') && numberInput.value <= 0) {
+                    alert(`Please enter a valid number greater than 0 for ${numberInput.previousElementSibling.textContent}`);
+                    isValid = false;
+                    numberInput.style.borderColor = 'red';
+                } else if (numberInput) {
+                    numberInput.style.borderColor = ''; // Reset border color if valid
+                }
+            });
+
+            // Proceed to the next page if all validations pass
+            if (isValid) {
+                // Remove duplicates and incomplete data
+                const uniqueApplianceData = applianceData.filter((item, index, self) =>
+                    index === self.findIndex((t) => (
+                        t.appliance_type === item.appliance_type &&
+                        (t.screen_size_category || '') === (item.screen_size_category || '') &&
+                        (t.screen_technology || '') === (item.screen_technology || '')
+                    ))
+                );
+
+                console.log('Validated and unique data to send:', uniqueApplianceData);
+
+                const data = { appliances: uniqueApplianceData };
+                sendDataToLambda(data);
             }
         }
-    });
 
-    if (!isValid) {
-        alert('Please answer all the questions correctly before proceeding.');
-    }
-    return isValid;
-}
 
-</script>
+
+    </script>
 </body>
+
 </html>

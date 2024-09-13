@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Travel Distance Estimator</title>
+    <style>
+        body {
+            font-family: 'Roboto', arial, sans-serif;
+            top: 30px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Center the container */
+            background-color: #f2e8d5;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .route-section {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            background-color: #d9e7d4;
+            border-radius: 8px;
+            /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: dark-gray;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            /* Rounded corners */
+            font-size: 16px;
+        }
+
+        .form-group input:focus {
+            border-color: #007BFF;
+            outline: none;
+            box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+            /* Add a subtle focus effect */
+        }
+
+        #add-more {
+            margin-top: 15px;
+            background-color: #28a745;
+        }
+
+        #add-more:hover {
+            background-color: #218838;
+        }
+
+        #error-message {
+            color: red;
+            font-weight: bold;
+        }
+
+        #distance-result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #total-distance {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #333;
+            /* Darker color for better readability */
+        }
+
+        .map {
+            height: 400px;
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            /* Rounded corners for maps */
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow */
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            /* Space below the heading */
+            color: #28a745;
+            line-height: 1.4;
+            text-transform: uppercase;
+            width: 100%;
+            text-align: center;
+            /* Center align heading */
+            white-space: nowrap;
+        }
+
+        .common-button {
+            padding: 12px 20px;
+            /* Adjust the padding for a larger clickable area */
+            border: none;
+            /* Remove default border */
+            background-color: #28a745;
+            color: white;
+            /* Text color */
+            font-size: 16px;
+            /* Font size */
+            font-weight: bold;
+            /* Make the text bold */
+            cursor: pointer;
+            /* Change cursor to pointer on hover */
+            border-radius: 4px;
+            /* Rounded corners */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            /* Smooth transitions */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            /* Subtle shadow for depth */
+            margin-bottom: 20px;
+            margin-top: 30px;
+        }
+
+        .common-button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+            /* Slightly enlarge the button on hover */
+        }
+
+        .common-button:active {
+            background-color: #1e7e34;
+            /* Even darker shade when button is pressed */
+            transform: scale(1);
+            /* Return to normal size */
+        }
+
+        .common-button:focus {
+            outline: none;
+            /* Remove default focus outline */
+            box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+            /* Add a subtle focus effect */
+        }
+
+        #add-more {
+            margin-top: 15px;
+            background-color: #28a745;
+            /* Green background */
+            color: white;
+            /* White icon color */
+            font-size: 24px;
+            /* Icon size */
+            width: 40px;
+            /* Button width */
+            height: 40px;
+            /* Button height */
+            display: flex;
+            /* Center icon */
+            align-items: center;
+            justify-content: center;
+            border: none;
+            /* Remove default border */
+            border-radius: 50%;
+            /* Circular button */
+            cursor: pointer;
+            /* Pointer cursor on hover */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            /* Smooth transitions */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            /* Subtle shadow for depth */
+        }
+
+        #add-more:hover {
+            background-color: #218838;
+            /* Darker green on hover */
+            transform: scale(1.05);
+            /* Slightly enlarge the button on hover */
+        }
+
+        #add-more:active {
+            background-color: #1e7e34;
+            /* Even darker green when button is pressed */
+            transform: scale(1);
+            /* Return to normal size */
+        }
+
+        #add-more i {
+            margin: 0;
+            /* Remove default margin */
+        }
+
+        .summary-section {
+            width: 100%;
+            max-width: 600px;
+            /* Restrict the width for better readability */
+            padding: 20px;
+            margin-top: 60px;
+        }
+
+        #total-distance {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            /* Darker color for better readability */
+            margin-bottom: 20px;
+        }
+
+        .delete-button {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 18px;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            /* Subtle shadow for depth */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            /* Smooth transitions */
+        }
+
+        .delete-button:hover {
+            background-color: #c82333;
+            transform: scale(1.05);
+        }
+
+        .delete-button:active {
+            background-color: #bd2130;
+            transform: scale(1);
+        }
+
+        .route-section {
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Train Travel Distance Estimator</h1>
+        <div id="route-container">
+            <div class="route-section" id="route-section-0">
+                <div id="map-0" class="map"></div>
+                <div class="form-group">
+                    <label for="start-0">Starting Point:</label>
+                    <input type="text" id="start-0" placeholder="Enter starting point">
+                </div>
+                <div class="form-group">
+                    <label for="end-0">Destination:</label>
+                    <input type="text" id="end-0" placeholder="Enter destination">
+                </div>
+                <div class="form-group">
+                    <label for="trips-0">How many times do you travel this route in a week?</label>
+                    <input type="number" id="trips-0" min="0" placeholder="Enter number of trips">
+                </div>
+                <div class="form-group">
+                    <button id="button-estimate" class="common-button" onclick="estimateRoute(0)">ESTIMATE TRAIN
+                        DISTANCE</button>
+                    <button id="button-reset-0" class="common-button" style="background-color: grey;"
+                        onclick="resetRoute(0)">RESET</button>
+                </div>
+                <div id="error-message-0"></div>
+                <div id="distance-result-0"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button id="add-more" onclick="addMoreRoutes()">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+        <div class="summary-section">
+            <div id="total-distance">Total Train Distance: 0 km</div>
+            <div class="form-group">
+                <button id="button-finish" class="common-button" onclick="finish()">FINISH</button>
+                <button id="button-back" class="common-button" style="background-color: #6c757d;"
+                    onclick="goBack()">BACK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let routeCount = 1;
+        let maps = [];
+        let directionsRenderers = [];
+        let totalDistance = 0;
+        let totalDistancePerRoute = {}; // Track distances for each route
+
+        function initMap(index) {
+            const map = new google.maps.Map(document.getElementById(`map-${index}`), {
+                center: { lat: -37.8136, lng: 144.9631 }, // Center on Melbourne
+                zoom: 12
+            });
+
+            const directionsRenderer = new google.maps.DirectionsRenderer({
+                polylineOptions: {
+                    strokeColor: 'green',
+                    strokeWeight: 5
+                },
+                suppressMarkers: true
+            });
+
+            directionsRenderer.setMap(map);
+            maps[index] = map;
+            directionsRenderers[index] = directionsRenderer;
+
+            const startInput = document.getElementById(`start-${index}`);
+            const endInput = document.getElementById(`end-${index}`);
+
+            const melbourneBounds = new google.maps.LatLngBounds(
+                new google.maps.LatLng(-37.955, 144.609), // Southwest coordinates
+                new google.maps.LatLng(-37.670, 145.278)  // Northeast coordinates
+            );
+
+            const autocompleteOptions = {
+                bounds: melbourneBounds,
+                componentRestrictions: { country: 'au' },
+                fields: ['place_id', 'geometry', 'name']
+            };
+
+            const startAutocomplete = new google.maps.places.Autocomplete(startInput, autocompleteOptions);
+            const endAutocomplete = new google.maps.places.Autocomplete(endInput, autocompleteOptions);
+
+            function isWithinBounds(place) {
+                return melbourneBounds.contains(place.geometry.location);
+            }
+
+            function addMarkers(startPlace, endPlace) {
+                if (startPlace && startPlace.geometry) {
+                    if (isWithinBounds(startPlace)) {
+                        startInput.dataset.lat = startPlace.geometry.location.lat();
+                        startInput.dataset.lng = startPlace.geometry.location.lng();
+                    } else {
+                        alert('Starting point is outside Melbourne. Please select a location within Melbourne.');
+                        startInput.value = '';
+                    }
+                }
+
+                if (endPlace && endPlace.geometry) {
+                    if (isWithinBounds(endPlace)) {
+                        endInput.dataset.lat = endPlace.geometry.location.lat();
+                        endInput.dataset.lng = endPlace.geometry.location.lng();
+                    } else {
+                        alert('Destination is outside Melbourne. Please select a location within Melbourne.');
+                        endInput.value = '';
+                    }
+                }
+            }
+
+            startAutocomplete.addListener('place_changed', () => {
+                const startPlace = startAutocomplete.getPlace();
+                addMarkers(startPlace, null);
+            });
+
+            endAutocomplete.addListener('place_changed', () => {
+                const endPlace = endAutocomplete.getPlace();
+                addMarkers(null, endPlace);
+            });
+        }
+
+        function estimateRoute(index) {
+            const start = document.getElementById(`start-${index}`).value;
+            const end = document.getElementById(`end-${index}`).value;
+            const trips = parseFloat(document.getElementById(`trips-${index}`).value) || 0;
+
+            if (!start || !end) {
+                alert("Please enter both starting point and destination.");
+                return;
+            }
+
+            if (trips < 1) {
+                alert("The number of trips must be at least 1.");
+                return;
+            }
+
+            const directionsService = new google.maps.DirectionsService();
+
+            const previousDistance = totalDistancePerRoute[index] || 0;
+            totalDistance -= previousDistance;
+
+            directionsService.route({
+                origin: start,
+                destination: end,
+                travelMode: google.maps.TravelMode.TRANSIT,
+                transitOptions: {
+                    modes: ['TRAIN'], // Filter to only consider train routes
+                }
+            }, function (response, status) {
+                if (status === google.maps.DirectionsStatus.OK) {
+                    const route = response.routes[0];
+                    let trainDistanceValue = 0;
+                    let hasNonTrainTransport = false;
+                    let startLocation = null;
+                    let endLocation = null;
+
+                    route.legs.forEach(leg => {
+                        leg.steps.forEach(step => {
+                            // Check if this step involves transit
+                            if (step.transit && step.transit.line && step.transit.line.vehicle) {
+                                if (step.transit.line.vehicle.type === 'HEAVY_RAIL') {
+                                    trainDistanceValue += step.distance.value; // Add distance of train segments only
+                                    if (!startLocation) startLocation = step.start_location; // Capture the start location
+                                    endLocation = step.end_location; // Capture the end location
+                                } else {
+                                    hasNonTrainTransport = true; // Flag if non-train transport is detected
+                                }
+                            }
+                        });
+                    });
+
+                    if (hasNonTrainTransport) {
+                        alert('The route contains non-train transportation. Please ensure only train routes are selected.');
+                    } else if (trainDistanceValue > 0) {
+                        const trainDistanceKm = trainDistanceValue / 1000; // Convert meters to kilometers
+                        const totalRouteTrainDistance = trainDistanceKm * trips; // Calculate total distance for the specified number of trips
+                        totalDistancePerRoute[index] = totalRouteTrainDistance; // Store the calculated distance for this route
+                        totalDistance += totalRouteTrainDistance; // Update total distance across all routes
+
+                        const distanceResult = document.getElementById(`distance-result-${index}`);
+                        distanceResult.innerHTML = `Estimated Train Distance: ${trainDistanceKm.toFixed(2)} km (Total for this route: ${totalRouteTrainDistance.toFixed(2)} km)`;
+                        updateTotalDistance(); // Update the displayed total distance
+                        directionsRenderers[index].setDirections(response); // Display the route on the map
+
+                        // Add markers at start and end of the train route
+                        if (startLocation && endLocation) {
+                            const map = maps[index];
+                            new google.maps.Marker({
+                                position: startLocation,
+                                map: map,
+                                icon: {
+                                    url: 'img/train.png',
+                                    size: new google.maps.Size(40, 40),
+                                    scaledSize: new google.maps.Size(40, 40)
+                                },
+                                title: 'Start'
+                            });
+                            new google.maps.Marker({
+                                position: endLocation,
+                                map: map,
+                                icon: {
+                                    url: 'img/train.png',
+                                    size: new google.maps.Size(40, 40),
+                                    scaledSize: new google.maps.Size(40, 40)
+                                },
+                                title: 'End'
+                            });
+                        }
+                    } else {
+                        alert('No train route found. Please check the entered locations.');
+                    }
+                } else {
+                    alert('Error fetching route: ' + status);
+                }
+            });
+        }
+
+        function updateTotalDistance() {
+            const totalDistanceElement = document.getElementById('total-distance');
+            if (totalDistanceElement) {
+                totalDistanceElement.textContent = `Total Train Distance: ${totalDistance.toFixed(2)} km`;
+            }
+        }
+
+        function addMoreRoutes() {
+            const routeContainer = document.getElementById('route-container');
+            const newRouteSection = document.createElement('div');
+            newRouteSection.classList.add('route-section');
+            newRouteSection.id = `route-section-${routeCount}`;
+            newRouteSection.innerHTML = `
+        <button class="delete-button" onclick="deleteRoute(${routeCount})">X</button>
+        <div id="map-${routeCount}" class="map"></div>
+        <div class="form-group">
+            <label for="start-${routeCount}">Starting Point:</label>
+            <input type="text" id="start-${routeCount}" placeholder="Enter starting point">
+        </div>
+        <div class="form-group">
+            <label for="end-${routeCount}">Destination:</label>
+            <input type="text" id="end-${routeCount}" placeholder="Enter destination">
+        </div>
+        <div class="form-group">
+            <label for="trips-${routeCount}">How many times do you travel this route in a week?</label>
+            <input type="number" id="trips-${routeCount}" min="0" placeholder="Enter number of trips">
+        </div>
+        <div class="form-group">
+            <button class="common-button" onclick="estimateRoute(${routeCount})">ESTIMATE TRAIN DISTANCE</button>
+            <button id="button-reset-${routeCount}" class="common-button" style="background-color: grey;" onclick="resetRoute(${routeCount})">RESET</button>
+        </div>
+        <div id="error-message-${routeCount}"></div>
+        <div id="distance-result-${routeCount}"></div>
+    `;
+
+            routeContainer.appendChild(newRouteSection);
+            initMap(routeCount);
+            routeCount++;
+        }
+
+        function resetRoute(index) {
+            // Get the relevant elements
+            const startInput = document.getElementById(`start-${index}`);
+            const endInput = document.getElementById(`end-${index}`);
+            const tripsInput = document.getElementById(`trips-${index}`);
+            const distanceResult = document.getElementById(`distance-result-${index}`);
+
+            // Clear input fields
+            startInput.value = '';
+            endInput.value = '';
+            tripsInput.value = '';
+
+            // Clear distance result
+            distanceResult.innerHTML = '';
+
+            // Remove markers
+            if (maps[index]) {
+                maps[index].setCenter({ lat: -37.8136, lng: 144.9631 }); // Center map back to Melbourne
+            }
+
+            // Clear directions
+            if (directionsRenderers[index]) {
+                directionsRenderers[index].setDirections({ routes: [] });
+            }
+
+            // Reset total distance for this route
+            totalDistance -= totalDistancePerRoute[index] || 0;
+            totalDistancePerRoute[index] = 0;
+
+            // Update the total distance display
+            updateTotalDistance();
+        }
+
+        function deleteRoute(index) {
+            // Ensure the first section is not deletable
+            if (index === 0) {
+                alert("The first route section cannot be deleted.");
+                return;
+            }
+
+            // Remove the selected route section
+            const routeSection = document.getElementById(`route-section-${index}`);
+            if (routeSection) {
+                routeSection.remove();
+            }
+
+            // Update the total distance by subtracting the deleted route's distance
+            const previousDistance = totalDistancePerRoute[index] || 0;
+            totalDistance -= previousDistance;
+            delete totalDistancePerRoute[index]; // Remove the distance tracking for this route
+
+            // Update the total distance display
+            updateTotalDistance();
+        }
+
+        function finish() {
+            // Round the total distance to 2 decimal places before saving
+            const roundedTotalDistance = totalDistance.toFixed(2);
+
+            // Save the rounded total distance to localStorage
+            localStorage.setItem('totalDistance_train', roundedTotalDistance);
+
+            // Redirect back to the original page
+            window.location.href = 'emission_cal_trans.html';
+        }
+
+        function goBack() {
+            window.location.href = 'emission_cal_trans.html';
+        }
+
+        function initMapZero() {
+            initMap(0);
+        }
+        document.getElementById('finish').addEventListener('click', finish);
+
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAStRwGjyxxLEMoa7E32sKxu2puxRvtFXs&libraries=places&callback=initMapZero">
+        </script>
+</body>
+
+</html>
