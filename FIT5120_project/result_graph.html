@@ -1,606 +1,629 @@
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emission Charts</title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-calculator.min.css">
-    <link rel="stylesheet" href="css/emission_appli.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <style>
-        body {
-            font-family: 'Open Sans', sans-serif;
-            background-color: #f9f4e9;
-            margin: 0;
-            padding: 0;
-        }
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Emission Charts</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-calculator.min.css">
+        <link rel="stylesheet" href="css/emission_appli.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <style>
+            body {
+                font-family: 'Open Sans', sans-serif;
+                background-color: #f9f4e9;
+                margin: 0;
+                padding: 0;
+            }
 
-        .header {
-            background: #333;
-            padding: 10px 0;
-        }
+            .header {
+                background: #333;
+                padding: 10px 0;
+            }
 
-        .navbar-nav>li>a {
-            color: #fff;
-            font-size: 16px;
-        }
+            .navbar-nav>li>a {
+                color: #fff;
+                font-size: 16px;
+            }
 
-        .navbar-brand img {
-            height: 50px;
-        }
+            .navbar-brand img {
+                height: 50px;
+            }
 
-        .dashboard-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 20px auto;
-            gap: 30px;
-        }
+            .dashboard-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                max-width: 1200px;
+                margin: 20px auto;
+                gap: 30px;
+            }
 
-        .section {
-            width: 100%;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin: 10px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-        }
-        h2 {
-            font-size: 2em; /* Relative to the body font size */
-            text-align: center;
-            margin: 20px 0; /* Margin for spacing */
-        }
+            .section {
+                width: 100%;
+                background: #fff;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                margin: 10px 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+            }
+            h2 {
+                font-size: 2em; /* Relative to the body font size */
+                text-align: center;
+                margin: 20px 0; /* Margin for spacing */
+            }
 
-        /*@media (max-width: 768px) {
+            /*@media (max-width: 768px) {
+                .equivalence-container div,
+                .offset-container div {
+                    flex: 1 1 100%; 
+                }*/
+            
+            .chart {
+                width: 100%;
+                margin-top: 20px;
+                text-align: center;
+            }
+
+            .equivalence-container,
+            .offset-container {
+                display: flex;
+                flex-wrap: wrap; /* Allows items to wrap onto the next line */
+                justify-content: space-around;
+                width: 100%;
+            }
+
             .equivalence-container div,
             .offset-container div {
-                flex: 1 1 100%; 
-            }*/
-        
-        .chart {
-            width: 100%;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .equivalence-container,
-        .offset-container {
-            display: flex;
-            flex-wrap: wrap; /* Allows items to wrap onto the next line */
-            justify-content: space-around;
-            width: 100%;
-        }
-
-        .equivalence-container div,
-        .offset-container div {
-            flex: 1 1 45%; /* Allows each item to take 45% of the width, adjust as needed */
-            margin: 10px; /* Adds spacing around items */
-            min-width: 150px; /* Minimum width to maintain some size */
-            text-align: center;
-        }
+                flex: 1 1 45%; /* Allows each item to take 45% of the width, adjust as needed */
+                margin: 10px; /* Adds spacing around items */
+                min-width: 150px; /* Minimum width to maintain some size */
+                text-align: center;
+            }
 
 
-        .chart-title {
-            font-size: 1.2em;
-            font-weight: bold;
-        }
+            .chart-title {
+                font-size: 1.2em;
+                font-weight: bold;
+            }
 
-        .legend {
-            font-size: 12px;
-            margin-top: 20px;
-            text-align: left;
-        }
+            .legend {
+                font-size: 12px;
+                margin-top: 20px;
+                text-align: left;
+            }
 
-        .legend-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 5px;
-        }
+            .legend-item {
+                display: flex;
+                align-items: center;
+                margin-bottom: 5px;
+            }
 
-        .legend-color-box {
-            width: 12px;
-            height: 12px;
-            margin-right: 8px;
-            flex-shrink: 0;
-        }
+            .legend-color-box {
+                width: 12px;
+                height: 12px;
+                margin-right: 8px;
+                flex-shrink: 0;
+            }
 
-        .legend-text {
-            white-space: nowrap;
-        }
+            .legend-text {
+                white-space: nowrap;
+            }
 
-        img {
-            max-width: 100%;
-            height: auto;
-        }
+            img {
+                max-width: 100%;
+                height: auto;
+            }
 
-    </style>
-</head>
+        </style>
+    </head>
 
-<body>
-    <!-- Header Section with Navigation Bar -->
-    <div class="header">
-        <div class="container">
-            <nav class="navbar navbar-inverse" role="navigation">
-                <div class="navbar-header">
-                    <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse"
-                        data-target="#main-nav">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a href="index.html" class="navbar-brand">
-                        <img src="img/logo.png" alt="EcoInsight Logo">
-                    </a>
-                </div>
-                <div id="main-nav" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a></li>
-                        <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
-                        <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
-                        <li><a href="recommendations.html">Recommendations</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </div>
-
-    <!-- Dashboard Container -->
-    <div class="dashboard-container">
-        <!-- Header Section -->
-        <div class="section" id="emission-comparison">
-            <h2>Emission Analytics</h2>
-            <p>Your estimated emissions are <span id="user-emissions">0</span> kg CO2 per week</p>
-            <p>You currently emit <span id="comparison-percentage" style="color:red;">0% more</span> CO2 than the average Melbournian</p>
-        </div>
-
-        <!-- Equivalence Section -->
-        <div class="section">
-            <h3>This is equivalent to...</h3>
-            <div class="equivalence-container">
-                <div>
-                    <img src="img/car.png" alt="Car" style="width: 100px;">
-                    <p id="car-equivalent">Calculating...</p> <!-- Dynamic update -->
-                </div>
-                <div>
-                    <img src="img/melting-ice.png" alt="Ice Cap" style="width: 100px;">
-                    <p id="ice-equivalent">Calculating...</p> <!-- Dynamic update -->
-                </div>
+    <body>
+        <!-- Header Section with Navigation Bar -->
+        <div class="header">
+            <div class="container">
+                <nav class="navbar navbar-inverse" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#main-nav">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a href="index.html" class="navbar-brand">
+                            <img src="img/logo.png" alt="EcoInsight Logo">
+                        </a>
+                    </div>
+                    <div id="main-nav" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a></li>
+                            <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
+                            <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
+                            <li><a href="recommendations.html">Recommendations</a></li>
+                        </ul>
+                    </div>
+                </nav>
             </div>
         </div>
 
-        <!-- Offset Section -->
-        <div class="section">
-            <h3>To offset this you would need to...</h3>
-            <div class="offset-container">
-                <div>
-                    <img src="img/forest.png" alt="Plant Trees" style="width: 100px;">
-                    <p id="trees-equivalent">Calculating...</p> <!-- Update this to dynamic -->
+        <!-- Dashboard Container -->
+        <div class="dashboard-container">
+            <!-- Header Section -->
+            <div class="section" id="emission-comparison">
+                <h2>Emission Analytics</h2>
+                <p>Your estimated emissions are <span id="user-emissions">0</span> kg CO2 per week</p>
+                <p>You currently emit <span id="comparison-percentage" style="color:red;">0% more</span> CO2 than the average Melbournian</p>
+            </div>
+
+            <!-- Equivalence Section -->
+            <div class="section">
+                <h3>This is equivalent to...</h3>
+                <div class="equivalence-container">
+                    <div>
+                        <img src="img/car.png" alt="Car" style="width: 100px;">
+                        <p id="car-equivalent">Calculating...</p> <!-- Dynamic update -->
+                    </div>
+                    <div>
+                        <img src="img/melting-ice.png" alt="Ice Cap" style="width: 100px;">
+                        <p id="ice-equivalent">Calculating...</p> <!-- Dynamic update -->
+                    </div>
                 </div>
-                <div>
-                    <img src="img/solar-energy.png" alt="Install Solar Panels" style="width: 100px;">
-                    <p id="solar-panels-equivalent">Calculating...</p> <!-- Dynamic solar panels -->
+            </div>
+
+            <!-- Offset Section -->
+            <div class="section">
+                <h3>To offset this you would need to...</h3>
+                <div class="offset-container">
+                    <div>
+                        <img src="img/forest.png" alt="Plant Trees" style="width: 100px;">
+                        <p id="trees-equivalent">Calculating...</p> <!-- Update this to dynamic -->
+                    </div>
+                    <div>
+                        <img src="img/solar-energy.png" alt="Install Solar Panels" style="width: 100px;">
+                        <p id="solar-panels-equivalent">Calculating...</p> <!-- Dynamic solar panels -->
+                    </div>
+                    <div>
+                        <img src="img/car (1).png" alt="Remove Cars" style="width: 100px;">
+                        <p id="cars-removed-equivalent">Calculating...</p> <!-- Dynamic cars removed -->
+                    </div>
                 </div>
-                <div>
-                    <img src="img/car (1).png" alt="Remove Cars" style="width: 100px;">
-                    <p id="cars-removed-equivalent">Calculating...</p> <!-- Dynamic cars removed -->
-                </div>
+            </div>
+
+
+            <!-- Chart Container -->
+            <div class="section chart">
+                <div class="chart-title">Emissions per Category (kg CO2)</div>
+                <div id="category-chart"></div>
+            </div>
+
+            <div class="section chart">
+                <div class="chart-title">Emissions per Appliance (kg CO2)</div>
+                <div id="appliance-chart"></div>
+            </div>
+
+            <div class="section chart">
+                <div class="chart-title">Emissions by Transport Mode (kg CO2)</div>
+                <div id="transport-chart"></div>
             </div>
         </div>
 
-
-        <!-- Chart Container -->
-        <div class="section chart">
-            <div class="chart-title">Emissions per Category (kg CO2)</div>
-            <div id="category-chart"></div>
+        <!-- Loading Animation with Tree GIF -->
+        <div id="loading-animation" style="display: none;">
+            <img src="img/tree.gif" alt="Loading..." style="width: 100px; height: auto;">
+            <p>Loading, please wait...</p>
         </div>
 
-        <div class="section chart">
-            <div class="chart-title">Emissions per Appliance (kg CO2)</div>
-            <div id="appliance-chart"></div>
-        </div>
+        <script>
+        // Constants for equivalences and offsets
+            const CO2_PER_KM_PETROL_CAR = 0.17048; // in kg per km
+            const CO2_PER_ICE_SQUARE_METER = 333.33; // in kg per m^2 (1000kg CO2 = 3 m^2 ice)
+            const TREES_TO_OFFSET_CO2 = 21.77; // Each tree offsets 21.77 kg of CO2 per year
+            const CO2_SAVED_PER_SOLAR_PANEL = 38.46; // Each solar panel saves 38.46 kg CO2 per week
+            const CO2_EMITTED_PER_CAR = 88.46; // Each car emits 88.46 kg CO2 per week
+            const AVERAGE_WEEKLY_EMISSIONS = 234.6153846; // Average Melbournian weekly emissions in kg CO2
 
-        <div class="section chart">
-            <div class="chart-title">Emissions by Transport Mode (kg CO2)</div>
-            <div id="transport-chart"></div>
-        </div>
-    </div>
-
-    <!-- Loading Animation with Tree GIF -->
-    <div id="loading-animation" style="display: none;">
-        <img src="img/tree.gif" alt="Loading..." style="width: 100px; height: auto;">
-        <p>Loading, please wait...</p>
-    </div>
-
-    <script>
-       // Constants for equivalences and offsets
-        const CO2_PER_KM_PETROL_CAR = 0.17048; // in kg per km
-        const CO2_PER_ICE_SQUARE_METER = 333.33; // in kg per m^2 (1000kg CO2 = 3 m^2 ice)
-        const TREES_TO_OFFSET_CO2 = 21.77; // Each tree offsets 21.77 kg of CO2 per year
-        const CO2_SAVED_PER_SOLAR_PANEL = 38.46; // Each solar panel saves 38.46 kg CO2 per week
-        const CO2_EMITTED_PER_CAR = 88.46; // Each car emits 88.46 kg CO2 per week
-        const AVERAGE_WEEKLY_EMISSIONS = 234.6153846; // Average Melbournian weekly emissions in kg CO2
-
-        // Show the loading animation
-        function showLoading() {
-            document.getElementById('loading-animation').style.display = 'flex';
-        }
-
-        // Hide the loading animation
-        function hideLoading() {
-            document.getElementById('loading-animation').style.display = 'none';
-        }
-
-        // Function to calculate and display the equivalence of emissions
-        function displayEquivalences(totalEmissions) {
-            // Calculate equivalent values
-            const kmsEquivalent = (totalEmissions / CO2_PER_KM_PETROL_CAR).toFixed(2); // KMs for car travel
-            const iceEquivalent = (totalEmissions / CO2_PER_ICE_SQUARE_METER).toFixed(2); // m^2 of melted ice
-            const treesEquivalent = (totalEmissions / TREES_TO_OFFSET_CO2).toFixed(2); // Number of trees
-            const solarPanelsEquivalent = (totalEmissions / CO2_SAVED_PER_SOLAR_PANEL).toFixed(2); // Number of solar panels
-            const carsRemovedEquivalent = (totalEmissions / CO2_EMITTED_PER_CAR).toFixed(2); // Number of cars removed
-
-            // Update the DOM elements with calculated values
-            document.getElementById('car-equivalent').innerText = `${kmsEquivalent} km travelled by petrol car`;
-            document.getElementById('ice-equivalent').innerText = `${iceEquivalent} m² of melted polar ice caps`;
-            document.getElementById('trees-equivalent').innerText = `Plant ${treesEquivalent} trees to offset`;
-            document.getElementById('solar-panels-equivalent').innerText = `Install ${solarPanelsEquivalent} solar panels to offset`;
-            document.getElementById('cars-removed-equivalent').innerText = `Remove ${carsRemovedEquivalent} cars from the road to offset`;
-        }
-
-
-        // Function to determine the request body based on the appliance type
-        function getRequestBody(applianceType, hours, brand) {
-            let requestBody = { type: 'appliance', appliance_type: applianceType };
-
-            // Add hours if applicable
-            if (['television', 'dishwasher', 'clothes_washer', 'clothes_dryer', 'air_conditioner'].includes(applianceType) && !isNaN(hours)) {
-                requestBody.hours = hours;
+            // Show the loading animation
+            function showLoading() {
+                document.getElementById('loading-animation').style.display = 'flex';
             }
 
-            // Add brand for refrigerator
-            if (applianceType === 'refrigerator' && brand) {
-                requestBody.brand = brand;
+            // Hide the loading animation
+            function hideLoading() {
+                document.getElementById('loading-animation').style.display = 'none';
             }
 
-            return requestBody;
-        }
+            // Function to calculate and display the equivalence of emissions
+            function displayEquivalences(totalEmissions) {
+                // Calculate equivalent values
+                const kmsEquivalent = (totalEmissions / CO2_PER_KM_PETROL_CAR).toFixed(2); // KMs for car travel
+                const iceEquivalent = (totalEmissions / CO2_PER_ICE_SQUARE_METER).toFixed(2); // m^2 of melted ice
+                const treesEquivalent = (totalEmissions / TREES_TO_OFFSET_CO2).toFixed(2); // Number of trees
+                const solarPanelsEquivalent = (totalEmissions / CO2_SAVED_PER_SOLAR_PANEL).toFixed(2); // Number of solar panels
+                const carsRemovedEquivalent = (totalEmissions / CO2_EMITTED_PER_CAR).toFixed(2); // Number of cars removed
 
-        async function fetchApplianceEmissions() {
-            showLoading();
-            try {
-                // Get input values
-                const applianceType = document.getElementById('applianceType').value.trim();
-                const hours = parseFloat(document.getElementById('hours').value);
-                const brand = document.getElementById('brand').value.trim();
-
-                // Validate input values
-                if (!applianceType) {
-                    alert('Please enter an appliance type.');
-                    hideLoading();
-                    return;
-                }
-
-                const requestBody = getRequestBody(applianceType, hours, brand);
-                console.log('Request body:', requestBody);
-
-                const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(requestBody),
-                });
-
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    console.error('Error response from API:', errorText);
-                    alert('Failed to fetch appliance emissions data.');
-                    hideLoading();
-                    return;
-                }
-
-                const data = await response.json();
-                console.log('Fetched Data:', data);
-
-                // Check if the data has the expected structure
-                if (data && typeof data === 'object' && data.appliance_emissions !== undefined && data.individual_appliance_emissions) {
-                    localStorage.setItem('applianceEmissions', data.appliance_emissions);
-                    localStorage.setItem('individualApplianceEmissions', JSON.stringify(data.individual_appliance_emissions));
-                    console.log('Data successfully stored in localStorage');
-
-                    // Calculate and display the comparison with average Melbournian
-                    updateEmissionComparison(data.appliance_emissions);
-
-                    // Reinitialize charts after data fetch
-                    initCharts();
-                } else {
-                    console.error('Unexpected data format:', data);
-                    alert('Unexpected data format received from API.');
-                }
-            } catch (error) {
-                console.error('Error in fetchApplianceEmissions:', error);
-                alert('An error occurred while fetching appliance emissions.');
-            } finally {
-                hideLoading();
+                // Update the DOM elements with calculated values
+                document.getElementById('car-equivalent').innerText = `${kmsEquivalent} km travelled by petrol car`;
+                document.getElementById('ice-equivalent').innerText = `${iceEquivalent} m² of melted polar ice caps`;
+                document.getElementById('trees-equivalent').innerText = `Plant ${treesEquivalent} trees to offset`;
+                document.getElementById('solar-panels-equivalent').innerText = `Install ${solarPanelsEquivalent} solar panels to offset`;
+                document.getElementById('cars-removed-equivalent').innerText = `Remove ${carsRemovedEquivalent} cars from the road to offset`;
             }
-        }
 
-        async function fetchTransportEmissions() {
-            try {
-                const response = await fetch('https://your-api-url/transport-emissions', {
-                    method: 'GET',
-                    headers: { 'Content-Type': 'application/json' }
-                });
 
-                if (response.ok) {
+            // Function to determine the request body based on the appliance type
+            function getRequestBody(applianceType, hours, brand) {
+                let requestBody = { type: 'appliance', appliance_type: applianceType };
+
+                // Add hours if applicable
+                if (['television', 'dishwasher', 'clothes_washer', 'clothes_dryer', 'air_conditioner'].includes(applianceType) && !isNaN(hours)) {
+                    requestBody.hours = hours;
+                }
+
+                // Add brand for refrigerator
+                if (applianceType === 'refrigerator' && brand) {
+                    requestBody.brand = brand;
+                }
+
+                return requestBody;
+            }
+
+            async function fetchApplianceEmissions() {
+                showLoading();
+                try {
+                    // Get input values
+                    const applianceType = document.getElementById('applianceType').value.trim();
+                    const hours = parseFloat(document.getElementById('hours').value);
+                    const brand = document.getElementById('brand').value.trim();
+
+                    // Validate input values
+                    if (!applianceType) {
+                        alert('Please enter an appliance type.');
+                        hideLoading();
+                        return;
+                    }
+
+                    const requestBody = getRequestBody(applianceType, hours, brand);
+                    console.log('Request body:', requestBody);
+
+                    const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(requestBody),
+                    });
+
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        console.error('Error response from API:', errorText);
+                        alert('Failed to fetch appliance emissions data.');
+                        hideLoading();
+                        return;
+                    }
+
                     const data = await response.json();
-                    console.log('Fetched Transport Data:', data); // Debugging log
+                    console.log('Fetched Data:', data);
 
-                    // Check if data contains transport emissions
-                    if (data && data.transport_emissions) {
-                        localStorage.setItem('individualTransportEmissions', JSON.stringify(data.transport_emissions));
-                        return data.transport_emissions;
+                    // Check if the data has the expected structure
+                    if (data && typeof data === 'object' && data.appliance_emissions !== undefined && data.individual_appliance_emissions) {
+                        localStorage.setItem('applianceEmissions', data.appliance_emissions);
+                        localStorage.setItem('individualApplianceEmissions', JSON.stringify(data.individual_appliance_emissions));
+                        console.log('Data successfully stored in localStorage');
+
+                        // Calculate and display the comparison with average Melbournian
+                        updateEmissionComparison(data.appliance_emissions);
+
+                        // Reinitialize charts after data fetch
+                        initCharts();
                     } else {
-                        console.warn('Transport emissions data is missing in response.');
+                        console.error('Unexpected data format:', data);
+                        alert('Unexpected data format received from API.');
+                    }
+                } catch (error) {
+                    console.error('Error in fetchApplianceEmissions:', error);
+                    alert('An error occurred while fetching appliance emissions.');
+                } finally {
+                    hideLoading();
+                }
+            }
+
+            async function fetchTransportEmissions() {
+                try {
+                    const response = await fetch('https://your-api-url/transport-emissions', {
+                        method: 'GET',
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        console.log('Fetched Transport Data:', data);
+
+                        // Check if data contains transport emissions
+                        if (data && data.individual_transport_emissions) {
+                            localStorage.setItem('individualTransportEmissions', JSON.stringify(data.individual_transport_emissions));
+                            return data.individual_transport_emissions;
+                        } else {
+                            console.warn('Transport emissions data is missing in response.');
+                            return {};
+                        }
+                    } else {
+                        const errorText = await response.text();
+                        console.error('Error fetching transport emissions:', response.status, errorText);
+                        alert('Failed to fetch transport emissions data.');
                         return {};
                     }
-                } else {
-                    const errorText = await response.text();
-                    console.error('Error fetching transport emissions:', response.status, errorText);
-                    alert('Failed to fetch transport emissions data.');
+                } catch (error) {
+                    console.error('Error fetching transport emissions:', error);
+                    alert('An error occurred while fetching transport emissions.');
                     return {};
                 }
-            } catch (error) {
-                console.error('Error fetching transport emissions:', error);
-                alert('An error occurred while fetching transport emissions.');
-                return {};
-            }
-        }
-
-
-
-        // Function to update the emission comparison with the average Melbournian
-        function updateEmissionComparison(userEmissions) {
-            const difference = (userEmissions - AVERAGE_WEEKLY_EMISSIONS) / AVERAGE_WEEKLY_EMISSIONS;
-            const percentageDifference = (difference * 100).toFixed(2);
-            const comparisonElement = document.getElementById('comparison-percentage');
-
-            if (difference > 0) {
-                comparisonElement.textContent = `${percentageDifference}% more`;
-                comparisonElement.style.color = 'red';
-            } else if (difference < 0) {
-                comparisonElement.textContent = `${Math.abs(percentageDifference)}% less`;
-                comparisonElement.style.color = 'green';
-            } else {
-                comparisonElement.textContent = `equal to the average`;
-                comparisonElement.style.color = 'blue';
             }
 
-            document.getElementById('user-emissions').textContent = userEmissions.toFixed(2);
-        }
 
-        // Function to create a bar chart with legend
-        function createBarChart(data, selector, valueKey, labelKey) {
-            // Debugging: Check if data is valid
-            console.log('Bar chart data:', data);
-            if (!data || data.length === 0) {
-                console.warn('No data available for the bar chart.');
-                return; // Exit if no data is available
+
+
+            // Function to update the emission comparison with the average Melbournian
+            function updateEmissionComparison(userEmissions) {
+                const difference = (userEmissions - AVERAGE_WEEKLY_EMISSIONS) / AVERAGE_WEEKLY_EMISSIONS;
+                const percentageDifference = (difference * 100).toFixed(2);
+                const comparisonElement = document.getElementById('comparison-percentage');
+
+                if (difference > 0) {
+                    comparisonElement.textContent = `${percentageDifference}% more`;
+                    comparisonElement.style.color = 'red';
+                } else if (difference < 0) {
+                    comparisonElement.textContent = `${Math.abs(percentageDifference)}% less`;
+                    comparisonElement.style.color = 'green';
+                } else {
+                    comparisonElement.textContent = `equal to the average`;
+                    comparisonElement.style.color = 'blue';
+                }
+
+                document.getElementById('user-emissions').textContent = userEmissions.toFixed(2);
             }
 
-            const margin = { top: 20, right: 20, bottom: 50, left: 50 };
-            const width = 500 - margin.left - margin.right;
-            const height = 300 - margin.top - margin.bottom;
+            // Function to create a bar chart with legend
+            function createBarChart(data, selector, valueKey, labelKey) {
+                // Debugging: Check if data is valid
+                console.log('Bar chart data:', data);
+                if (!data || data.length === 0) {
+                    console.warn('No data available for the bar chart.');
+                    return; // Exit if no data is available
+                }
 
-            const svg = d3.select(selector)
-                .html('')  // Clear existing SVG content before drawing new chart
-                .append('svg')
-                .attr('width', width + margin.left + margin.right)
-                .attr('height', height + margin.top + margin.bottom)
-                .append('g')
-                .attr('transform', `translate(${margin.left}, ${margin.top})`);
+                const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+                const width = 500 - margin.left - margin.right;
+                const height = 300 - margin.top - margin.bottom;
 
-            // Ensure the data contains valid numbers for the emissions values
-            const maxEmission = d3.max(data, d => d[valueKey]);
-            console.log('Max emission value:', maxEmission);
+                const svg = d3.select(selector)
+                    .html('')  // Clear existing SVG content before drawing new chart
+                    .append('svg')
+                    .attr('width', width + margin.left + margin.right)
+                    .attr('height', height + margin.top + margin.bottom)
+                    .append('g')
+                    .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
-            // Create scales
-            const x = d3.scaleBand()
-                .domain(data.map(d => d[labelKey]))
-                .range([0, width])
-                .padding(0.1);
+                // Ensure the data contains valid numbers for the emissions values
+                const maxEmission = d3.max(data, d => d[valueKey]);
+                console.log('Max emission value:', maxEmission);
 
-            const y = d3.scaleLinear()
-                .domain([0, maxEmission || 1]) // Ensure we have a valid domain
-                .nice()
-                .range([height, 0]);
+                // Create scales
+                const x = d3.scaleBand()
+                    .domain(data.map(d => d[labelKey]))
+                    .range([0, width])
+                    .padding(0.1);
 
-            // Create axes
-            svg.append('g')
-                .attr('transform', `translate(0, ${height})`)
-                .call(d3.axisBottom(x))
-                .selectAll('text')
-                .attr('transform', 'rotate(-45)')
-                .style('text-anchor', 'end');
+                const y = d3.scaleLinear()
+                    .domain([0, maxEmission || 1]) // Ensure we have a valid domain
+                    .nice()
+                    .range([height, 0]);
 
-            svg.append('g')
-                .call(d3.axisLeft(y));
+                // Create axes
+                svg.append('g')
+                    .attr('transform', `translate(0, ${height})`)
+                    .call(d3.axisBottom(x))
+                    .selectAll('text')
+                    .attr('transform', 'rotate(-45)')
+                    .style('text-anchor', 'end');
 
-            // Draw bars
-            svg.selectAll('.bar')
-                .data(data)
-                .enter()
-                .append('rect')
-                .attr('class', 'bar')
-                .attr('x', d => x(d[labelKey]))
-                .attr('y', d => y(d[valueKey]))
-                .attr('width', x.bandwidth())
-                .attr('height', d => height - y(d[valueKey]))
-                .attr('fill', '#69b3a2');
+                svg.append('g')
+                    .call(d3.axisLeft(y));
 
-            // Add labels to the bars
-            svg.selectAll('.label')
-                .data(data)
-                .enter()
-                .append('text')
-                .attr('class', 'label')
-                .attr('x', d => x(d[labelKey]) + x.bandwidth() / 2)
-                .attr('y', d => y(d[valueKey]) - 5)
-                .attr('text-anchor', 'middle')
-                .text(d => `${d[valueKey].toFixed(2)} kg`);
-        }
+                // Draw bars
+                svg.selectAll('.bar')
+                    .data(data)
+                    .enter()
+                    .append('rect')
+                    .attr('class', 'bar')
+                    .attr('x', d => x(d[labelKey]))
+                    .attr('y', d => y(d[valueKey]))
+                    .attr('width', x.bandwidth())
+                    .attr('height', d => height - y(d[valueKey]))
+                    .attr('fill', '#69b3a2');
 
-
-
-
-        // Function to retrieve emissions data from localStorage dynamically
-        function getEmissionsData() {
-            // Retrieve and parse data from local storage
-            const categoryData = [
-                { category: 'Electricity', emissions: parseFloat(localStorage.getItem('applianceEmissions') || 0) },
-                { category: 'Transport', emissions: parseFloat(localStorage.getItem('transportEmissions') || 0) },
-                { category: 'Gas', emissions: parseFloat(localStorage.getItem('gasEmissions') || 0) }
-            ];
-
-            const individualApplianceEmissions = JSON.parse(localStorage.getItem('individualApplianceEmissions') || '{}');
-            const individualTransportEmissions = JSON.parse(localStorage.getItem('individualTransportEmissions') || '{}'); // Retrieve transport emissions
-
-            // Format appliance data for charts
-            const applianceData = Object.entries(individualApplianceEmissions).map(([type, emissions]) => ({
-                type: type,
-                emissions: parseFloat(emissions)
-            }));
-
-            // Format transport data for charts
-            const transportData = Object.entries(individualTransportEmissions).map(([type, emissions]) => ({
-                type: type,
-                emissions: parseFloat(emissions)
-            }));
-
-            // Log data to ensure it's correctly retrieved
-            console.log('Retrieved individualApplianceEmissions:', individualApplianceEmissions);
-            console.log('Retrieved individualTransportEmissions:', individualTransportEmissions);
-
-            return { categoryData, applianceData, transportData };
-        }
-
-
-        // Function to create a pie chart with legend
-        function createPieChart(data, selector, valueKey, labelKey) {
-            const width = 300;
-            const height = 300;
-            const radius = Math.min(width, height) / 2;
-
-            const svg = d3.select(selector)
-                .html('')  // Clear existing SVG content before drawing new chart
-                .append('svg')
-                .attr('width', width)
-                .attr('height', height + 50) // Extra space for legend
-                .append('g')
-                .attr('transform', `translate(${width / 2}, ${height / 2})`);
-
-            const color = d3.scaleOrdinal(d3.schemeCategory10);
-
-            const pie = d3.pie()
-                .value(d => d[valueKey]);
-
-            const arc = d3.arc()
-                .innerRadius(0)
-                .outerRadius(radius);
-
-            const arcs = svg.selectAll('arc')
-                .data(pie(data))
-                .enter()
-                .append('g')
-                .attr('class', 'arc');
-
-            arcs.append('path')
-                .attr('d', arc)
-                .attr('fill', d => color(d.data[labelKey]));
-
-            // Add labels to the pie slices
-            arcs.append('text')
-                .attr('transform', d => `translate(${arc.centroid(d)})`)
-                .attr('text-anchor', 'middle')
-                .style('font-size', '12px')
-                .text(d => `${d.data[labelKey]} (${d.data[valueKey].toFixed(2)} kg)`);
-
-            // Add a legend below the pie chart
-            const legend = d3.select(selector)
-                .append('div')
-                .attr('class', 'legend');
-
-            const legendItems = legend.selectAll('.legend-item')
-                .data(data)
-                .enter()
-                .append('div')
-                .attr('class', 'legend-item');
-
-            legendItems.append('div')
-                .attr('class', 'legend-color-box')
-                .style('background-color', d => color(d[labelKey]));
-
-            legendItems.append('span')
-                .attr('class', 'legend-text')
-                .text(d => `${d[labelKey]}: ${d[valueKey].toFixed(2)} kg CO2`);
-        }
-
-        // Initialize charts using the dynamic data
-        function initCharts() {
-            const { categoryData, applianceData, transportData } = getEmissionsData();
-
-            if (!categoryData.length && !applianceData.length && !transportData.length) {
-                console.warn('No data available to display.');
-                // Optionally, you can display a message to the user
-                alert('No emissions data available to display.');
-                return;
+                // Add labels to the bars
+                svg.selectAll('.label')
+                    .data(data)
+                    .enter()
+                    .append('text')
+                    .attr('class', 'label')
+                    .attr('x', d => x(d[labelKey]) + x.bandwidth() / 2)
+                    .attr('y', d => y(d[valueKey]) - 5)
+                    .attr('text-anchor', 'middle')
+                    .text(d => `${d[valueKey].toFixed(2)} kg`);
             }
 
-            // Create pie charts with the retrieved data
-            createPieChart(categoryData, '#category-chart', 'emissions', 'category');
-            createPieChart(applianceData, '#appliance-chart', 'emissions', 'type');
-            
-            // Create bar chart for transport emissions
-            createBarChart(transportData, '#transport-chart', 'emissions', 'type'); // Use bar chart for transport data
-        }
 
-        // Initialize the page on window load
-        window.onload = function () {
-            // Initialize charts on page load
-            initCharts();
-            
-            // Retrieve total emissions from localStorage
-            const totalEmissions = parseFloat(localStorage.getItem('totalEmissions'));
 
-            // Log to verify what is stored in localStorage
-            console.log('Attempting to load totalEmissions from localStorage:', totalEmissions);
 
-            if (!isNaN(totalEmissions) && totalEmissions !== 0) {
-                console.log('Loaded totalEmissions:', totalEmissions); 
-                updateEmissionComparison(totalEmissions);
-                displayEquivalences(totalEmissions); // Ensure this function is called
-            } else {
-                console.error('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
-                alert('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
+            // Function to retrieve emissions data from localStorage dynamically
+            function getEmissionsData() {
+                // Retrieve and parse data from local storage
+                const categoryData = [
+                    { category: 'Electricity', emissions: parseFloat(localStorage.getItem('applianceEmissions') || 0) },
+                    { category: 'Transport', emissions: parseFloat(localStorage.getItem('transportEmissions') || 0) },
+                    { category: 'Gas', emissions: parseFloat(localStorage.getItem('gasEmissions') || 0) }
+                ];
+
+                const individualApplianceEmissions = JSON.parse(localStorage.getItem('individualApplianceEmissions') || '{}');
+                // Format appliance data for charts
+                const applianceData = Object.entries(individualApplianceEmissions).map(([type, emissions]) => ({
+                    type: type,
+                    emissions: parseFloat(emissions)
+                }));
+
+                // Log data to ensure it's correctly retrieved
+                console.log('Retrieved individualApplianceEmissions:', individualApplianceEmissions);
+
+                return { categoryData, applianceData };
             }
-        };
 
 
-    </script>
-</body>
-</html>
+            // Function to create a pie chart with legend
+            function createPieChart(data, selector, valueKey, labelKey) {
+                const width = 300;
+                const height = 300;
+                const radius = Math.min(width, height) / 2;
+
+                const svg = d3.select(selector)
+                    .html('')  // Clear existing SVG content before drawing new chart
+                    .append('svg')
+                    .attr('width', width)
+                    .attr('height', height + 50) // Extra space for legend
+                    .append('g')
+                    .attr('transform', `translate(${width / 2}, ${height / 2})`);
+
+                const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+                const pie = d3.pie()
+                    .value(d => d[valueKey]);
+
+                const arc = d3.arc()
+                    .innerRadius(0)
+                    .outerRadius(radius);
+
+                const arcs = svg.selectAll('arc')
+                    .data(pie(data))
+                    .enter()
+                    .append('g')
+                    .attr('class', 'arc');
+
+                arcs.append('path')
+                    .attr('d', arc)
+                    .attr('fill', d => color(d.data[labelKey]));
+
+                // Add labels to the pie slices
+                arcs.append('text')
+                    .attr('transform', d => `translate(${arc.centroid(d)})`)
+                    .attr('text-anchor', 'middle')
+                    .style('font-size', '12px')
+                    .text(d => `${d.data[labelKey]} (${d.data[valueKey].toFixed(2)} kg)`);
+
+                // Add a legend below the pie chart
+                const legend = d3.select(selector)
+                    .append('div')
+                    .attr('class', 'legend');
+
+                const legendItems = legend.selectAll('.legend-item')
+                    .data(data)
+                    .enter()
+                    .append('div')
+                    .attr('class', 'legend-item');
+
+                legendItems.append('div')
+                    .attr('class', 'legend-color-box')
+                    .style('background-color', d => color(d[labelKey]));
+
+                legendItems.append('span')
+                    .attr('class', 'legend-text')
+                    .text(d => `${d[labelKey]}: ${d[valueKey].toFixed(2)} kg CO2`);
+            }
+
+            // Function to retrieve and format transport emissions data from localStorage
+            function getTransportEmissionsData() {
+                // Retrieve data from local storage
+                const transportData = JSON.parse(localStorage.getItem('transportationData')) || {};
+                
+                console.log('Transport data retrieved from localStorage:', transportData); // Log retrieved data
+
+                // Check if data is properly structured
+                if (!Object.keys(transportData).length) {
+                    console.warn('No transport data found in localStorage or data is empty.');
+                    return [];
+                }
+                
+                // Format data for chart
+                const formattedData = Object.entries(transportData).map(([type, emissions]) => ({
+                    type: type.replace('_', ' '), // Make type readable if needed
+                    emissions: parseFloat(emissions)
+                }));
+
+                console.log('Formatted transport emissions data for chart:', formattedData); // Log formatted data
+                return formattedData;
+            }
+
+
+
+
+            function initCharts() {
+                const { categoryData, applianceData } = getEmissionsData();
+
+                if (!categoryData.length && !applianceData.length) {
+                    console.warn('No data available to display.');
+                    alert('No emissions data available to display.');
+                    return;
+                }
+
+                createPieChart(categoryData, '#category-chart', 'emissions', 'category');
+                createPieChart(applianceData, '#appliance-chart', 'emissions', 'type');
+
+                const transportData = getTransportEmissionsData();
+
+                if (!transportData.length) {
+                    console.warn('No data available to display for transport chart.');
+                    alert('No emissions data available to display.');
+                    return;
+                }
+
+                createBarChart(transportData, '#transport-chart', 'emissions', 'type'); // Ensure correct data and keys
+            }
+
+
+            // Initialize the page on window load
+            window.onload = function () {
+                // Initialize charts on page load
+                initCharts();
+                
+                // Retrieve total emissions from localStorage
+                const totalEmissions = parseFloat(localStorage.getItem('totalEmissions'));
+
+                // Log to verify what is stored in localStorage
+                console.log('Attempting to load totalEmissions from localStorage:', totalEmissions);
+
+                if (!isNaN(totalEmissions) && totalEmissions !== 0) {
+                    console.log('Loaded totalEmissions:', totalEmissions); 
+                    updateEmissionComparison(totalEmissions);
+                    displayEquivalences(totalEmissions); // Ensure this function is called
+                } else {
+                    console.error('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
+                    alert('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
+                }
+            };
+
+
+        </script>
+    </body>
+    </html>

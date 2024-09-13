@@ -268,9 +268,42 @@
             }
         });
 
+        async function fetchTransportEmissions() {
+            try {
+                const response = await fetch('YOUR_API_ENDPOINT', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type: 'transportation', transportation_type: 'bus', kms: 10 }) // Example request
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Fetched Transport Data:', data);
+
+                    // Ensure the response contains the expected data
+                    if (data && data.individual_transport_emissions) {
+                        // Save to local storage
+                        localStorage.setItem('transportationData', JSON.stringify(data.individual_transport_emissions));
+                        console.log('Transport data saved:', data.individual_transport_emissions);
+                    } else {
+                        console.warn('Transport emissions data is missing in response.');
+                    }
+                } else {
+                    const errorText = await response.text();
+                    console.error('Error fetching transport emissions:', response.status, errorText);
+                    alert('Failed to fetch transport emissions data.');
+                }
+            } catch (error) {
+                console.error('Error fetching transport emissions:', error);
+                alert('An error occurred while fetching transport emissions.');
+            }
+        }
+
+
+
         async function sendDataToLambda(data) {
             try {
-                console.log('Sending data to Lambda:', data); // Log the data being sent
+                console.log('Sending data to Lambda:', data);
 
                 // Send the data to the API
                 const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
@@ -285,22 +318,27 @@
                     const result = await response.json();
                     console.log('Data sent successfully:', result);
 
-                    // Check the response to ensure transport emissions are correctly calculated
-                    if (result.transport_emissions === 0) {
-                        console.warn('Transport emissions are zero, please check the input values and API logic.');
+                    // Save individual transport emissions to local storage
+                    // Ensure the structure matches the backend response
+                    if (result[0] && result[0].individual_transport_emissions) {
+                        localStorage.setItem('transportationData', JSON.stringify(result[0].individual_transport_emissions));
+                        console.log('Transport data saved to localStorage:', result[0].individual_transport_emissions);
+                    } else {
+                        console.warn('Transport emissions data is missing in response.');
                     }
 
                     window.location.href = 'emission_cal_appli.html'; // Redirect to the next page
                 } else {
-                    const errorText = await response.text(); // Log the error response
+                    const errorText = await response.text(); 
                     console.error('Error response from server:', response.status, errorText);
                     alert('Error sending data to the server. Please try again.');
                 }
             } catch (error) {
                 console.error('Error sending data:', error);
-                alert('Error sending data to the server. Please try again.');
+                alert('Error sending data to the server. Please try again.');  
             }
         }
+
 
         function validateAndNavigate() {
             const questions = document.querySelectorAll('#transportation-usage-section input[type="number"]');
@@ -318,22 +356,19 @@
                 }
             });
 
-            // Save data to localStorage for debugging or future use
-            localStorage.setItem('transportationData', JSON.stringify(dataToSend));
-
-            console.log('Original data (input values):');
-            questions.forEach(input => {
-                console.log(`${input.id}: ${input.value}`);
-            });
-
-            console.log('Formatted data to send:', dataToSend);
+            // Debug: Check the data before saving
+            console.log('Data to be saved:', dataToSend);
 
             if (valid) {
+                localStorage.setItem('transportationData', JSON.stringify(dataToSend)); // Save to local storage
+                console.log('Saved transportation data:', JSON.parse(localStorage.getItem('transportationData'))); // Verify save
                 sendDataToLambda(dataToSend); // Send data to Lambda if all inputs are valid
             } else {
                 alert('Please enter a value greater than 0.');
             }
         }
+
+
 
     </script>
 </body>
