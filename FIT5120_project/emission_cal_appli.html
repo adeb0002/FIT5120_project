@@ -150,7 +150,7 @@
             // Save selected appliances
             localStorage.setItem('applianceData', JSON.stringify(selectedAppliances));
 
-            // Save usage data
+            // Save usage data for each selected appliance
             selectedAppliances.forEach(appliance => {
                 const usageElement = document.getElementById(`${appliance}-hours`);
                 if (usageElement) {
@@ -163,8 +163,10 @@
                 }
             });
 
-            console.log('Appliance data and usage data saved to localStorage.');
+            console.log('Appliance data and usage data saved to localStorage:', selectedAppliances);
         }
+
+
 
 
         function clearLocalStorage() {
@@ -421,7 +423,7 @@
                     });
                     document.getElementById('usage-questions').innerHTML = '';
                     document.getElementById('appliance-usage-section').style.display = 'none';
-                    document.getElementById('next-button').style.display = 'block'; // Ensure 'Next' button is shown
+                    document.getElementById('next-button').style.display = 'block';
                 } else {
                     event.target.classList.toggle('selected-green');
                     noneButton.classList.remove('selected-green');
@@ -429,6 +431,7 @@
                 }
             }
         });
+
 
         async function sendDataToLambda(data) {
             showLoading();
@@ -485,6 +488,13 @@
                 }));
 
                 console.log('Data sent successfully:', responses);
+                
+                responses.forEach(response => {
+                    if (response.appliance_emissions !== undefined) {
+                        localStorage.setItem(`emissions_${response.appliance_type}`, JSON.stringify(response));
+                    }
+                });
+                
                 window.location.href = 'emission_result.html'; 
             } catch (error) {
                 console.error('Error sending data:', error);
