@@ -4,16 +4,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Recommendations</title>
-    <meta name="description" content="">
+    <title>Your Personalised Recommendations</title>
+    <meta name="description" content="Below are personalised recommendations based on your appliance usage and transport habits.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Fonts and CSS -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/recommendations.css"> <!-- Link to your custom CSS file -->
+    <link rel="stylesheet" href="css/recommendations.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
@@ -23,13 +23,16 @@
         <div class="container">
             <nav class="navbar navbar-inverse" role="navigation">
                 <div class="navbar-header">
-                    <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
+                    <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#main-nav">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <img href="index.html" class="navbar-brand scroll-top" src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
+                    <a href="index.html" class="navbar-brand scroll-top">
+                        <img src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
+                    </a>
                 </div>
                 <div id="main-nav" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
@@ -45,74 +48,20 @@
     </div>
 
     <!-- Recommendations Section -->
-    <div class="parallax-content" id="recommendations">
+    <div class="parallax-content">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>General Recommendations</h2>
+                    <h2>Your Personalised Recommendations</h2>
+                    <p>Below are personalised recommendations based on your appliance usage and transport habits.</p>
                     <div class="title-bar"></div>
-                    
-                    <!-- Description for the page -->
-                    <p class="page-description">
-                        This page provides tailored recommendations to help you reduce emissions and save on energy costs. 
-                        Use the buttons below to switch between emissions-reducing tips and cost-saving recommendations.
-                    </p>
 
-                    <!-- Buttons for toggling between recommendations -->
-                    <div class="button-toggle">
-                        <button id="emissions-btn" class="btn btn-primary active-toggle">Emissions Recommendations</button>
-                        <button id="cost-saving-btn" class="btn btn-secondary">Cost-Saving Recommendations</button>
+                    <!-- Dynamic Recommendations Section -->
+                    <div id="recommendations" class="recommendations-section">
+                        <!-- Dynamic recommendations will be inserted here by JS -->
                     </div>
 
-                    <!-- Emissions Recommendations -->
-                    <div class="recommendations-section" id="emissions-recommendations">
-                        <div class="box">
-                            <h3>Dishwasher Usage:</h3>
-                            <p>Run your dishwasher only when it's full and use the energy-saving mode. Reducing the frequency of washes and opting for cooler water settings can lower energy consumption, reducing your carbon footprint.</p>
-                            <i class="fas fa-shower icon-right"></i>
-                        </div>
-
-                        <div class="box">
-                            <h3>Air Conditioner Usage:</h3>
-                            <p>Set your air conditioner to a higher temperature in summer and lower in winter to reduce energy usage. This small adjustment can decrease greenhouse gas emissions.</p>
-                            <i class="fas fa-wind icon-right"></i>
-                        </div>
-
-                        <div class="box">
-                            <h3>Refrigerator Efficiency:</h3>
-                            <p>Keep your refrigerator between 3°C and 5°C, and defrost it regularly to improve energy efficiency. Doing so reduces emissions and prolongs the appliance's life.</p>
-                            <i class="fas fa-thermometer-half icon-right"></i>
-                        </div>
-
-                        <div class="box">
-                            <h3>Public Transport Usage:</h3>
-                            <p>Use public transport instead of driving when possible. This helps reduce your transportation emissions and promotes cleaner air quality in your city.</p>
-                            <i class="fas fa-bus icon-right"></i>
-                        </div>
-                    </div>
-
-                    <!-- Cost-Saving Recommendations (Hidden by default) -->
-                    <div class="recommendations-section" id="cost-saving-recommendations" style="display: none;">
-                        <div class="box">
-                            <h3>Maximise Solar Energy:</h3>
-                            <p>If you have solar panels, use high-energy appliances like washing machines and dishwashers during the day to reduce reliance on the grid and save money on electricity bills.</p>
-                            <i class="fas fa-sun icon-right"></i>
-                        </div>
-
-                        <div class="box">
-                            <h3>Cold Water for Laundry:</h3>
-                            <p>Washing clothes in cold water can reduce energy use by up to 80% per wash. This simple switch can lead to significant savings on your energy bills while still getting your clothes clean.</p>
-                            <i class="fas fa-water icon-right"></i>
-                        </div>
-
-                        <div class="box">
-                            <h3>Air-Dry Clothes:</h3>
-                            <p>Skipping the dryer and air-drying clothes can save energy and lower your electricity costs. This eco-friendly habit is especially effective during warmer months.</p>
-                            <i class="fas fa-plug icon-right"></i>
-                        </div>
-                    </div>
-
-                    <!-- Government Rebates (Visible all the time) -->
+                    <!-- Government Rebates Section (Always visible) -->
                     <div class="box">
                         <h3>Government Rebates:</h3>
                         <p>Take advantage of government rebates to offset costs. Explore the following programs:</p>
@@ -128,37 +77,67 @@
         </div>
     </div>
 
-    <!-- JavaScript to toggle between Emissions and Cost-Saving recommendations -->
+    <!-- JavaScript at the end of the body to ensure the DOM is fully loaded -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const emissionsBtn = document.getElementById('emissions-btn');
-            const costSavingBtn = document.getElementById('cost-saving-btn');
-            const emissionsSection = document.getElementById('emissions-recommendations');
-            const costSavingSection = document.getElementById('cost-saving-recommendations');
+        document.addEventListener('DOMContentLoaded', function () {
+            const solarOption = localStorage.getItem('solarPanel');
+            const dishwasherHours = localStorage.getItem('dishwasherHours');
+            const washingMachineHours = localStorage.getItem('washingMachineHours');
+            const clothesDryer = localStorage.getItem('clothesDryer');
+            const recommendationsContainer = document.getElementById('recommendations');
+            let recommendationsHTML = '';  // Start empty
 
-            // Show emissions recommendations by default
-            emissionsSection.style.display = 'block';
-            costSavingSection.style.display = 'none';
+            // Check if any key data is missing in localStorage
+            if (!solarOption && !dishwasherHours && !washingMachineHours && !clothesDryer) {
+                // If no data is found, prompt the user to complete the calculation first
+                recommendationsHTML += `
+                    <div class="centered-title">
+                        <p>Please complete the emission calculator first to receive personalised recommendations!</p>
+                    </div>`;
+            } else {
+                // Dynamic title and description
+                recommendationsHTML += `
+                    <div class="centered-title">
+                        <h2>Your Personalized Recommendations</h2>
+                        <p>Below are personalised recommendations based on your appliance usage and transport habits.</p>
+                    </div>`;
 
-            emissionsBtn.addEventListener('click', function() {
-                emissionsSection.style.display = 'block';
-                costSavingSection.style.display = 'none';
+                // Solar Option
+                if (solarOption === 'yes') {
+                    recommendationsHTML += `
+                        <div class="recommendation">
+                            <h3>Optimize Your Solar Energy Usage</h3>
+                            <p>It looks like you're using solar energy. To maximize its benefits, ensure your solar panels are clean and positioned to get optimal sunlight year-round.</p>
+                        </div>`;
+                } else if (solarOption === 'no') {
+                    recommendationsHTML += `
+                        <div class="recommendation">
+                            <h3>Consider Switching to Solar Energy</h3>
+                            <p>It looks like you haven't installed solar energy yet. Solar panels can significantly reduce your carbon footprint and energy bills by harnessing renewable energy from the sun.</p>
+                        </div>`;
+                }
 
-                // Highlight the selected button and grey out the other
-                emissionsBtn.classList.add('active-toggle');
-                costSavingBtn.classList.remove('active-toggle');
-            });
+                // Gas Water Heater
+                const gasWaterHeater = localStorage.getItem('gasWaterHeater');
+                if (gasWaterHeater === 'yes') {
+                    recommendationsHTML += `
+                        <div class="recommendation">
+                            <h3>Upgrade Your Water Heater</h3>
+                            <p>Since you have a gas water heater, switching to a more efficient gas model or even an electric heat pump could drastically reduce your emissions.</p>
+                        </div>`;
+                } else if (gasWaterHeater === 'no') {
+                    recommendationsHTML += `
+                        <div class="recommendation">
+                            <h3>Consider Upgrading to a Gas or Solar Water Heater</h3>
+                            <p>Switching to an energy-efficient gas water heater or an electric heat pump can significantly lower your energy usage and emissions.</p>
+                        </div>`;
+                }
+            }
 
-            costSavingBtn.addEventListener('click', function() {
-                emissionsSection.style.display = 'none';
-                costSavingSection.style.display = 'block';
-
-                // Highlight the selected button and grey out the other
-                costSavingBtn.classList.add('active-toggle');
-                emissionsBtn.classList.remove('active-toggle');
-            });
+            // Add the recommendations to the container
+            recommendationsContainer.innerHTML = recommendationsHTML;
         });
     </script>
-
 </body>
+
 </html>
