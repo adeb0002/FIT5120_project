@@ -124,6 +124,27 @@
             document.getElementById('loading-animation').style.display = 'none';
         }
 
+         // Save appliance data to localStorage
+        function saveApplianceDataToLocalStorage() {
+            // Save Dishwasher Hours
+            const dishwasherUsage = document.getElementById('dishwasher-usage');
+            if (dishwasherUsage) {
+                localStorage.setItem('dishwasherHours', parseFloat(dishwasherUsage.value));
+            }
+
+            // Save Washing Machine Hours
+            const washingMachineUsage = document.getElementById('clothes-washer-usage');
+            if (washingMachineUsage) {
+                localStorage.setItem('washingMachineHours', parseFloat(washingMachineUsage.value));
+            }
+
+            // Save Clothes Dryer Hours
+            const clothesDryerUsage = document.getElementById('clothes-dryer-usage');
+            if (clothesDryerUsage) {
+                localStorage.setItem('clothesDryer', parseFloat(clothesDryerUsage.value));
+            }
+        }
+
         // Use sessionStorage to manage the flow properly
         document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('next-button').style.display = 'none';

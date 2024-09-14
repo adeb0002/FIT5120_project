@@ -84,18 +84,23 @@
             const dishwasherHours = localStorage.getItem('dishwasherHours');
             const washingMachineHours = localStorage.getItem('washingMachineHours');
             const clothesDryer = localStorage.getItem('clothesDryer');
+            
+            // Transportation data from localStorage
+            const carDistance = localStorage.getItem('totalDistance_car');
+            const busDistance = localStorage.getItem('totalDistance_bus');
+            const trainDistance = localStorage.getItem('totalDistance_train');
+            const tramDistance = localStorage.getItem('totalDistance_tram');
+            
             const recommendationsContainer = document.getElementById('recommendations');
             let recommendationsHTML = '';  // Start empty
 
             // Check if any key data is missing in localStorage
             if (!solarOption && !dishwasherHours && !washingMachineHours && !clothesDryer) {
-                // If no data is found, prompt the user to complete the calculation first
                 recommendationsHTML += `
                     <div class="centered-title">
                         <p>Please complete the emission calculator first to receive personalised recommendations!</p>
                     </div>`;
             } else {
-                // Dynamic title and description
                 recommendationsHTML += `
                     <div class="centered-title">
                         <h2>Your Personalized Recommendations</h2>
@@ -130,6 +135,39 @@
                         <div class="recommendation">
                             <h3>Consider Upgrading to a Gas or Solar Water Heater</h3>
                             <p>Switching to an energy-efficient gas water heater or an electric heat pump can significantly lower your energy usage and emissions.</p>
+                        </div>`;
+                }
+                
+                // Transportation recommendations
+                if (carDistance && parseInt(carDistance) > 50) {
+                    recommendationsHTML += `
+                        <div class="recommendation">
+                            <h3>Reduce Car Usage</h3>
+                            <p>You travel ${carDistance} km by car per week. Consider carpooling, using public transport, or switching to an electric vehicle to reduce your carbon footprint.</p>
+                        </div>`;
+                }
+                
+                if (busDistance && parseInt(busDistance) > 50) {
+                    recommendationsHTML += `
+                        <div class="recommendation">
+                            <h3>Optimize Bus Travel</h3>
+                            <p>You currently travel ${busDistance} km by bus per week. Bus travel is more efficient than cars, but you can still reduce emissions by opting for bus routes that use low-emission or electric buses when available.</p>
+                        </div>`;
+                }
+                
+                if (trainDistance && parseInt(trainDistance) > 50) {
+                    recommendationsHTML += `
+                        <div class="recommendation">
+                            <h3>Train Travel Efficiency</h3>
+                            <p>You travel ${trainDistance} km per week by train. Train travel is one of the most efficient public transport modes. Keep using trains where possible to minimise emissions.</p>
+                        </div>`;
+                }
+                
+                if (tramDistance && parseInt(tramDistance) > 50) {
+                    recommendationsHTML += `
+                        <div class="recommendation">
+                            <h3>Efficient Tram Usage</h3>
+                            <p>Trams are electric and have a smaller carbon footprint than cars or buses. You travel ${tramDistance} km per week by tram. Keep using trams where possible, especially during off-peak hours to avoid congestion and energy emissions.</p>
                         </div>`;
                 }
             }

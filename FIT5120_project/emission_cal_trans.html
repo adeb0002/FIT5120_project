@@ -352,6 +352,7 @@
                 } else {
                     input.style.borderColor = '';
                     const type = input.id.replace('-usage', ''); // Get the transportation type from input id
+                    localStorage.setItem(`totalDistance_${type}`, parseFloat(input.value));
                     dataToSend.push({ type: 'transportation', transportation_type: type.replace(/-/g, '_'), kms: parseFloat(input.value) });
                 }
             });
