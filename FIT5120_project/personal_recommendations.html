@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Personalised Recommendations</title>
+    <meta name="description" content="Below are personalised recommendations based on your appliance usage and transport habits.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Fonts and CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/recommendations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Header Section with Navigation Bar -->
+    <div class="header">
+        <div class="container">
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#main-nav">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="index.html" class="navbar-brand scroll-top">
+                        <img src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
+                    </a>
+                </div>
+                <div id="main-nav" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="index.html" class="scroll-top">Home</a></li>
+                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a></li>
+                        <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
+                        <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
+                        <li><a href="recommendations.html">Recommendations</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Recommendations Section -->
+    <div class="parallax-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Move title and description into centered div with correct class -->
+                    <div class="centered-title">
+                        <h2>Personalised Recommendations</h2>
+                        <p>Below are personalised recommendations based on your appliance usage and transport habits.</p>
+                    </div>
+                    
+                    <div class="title-bar"></div>
+
+                    <!-- Dynamic Recommendations Section -->
+                    <div id="recommendations" class="recommendations-section">
+                        <!-- Dynamic recommendations will be inserted here by JS -->
+                    </div>
+
+                    <!-- Government Rebates Section (Always visible) -->
+                    <div class="box rebate-box">
+                        <h3>Government Rebates</h3>
+                        <p>Take advantage of government rebates to offset costs. Explore the following programs:</p>
+                        <div class="rebate-links">
+                            <a href="https://www.energy.vic.gov.au/victorian-energy-upgrades/homes" target="_blank" class="rebate-link">
+                                Victorian Energy Upgrades
+                            </a>
+                            <a href="https://www.solar.vic.gov.au/solar-panel-rebate" target="_blank" class="rebate-link">
+                                Solar Panel Rebate
+                            </a>
+                            <a href="https://www.energy.vic.gov.au/households/help-paying-your-energy-bills/energy-bill-relief-fund#:~:text=Eligible%20Victorian%20households%20will%20receive%20rebates%20of%20up%20to%20%24300,four%20quarterly%20instalments%20of%20%2475," target="_blank" class="rebate-link">
+                                Energy Bill Relief Fund
+                            </a>
+                        </div>
+                        <i class="fas fa-dollar-sign icon-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript at the end of the body to ensure the DOM is fully loaded -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const solarOption = localStorage.getItem('solarPanel');
+            const dishwasherHours = localStorage.getItem('dishwasherHours');
+            const washingMachineHours = localStorage.getItem('washingMachineHours');
+            const clothesDryer = localStorage.getItem('clothesDryer');
+            
+            // Transportation data from localStorage
+            const carDistance = localStorage.getItem('totalDistance_car');
+            const busDistance = localStorage.getItem('totalDistance_bus');
+            const trainDistance = localStorage.getItem('totalDistance_train');
+            const tramDistance = localStorage.getItem('totalDistance_tram');
+            
+            const recommendationsContainer = document.getElementById('recommendations');
+            let recommendationsHTML = '';  // Start empty
+
+            // Function to create a recommendation box with an icon
+            function createRecommendation(title, description, iconClass) {
+                return `
+                    <div class="box">
+                        <h3>${title}</h3>
+                        <p>${description}</p>
+                        <i class="${iconClass} icon-right"></i>
+                    </div>
+                `;
+            }
+
+            // Check if any key data is missing in localStorage
+            if (!solarOption && !dishwasherHours && !washingMachineHours && !clothesDryer) {
+                recommendationsHTML += `
+                    <div class="instruction-box">
+                        <h2>Personalised Recommendations Are Waiting For You!</h2>
+                        <p>To receive personalised recommendations, <strong>please complete the Emission Calculator first.</strong></p>
+                        <a href="emission_cal_personal.html" class="btn-primary-instruction">Go to the Emission Calculator Now</a>
+                    </div>`;
+            } else {
+                recommendationsHTML += `
+                    <div class="centered-title">
+                        <h2>Personalised Recommendations</h2>
+                        <p>Below are personalised recommendations based on your appliance usage and transport habits.</p>
+                    </div>`;
+                
+
+                // Solar Option
+                if (solarOption === 'yes') {
+                    recommendationsHTML += createRecommendation(
+                        "Optimize Your Solar Energy Usage",
+                        "It looks like you're using solar energy. To maximize its benefits, ensure your solar panels are clean and positioned to get optimal sunlight year-round.",
+                        "fas fa-sun"
+                    );
+                } else if (solarOption === 'no') {
+                    recommendationsHTML += createRecommendation(
+                        "Consider Switching to Solar Energy",
+                        "It looks like you haven't installed solar energy yet. Solar panels can significantly reduce your carbon footprint and energy bills by harnessing renewable energy from the sun.",
+                        "fas fa-solar-panel"
+                    );
+                }
+
+                // Gas Water Heater
+                const gasWaterHeater = localStorage.getItem('gasWaterHeater');
+                if (gasWaterHeater === 'yes') {
+                    recommendationsHTML += createRecommendation(
+                        "Upgrade Your Water Heater",
+                        "Since you have a gas water heater, switching to a more efficient gas model or even an electric heat pump could drastically reduce your emissions.",
+                        "fas fa-water"
+                    );
+                } else if (gasWaterHeater === 'no') {
+                    recommendationsHTML += createRecommendation(
+                        "Consider Upgrading to a Gas or Solar Water Heater",
+                        "Switching to an energy-efficient gas water heater or an electric heat pump can significantly lower your energy usage and emissions.",
+                        "fas fa-thermometer-half"
+                    );
+                }
+                
+                // Transportation recommendations
+                if (carDistance && parseInt(carDistance) > 50) {
+                    recommendationsHTML += createRecommendation(
+                        "Reduce Car Usage",
+                        `You travel ${carDistance} km by car per week. Consider carpooling, using public transport, or switching to an electric vehicle to reduce your carbon footprint.`,
+                        "fas fa-car"
+                    );
+                }
+                
+                if (busDistance && parseInt(busDistance) > 50) {
+                    recommendationsHTML += createRecommendation(
+                        "Optimize Bus Travel",
+                        `You currently travel ${busDistance} km by bus per week. Bus travel is more efficient than cars, but you can still reduce emissions by opting for bus routes that use low-emission or electric buses when available.`,
+                        "fas fa-bus"
+                    );
+                }
+                
+                if (trainDistance && parseInt(trainDistance) > 50) {
+                    recommendationsHTML += createRecommendation(
+                        "Train Travel Efficiency",
+                        `You travel ${trainDistance} km per week by train. Train travel is one of the most efficient public transport modes. Keep using trains where possible to minimise emissions.`,
+                        "fas fa-train"
+                    );
+                }
+                
+                if (tramDistance && parseInt(tramDistance) > 50) {
+                    recommendationsHTML += createRecommendation(
+                        "Efficient Tram Usage",
+                        `Trams are electric and have a smaller carbon footprint than cars or buses. You travel ${tramDistance} km per week by tram. Keep using trams where possible, especially during off-peak hours to avoid congestion and energy emissions.`,
+                        "fas fa-tram"
+                    );
+                }
+            }
+
+            // Add the recommendations to the container
+            recommendationsContainer.innerHTML = recommendationsHTML;
+        });
+    </script>
+</body>
+
+</html>
