@@ -111,18 +111,18 @@
             var householdSizeSlider = document.querySelector('#household-size');
             var sliderValue = document.querySelector('#slider-value');
 
-            // Check if household size exists in localStorage and set it on page load
-            const savedHouseholdSize = localStorage.getItem('householdSize');
+            // Check if household size exists in sessionStorage and set it on page load
+            const savedHouseholdSize = sessionStorage.getItem('householdSize');
             if (savedHouseholdSize) {
                 householdSizeSlider.value = savedHouseholdSize;
                 sliderValue.textContent = savedHouseholdSize;
-                console.log('Saved household size from localStorage:', savedHouseholdSize);
+                console.log('Saved household size from sessionStorage:', savedHouseholdSize);
             }
 
-            // Update slider value display and save to localStorage
+            // Update slider value display and save to sessionStorage
             householdSizeSlider.addEventListener('input', function () {
                 sliderValue.textContent = householdSizeSlider.value;
-                localStorage.setItem('householdSize', householdSizeSlider.value); // Save to localStorage
+                sessionStorage.setItem('householdSize', householdSizeSlider.value); // Save to sessionStorage
 
                 if (householdSizeSlider.value) {
                     nextButton.style.display = 'inline-block'; // Show the button
