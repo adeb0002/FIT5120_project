@@ -214,6 +214,35 @@
             <div id="appliance-chart"></div>
         </div>
 
+        <div id="tv-screen-size-chart" class="section chart">
+            <div class="chart-title">TV Screen Size Energy Consumption</div>
+        </div>
+        
+        <div id="tv-screen-tech-chart" class="section chart">
+            <div class="chart-title">TV Screen Technology Energy Consumption</div>
+        </div>
+        
+        <div id="clothes-washer-load-size-chart" class="section chart">
+            <div class="chart-title">Clothes Washer Energy Usage by Load Size</div>
+        </div>
+        
+        <div id="clothes-washer-type-chart" class="section chart">
+            <div class="chart-title">Clothes Washer Type Energy Usage</div>
+        </div>
+        
+        <div id="clothes-dryer-chart" class="section chart">
+            <div class="chart-title">Clothes Dryer Energy Consumption</div>
+        </div>
+        
+        <div id="air-conditioner-chart" class="section chart">
+            <div class="chart-title">Air Conditioner Energy Usage</div>
+        </div>
+        
+        <div id="refrigerator-chart" class="section chart">
+            <div class="chart-title">Refrigerator Energy Usage by Volume</div>
+        </div>
+        
+
         <div class="section chart">
             <div class="chart-title">Emissions by Transport Mode (kg CO2)</div>
             <div id="transport-chart"></div>
@@ -464,8 +493,151 @@
                 .attr('text-anchor', 'middle')
                 .text(d => `${d[valueKey].toFixed(2)} kg`);
         }
+        
+        
+        // Data for charts
+        const tvScreenSizeData = [
+            { screenSize: 'less than 40', avgConsumption: 20 },
+            { screenSize: '40-49', avgConsumption: 45 },
+            { screenSize: '50-59', avgConsumption: 67 },
+            { screenSize: '60-69', avgConsumption: 53 },
+            { screenSize: '70-79', avgConsumption: 23 },
+            { screenSize: '80-89', avgConsumption: 14 },
+            { screenSize: '90-99', avgConsumption: 5 },
+            { screenSize: 'greater than 100', avgConsumption: 2 }
+        ];
 
+        const tvScreenTechData = [
+            { screenTech: 'OLED', avgConsumption: 10 },
+            { screenTech: 'LED', avgConsumption: 50 },
+            { screenTech: 'LCD', avgConsumption: 30 },
+            { screenTech: 'Plasma', avgConsumption: 90 }
+        ];
 
+        const clothesWasherLoadSizeData = [
+            { loadSize: 0, energyUsage: 2 },
+            { loadSize: 1, energyUsage: 6 },
+            { loadSize: 2, energyUsage: 14 },
+            { loadSize: 3, energyUsage: 24 },
+            { loadSize: 4, energyUsage: 30 },
+            { loadSize: 5, energyUsage: 36 },
+            { loadSize: 6, energyUsage: 38 },
+            { loadSize: 7, energyUsage: 40 }
+        ];
+
+        const clothesWasherTypeData = [
+            { loadType: 'Front Load', energyUsage: 10 },
+            { loadType: 'Top Load', energyUsage: 80 }
+        ];
+
+        const clothesDryerData = [
+            { dryerType: 'Vented', energyUsage: 20 },
+            { dryerType: 'Condensed', energyUsage: 50 }
+        ];
+
+        const airConditionerData = [
+            { type: 'Ducted', energyUsage: 20 },
+            { type: 'Non Ducted', energyUsage: 90 }
+        ];
+
+        const refrigeratorData = [
+            { volume: 'less than 99', avgUsage: 321 },
+            { volume: '100-199L', avgUsage: 590 },
+            { volume: '200-299L', avgUsage: 400 },
+            { volume: '300-399L', avgUsage: 352 },
+            { volume: '400-499L', avgUsage: 512 },
+            { volume: '500-599L', avgUsage: 222 },
+            { volume: '600-699L', avgUsage: 124 },
+            { volume: 'greater than 700L', avgUsage: 515 }
+        ];
+
+        // Function to create a bar chart
+        function createBarChart(data, selector, valueKey, labelKey) {
+            const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+            const width = 400 - margin.left - margin.right;
+            const height = 300 - margin.top - margin.bottom;
+
+            const svg = d3.select(selector)
+                .html('')
+                .append('svg')
+                .attr('width', width + margin.left + margin.right)
+                .attr('height', height + margin.top + margin.bottom)
+                .append('g')
+                .attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+            const x = d3.scaleBand()
+                .domain(data.map(d => d[labelKey]))
+                .range([0, width])
+                .padding(0.1);
+
+            const y = d3.scaleLinear()
+                .domain([0, d3.max(data, d => d[valueKey])])
+                .nice()
+                .range([height, 0]);
+
+            svg.append('g')
+                .attr('transform', `translate(0, ${height})`)
+                .call(d3.axisBottom(x))
+                .selectAll('text')
+                .attr('transform', 'rotate(-45)')
+                .style('text-anchor', 'end');
+
+            svg.append('g')
+                .call(d3.axisLeft(y));
+
+            svg.selectAll('.bar')
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr('class', 'bar')
+                .attr('x', d => x(d[labelKey]))
+                .attr('y', d => y(d[valueKey]))
+                .attr('width', x.bandwidth())
+                .attr('height', d => height - y(d[valueKey]))
+                .attr('fill', '#69b3a2');
+        }
+
+        // Function to create a line chart
+        function createLineChart(data, selector, valueKey, labelKey) {
+            const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+            const width = 400 - margin.left - margin.right;
+            const height = 300 - margin.top - margin.bottom;
+
+            const svg = d3.select(selector)
+                .html('')
+                .append('svg')
+                .attr('width', width + margin.left + margin.right)
+                .attr('height', height + margin.top + margin.bottom)
+                .append('g')
+                .attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+            const x = d3.scaleLinear()
+                .domain(d3.extent(data, d => d[labelKey]))
+                .range([0, width]);
+
+            const y = d3.scaleLinear()
+                .domain([0, d3.max(data, d => d[valueKey])])
+                .nice()
+                .range([height, 0]);
+
+            const line = d3.line()
+                .x(d => x(d[labelKey]))
+                .y(d => y(d[valueKey]));
+
+            svg.append('g')
+                .attr('transform', `translate(0, ${height})`)
+                .call(d3.axisBottom(x));
+
+            svg.append('g')
+                .call(d3.axisLeft(y));
+
+            svg.append('path')
+                .datum(data)
+                .attr('fill', 'none')
+                .attr('stroke', '#69b3a2')
+                .attr('stroke-width', 1.5)
+                .attr('d', line);
+        }
 
 
         // Function to retrieve emissions data from localStorage dynamically
@@ -705,6 +877,13 @@
             window.onload = function () {
                 // Initialize charts on page load
                 initCharts();
+                createBarChart(tvScreenSizeData, '#tv-screen-size-chart', 'avgConsumption', 'screenSize');
+                createBarChart(tvScreenTechData, '#tv-screen-tech-chart', 'avgConsumption', 'screenTech');
+                createLineChart(clothesWasherLoadSizeData, '#clothes-washer-load-size-chart', 'energyUsage', 'loadSize');
+                createBarChart(clothesWasherTypeData, '#clothes-washer-type-chart', 'energyUsage', 'loadType');
+                createBarChart(clothesDryerData, '#clothes-dryer-chart', 'energyUsage', 'dryerType');
+                createBarChart(airConditionerData, '#air-conditioner-chart', 'energyUsage', 'type');
+                createBarChart(refrigeratorData, '#refrigerator-chart', 'avgUsage', 'volume');
 
                 // Retrieve total emissions from localStorage
                 const totalEmissions = parseFloat(localStorage.getItem('totalEmissions'));
