@@ -834,7 +834,7 @@ input[type="radio"]:checked + .radio-label {
 #tv-screen-size, #refrigerator-volume {
     width: 500px; /* Default width for larger screens */
     padding: 10px; /* Add padding for better UX */
-    font-size: 16px; /* Set a default font size */
+    font-size: 12px; /* Set a default font size */
     border-radius: 4px; /* Rounded corners for aesthetics */
     border: 1px solid #ccc; /* Border styling */
     box-sizing: border-box; /* Ensure padding is included in width */
@@ -844,7 +844,7 @@ input[type="radio"]:checked + .radio-label {
 @media (max-width: 768px) {
     #tv-screen-size, #refrigerator-volume {
         width: 100%; /* Shorter width for medium screens */
-        font-size: 14px; /* Slightly smaller font size */
+        font-size: 12px; /* Slightly smaller font size */
     }
 }
 
