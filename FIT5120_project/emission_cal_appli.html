@@ -232,7 +232,12 @@
             // Define the HTML for each appliance's questions with headers and corresponding images
             const applianceQuestions = {
                 'television': `
-                    <h3><img src="img/television.png" alt="Television Icon" style="height: 30px; margin-right: 10px;">Television</h3>
+                <h3 class="icon-text">
+    <span class="icon">
+        <img src="img/television.png" alt="Television Icon">
+    </span>
+    <span class="text">Television</span>
+</h3>
                     <div class="form-group">
                         <label for="tv-screen-size">What screen size is your television?</label>
                         <select id="tv-screen-size" class="form-control" style="width: 500px;">
@@ -272,14 +277,24 @@
                     </div>
                 `,
                 'dishwasher': `
-                    <h3><img src="img/dishwasher.png" alt="Dishwasher Icon" style="height: 30px; margin-right: 10px;">Dishwasher</h3>
+                <h3 class="icon-text">
+                    <span class="icon">
+                        <img src="img/dishwasher.png" alt="Dishwasher Icon">
+                    </span>
+                        <span class="text">Dishwasher</span>
+                </h3>
                     <div class="form-group">
                         <label for="dishwasher-usage">How many times do you use the dishwasher a week?</label>
                         <input type="number" class="form-control" id="dishwasher-usage" name="dishwasher-usage" min="1" value="1" required>
                     </div>
                 `,
                 'clothes_washer': `
-                    <h3><img src="img/clotheswasher.png" alt="Clothes Washer Icon" style="height: 30px; margin-right: 10px;">Clothes Washer</h3>
+                <h3 class="icon-text">
+                    <span class="icon">
+                        <img src="img/clotheswasher.png" alt="Clotheswasher Icon">
+                    </span>
+                        <span class="text">Clothes Washer</span>
+                </h3>
                     <div class="form-group radio-question">
                         <label for="clothes-washer-loading">What type of loading is your clothes washer?</label>
                         <div class="radio-option">
@@ -306,7 +321,12 @@
                     </div>
                 `,
                 'clothes_dryer': `
-                    <h3><img src="img/clothesdryer.png" alt="Clothes Dryer Icon" style="height: 30px; margin-right: 10px;">Clothes Dryer</h3>
+                <h3 class="icon-text">
+                    <span class="icon">
+                        <img src="img/clothesdryer.png" alt="Clothesdryer Icon">
+                    </span>
+                    <span class="text">Clothes Dryer</span>
+                </h3>
                     <div class="form-group radio-question">
                         <label for="clothes-dryer-type">What type of clothes dryer do you use?</label>
                         <div class="radio-option">
@@ -324,7 +344,12 @@
                     </div>
                 `,
                 'air_conditioner': `
-                    <h3><img src="img/air_conditioner.png" alt="Air Conditioner Icon" style="height: 30px; margin-right: 10px;">Air Conditioner</h3>
+                <h3 class="icon-text">
+                    <span class="icon">
+                        <img src="img/air_conditioner.png">
+                    </span>
+                    <span class="text">Air Conditioner</span>
+                </h3>
                     <div class="form-group radio-question">
                         <label for="air-conditioner-type">Is your air conditioner ducted or non-ducted?</label>
                         <div class="radio-option">
@@ -346,7 +371,12 @@
                     </div>
                 `,
                 'refrigerator': `
-                    <h3><img src="img/refrigerator.png" alt="Refrigerator Icon" style="height: 30px; margin-right: 10px;">Refrigerator</h3>
+                <h3 class="icon-text">
+                    <span class="icon">
+                        <img src="img/refrigerator.png" alt="Refrigerator Icon">
+                    </span>
+                    <span class="text">Refrigerator</span>
+                </h3>
                     <div class="form-group">
                         <label for="refrigerator-volume">What volume is your refrigerator?</label>
                         <select class="form-control" id="refrigerator-volume" name="refrigerator-volume" style="width: 500px;" required>
@@ -488,14 +518,14 @@
                 }));
 
                 console.log('Data sent successfully:', responses);
-                
+
                 responses.forEach(response => {
                     if (response.appliance_emissions !== undefined) {
                         localStorage.setItem(`emissions_${response.appliance_type}`, JSON.stringify(response));
                     }
                 });
-                
-                window.location.href = 'emission_result.html'; 
+
+                window.location.href = 'emission_result.html';
             } catch (error) {
                 console.error('Error sending data:', error);
                 alert('There was an error submitting your data. Please try again.');
@@ -541,8 +571,8 @@
                                     hours: hours
                                 });
                             }
-                        } 
-                        
+                        }
+
                         // Handle refrigerator inputs
                         else if (dropdown.id === 'refrigerator-volume') {
                             // For refrigerators, no hours are needed, just capture the volume
