@@ -116,6 +116,10 @@
         document.addEventListener('DOMContentLoaded', function () {
             console.log('DOM fully loaded and parsed');
 
+            if (window.location.href.includes('emission_cal_personal.html')) {
+                localStorage.clear();  // This clears all localStorage, adjust as needed.
+            }
+
             // Get references to form elements
             var solarPanelsButtons = document.querySelectorAll('.button-group .btn');
             var gridDependenceSection = document.querySelector('#grid-dependence-section');

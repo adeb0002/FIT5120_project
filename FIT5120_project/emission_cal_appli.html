@@ -126,22 +126,6 @@
 
         // Use sessionStorage to manage the flow properly
         document.addEventListener('DOMContentLoaded', function () {
-
-            // Load saved data from localStorage on page load
-            loadSavedData();
-
-            // Event listener to handle changes and save to localStorage
-            document.getElementById('emission-form').addEventListener('change', function (event) {
-                saveInputToLocalStorage(event.target);
-            });
-
-            // Event listener for buttons in the appliance selection section
-            document.getElementById('appliance-selection').addEventListener('click', function (event) {
-                if (event.target.classList.contains('btn')) {
-                    toggleButtonSelection(event.target);
-                    saveSelectedAppliances();
-                }
-            });
             document.getElementById('next-button').style.display = 'none';
 
             document.getElementById('next-button').addEventListener('click', function (event) {
@@ -161,22 +145,6 @@
         });
 
         function saveDataToLocalStorage() {
-            const inputType = inputElement.type;
-
-            if (inputType === 'radio' || inputType === 'checkbox') {
-                // Save radio or checkbox values
-                const name = inputElement.name;
-                const value = inputElement.value;
-                const isChecked = inputElement.checked;
-                localStorage.setItem(name, JSON.stringify({ value, isChecked }));
-            } else if (inputType === 'select-one' || inputType === 'text' || inputType === 'number') {
-                // Save select, text, or number values
-                const id = inputElement.id;
-                const value = inputElement.value;
-                localStorage.setItem(id, value);
-            }
-
-
             const selectedAppliances = Array.from(document.querySelectorAll('#appliance-selection .btn.selected-green')).map(button => button.getAttribute('data-value'));
 
             // Save selected appliances
@@ -705,75 +673,6 @@
                 const data = { appliances: uniqueApplianceData };
                 sendDataToLambda(data);
             }
-        }
-
-        // Load saved data from localStorage on page load
-        function loadSavedData() {
-            // Load appliance selection
-            const selectedAppliances = JSON.parse(localStorage.getItem('applianceData')) || [];
-            selectedAppliances.forEach(appliance => {
-                document.querySelector(`.btn[data-value="${appliance}"]`).classList.add('selected-green');
-            });
-            updateQuestions(selectedAppliances); // Update questions based on loaded selections
-
-            // Load other form inputs
-            const inputs = document.querySelectorAll('#emission-form input, #emission-form select');
-            inputs.forEach(input => {
-                const value = localStorage.getItem(input.id || input.name);
-                if (value !== null) {
-                    if (input.type === 'radio' || input.type === 'checkbox') {
-                        const saved = JSON.parse(value);
-                        if (saved.isChecked) input.checked = true;
-                    } else {
-                        input.value = value;
-                    }
-                }
-            });
-        }
-
-        // Save selected appliances to localStorage
-        function saveSelectedAppliances() {
-            const selectedAppliances = Array.from(document.querySelectorAll('#appliance-selection .btn.selected-green'))
-                .map(button => button.getAttribute('data-value'));
-            localStorage.setItem('applianceData', JSON.stringify(selectedAppliances));
-        }
-
-        // Toggle button selection for appliances
-        function toggleButtonSelection(button) {
-            button.classList.toggle('selected-green');
-            const noneButton = document.getElementById('none-checkbox');
-            if (button.id === 'none-checkbox') {
-                noneButton.classList.add('selected-green');
-                document.querySelectorAll('#appliance-selection .btn').forEach(btn => {
-                    if (btn.id !== 'none-checkbox') btn.classList.remove('selected-green');
-                });
-            } else {
-                noneButton.classList.remove('selected-green');
-            }
-        }
-
-        // Save all form data to localStorage before navigating
-        function saveDataToLocalStorage() {
-            const selectedAppliances = Array.from(document.querySelectorAll('#appliance-selection .btn.selected-green'))
-                .map(button => button.getAttribute('data-value'));
-
-            // Save appliance data
-            localStorage.setItem('applianceData', JSON.stringify(selectedAppliances));
-
-            // Save appliance-specific usage data
-            selectedAppliances.forEach(appliance => {
-                const hoursElement = document.getElementById(`${appliance}-hours`);
-                if (hoursElement) {
-                    localStorage.setItem(`${appliance}-hours`, hoursElement.value);
-                }
-
-                const brandElement = document.getElementById(`${appliance}-brand`);
-                if (brandElement) {
-                    localStorage.setItem(`${appliance}-brand`, brandElement.value);
-                }
-            });
-
-            console.log('Appliance data and usage data saved to localStorage:', selectedAppliances);
         }
 
 

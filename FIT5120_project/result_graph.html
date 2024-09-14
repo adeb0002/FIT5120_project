@@ -217,31 +217,31 @@
         <div id="tv-screen-size-chart" class="section chart">
             <div class="chart-title">TV Screen Size Energy Consumption</div>
         </div>
-        
+
         <div id="tv-screen-tech-chart" class="section chart">
             <div class="chart-title">TV Screen Technology Energy Consumption</div>
         </div>
-        
+
         <div id="clothes-washer-load-size-chart" class="section chart">
             <div class="chart-title">Clothes Washer Energy Usage by Load Size</div>
         </div>
-        
+
         <div id="clothes-washer-type-chart" class="section chart">
             <div class="chart-title">Clothes Washer Type Energy Usage</div>
         </div>
-        
+
         <div id="clothes-dryer-chart" class="section chart">
             <div class="chart-title">Clothes Dryer Energy Consumption</div>
         </div>
-        
+
         <div id="air-conditioner-chart" class="section chart">
             <div class="chart-title">Air Conditioner Energy Usage</div>
         </div>
-        
+
         <div id="refrigerator-chart" class="section chart">
             <div class="chart-title">Refrigerator Energy Usage by Volume</div>
         </div>
-        
+
 
         <div class="section chart">
             <div class="chart-title">Emissions by Transport Mode (kg CO2)</div>
@@ -526,8 +526,8 @@
         ];
 
         const clothesWasherTypeData = [
-            { loadType: 'Front Load', energyUsage: 10 },
-            { loadType: 'Top Load', energyUsage: 80 }
+            { loadType: 'Front', energyUsage: 10 },
+            { loadType: 'Top', energyUsage: 80 }
         ];
 
         const clothesDryerData = [
@@ -551,8 +551,24 @@
             { volume: 'greater than 700L', avgUsage: 515 }
         ];
 
-        // Function to create a bar chart
-        function createBarChart(data, selector, valueKey, labelKey) {
+        // Retrieve data from local storage with default values to avoid undefined/null
+        const clothesWasherLoadSize = parseFloat(localStorage.getItem('clothesWasherLoadSize')) || 0; 
+        const clothesWasherLoadingType = localStorage.getItem('clothesWasherLoadingType') || '';
+
+        // Create the user input object, ensuring that it matches the data format in charts
+        const userInputLoadSize = {
+            loadSize: clothesWasherLoadSize,
+            energyUsage: clothesWasherLoadSizeData.find(d => d.loadSize === clothesWasherLoadSize)?.energyUsage || 0
+        };
+
+        // Log to ensure correct retrieval and format
+        console.log('User input load size:', userInputLoadSize);
+        console.log('User input loading type:', clothesWasherLoadingType);
+        console.log('Retrieved clothesWasherLoadSize:', clothesWasherLoadSize);
+        console.log('Retrieved clothesWasherLoadingType:', clothesWasherLoadingType);
+
+
+        function createBarChart(data, selector, valueKey, labelKey, userInput) {
             const margin = { top: 20, right: 20, bottom: 50, left: 50 };
             const width = 400 - margin.left - margin.right;
             const height = 300 - margin.top - margin.bottom;
@@ -585,6 +601,10 @@
             svg.append('g')
                 .call(d3.axisLeft(y));
 
+            console.log('Data for bars:', data);
+            console.log('User input for highlighting:', userInput);
+
+            // Ensure matching is consistent and values are formatted correctly
             svg.selectAll('.bar')
                 .data(data)
                 .enter()
@@ -594,11 +614,15 @@
                 .attr('y', d => y(d[valueKey]))
                 .attr('width', x.bandwidth())
                 .attr('height', d => height - y(d[valueKey]))
-                .attr('fill', '#69b3a2');
+                .attr('fill', d => {
+                    const isMatch = String(d[labelKey]).toLowerCase() === String(userInput).toLowerCase();
+                    console.log(`Comparing ${d[labelKey]} with ${userInput}: ${isMatch ? 'Match' : 'No Match'}`);
+                    return isMatch ? 'red' : '#69b3a2'; // Highlight bar if matches user input
+                });
         }
 
-        // Function to create a line chart
-        function createLineChart(data, selector, valueKey, labelKey) {
+
+        function createLineChart(data, selector, valueKey, labelKey, userInput) {
             const margin = { top: 20, right: 20, bottom: 50, left: 50 };
             const width = 400 - margin.left - margin.right;
             const height = 300 - margin.top - margin.bottom;
@@ -637,7 +661,21 @@
                 .attr('stroke', '#69b3a2')
                 .attr('stroke-width', 1.5)
                 .attr('d', line);
+
+            // Highlight the user input point on the line
+            svg.selectAll('.highlight')
+                .data([userInput])
+                .enter()
+                .append('circle')
+                .attr('cx', d => x(d[labelKey]))
+                .attr('cy', d => y(d[valueKey]))
+                .attr('r', 6)
+                .attr('fill', 'red')
+                .attr('stroke', 'black')
+                .attr('stroke-width', 1.5);
         }
+
+
 
 
         // Function to retrieve emissions data from localStorage dynamically
@@ -751,26 +789,6 @@
             createBarChart(transportData, '#transport-chart', 'emissions', 'type'); // Use bar chart for transport data
         }
 
-        // Initialize the page on window load
-        window.onload = function () {
-            // Initialize charts on page load
-            initCharts();
-            
-            // Retrieve total emissions from localStorage
-            const totalEmissions = parseFloat(localStorage.getItem('totalEmissions'));
-
-            // Log to verify what is stored in localStorage
-            console.log('Attempting to load totalEmissions from localStorage:', totalEmissions);
-
-            if (!isNaN(totalEmissions) && totalEmissions !== 0) {
-                console.log('Loaded totalEmissions:', totalEmissions); 
-                updateEmissionComparison(totalEmissions);
-                displayEquivalences(totalEmissions); // Ensure this function is called
-            } else {
-                console.error('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
-                alert('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
-            }
-        };
 
 
             // Function to create a pie chart with legend
@@ -873,72 +891,35 @@
                 createBarChart(transportData, '#transport-chart', 'emissions', 'type'); // Make sure these keys align
             }
 
-            function getDynamicChartData() {
-                // Fetch dynamic data from localStorage for each chart
-                const tvScreenSizeData = JSON.parse(localStorage.getItem('tvScreenSizeData') || '[]');
-                const tvScreenTechData = JSON.parse(localStorage.getItem('tvScreenTechData') || '[]');
-                const clothesWasherLoadSizeData = JSON.parse(localStorage.getItem('clothesWasherLoadSizeData') || '[]');
-                const clothesWasherTypeData = JSON.parse(localStorage.getItem('clothesWasherTypeData') || '[]');
-                const clothesDryerData = JSON.parse(localStorage.getItem('clothesDryerData') || '[]');
-                const airConditionerData = JSON.parse(localStorage.getItem('airConditionerData') || '[]');
-                const refrigeratorData = JSON.parse(localStorage.getItem('refrigeratorData') || '[]');
-
-                return {
-                    tvScreenSizeData,
-                    tvScreenTechData,
-                    clothesWasherLoadSizeData,
-                    clothesWasherTypeData,
-                    clothesDryerData,
-                    airConditionerData,
-                    refrigeratorData
-                };
-            }
-
-            // Function to initialize charts using dynamic data
-            function initDynamicCharts() {
-                const {
-                    tvScreenSizeData,
-                    tvScreenTechData,
-                    clothesWasherLoadSizeData,
-                    clothesWasherTypeData,
-                    clothesDryerData,
-                    airConditionerData,
-                    refrigeratorData
-                } = getDynamicChartData();
-
-                // Initialize each chart with dynamically fetched data
-                createBarChart(tvScreenSizeData, '#tv-screen-size-chart', 'avgConsumption', 'screenSize');
-                createBarChart(tvScreenTechData, '#tv-screen-tech-chart', 'avgConsumption', 'screenTech');
-                createLineChart(clothesWasherLoadSizeData, '#clothes-washer-load-size-chart', 'energyUsage', 'loadSize');
-                createBarChart(clothesWasherTypeData, '#clothes-washer-type-chart', 'energyUsage', 'loadType');
-                createBarChart(clothesDryerData, '#clothes-dryer-chart', 'energyUsage', 'dryerType');
-                createBarChart(airConditionerData, '#air-conditioner-chart', 'energyUsage', 'type');
-                createBarChart(refrigeratorData, '#refrigerator-chart', 'avgUsage', 'volume');
-            }
-
             // Initialize the page on window load
             window.onload = function () {
-                // Initialize charts on page load
                 initCharts();
 
-                // Initialize dynamic charts on page load
-                initDynamicCharts();
+                // Pass the correct user input for highlighting
+                createLineChart(clothesWasherLoadSizeData, '#clothes-washer-load-size-chart', 'energyUsage', 'loadSize', userInputLoadSize.loadSize);
+                createBarChart(clothesWasherTypeData, '#clothes-washer-type-chart', 'energyUsage', 'loadType', clothesWasherLoadingType);
 
-                // Retrieve total emissions from localStorage
+                // For other charts, ensure highlighting input is set correctly
+                createBarChart(tvScreenSizeData, '#tv-screen-size-chart', 'avgConsumption', 'screenSize', null);
+                createBarChart(tvScreenTechData, '#tv-screen-tech-chart', 'avgConsumption', 'screenTech', null);
+                createBarChart(clothesDryerData, '#clothes-dryer-chart', 'energyUsage', 'dryerType', null);
+                createBarChart(airConditionerData, '#air-conditioner-chart', 'energyUsage', 'type', null);
+                createBarChart(refrigeratorData, '#refrigerator-chart', 'avgUsage', 'volume', null);
+
                 const totalEmissions = parseFloat(localStorage.getItem('totalEmissions'));
-
-                // Log to verify what is stored in localStorage
                 console.log('Attempting to load totalEmissions from localStorage:', totalEmissions);
 
                 if (!isNaN(totalEmissions) && totalEmissions !== 0) {
                     console.log('Loaded totalEmissions:', totalEmissions); 
                     updateEmissionComparison(totalEmissions);
-                    displayEquivalences(totalEmissions); // Ensure this function is called
+                    displayEquivalences(totalEmissions);
                 } else {
                     console.error('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
                     alert('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
                 }
             };
+
+
 
 
         </script>
