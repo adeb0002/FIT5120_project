@@ -4,17 +4,19 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Recommendations</title>
+    <title>EcoInsight Melbourne</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Fonts and CSS -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/recommendations.css"> <!-- Link to your custom CSS file -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/fontAwesome.css">
+    <link rel="stylesheet" href="css/recommendations.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -23,18 +25,22 @@
         <div class="container">
             <nav class="navbar navbar-inverse" role="navigation">
                 <div class="navbar-header">
-                    <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
+                    <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#main-nav">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <img href="index.html" class="navbar-brand scroll-top" src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
+                    <a href="index.html" class="navbar-brand">
+                        <img src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
+                    </a>
                 </div>
                 <div id="main-nav" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="index.html" class="scroll-top">Home</a></li>
-                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a></li>
+                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a>
+                        </li>
                         <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
                         <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
                         <li><a href="recommendations.html">Recommendations</a></li>
@@ -47,130 +53,217 @@
     <!-- Recommendations Section -->
     <div class="parallax-content" id="recommendations">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>General Recommendations</h2>
-                    <div class="title-bar"></div>
-                    
-                    <!-- Description for the page -->
-                    <p class="page-description">
-                        This page provides tailored recommendations to help you reduce emissions and save on energy costs. 
-                        Use the buttons below to switch between emissions-reducing tips and cost-saving recommendations.
-                    </p>
+            <div class="col-md-12">
+                <h2>Eco-Friendly Tips for a Greener Lifestyle</h2>
+                <div class="title-bar"></div>
 
-                    <!-- Buttons for toggling between recommendations -->
-                    <div class="button-toggle">
-                        <button id="emissions-btn" class="btn">Emissions Recommendations</button>
-                        <button id="cost-saving-btn" class="btn">Cost-Saving Recommendations</button>
+                <div class="button-toggle">
+                    <div id="emissions-btn" class="btn">
+                        <img src="img/carbon-neutral.png" alt="Emissions Recommendations Icon" class="btn-icon">
+                        <div class="btn-text">How to reduce emissions?</div>
                     </div>
+                    <div id="cost-saving-btn" class="btn">
+                        <img src="img/save-money.png" alt="Cost-Saving Recommendations Icon" class="btn-icon">
+                        <div class="btn-text">How to save costs?</div>
+                    </div>
+                </div>
 
-                    <!-- Emissions Recommendations -->
-                    <div class="recommendations-section" id="emissions-recommendations">
-                        <div class="box">
-                            <h3>Dishwasher Usage:</h3>
-                            <p>Run your dishwasher only when it's full and use the energy-saving mode. Reducing the frequency of washes and opting for cooler water settings can lower energy consumption, reducing your carbon footprint.</p>
-                            <i class="fas fa-shower icon-right"></i>
+
+                <!-- Emissions Recommendations (Hidden by default) -->
+                <div class="recommendations-section" id="emissions-recommendations">
+                    <div class="grid-container">
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <img src="img/dishwasher_ikea.jpg" alt="Dishwasher" class="recommendations-photo">
+                                </div>
+                                <div class="flip-card-back">
+                                    <p>Run your dishwasher only when it's full and use the energy-saving mode. Reducing
+                                        the
+                                        frequency of washes and opting for cooler water settings can lower energy
+                                        consumption,
+                                        reducing your carbon footprint.</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="box">
-                            <h3>Air Conditioner Usage:</h3>
-                            <p>Set your air conditioner to a higher temperature in summer and lower in winter to reduce energy usage. This small adjustment can decrease greenhouse gas emissions.</p>
-                            <i class="fas fa-wind icon-right"></i>
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <img src="img/air-conditioner.jpg" alt="Air Conditioner"
+                                        class="recommendations-photo air-conditioner-photo">
+                                </div>
+                                <div class="flip-card-back">
+                                    <p>Set your air conditioner to a higher temperature in summer and lower in winter to
+                                        reduce
+                                        energy usage. This small adjustment can decrease greenhouse gas emissions.</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="box">
-                            <h3>Refrigerator Efficiency:</h3>
-                            <p>Keep your refrigerator between 3°C and 5°C, and defrost it regularly to improve energy efficiency. Doing so reduces emissions and prolongs the appliance's life.</p>
-                            <i class="fas fa-thermometer-half icon-right"></i>
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <img src="img/refrigerator.jpg" alt="Refrigerator"
+                                        class="recommendations-photo refrigerator-photo">
+                                </div>
+                                <div class="flip-card-back">
+                                    <p>Keep your refrigerator between 3°C and 5°C, and defrost it regularly to improve
+                                        energy
+                                        efficiency. Doing so reduces emissions and prolongs the appliance's life.</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="box">
-                            <h3>Public Transport Usage:</h3>
-                            <p>Use public transport instead of driving when possible. This helps reduce your transportation emissions and promotes cleaner air quality in your city.</p>
-                            <i class="fas fa-bus icon-right"></i>
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <img src="img/public-transport.jpg" alt="Public Transport"
+                                        class="recommendations-photo public-transport-photo">
+                                </div>
+                                <div class="flip-card-back">
+                                    <p>Use public transport instead of driving when possible. This helps reduce your
+                                        transportation
+                                        emissions and promotes cleaner air quality in your city.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <!-- Cost-Saving Recommendations (Hidden by default) -->
-                    <div class="recommendations-section" id="cost-saving-recommendations" style="display: none;">
-                        <div class="box">
-                            <h3>Maximise Solar Energy:</h3>
-                            <p>If you have solar panels, use high-energy appliances like washing machines and dishwashers during the day to reduce reliance on the grid and save money on electricity bills.</p>
-                            <i class="fas fa-sun icon-right"></i>
+                </div>
+                <!-- Cost-Saving Recommendations (Hidden by default) -->
+                <div class="recommendations-section" id="cost-saving-recommendations">
+                    <div class="grid-container">
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <img src="img/solar-panel.jpg" alt="Maximise Solar Energy"
+                                        class="recommendations-photo">
+                                </div>
+                                <div class="flip-card-back">
+                                    <p>If you have solar panels, use high-energy appliances like washing machines and
+                                        dishwashers
+                                        during the day to reduce reliance on the grid and save money on electricity
+                                        bills.</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="box">
-                            <h3>Cold Water for Laundry:</h3>
-                            <p>Washing clothes in cold water can reduce energy use by up to 80% per wash. This simple switch can lead to significant savings on your energy bills while still getting your clothes clean.</p>
-                            <i class="fas fa-water icon-right"></i>
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <img src="img/laundry.jpg" alt="Cold Water for Laundry"
+                                        class="recommendations-photo">
+                                </div>
+                                <div class="flip-card-back">
+                                    <p>Washing clothes in cold water can reduce energy use by up to 80% per wash. This
+                                        simple switch
+                                        can lead to significant savings on your energy bills while still getting your
+                                        clothes
+                                        clean.</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="box">
-                            <h3>Air-Dry Clothes:</h3>
-                            <p>Skipping the dryer and air-drying clothes can save energy and lower your electricity costs. This eco-friendly habit is especially effective during warmer months.</p>
-                            <i class="fas fa-plug icon-right"></i>
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <img src="img/air-dry-clothes.jpg" alt="Air-Dry Clothes"
+                                        class="recommendations-photo">
+                                </div>
+                                <div class="flip-card-back">
+                                    <p>Skipping the dryer and air-drying clothes can save energy and lower your
+                                        electricity
+                                        costs.
+                                        This eco-friendly habit is especially effective during warmer months.</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="box">
-                            <h3>Use Energy-Efficient Light Bulbs:</h3>
-                            <p>Switching to LED or energy-efficient light bulbs can reduce your lighting energy consumption by up to 75%. They also last longer, providing savings on both electricity and replacement costs.</p>
-                            <i class="fas fa-lightbulb icon-right"></i>
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <img src="img/lightbulb.jpg" alt="Use Energy-Efficient Light Bulbs"
+                                        class="recommendations-photo">
+                                </div>
+                                <div class="flip-card-back">
+                                    <p>Switching to LED or energy-efficient light bulbs can reduce your lighting energy
+                                        consumption
+                                        by up to 75%. They also last longer, providing savings on both electricity and
+                                        replacement
+                                        costs.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Government Rebates (Visible all the time) -->
-                    <div class="box rebate-box">
-                        <h3>Government Rebates</h3>
-                        <p>Take advantage of government rebates to offset costs. Explore the following programs:</p>
-                        <div class="rebate-links">
-                            <a href="https://www.energy.vic.gov.au/victorian-energy-upgrades/homes" target="_blank" class="rebate-link">
-                                Victorian Energy Upgrades
-                            </a>
-                            <a href="https://www.solar.vic.gov.au/solar-panel-rebate" target="_blank" class="rebate-link">
-                                Solar Panel Rebate
-                            </a>
-                            <a href="https://www.energy.vic.gov.au/households/help-paying-your-energy-bills/energy-bill-relief-fund#:~:text=Eligible%20Victorian%20households%20will%20receive%20rebates%20of%20up%20to%20%24300,four%20quarterly%20instalments%20of%20%2475," target="_blank" class="rebate-link">
-                                Energy Bill Relief Fund
-                            </a>
-                        </div>
-                        <i class="fas fa-dollar-sign icon-right"></i>
+                <!-- Government Rebates (Initially Hidden) -->
+                <div class="box rebate-box" id="rebate-box">
+                    <h3 class="rebates-heading">Government Rebates</h3>
+                    <p>Take advantage of government rebates to offset costs. Explore the following programs:</p>
+                    <div class="rebate-links">
+                        <a href="https://www.energy.vic.gov.au/victorian-energy-upgrades/homes" target="_blank"
+                            class="rebate-link">
+                            Victorian Energy Upgrades
+                        </a>
+                        <a href="https://www.solar.vic.gov.au/solar-panel-rebate" target="_blank" class="rebate-link">
+                            Solar Panel Rebate
+                        </a>
+                        <a href="https://www.energy.vic.gov.au/households/help-paying-your-energy-bills/energy-bill-relief-fund#:~:text=Eligible%20Victorian%20households%20will%20receive%20rebates%20of%20up%20to%20%24300,four%20quarterly%20instalments%20of%20%2475,"
+                            target="_blank" class="rebate-link">
+                            Energy Bill Relief Fund
+                        </a>
                     </div>
+                </div>
+                <!-- Back to Home Page Button -->
+                <div class="back-to-home">
+                    <a href="index.html" class="back-button">Back to Home</a>
                 </div>
             </div>
         </div>
     </div>
+    </div>
 
-    <!-- JavaScript to toggle between Emissions and Cost-Saving recommendations -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+
+        document.addEventListener('DOMContentLoaded', function () {
             const emissionsBtn = document.getElementById('emissions-btn');
             const costSavingBtn = document.getElementById('cost-saving-btn');
             const emissionsSection = document.getElementById('emissions-recommendations');
             const costSavingSection = document.getElementById('cost-saving-recommendations');
+            const rebateBox = document.getElementById('rebate-box');
 
-            // Show emissions recommendations by default
-            emissionsSection.style.display = 'block';
+            // Hide both recommendations and rebates initially
+            emissionsSection.style.display = 'none';
             costSavingSection.style.display = 'none';
+            rebateBox.style.display = 'none';
 
-            emissionsBtn.addEventListener('click', function() {
+            // When Emissions button is clicked, show emissions recommendations and rebates
+            emissionsBtn.addEventListener('click', function () {
                 emissionsSection.style.display = 'block';
-                costSavingSection.style.display = 'none';
+                costSavingSection.style.display = 'none'; // Hide cost-saving recommendations
+                rebateBox.style.display = 'block'; // Show rebates
 
-                // Highlight the selected button and grey out the other
+                // Highlight the selected button and remove highlight from the other
                 emissionsBtn.classList.add('active-toggle');
                 costSavingBtn.classList.remove('active-toggle');
             });
 
-            costSavingBtn.addEventListener('click', function() {
-                emissionsSection.style.display = 'none';
+            // When Cost-Saving button is clicked, show cost-saving recommendations and rebates
+            costSavingBtn.addEventListener('click', function () {
                 costSavingSection.style.display = 'block';
+                emissionsSection.style.display = 'none'; // Hide emissions recommendations
+                rebateBox.style.display = 'block'; // Show rebates
 
-                // Highlight the selected button and grey out the other
+                // Highlight the selected button and remove highlight from the other
                 costSavingBtn.classList.add('active-toggle');
                 emissionsBtn.classList.remove('active-toggle');
             });
         });
+
+
     </script>
 
 </body>
+
 </html>
