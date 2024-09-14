@@ -112,17 +112,45 @@
     </div>
 
 
-    <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             console.log('DOM fully loaded and parsed');
 
+            // Get references to form elements
             var solarPanelsButtons = document.querySelectorAll('.button-group .btn');
             var gridDependenceSection = document.querySelector('#grid-dependence-section');
             var gridDependenceSelect = document.querySelector('#grid-dependence');
             var nextButton = document.querySelector('#next-button');
 
-            // Function to handle button clicks
+            // Retrieve saved values from localStorage and set them in the form
+            const savedSolarPanels = localStorage.getItem('solarPanels');
+            const savedGridDependence = localStorage.getItem('gridDependence');
+
+            // If saved values are present, set them in the form
+            if (savedSolarPanels) {
+                solarPanelsButtons.forEach(button => {
+                    if (button.getAttribute('data-value') === savedSolarPanels) {
+                        button.classList.add('active');
+                        document.getElementById('solar-panels-hidden').value = savedSolarPanels;
+
+                        // Show or hide the grid dependence section based on saved value
+                        if (savedSolarPanels === 'yes') {
+                            gridDependenceSection.style.display = 'block'; // Show grid dependence question
+                        } else {
+                            gridDependenceSection.style.display = 'none'; // Hide grid dependence question
+                        }
+                    }
+                });
+            }
+
+            if (savedGridDependence) {
+                gridDependenceSelect.value = savedGridDependence;
+            }
+
+            // Update the Next button visibility
+            checkFormCompletion();
+
+            // Function to handle button clicks for solar panels
             function handleSolarPanelSelection() {
                 solarPanelsButtons.forEach(button => {
                     button.addEventListener('click', function () {
@@ -137,6 +165,8 @@
                             gridDependenceSection.style.display = 'block'; // Show grid dependence question
                         } else {
                             gridDependenceSection.style.display = 'none';  // Hide grid dependence question
+                            gridDependenceSelect.value = ''; // Clear the grid dependence value
+                            localStorage.removeItem('gridDependence'); // Remove grid dependence from localStorage
                         }
 
                         checkFormCompletion(); // Update button visibility
@@ -144,7 +174,7 @@
                 });
             }
 
-            // Function to check form completion
+            // Function to check form completion and update the Next button visibility
             function checkFormCompletion() {
                 var solarPanels = document.getElementById('solar-panels-hidden').value;
                 var gridDependence = gridDependenceSelect.value;
@@ -162,12 +192,13 @@
             handleSolarPanelSelection();
             gridDependenceSelect.addEventListener('change', checkFormCompletion);
 
-            // Add event listener for "Next" button
+            // Add event listener for the "Next" button
             nextButton.addEventListener('click', function (event) {
                 event.preventDefault(); // Prevent default anchor behavior
                 validateAndNavigate(); // Call function to handle navigation
             });
 
+            // Function to send data to Lambda function
             async function sendDataToLambda(data) {
                 try {
                     console.log('Sending data:', data);
@@ -199,6 +230,7 @@
                 }
             }
 
+            // Function to validate and navigate to the next page
             async function validateAndNavigate() {
                 const solarPanels = document.getElementById('solar-panels-hidden').value;
                 const gridDependence = gridDependenceSelect.value;
@@ -230,4 +262,5 @@
         });
     </script>
 </body>
+
 </html>

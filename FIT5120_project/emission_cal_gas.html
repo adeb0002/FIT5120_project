@@ -120,9 +120,31 @@
             const instantaneousStorageSection = document.getElementById('instantaneous-storage-section');
             const nextButton = document.getElementById('next-button');
 
-            // To store the state of the buttons
-            let selectedGasHeater = null;
-            let selectedHeaterType = null;
+            // Load saved values from localStorage
+            const savedGasHeater = localStorage.getItem('gasWaterHeater');
+            const savedHeaterType = localStorage.getItem('heaterType');
+
+            // Set saved values in the form
+            if (savedGasHeater) {
+                gasHeaterButtons.forEach(button => {
+                    if (button.getAttribute('data-value') === savedGasHeater) {
+                        button.classList.add('active');
+                        if (savedGasHeater === 'yes') {
+                            instantaneousStorageSection.style.display = 'block'; // Show heater type section
+                        } else {
+                            instantaneousStorageSection.style.display = 'none'; // Hide heater type section
+                        }
+                    }
+                });
+            }
+
+            if (savedHeaterType) {
+                heaterTypeButtons.forEach(button => {
+                    if (button.getAttribute('data-value') === savedHeaterType) {
+                        button.classList.add('active');
+                    }
+                });
+            }
 
             // Event listener for gas water heater buttons
             gasHeaterButtons.forEach(button => {
@@ -132,20 +154,20 @@
 
                     // Add 'active' class to the clicked button
                     this.classList.add('active');
-                    selectedGasHeater = this;
 
                     // Show or hide the next question based on the selected button
                     if (this.getAttribute('data-value') === 'yes') {
                         instantaneousStorageSection.style.display = 'block'; // Show the next question section
-                        // Reset heater type selection
-                        heaterTypeButtons.forEach(btn => btn.classList.remove('active'));
-                        selectedHeaterType = null;
                     } else {
                         instantaneousStorageSection.style.display = 'none'; // Hide the next question section
-                        selectedHeaterType = null;
+                        heaterTypeButtons.forEach(btn => btn.classList.remove('active')); // Clear heater type selection
+                        localStorage.removeItem('heaterType'); // Clear heater type in localStorage
                     }
 
                     nextButton.style.display = 'block'; // Show the Next button
+
+                    // Save selection to localStorage
+                    localStorage.setItem('gasWaterHeater', this.getAttribute('data-value'));
                 });
             });
 
@@ -157,7 +179,9 @@
 
                     // Add 'active' class to the clicked button
                     this.classList.add('active');
-                    selectedHeaterType = this;
+
+                    // Save selection to localStorage
+                    localStorage.setItem('heaterType', this.getAttribute('data-value'));
                 });
             });
 
@@ -251,7 +275,6 @@
                 });
             });
         });
-
     </script>
 </body>
 
