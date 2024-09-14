@@ -17,7 +17,7 @@ ul {
 }
 
 p {
-    color: #28a745; /* Set all general paragraphs to green */
+    color: black;
     font-size: 20px;
     line-height: 24px;
 }
@@ -159,7 +159,7 @@ p {
     width: 80%;
     height: 15px;
     background-color: white;
-    margin: 20px auto 40px;
+    margin: 0 auto 40px; /* Adjusted margin to center and place it correctly */
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -182,7 +182,8 @@ p {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     position: relative;
-    color: #28a745;
+    color: black;
+    min-height: 200px; /* To ensure consistent height */
 }
 
 .box h3 {
@@ -193,7 +194,7 @@ p {
 .box p {
     font-size: 16px;
     line-height: 1.5;
-    color: #28a745;
+    color: #333; /* Dark gray for better contrast */
 }
 
 .box i {
@@ -272,21 +273,125 @@ ul li a:hover {
 /* Centered title and description styles */
 .centered-title {
     text-align: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    color: #28a745; /* Green text */
+    margin-top: 20px; /* Adjusted for proper spacing */
+    margin-bottom: 10px; /* Space between title/description and title bar */
 }
 
 .centered-title h2 {
     font-size: 3.5rem;
     font-weight: 800;
+    color: #28a745 !important; /* Ensure green with !important */
     margin-bottom: 10px;
-    color: #28a745 !important; /* Force green with !important */
 }
 
 .centered-title p {
     font-size: 1.5rem;
+    color: #28a745 !important; /* Ensure green for description too */
+    margin-bottom: 30px; /* Space before the white title-bar */
+}
+
+.title-bar {
+    width: 80%;
+    height: 15px;
+    background-color: white;
+    margin: 0 auto 40px; /* Space below the title-bar */
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for the prominent instruction box */
+.instruction-box {
+    background-color: #fff3cd; /* Light yellow background */
+    border: 2px solid #ffc107; /* Yellow border */
+    padding: 30px;
+    margin: 50px auto;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+}
+
+.instruction-box h2 {
+    font-size: 2rem;
+    color: #856404;
+    margin-bottom: 10px;
+}
+
+.instruction-box p {
+    font-size: 1.2rem;
+    color: #856404;
+}
+
+.btn-primary-instruction {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background-color: #28a745;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.btn-primary-instruction:hover {
+    background-color: #218838;
+}
+
+.rebate-box {
+    background-color: #e9f7f1;
+    border: 2px solid #33c1cf;
+    padding: 25px;
     margin-bottom: 20px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.rebate-box h3 {
+    font-size: 24px;
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+.rebate-box p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.rebate-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.rebate-link {
+    display: inline-block;
+    background-color: #33c1cf;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.rebate-link:hover {
+    background-color: #28a745;
+    color: white;
+}
+
+.icon-right {
+    font-size: 3em;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #33c1cf;
+}
+
+.rebate-box:hover .icon-right {
     color: #28a745;
 }
 
