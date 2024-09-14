@@ -119,6 +119,28 @@
             white-space: nowrap;
         }
 
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.7rem;
+                /* Adjust font size for medium screens */
+                margin-bottom: 25px;
+                /* Adjust space below the heading */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.2rem;
+                /* Reduce font size for small screens */
+                margin-bottom: 20px;
+                /* Adjust space below the heading */
+                white-space: normal;
+                /* Allow wrapping on small screens */
+                padding: 0 10px;
+                /* Add padding for better spacing on smaller screens */
+            }
+        }
+
         .common-button {
             padding: 12px 20px;
             /* Adjust the padding for a larger clickable area */
@@ -161,6 +183,28 @@
             /* Remove default focus outline */
             box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
             /* Add a subtle focus effect */
+        }
+
+        @media (max-width: 768px) {
+            .common-button {
+                padding: 12px 20px;
+                /* Adjust padding for medium screens */
+                font-size: 14px;
+                /* Reduce font size */
+                margin-bottom: 15px;
+                margin-top: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .common-button {
+                padding: 12px 20px;
+                /* Further reduce padding for small screens */
+                font-size: 14px;
+                /* Reduce font size for small screens */
+                margin-bottom: 10px;
+                margin-top: 20px;
+            }
         }
 
         #add-more {
@@ -210,6 +254,30 @@
             /* Remove default margin */
         }
 
+        /* Medium screens (tablets) */
+        @media (max-width: 768px) {
+            #add-more {
+                font-size: 20px;
+                /* Slightly smaller icon size */
+                width: 35px;
+                /* Slightly smaller button width */
+                height: 35px;
+                /* Slightly smaller button height */
+            }
+        }
+
+        /* Small screens (mobile devices) */
+        @media (max-width: 480px) {
+            #add-more {
+                font-size: 18px;
+                /* Smaller icon size */
+                width: 30px;
+                /* Smaller button width */
+                height: 30px;
+                /* Smaller button height */
+            }
+        }
+
         .summary-section {
             width: 100%;
             max-width: 600px;
@@ -224,6 +292,40 @@
             color: #333;
             /* Darker color for better readability */
             margin-bottom: 20px;
+        }
+
+        /* Medium screens (tablets) */
+        @media (max-width: 768px) {
+            .summary-section {
+                padding: 15px;
+                /* Reduce padding for smaller screens */
+                margin-top: 40px;
+                /* Adjust margin-top for smaller screens */
+            }
+
+            #total-distance {
+                font-size: 20px;
+                /* Slightly smaller font size */
+                margin-bottom: 15px;
+                /* Reduce margin-bottom for smaller screens */
+            }
+        }
+
+        /* Small screens (mobile devices) */
+        @media (max-width: 480px) {
+            .summary-section {
+                padding: 10px;
+                /* Further reduce padding for very small screens */
+                margin-top: 30px;
+                /* Adjust margin-top for very small screens */
+            }
+
+            #total-distance {
+                font-size: 18px;
+                /* Smaller font size for mobile devices */
+                margin-bottom: 10px;
+                /* Reduce margin-bottom for mobile devices */
+            }
         }
 
         .delete-button {
@@ -255,6 +357,38 @@
         .delete-button:active {
             background-color: #bd2130;
             transform: scale(1);
+        }
+
+        /* Medium screens (tablets) */
+        @media (max-width: 768px) {
+            .delete-button {
+                font-size: 16px;
+                /* Slightly smaller font size */
+                width: 30px;
+                /* Smaller width */
+                height: 30px;
+                /* Smaller height */
+                top: -5px;
+                /* Adjust position */
+                right: -5px;
+                /* Adjust position */
+            }
+        }
+
+        /* Small screens (mobile devices) */
+        @media (max-width: 480px) {
+            .delete-button {
+                font-size: 14px;
+                /* Smaller font size */
+                width: 25px;
+                /* Smaller width */
+                height: 25px;
+                /* Smaller height */
+                top: -5px;
+                /* Adjust position for small screens */
+                right: -5px;
+                /* Adjust position for small screens */
+            }
         }
 
         .route-section {

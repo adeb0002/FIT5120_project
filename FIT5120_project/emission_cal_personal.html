@@ -111,9 +111,19 @@
             var householdSizeSlider = document.querySelector('#household-size');
             var sliderValue = document.querySelector('#slider-value');
 
-            // Update slider value display
+            // Check if household size exists in localStorage and set it on page load
+            const savedHouseholdSize = localStorage.getItem('householdSize');
+            if (savedHouseholdSize) {
+                householdSizeSlider.value = savedHouseholdSize;
+                sliderValue.textContent = savedHouseholdSize;
+                console.log('Saved household size from localStorage:', savedHouseholdSize);
+            }
+
+            // Update slider value display and save to localStorage
             householdSizeSlider.addEventListener('input', function () {
                 sliderValue.textContent = householdSizeSlider.value;
+                localStorage.setItem('householdSize', householdSizeSlider.value); // Save to localStorage
+
                 if (householdSizeSlider.value) {
                     nextButton.style.display = 'inline-block'; // Show the button
                 } else {
@@ -166,11 +176,8 @@
             }
 
             async function validateAndNavigate() {
-                const householdSize = document.getElementById('household-size').value;
+                const householdSize = householdSizeSlider.value;
                 console.log('Household size value:', householdSize);
-
-                // Save household size to localStorage
-                localStorage.setItem('householdSize', householdSize);
 
                 // Send data to Lambda
                 const lambdaResponse = await sendDataToLambda({ type: 'personal', household_size: householdSize });
@@ -208,8 +215,6 @@
 
         // Update the slider value and position when the slider is moved
         document.getElementById('household-size').addEventListener('input', updateSliderValue);
-
-
     </script>
 </body>
 
