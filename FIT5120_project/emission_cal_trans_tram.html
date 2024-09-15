@@ -719,7 +719,7 @@
             const roundedTotalDistance = totalDistance.toFixed(2);
 
             // Save the rounded total distance to localStorage
-            localStorage.setItem('totalDistance_tram', roundedTotalDistance);
+            sessionStorage.setItem('totalDistance_tram', roundedTotalDistance);
 
             // Redirect back to the original page
             window.location.href = 'emission_cal_trans.html';

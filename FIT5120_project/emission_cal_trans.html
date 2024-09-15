@@ -116,7 +116,7 @@
             const nextButton = document.getElementById('next-button');
 
             // Load saved state
-            const savedState = JSON.parse(localStorage.getItem('transportationState')) || {};
+            const savedState = JSON.parse(sessionStorage.getItem('transportationState')) || {};
             buttons.forEach(button => {
                 if (savedState.selectedModes && savedState.selectedModes.includes(button.dataset.value)) {
                     button.classList.add('selected-green');
@@ -134,10 +134,10 @@
 
             // Load the total distance if available
             const storedTotalDistances = {
-                car: localStorage.getItem('totalDistance_car'),
-                bus: localStorage.getItem('totalDistance_bus'),
-                train: localStorage.getItem('totalDistance_train'),
-                tram: localStorage.getItem('totalDistance_tram')
+                car: sessionStorage.getItem('totalDistance_car'),
+                bus: sessionStorage.getItem('totalDistance_bus'),
+                train: sessionStorage.getItem('totalDistance_train'),
+                tram: sessionStorage.getItem('totalDistance_tram')
             };
 
             if (storedTotalDistances.car) {
@@ -218,17 +218,17 @@
 
                         // Create the HTML structure with the icon
                         questionDiv.innerHTML = `
-                <div class="icon-label-container">
-                    <div class="${iconClass}"></div>
-                    <label for="${btn.dataset.value}-usage">${question}</label>
-                </div>
-                <div class="input-container">
-                    <input type="number" class="form-control" id="${btn.dataset.value}-usage" min="1" placeholder="Enter kilometers">
-                    ${btn.dataset.value === 'private-vehicle' || btn.dataset.value === 'bus' || btn.dataset.value === 'train' || btn.dataset.value === 'tram' ?
+        <div class="icon-label-container">
+            <div class="${iconClass}"></div>
+            <label for="${btn.dataset.value}-usage">${question}</label>
+        </div>
+        <div class="input-container">
+            <input type="number" class="form-control" id="${btn.dataset.value}-usage" min="1" placeholder="Enter kilometers">
+            ${btn.dataset.value === 'private-vehicle' || btn.dataset.value === 'bus' || btn.dataset.value === 'train' || btn.dataset.value === 'tram' ?
                                 `<button type="button" id="display-map-button-${btn.dataset.value}" class="map-button">Display Map</button>`
                                 : ''}
-                </div>
-            `;
+        </div>
+    `;
 
                         usageQuestions.appendChild(questionDiv);
                     }
@@ -260,18 +260,18 @@
                     noneSelected: noneButton.classList.contains('selected-green'),
                     selectedModes: Array.from(buttons).filter(btn => btn.classList.contains('selected-green')).map(btn => btn.dataset.value)
                 };
-                localStorage.setItem('transportationState', JSON.stringify(state));
+                sessionStorage.setItem('transportationState', JSON.stringify(state));
             }
         });
 
         function logSavedData() {
-            const transportationState = JSON.parse(localStorage.getItem('transportationState'));
-            const transportationData = JSON.parse(localStorage.getItem('transportationData'));
+            const transportationState = JSON.parse(sessionStorage.getItem('transportationState'));
+            const transportationData = JSON.parse(sessionStorage.getItem('transportationData'));
             const storedTotalDistances = {
-                car: localStorage.getItem('totalDistance_car'),
-                bus: localStorage.getItem('totalDistance_bus'),
-                train: localStorage.getItem('totalDistance_train'),
-                tram: localStorage.getItem('totalDistance_tram')
+                car: sessionStorage.getItem('totalDistance_car'),
+                bus: sessionStorage.getItem('totalDistance_bus'),
+                train: sessionStorage.getItem('totalDistance_train'),
+                tram: sessionStorage.getItem('totalDistance_tram')
             };
 
             console.log('Transportation State:', transportationState);
@@ -301,8 +301,8 @@
                     if (result[0]?.body) {
                         const parsedBody = JSON.parse(result[0].body);
                         if (parsedBody?.individual_transport_emissions) {
-                            localStorage.setItem('transportationData', JSON.stringify(parsedBody.individual_transport_emissions));
-                            console.log('Transport data saved to localStorage:', parsedBody.individual_transport_emissions);
+                            sessionStorage.setItem('transportationData', JSON.stringify(parsedBody.individual_transport_emissions));
+                            console.log('Transport data saved to sessionStorage:', parsedBody.individual_transport_emissions);
                         } else {
                             console.warn('Transport emissions data is missing in response.');
                         }

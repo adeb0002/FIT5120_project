@@ -117,7 +117,7 @@
             console.log('DOM fully loaded and parsed');
 
             if (window.location.href.includes('emission_cal_personal.html')) {
-                localStorage.clear();  // This clears all localStorage, adjust as needed.
+                sessionStorage.clear();  // This clears all sessionStorage, adjust as needed.
             }
 
             // Get references to form elements
@@ -126,9 +126,9 @@
             var gridDependenceSelect = document.querySelector('#grid-dependence');
             var nextButton = document.querySelector('#next-button');
 
-            // Retrieve saved values from localStorage and set them in the form
-            const savedSolarPanels = localStorage.getItem('solarPanels');
-            const savedGridDependence = localStorage.getItem('gridDependence');
+            // Retrieve saved values from sessionStorage and set them in the form
+            const savedSolarPanels = sessionStorage.getItem('solarPanels');
+            const savedGridDependence = sessionStorage.getItem('gridDependence');
 
             // If saved values are present, set them in the form
             if (savedSolarPanels) {
@@ -169,8 +169,8 @@
                             gridDependenceSection.style.display = 'block'; // Show grid dependence question
                         } else {
                             gridDependenceSection.style.display = 'none';  // Hide grid dependence question
-                            gridDependenceSelect.value = ''; // Clear the grid dependence value
-                            localStorage.removeItem('gridDependence'); // Remove grid dependence from localStorage
+                            gridDependenceSelect.value = 'None'; // Set grid dependence to 'None'
+                            sessionStorage.setItem('gridDependence', 'None'); // Save 'None' in sessionStorage
                         }
 
                         checkFormCompletion(); // Update button visibility
@@ -242,9 +242,13 @@
                 console.log('Solar panels value:', solarPanels);
                 console.log('Grid dependence value:', gridDependence);
 
-                // Save solar panel data to localStorage
-                localStorage.setItem('solarPanels', solarPanels);
-                localStorage.setItem('gridDependence', gridDependence);
+                // Save solar panel data to sessionStorage
+                sessionStorage.setItem('solarPanels', solarPanels);
+                sessionStorage.setItem('gridDependence', gridDependence);
+
+                // Log values from sessionStorage
+                console.log('Solar panels saved in sessionStorage:', sessionStorage.getItem('solarPanels'));
+                console.log('Grid dependence saved in sessionStorage:', sessionStorage.getItem('gridDependence'));
 
                 // Prepare data for Lambda
                 const lambdaData = {

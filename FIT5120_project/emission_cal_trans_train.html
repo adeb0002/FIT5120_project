@@ -547,6 +547,9 @@
                     modes: ['TRAIN'], // Filter to only consider train routes
                 }
             }, function (response, status) {
+                console.log('Directions API response:', response);
+                console.log('Directions API status:', status);
+
                 if (status === google.maps.DirectionsStatus.OK) {
                     const route = response.routes[0];
                     let trainDistanceValue = 0;
@@ -628,27 +631,27 @@
             newRouteSection.classList.add('route-section');
             newRouteSection.id = `route-section-${routeCount}`;
             newRouteSection.innerHTML = `
-        <button class="delete-button" onclick="deleteRoute(${routeCount})">X</button>
-        <div id="map-${routeCount}" class="map"></div>
-        <div class="form-group">
-            <label for="start-${routeCount}">Starting Point:</label>
-            <input type="text" id="start-${routeCount}" placeholder="Enter starting point">
-        </div>
-        <div class="form-group">
-            <label for="end-${routeCount}">Destination:</label>
-            <input type="text" id="end-${routeCount}" placeholder="Enter destination">
-        </div>
-        <div class="form-group">
-            <label for="trips-${routeCount}">How many times do you travel this route in a week?</label>
-            <input type="number" id="trips-${routeCount}" min="0" placeholder="Enter number of trips">
-        </div>
-        <div class="form-group">
-            <button class="common-button" onclick="estimateRoute(${routeCount})">ESTIMATE TRAIN DISTANCE</button>
-            <button id="button-reset-${routeCount}" class="common-button" style="background-color: grey;" onclick="resetRoute(${routeCount})">RESET</button>
-        </div>
-        <div id="error-message-${routeCount}"></div>
-        <div id="distance-result-${routeCount}"></div>
-    `;
+            <button class="delete-button" onclick="deleteRoute(${routeCount})">X</button>
+            <div id="map-${routeCount}" class="map"></div>
+            <div class="form-group">
+                <label for="start-${routeCount}">Starting Point:</label>
+                <input type="text" id="start-${routeCount}" placeholder="Enter starting point">
+            </div>
+            <div class="form-group">
+                <label for="end-${routeCount}">Destination:</label>
+                <input type="text" id="end-${routeCount}" placeholder="Enter destination">
+            </div>
+            <div class="form-group">
+                <label for="trips-${routeCount}">How many times do you travel this route in a week?</label>
+                <input type="number" id="trips-${routeCount}" min="0" placeholder="Enter number of trips">
+            </div>
+            <div class="form-group">
+                <button class="common-button" onclick="estimateRoute(${routeCount})">ESTIMATE TRAIN DISTANCE</button>
+                <button id="button-reset-${routeCount}" class="common-button" style="background-color: grey;" onclick="resetRoute(${routeCount})">RESET</button>
+            </div>
+            <div id="error-message-${routeCount}"></div>
+            <div id="distance-result-${routeCount}"></div>
+        `;
 
             routeContainer.appendChild(newRouteSection);
             initMap(routeCount);
@@ -714,8 +717,8 @@
             // Round the total distance to 2 decimal places before saving
             const roundedTotalDistance = totalDistance.toFixed(2);
 
-            // Save the rounded total distance to localStorage
-            localStorage.setItem('totalDistance_train', roundedTotalDistance);
+            // Save the rounded total distance to sessionStorage
+            sessionStorage.setItem('totalDistance_train', roundedTotalDistance);
 
             // Redirect back to the original page
             window.location.href = 'emission_cal_trans.html';
@@ -728,6 +731,7 @@
         function initMapZero() {
             initMap(0);
         }
+
         document.getElementById('finish').addEventListener('click', finish);
 
     </script>
