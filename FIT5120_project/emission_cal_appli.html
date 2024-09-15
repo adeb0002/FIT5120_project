@@ -130,73 +130,122 @@
 
             document.getElementById('next-button').addEventListener('click', function (event) {
                 event.preventDefault();
-                saveDataToLocalStorage();
+                saveDataToSessionStorage();
                 validateAndNavigate(); // Validate and navigate to the next page
             });
 
             document.getElementById('back-button').addEventListener('click', function (event) {
                 event.preventDefault();
                 if (confirm('Are you sure you want to start over? This will clear all current data.')) {
-                    clearLocalStorage();
+                    clearSessionStorage();
                 }
-                clearLocalStorage();
+                clearSessionStorage();
                 window.history.back();
             });
         });
 
-        function saveDataToLocalStorage() {
-            const selectedAppliances = Array.from(document.querySelectorAll('#appliance-selection .btn.selected-green')).map(button => button.getAttribute('data-value'));
+        function saveDataToSessionStorage() {
+            // Retrieve selected appliances
+            const selectedAppliances = Array.from(document.querySelectorAll('#appliance-selection .btn.selected-green'))
+                .map(button => button.getAttribute('data-value'));
 
             // Save selected appliances
-            localStorage.setItem('applianceData', JSON.stringify(selectedAppliances));
+            sessionStorage.setItem('applianceData', JSON.stringify(selectedAppliances));
 
-            // Save usage data for each selected appliance
+            // Iterate over each selected appliance and save relevant input data
             selectedAppliances.forEach(appliance => {
+                // Save usage data if available
                 const usageElement = document.getElementById(`${appliance}-hours`);
                 if (usageElement) {
-                    localStorage.setItem(`${appliance}-hours`, usageElement.value);
+                    sessionStorage.setItem(`${appliance}-hours`, usageElement.value);
                 }
 
+                // Save brand data if available
                 const brandElement = document.getElementById(`${appliance}-brand`);
                 if (brandElement) {
-                    localStorage.setItem(`${appliance}-brand`, brandElement.value);
+                    sessionStorage.setItem(`${appliance}-brand`, brandElement.value);
+                }
+
+                // Save specific inputs for each appliance type
+                switch (appliance) {
+                    case 'television':
+                        // Save screen size and technology type for televisions
+                        const screenSize = document.getElementById('tv-screen-size').value;
+                        const screenTech = document.querySelector('input[name="television-screen-tech"]:checked')?.value;
+                        sessionStorage.setItem('television-screen-size', screenSize);
+                        sessionStorage.setItem('television-screen-tech', screenTech);
+                        break;
+
+                    case 'clothes_washer':
+                        // Save loading type and load size for clothes washers
+                        const loadingType = document.querySelector('input[name="clothes-washer-loading"]:checked')?.value;
+                        const loadSize = document.getElementById('clothes-washer-load-size').value;
+                        sessionStorage.setItem('clothes_washer-loading', loadingType);
+                        sessionStorage.setItem('clothes_washer-load-size', loadSize);
+                        break;
+
+                    case 'clothes_dryer':
+                        // Save dryer type for clothes dryers
+                        const dryerType = document.querySelector('input[name="clothes-dryer-type"]:checked')?.value;
+                        sessionStorage.setItem('clothes_dryer-type', dryerType);
+                        break;
+
+                    case 'air_conditioner':
+                        // Save type and hours for air conditioners
+                        const acType = document.querySelector('input[name="air-conditioner-type"]:checked')?.value;
+                        const acHours = document.getElementById('air-conditioner-hours').value;
+                        sessionStorage.setItem('air_conditioner-type', acType);
+                        sessionStorage.setItem('air_conditioner-hours', acHours);
+                        break;
+
+                    case 'refrigerator':
+                        // Save volume category for refrigerators
+                        const refrigeratorVolume = document.getElementById('refrigerator-volume').value;
+                        sessionStorage.setItem('refrigerator-volume', refrigeratorVolume);
+                        break;
+
+                    case 'dishwasher':
+                        // Save usage frequency for dishwashers
+                        const dishwasherUsage = document.getElementById('dishwasher-usage').value;
+                        sessionStorage.setItem('dishwasher-usage', dishwasherUsage);
+                        break;
+
+                    default:
+                        console.warn(`No specific input handling for ${appliance}`);
                 }
             });
 
-            console.log('Appliance data and usage data saved to localStorage:', selectedAppliances);
+            // Log the saved data for verification
+            console.log('All user input data saved to sessionStorage:', sessionStorage);
         }
 
-
-
-
-        function clearLocalStorage() {
-            localStorage.removeItem('applianceData');
+        function clearSessionStorage() {
+            sessionStorage.removeItem('applianceData');
 
             // Remove each appliance's associated data
-            const selectedAppliances = JSON.parse(localStorage.getItem('applianceData')) || [];
+            const selectedAppliances = JSON.parse(sessionStorage.getItem('applianceData')) || [];
             selectedAppliances.forEach(appliance => {
-                localStorage.removeItem(`${appliance}-hours`);
-                localStorage.removeItem(`${appliance}-brand`);
+                sessionStorage.removeItem(`${appliance}-hours`);
+                sessionStorage.removeItem(`${appliance}-brand`);
             });
 
-            console.log('LocalStorage cleared.');
+            console.log('SessionStorage cleared.');
         }
 
-
-        // Clear all selections and ensure local storage management is correct
+        // Clear all selections and ensure session storage management is correct
         function clearAllSelections() {
             document.querySelectorAll('#appliance-selection .appliance-btn').forEach(button => button.classList.remove('selected'));
             document.getElementById('usage-questions').innerHTML = '';
             document.getElementById('appliance-usage-section').style.display = 'none';
             // Optionally clear data specifically related to the selection
-            localStorage.removeItem('applianceData');
+            sessionStorage.removeItem('applianceData');
         }
 
         // Manage clearing based on page context or user actions
         function handleNavigationClearance() {
             // Check context: only clear if restarting or leaving the entire process
             if (window.location.href.includes('start') || userConfirmedRestart) {
-                clearLocalStorage();
+                clearSessionStorage();
             }
         }
 
@@ -213,14 +262,13 @@
                 return;
             }
 
-            // Save selected appliances to localStorage
-            localStorage.setItem('applianceData', JSON.stringify(selectedAppliances));
-            console.log('Appliance data saved to localStorage:', selectedAppliances);
+            // Save selected appliances to sessionStorage
+            sessionStorage.setItem('applianceData', JSON.stringify(selectedAppliances));
+            console.log('Appliance data saved to sessionStorage:', selectedAppliances);
 
             updateQuestions(selectedAppliances);
             updateUsageSectionVisibility();
         }
-
 
         function updateQuestions(selectedAppliances) {
             const usageSection = document.getElementById('appliance-usage-section');
@@ -233,11 +281,11 @@
             const applianceQuestions = {
                 'television': `
                 <h3 class="icon-text">
-    <span class="icon">
-        <img src="img/television.png" alt="Television Icon">
-    </span>
-    <span class="text">Television</span>
-</h3>
+                    <span class="icon">
+                        <img src="img/television.png" alt="Television Icon">
+                    </span>
+                    <span class="text">Television</span>
+                </h3>
                     <div class="form-group">
                         <label for="tv-screen-size">What screen size is your television?</label>
                         <select id="tv-screen-size" class="form-control" style="width: 500px;">
@@ -281,7 +329,7 @@
                     <span class="icon">
                         <img src="img/dishwasher.png" alt="Dishwasher Icon">
                     </span>
-                        <span class="text">Dishwasher</span>
+                    <span class="text">Dishwasher</span>
                 </h3>
                     <div class="form-group">
                         <label for="dishwasher-usage">How many times do you use the dishwasher a week?</label>
@@ -293,7 +341,7 @@
                     <span class="icon">
                         <img src="img/clotheswasher.png" alt="Clotheswasher Icon">
                     </span>
-                        <span class="text">Clothes Washer</span>
+                    <span class="text">Clothes Washer</span>
                 </h3>
                     <div class="form-group radio-question">
                         <label for="clothes-washer-loading">What type of loading is your clothes washer?</label>
@@ -414,7 +462,6 @@
             }
         }
 
-
         function showQuestions() {
             const selectedAppliances = Array.from(document.querySelectorAll('#appliance-selection .btn.selected-green'))
                 .map(button => button.getAttribute('data-value'));
@@ -462,77 +509,113 @@
             }
         });
 
-
         async function sendDataToLambda(data) {
-            showLoading();
-            try {
-                console.log('Original data:', data);
+    showLoading();
+    try {
+        console.log('Original data:', data);
 
-                // Ensure correct handling for each appliance type
-                const formattedData = data.appliances.map(item => {
-                    let formattedItem = {
-                        type: 'appliance',
-                        appliance_type: item.appliance_type
-                    };
+        // Format the data for each appliance type
+        const formattedData = data.appliances.map(item => {
+            let formattedItem = {
+                type: 'appliance',
+                appliance_type: item.appliance_type
+            };
 
-                    if (item.appliance_type === 'clothes_washer') {
-                        formattedItem = {
-                            ...formattedItem,
-                            Loading: item.Loading,
-                            Cap: item.Cap,
-                            usage_per_week: item.usage_per_week
-                        };
-                    } else if (item.appliance_type === 'refrigerator') {
-                        formattedItem.volume_category = item.volume_category.trim(); // Remove extra spaces
-                    } else if (item.appliance_type === 'television') {
-                        formattedItem.screen_size_category = item.screen_size_category.replace('-', ' - ');
-                        formattedItem.screen_technology = item.screen_technology || '';
-                        formattedItem.hours = item.hours;
-                    } else if (item.appliance_type === 'air_conditioner') {
-                        // Ensure both Configuration1 and hours_per_day are correctly assigned
-                        formattedItem.Configuration1 = item.Configuration1;
-                        formattedItem.hours_per_day = item.hours_per_day;
-                    } else {
-                        formattedItem.hours = item.hours; // Add hours for other appliances
-                    }
-
-                    return formattedItem;
-                });
-
-                console.log('Formatted data to send:', formattedData);
-
-                const responses = await Promise.all(formattedData.map(async item => {
-                    const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(item),
-                    });
-
-                    if (!response.ok) {
-                        const errorDetails = await response.text();
-                        console.error(`Network response was not ok. Status: ${response.status}. Details: ${errorDetails}`);
-                        throw new Error(`Network response was not ok. Status: ${response.status}. Details: ${errorDetails}`);
-                    }
-
-                    return response.json();
-                }));
-
-                console.log('Data sent successfully:', responses);
-
-                responses.forEach(response => {
-                    if (response.appliance_emissions !== undefined) {
-                        localStorage.setItem(`emissions_${response.appliance_type}`, JSON.stringify(response));
-                    }
-                });
-
-                window.location.href = 'emission_result.html';
-            } catch (error) {
-                console.error('Error sending data:', error);
-                alert('There was an error submitting your data. Please try again.');
-            } finally {
-                hideLoading();
+            switch (item.appliance_type) {
+                case 'clothes_washer':
+                    formattedItem.Loading = item.Loading;
+                    formattedItem.Cap = item.Cap;
+                    formattedItem.usage_per_week = item.usage_per_week;
+                    break;
+                case 'refrigerator':
+                    formattedItem.volume_category = item.volume_category.trim();
+                    break;
+                case 'television':
+                    formattedItem.screen_size_category = item.screen_size_category.replace('-', ' - ');
+                    formattedItem.screen_technology = item.screen_technology || '';
+                    formattedItem.hours = item.hours;
+                    break;
+                case 'air_conditioner':
+                    formattedItem.Configuration1 = item.Configuration1;
+                    formattedItem.hours_per_day = item.hours_per_day;
+                    break;
+                case 'dishwasher':
+                    formattedItem.usage_per_week = item.usage_per_week;
+                    break;
+                default:
+                    formattedItem.hours = item.hours; // For other appliances
+                    break;
             }
-        }
+
+            return formattedItem;
+        });
+
+        console.log('Formatted data to send:', formattedData);
+
+        // Send data for each appliance and handle their responses
+        const responses = await Promise.all(formattedData.map(async item => {
+            const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(item),
+            });
+
+            if (!response.ok) {
+                const errorDetails = await response.text();
+                console.error(`Network response was not ok. Status: ${response.status}. Details: ${errorDetails}`);
+                throw new Error(`Network response was not ok. Status: ${response.status}. Details: ${errorDetails}`);
+            }
+
+            return response.json();
+        }));
+
+        console.log('Data sent successfully:', responses);
+
+        // Object to store all individual appliance emissions correctly
+        const allIndividualApplianceEmissions = {};
+
+        // Store individual emissions for each appliance type correctly
+        responses.forEach(response => {
+            if (response && response.individual_appliance_emissions) {
+                Object.entries(response.individual_appliance_emissions).forEach(([applianceType, emission]) => {
+                    // Ensure the key corresponds correctly to the appliance
+                    const emissionsKey = `emissions_${applianceType}`;
+                    allIndividualApplianceEmissions[applianceType] = emission;
+                    sessionStorage.setItem(emissionsKey, JSON.stringify({ appliance_emissions: emission }));
+                });
+            }
+        });
+
+        // Check and handle missing appliances
+        const selectedAppliances = JSON.parse(sessionStorage.getItem('applianceData')) || [];
+        selectedAppliances.forEach(appliance => {
+            if (!allIndividualApplianceEmissions[appliance]) {
+                allIndividualApplianceEmissions[appliance] = 0; // Default to zero if no data available
+                sessionStorage.setItem(`emissions_${appliance}`, JSON.stringify({ appliance_emissions: 0 }));
+            }
+        });
+
+        // Store all individual appliance emissions in a single object for overall reference
+        sessionStorage.setItem('individualApplianceEmissions', JSON.stringify(allIndividualApplianceEmissions));
+        console.log('Combined individual appliance emissions saved:', allIndividualApplianceEmissions);
+
+        // Calculate total emissions correctly
+        const totalEmissions = Object.values(allIndividualApplianceEmissions).reduce((total, emission) => total + emission, 0);
+        sessionStorage.setItem('totalEmissions', totalEmissions.toFixed(2));
+        console.log('Total emissions calculated:', totalEmissions);
+
+        window.location.href = 'emission_result.html'; // Navigate to the results page
+    } catch (error) {
+        console.error('Error sending data:', error);
+        alert('There was an error submitting your data. Please try again.');
+    } finally {
+        hideLoading();
+    }
+}
+
+
+
+
 
         function validateAndNavigate() {
             let isValid = true;
@@ -613,7 +696,6 @@
                             }
                         }
 
-
                         // Handle clothes dryer inputs
                         else if (section.querySelector('input[name="clothes-dryer-type"]')) {
                             const usagePerWeek = parseInt(document.getElementById('clothes-dryer-usage').value, 10);
@@ -674,9 +756,6 @@
                 sendDataToLambda(data);
             }
         }
-
-
-
     </script>
 </body>
 

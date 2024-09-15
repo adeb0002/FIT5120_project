@@ -352,7 +352,7 @@
             }
 
             // Save data to localStorage for debugging or future use
-            localStorage.setItem('transportationData', JSON.stringify(dataToSend));
+            sessionStorage.setItem('transportationData', JSON.stringify(dataToSend));
 
             console.log('Original data (input values):');
             questions.forEach(input => {

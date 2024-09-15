@@ -38,7 +38,7 @@
                         <li><a href="index.html" class="scroll-top">Home</a></li>
                         <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a></li>
                         <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
-                        <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
+                        <li><a href="emission_cal_personal.html" onclick="clearSessionStorage();">Emission Calculator</a></li>
                         <li><a href="recommendations.html">Recommendations</a></li>
                     </ul>
                 </div>
@@ -60,7 +60,7 @@
                         <!-- Total result will be dynamically injected here -->
                     </div>
                     <div class="primary-blue-button">
-                        <a href="emission_cal_personal.html" class="scroll-link" onclick="clearLocalStorage();">Calculate Again</a>
+                        <a href="emission_cal_personal.html" class="scroll-link" onclick="clearSessionStorage();">Calculate Again</a>
                     </div>
                     <!-- Add the button for navigating to result_graph.html -->
                     <div class="primary-blue-button">
@@ -76,113 +76,118 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-    sessionStorage.setItem('visitedResultPage', 'true');
-});
-
-async function fetchCategoryResults(data, type) {
-    try {
-        console.log(`Fetching results for ${type} with data:`, data);
-        const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ type: type, ...data })
+            sessionStorage.setItem('visitedResultPage', 'true');
         });
 
-        if (response.ok) {
-            const result = await response.json();
-            console.log(`Lambda response for ${type}:`, result);
+        async function fetchCategoryResults(data, type) {
+            try {
+                console.log(`Fetching results for ${type} with data:`, data);
+                const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type: type, ...data })
+                });
 
-            // Save the emissions for each category to local storage
-            if (type === 'total') {
-                localStorage.setItem('totalEmissions', result.total_emissions || 0);
-                localStorage.setItem('applianceEmissions', result.appliance_emissions || 0);
-                localStorage.setItem('gasEmissions', result.gas_emissions || 0);
-                localStorage.setItem('transportEmissions', result.transport_emissions || 0);
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log(`Lambda response for ${type}:`, result);
+
+                    // Save the emissions for each category to session storage
+                    if (type === 'total') {
+                        sessionStorage.setItem('totalEmissions', result.total_emissions || 0);
+                        sessionStorage.setItem('applianceEmissions', result.appliance_emissions || 0);
+                        sessionStorage.setItem('gasEmissions', result.gas_emissions || 0);
+                        sessionStorage.setItem('transportEmissions', result.transport_emissions || 0);
+                    }
+
+                    if (result.individual_appliance_emissions) {
+                        console.log('Saving individualApplianceEmissions:', result.individual_appliance_emissions);
+                        sessionStorage.setItem('individualApplianceEmissions', JSON.stringify(result.individual_appliance_emissions));
+                    }
+
+                    if (result.individual_transport_emissions) {
+                        console.log('Saving individualTransportEmissions:', result.individual_transport_emissions);
+                        sessionStorage.setItem('individualTransportEmissions', JSON.stringify(result.individual_transport_emissions));
+                    }
+
+                    return result;
+                } else {
+                    console.error(`Failed to fetch ${type} data:`, response.status);
+                    alert(`Failed to fetch ${type} results from the server.`);
+                    return null;
+                }
+            } catch (error) {
+                console.error(`Error fetching ${type} results:`, error);
+                alert('Network error. Please try again later.');
+                return null;
             }
-
-            if (result.individual_appliance_emissions) {
-                console.log('Saving individualApplianceEmissions:', result.individual_appliance_emissions);
-                localStorage.setItem('individualApplianceEmissions', JSON.stringify(result.individual_appliance_emissions));
-            }
-
-            if (result.individual_transport_emissions) {
-                console.log('Saving individualTransportEmissions:', result.individual_transport_emissions);
-                localStorage.setItem('individualTransportEmissions', JSON.stringify(result.individual_transport_emissions));
-            }
-
-            return result;
-        } else {
-            console.error(`Failed to fetch ${type} data:`, response.status);
-            alert(`Failed to fetch ${type} results from the server.`);
-            return null;
-        }
-    } catch (error) {
-        console.error(`Error fetching ${type} results:`, error);
-        alert('Network error. Please try again later.');
-        return null;
-    }
-}
-
-async function fetchAndDisplayResults() {
-    try {
-        // Retrieve any needed data from localStorage (or other sources)
-        const applianceEmissions = parseFloat(localStorage.getItem('applianceEmissions') || 0);
-        const gasEmissions = parseFloat(localStorage.getItem('gasEmissions') || 0);
-        const transportEmissions = parseFloat(localStorage.getItem('transportEmissions') || 0);
-
-        // Combine emissions data into a single request
-        const dataToSend = {
-            type: 'total',
-            appliance_emissions: applianceEmissions,
-            gas_emissions: gasEmissions,
-            transport_emissions: transportEmissions,
-        };
-
-        // Fetch the total emissions result
-        const totalResults = await fetchCategoryResults(dataToSend, 'total');
-
-        if (totalResults && totalResults.total_emissions !== undefined) {
-            localStorage.setItem('totalEmissions', totalResults.total_emissions);
-            console.log('Stored totalEmissions:', totalResults.total_emissions);
-        } else {
-            console.error('Failed to retrieve total emissions');
         }
 
-        // Display the total results after data is fetched
-        displayResults();
-    } catch (error) {
-        console.error('Error in fetchAndDisplayResults:', error);
-    }
-}
+        async function fetchAndDisplayResults() {
+            try {
+                // Retrieve any needed data from sessionStorage (or other sources)
+                const applianceEmissions = parseFloat(sessionStorage.getItem('applianceEmissions') || 0);
+                const gasEmissions = parseFloat(sessionStorage.getItem('gasEmissions') || 0);
+                const transportEmissions = parseFloat(sessionStorage.getItem('transportEmissions') || 0);
 
-function displayResults() {
-    try {
-        // Fetch each emission type from localStorage
-        const totalEmissions = parseFloat(localStorage.getItem('totalEmissions') || 0).toFixed(2);
-        const applianceEmissions = parseFloat(localStorage.getItem('applianceEmissions') || 0).toFixed(2);
-        const gasEmissions = parseFloat(localStorage.getItem('gasEmissions') || 0).toFixed(2);
-        const transportEmissions = parseFloat(localStorage.getItem('transportEmissions') || 0).toFixed(2);
+                // Combine emissions data into a single request
+                const dataToSend = {
+                    type: 'total',
+                    appliance_emissions: applianceEmissions,
+                    gas_emissions: gasEmissions,
+                    transport_emissions: transportEmissions,
+                };
 
-        const resultsTable = document.getElementById('results-table');
-        let tableHTML = `
-            <table class="table table-bordered">
-                <thead>
-                    <tr><th>Category</th><th>Emissions (kg CO2)</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>Appliance</td><td>${applianceEmissions} kg</td></tr>
-                    <tr><td>Gas</td><td>${gasEmissions} kg</td></tr>
-                    <tr><td>Transport</td><td>${transportEmissions} kg</td></tr>
-                    <tr><td><strong>Total</strong></td><td><strong>${totalEmissions} kg</strong></td></tr>
-                </tbody>
-            </table>`;
-        resultsTable.innerHTML = tableHTML;
-    } catch (error) {
-        console.error('Error displaying results:', error);
-    }
-}
+                // Fetch the total emissions result
+                const totalResults = await fetchCategoryResults(dataToSend, 'total');
 
-window.onload = fetchAndDisplayResults;
+                if (totalResults && totalResults.total_emissions !== undefined) {
+                    sessionStorage.setItem('totalEmissions', totalResults.total_emissions);
+                    console.log('Stored totalEmissions:', totalResults.total_emissions);
+                } else {
+                    console.error('Failed to retrieve total emissions');
+                }
+
+                // Display the total results after data is fetched
+                displayResults();
+            } catch (error) {
+                console.error('Error in fetchAndDisplayResults:', error);
+            }
+        }
+
+        function displayResults() {
+            try {
+                // Fetch each emission type from sessionStorage
+                const totalEmissions = parseFloat(sessionStorage.getItem('totalEmissions') || 0).toFixed(2);
+                const applianceEmissions = parseFloat(sessionStorage.getItem('applianceEmissions') || 0).toFixed(2);
+                const gasEmissions = parseFloat(sessionStorage.getItem('gasEmissions') || 0).toFixed(2);
+                const transportEmissions = parseFloat(sessionStorage.getItem('transportEmissions') || 0).toFixed(2);
+
+                const resultsTable = document.getElementById('results-table');
+                let tableHTML = `
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr><th>Category</th><th>Emissions (kg CO2)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Appliance</td><td>${applianceEmissions} kg</td></tr>
+                            <tr><td>Gas</td><td>${gasEmissions} kg</td></tr>
+                            <tr><td>Transport</td><td>${transportEmissions} kg</td></tr>
+                            <tr><td><strong>Total</strong></td><td><strong>${totalEmissions} kg</strong></td></tr>
+                        </tbody>
+                    </table>`;
+                resultsTable.innerHTML = tableHTML;
+            } catch (error) {
+                console.error('Error displaying results:', error);
+            }
+        }
+
+        function clearSessionStorage() {
+            sessionStorage.clear();
+            console.log('Session storage cleared');
+        }
+
+        window.onload = fetchAndDisplayResults;
 
     </script>
 </body>
