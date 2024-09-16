@@ -193,7 +193,7 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a></li>
                         <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
-                        <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
+                        <li><a href="emission_cal_personal.html" id="emission-calculator-link">Emission Calculator</a></li>
                         <li><a href="recommendations.html">Recommendations</a></li>
                     </ul>
                 </div>
@@ -362,6 +362,19 @@
     </div>
 
     <script>
+
+        function clearAllSessionStorage() {
+                sessionStorage.clear(); // Clears all data from session storage
+            }
+
+        document.getElementById('emission-calculator-link').addEventListener('click', function(event) {
+            // Clear all session storage data before navigating
+            clearAllSessionStorage();
+            
+            // Navigation will proceed as usual after clearing storage
+            // If you want to handle navigation manually or do something else, you can modify this section
+        });
+
        // Constants for equivalences and offsets
         const CO2_PER_KM_PETROL_CAR = 0.17048; // in kg per km
         const CO2_PER_ICE_SQUARE_METER = 333.33; // in kg per m^2 (1000kg CO2 = 3 m^2 ice)
