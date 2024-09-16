@@ -69,12 +69,29 @@
             .offset-container div {
                 flex: 1 1 100%; 
             }*/
-        
-        .chart {
-            width: 100%;
-            margin-top: 20px;
-            text-align: center;
-        }
+
+            .chart-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                justify-content: space-between;
+                width: 100%;
+                box-sizing: border-box; /* Prevent overflow */
+                padding: 10px; /* Add padding for spacing */
+                overflow: hidden; /* Prevent overflowing charts */
+            }
+
+            .chart {
+                flex: 1 1 calc(50% - 20px); /* Make each chart take up to half of the container width minus the gap */
+                min-width: 300px;
+                max-width: calc(50% - 20px); /* Ensure that each chart does not exceed half of the container */
+                margin-top: 20px;
+                text-align: center;
+                box-sizing: border-box; /* Ensure padding and borders are included in the width */
+                overflow: hidden; /* Prevent overflowing content */
+            }
+
+
 
         .equivalence-container,
         .offset-container {
@@ -96,6 +113,7 @@
         .chart-title {
             font-size: 1.2em;
             font-weight: bold;
+            margin-bottom: 10px;
         }
 
         .legend {
@@ -225,45 +243,80 @@
             </p>
         </div>
 
-        <div class="section chart">
-            <div class="chart-title">TV Screen Size Energy Consumption</div>
-            <div id="tv-screen-size-chart"></div>
+        <!-- TV Charts Section -->
+        <div class="section">
+            <p>Compare your television's energy efficiency against other types of television sizes or screen technology types below...</p>
+            <div class="chart-container">
+                <div class="chart">
+                    <div class="chart-title">TV Screen Size Energy Consumption</div>
+                    <div id="tv-screen-size-chart"></div>
+                </div>
+                <div class="chart">
+                    <div class="chart-title">TV Screen Technology Energy Consumption</div>
+                    <div id="tv-screen-tech-chart"></div>
+                </div>
+            </div>
         </div>
 
-        <div class="section chart">
-            <div class="chart-title">TV Screen Technology Energy Consumption</div>
-            <div id="tv-screen-tech-chart"></div>
-        </div>
-
-        <div class="section chart">
-            <div class="chart-title">Clothes Washer Energy Usage by Load Size</div>
-            <div id="clothes-washer-load-size-chart"></div>
-        </div>
-
-        <div class="section chart">
-            <div class="chart-title">Clothes Washer Type Energy Usage</div>
-            <div id="clothes-washer-type-chart"></div>
-        </div>
-
-        <div class="section chart">
-            <div class="chart-title">Clothes Dryer Energy Consumption</div>
-            <div id="clothes-dryer-chart"></div>
-        </div>
-
-        <div class="section chart">
-            <div class="chart-title">Air Conditioner Energy Usage</div>
-            <div id="air-conditioner-chart"></div>
-        </div>
-
-        <div class="section chart">
-            <div class="chart-title">Refrigerator Energy Usage by Volume</div>
-            <div id="refrigerator-chart"></div> 
+        <!-- Clothes Washer Charts Section -->
+        <div class="section">
+            <p>Compare your specific clothes washer's energy efficiency against others by load size or top vs front load types below...</p>
+            <div class="chart-container">
+                <div class="chart">
+                    <div class="chart-title">Clothes Washer Energy Usage by Load Size</div>
+                    <div id="clothes-washer-load-size-chart"></div>
+                </div>
+                <div class="chart">
+                    <div class="chart-title">Clothes Washer Type Energy Usage</div>
+                    <div id="clothes-washer-type-chart"></div>
+                </div>
+            </div>
         </div>
 
 
-        <div class="section chart">
-            <div class="chart-title">Emissions by Transport Mode (kg CO2)</div>
-            <div id="transport-chart"></div>
+        <!-- Clothes Dryer Charts Section -->
+        <div class="section">
+            <p>Compare your clothes dryer vs top/front load types below...</p>
+            <div class="chart-container">
+                <div class="chart">
+                    <div class="chart-title">Clothes Dryer Energy Consumption</div>
+                    <div id="clothes-dryer-chart"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Air Conditioner Charts Section -->
+        <div class="section">
+            <p>Compare ducted vs non-ducted air conditioner types below...</p>
+            <div class="chart-container">
+                <div class="chart">
+                    <div class="chart-title">Air Conditioner Energy Usage</div>
+                    <div id="air-conditioner-chart"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Refrigerator Charts Section -->
+        <div class="section">
+            <p>Compare refrigerators by volume below...</p>
+            <div class="chart-container">
+                <div class="chart">
+                    <div class="chart-title">Refrigerator Energy Usage by Volume</div>
+                    <div id="refrigerator-chart"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Transport Emissions Section -->
+        <div class="section">
+            <p>Lastly, let's take a look at how much your transportation choices emit...</p>
+            <div class="chart-container">
+                <div class="chart">
+                    <div class="chart-title">Emissions by Transport Mode (kg CO2)</div>
+                    <div id="transport-chart"></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -326,6 +379,65 @@
 
             return requestBody;
         }
+
+        function createUnifiedBarChart(data, selector, valueKey, labelKey, userInput) {
+            const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+            const containerWidth = document.querySelector(selector).offsetWidth; // Get container width
+            const width = containerWidth - margin.left - margin.right;
+            const height = 300 - margin.top - margin.bottom; // Adjust height as needed
+
+            const svg = d3.select(selector)
+                .html('')  // Clear existing SVG content before drawing new chart
+                .append('svg')
+                .attr('width', width + margin.left + margin.right)
+                .attr('height', height + margin.top + margin.bottom)
+                .append('g')
+                .attr('transform', `translate(${margin.left},${margin.top})`);
+
+            const x = d3.scaleBand()
+                .domain(data.map(d => d[labelKey]))
+                .range([0, width])
+                .padding(0.1);
+
+            const y = d3.scaleLinear()
+                .domain([0, d3.max(data, d => d[valueKey])])
+                .nice()
+                .range([height, 0]);
+
+            svg.append('g')
+                .attr('transform', `translate(0, ${height})`)
+                .call(d3.axisBottom(x))
+                .selectAll('text')
+                .attr('transform', 'rotate(-45)')
+                .style('text-anchor', 'end');
+
+            svg.append('g')
+                .call(d3.axisLeft(y));
+
+            svg.selectAll('.bar')
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr('class', 'bar')
+                .attr('x', d => x(d[labelKey]))
+                .attr('y', d => y(d[valueKey]))
+                .attr('width', x.bandwidth())
+                .attr('height', d => height - y(d[valueKey]))
+                .attr('fill', d => userInput && String(d[labelKey]).toLowerCase() === String(userInput).toLowerCase() ? 'red' : '#5ad18f');
+
+            svg.selectAll('.label')
+                .data(data)
+                .enter()
+                .append('text')
+                .attr('class', 'label')
+                .attr('x', d => x(d[labelKey]) + x.bandwidth() / 2)
+                .attr('y', d => y(d[valueKey]) - 5)
+                .attr('text-anchor', 'middle')
+                .style('font-size', '12px')
+                .text(d => `${d[valueKey].toFixed(2)} kg`);
+        }
+
+
 
         async function fetchApplianceEmissions() {
             showLoading();
@@ -582,17 +694,117 @@
         const clothesWasherLoadSize = parseFloat(localStorage.getItem('clothesWasherLoadSize')) || 0; 
         const clothesWasherLoadingType = localStorage.getItem('clothesWasherLoadingType') || '';
 
+        // Constants for calculations
+        const ENERGY_COST_PER_UNIT = 0.1901; // Energy cost per unit in dollars
+
+        // Example data retrieval from session storage
+        const applianceData = JSON.parse(sessionStorage.getItem('applianceData')) || [];
+        const individualApplianceEmissions = JSON.parse(sessionStorage.getItem('individualApplianceEmissions')) || {};
+
+        // Sample average consumptions data; adjust according to your real data
+        const averageConsumptions = {
+            television: 385,
+            clothes_washer: 520,
+            clothes_dryer: 720,
+            air_conditioner: 540,
+            refrigerator: 420
+        };
+
+        // Map the data from session storage to the format expected by the calculation function
+        const data = applianceData.map(appliance => {
+            const userConsumption = individualApplianceEmissions[appliance] * 1000; // Convert to kWh
+            const avgConsumption = averageConsumptions[appliance.toLowerCase().replace(/\s+/g, '_')];
+            return { appliance, userConsumption, avgConsumption };
+        });
+
+        // Calculate the total cost savings
+        const totalSavings = calculateCostSaving(data);
+
         // Create the user input object, ensuring that it matches the data format in charts
         const userInputLoadSize = {
             loadSize: clothesWasherLoadSize,
             energyUsage: clothesWasherLoadSizeData.find(d => d.loadSize === clothesWasherLoadSize)?.energyUsage || 0
         };
 
+        function displayTotalSavings(totalSavings) {
+            // Find the container where you want to display the savings
+            const savingsContainer = document.getElementById('negative-differences');
+            savingsContainer.textContent = `$${totalSavings} per year`; // Display the formatted savings
+        }
+
+        // Function to dynamically update the comparison section
+        function updateComparisonSection() {
+            // Calculate the total cost savings
+            const totalSavings = calculateCostSaving(averagesData);
+
+            // Find the container where you want to display the savings
+            const savingsContainer = document.getElementById('negative-differences');
+            if (totalSavings > 0) {
+                savingsContainer.textContent = `$${totalSavings} per year`;
+                savingsContainer.style.backgroundColor = '#4CAF50'; // Green for positive savings
+            } else {
+                savingsContainer.textContent = 'No significant savings identified';
+                savingsContainer.style.backgroundColor = '#f44336'; // Red for no savings
+            }
+
+            // Update other relevant dynamic parts
+            // Example: Update bar chart dynamically if not done elsewhere
+            createGroupedBarChart(averagesData, "#grouped-bar-chart");
+        }
+
         // Log to ensure correct retrieval and format
         console.log('User input load size:', userInputLoadSize);
         console.log('User input loading type:', clothesWasherLoadingType);
         console.log('Retrieved clothesWasherLoadSize:', clothesWasherLoadSize);
         console.log('Retrieved clothesWasherLoadingType:', clothesWasherLoadingType);
+        
+
+        // Function to dynamically create the averagesData array using session storage
+        function createAveragesData() {
+            // Retrieve individual appliance emissions from session storage
+            const individualApplianceEmissions = JSON.parse(sessionStorage.getItem('individualApplianceEmissions')) || {};
+            
+            // Define the average consumptions for comparison
+            const averageConsumptions = {
+                television: 37,
+                clothes_washer: 70,
+                clothes_dryer: 62,
+                air_conditioner: 30,
+                refrigerator: 20
+            };
+
+            // Build the averagesData array dynamically based on retrieved user data
+            const averagesData = [
+                {
+                    appliance: "Television",
+                    userConsumption: individualApplianceEmissions.television ? individualApplianceEmissions.television * 1000 : 0, // Convert to kWh if needed
+                    avgConsumption: averageConsumptions.television
+                },
+                {
+                    appliance: "Clothes Washer",
+                    userConsumption: individualApplianceEmissions.clothes_washer ? individualApplianceEmissions.clothes_washer * 1000 : 0,
+                    avgConsumption: averageConsumptions.clothes_washer
+                },
+                {
+                    appliance: "Clothes Dryer",
+                    userConsumption: individualApplianceEmissions.clothes_dryer ? individualApplianceEmissions.clothes_dryer * 1000 : 0,
+                    avgConsumption: averageConsumptions.clothes_dryer
+                },
+                {
+                    appliance: "Air Conditioner",
+                    userConsumption: individualApplianceEmissions.air_conditioner ? individualApplianceEmissions.air_conditioner * 1000 : 0,
+                    avgConsumption: averageConsumptions.air_conditioner
+                },
+                {
+                    appliance: "Refrigerator",
+                    userConsumption: individualApplianceEmissions.refrigerator ? individualApplianceEmissions.refrigerator * 1000 : 0,
+                    avgConsumption: averageConsumptions.refrigerator
+                }
+            ];
+
+            console.log('Averages Data:', averagesData); // Log to verify correctness
+            return averagesData;
+        }
 
 
         // Adjust chart functions to highlight user-selected data
@@ -696,9 +908,8 @@
                 });
         }
 
-        // Function to retrieve emissions data from sessionStorage dynamically
+        // Function to handle sessionStorage data retrieval
         function getEmissionsData() {
-            // Retrieve and parse data from sessionStorage
             const categoryData = [
                 { category: 'Electricity', emissions: parseFloat(sessionStorage.getItem('applianceEmissions') || 0) },
                 { category: 'Transport', emissions: parseFloat(sessionStorage.getItem('transportEmissions') || 0) },
@@ -708,32 +919,28 @@
             const individualApplianceEmissions = JSON.parse(sessionStorage.getItem('individualApplianceEmissions') || '{}');
             const individualTransportEmissions = JSON.parse(sessionStorage.getItem('transportationData') || '{}');
 
-            // Format appliance data for charts
+            // Debug logs to check data
+            console.log('Individual Appliance Emissions:', individualApplianceEmissions);
+            console.log('Individual Transport Emissions:', individualTransportEmissions);
+
             const applianceData = Object.entries(individualApplianceEmissions).map(([type, emissions]) => ({
-                type: type,
+                type,
                 emissions: parseFloat(emissions)
             }));
 
-            // Format transport data for charts
             const transportData = Object.entries(individualTransportEmissions).map(([type, emissions]) => ({
-                type: type.replace('_', ' '),  // Format for display
+                type: type.replace('_', ' '),
                 emissions: parseFloat(emissions)
             }));
-
-            // Log data to ensure it's correctly retrieved
-            console.log('Retrieved individualApplianceEmissions:', individualApplianceEmissions);
-            console.log('Retrieved individualTransportEmissions:', individualTransportEmissions);
 
             return { categoryData, applianceData, transportData };
         }
 
-        // Function to retrieve and format emissions data from sessionStorage
+
         function getUserSelections() {
-            // Retrieve selected appliances from session storage
             const selectedAppliances = JSON.parse(sessionStorage.getItem('applianceData')) || [];
             const userSelections = {};
 
-            // Extract data for each appliance type
             selectedAppliances.forEach(appliance => {
                 userSelections[appliance] = {
                     hours: sessionStorage.getItem(`${appliance}-hours`) || null,
@@ -744,28 +951,22 @@
                         userSelections[appliance].screenSize = sessionStorage.getItem('television-screen-size');
                         userSelections[appliance].screenTech = sessionStorage.getItem('television-screen-tech');
                         break;
-
                     case 'clothes_washer':
                         userSelections[appliance].loadingType = sessionStorage.getItem('clothes_washer-loading');
                         userSelections[appliance].loadSize = parseFloat(sessionStorage.getItem('clothes_washer-load-size'));
                         break;
-
                     case 'clothes_dryer':
                         userSelections[appliance].dryerType = sessionStorage.getItem('clothes_dryer-type');
                         break;
-
                     case 'air_conditioner':
                         userSelections[appliance].type = sessionStorage.getItem('air_conditioner-type');
                         break;
-
                     case 'refrigerator':
                         userSelections[appliance].volume = sessionStorage.getItem('refrigerator-volume');
                         break;
-
                     case 'dishwasher':
                         userSelections[appliance].usage = sessionStorage.getItem('dishwasher-usage');
                         break;
-
                     default:
                         console.warn(`No specific handling for ${appliance}`);
                 }
@@ -1025,30 +1226,30 @@
             const userSelections = getUserSelections();
             const { categoryData, applianceData, transportData } = getEmissionsData();
 
-            // Create all charts regardless of user input
+            console.log('Category Data:', categoryData);
+            console.log('Appliance Data:', applianceData);
+            console.log('Transport Data:', transportData);
+
             createPieChart(categoryData, '#category-chart', 'emissions', 'category');
             createPieChart(applianceData, '#appliance-chart', 'emissions', 'type');
-            
-            // TV Charts
-            createBarChart(tvScreenSizeData, '#tv-screen-size-chart', 'avgConsumption', 'screenSize', userSelections.television?.screenSize);
-            createBarChart(tvScreenTechData, '#tv-screen-tech-chart', 'avgConsumption', 'screenTech', userSelections.television?.screenTech);
 
-            // Clothes Washer Charts
-            createBarChart(clothesWasherLoadSizeData, '#clothes-washer-load-size-chart', 'energyUsage', 'loadSize', userSelections.clothes_washer?.loadSize);
-            createBarChart(clothesWasherTypeData, '#clothes-washer-type-chart', 'energyUsage', 'loadType', userSelections.clothes_washer?.loadingType);
+            createUnifiedBarChart(tvScreenSizeData, '#tv-screen-size-chart', 'avgConsumption', 'screenSize', userSelections.television?.screenSize);
+            createUnifiedBarChart(tvScreenTechData, '#tv-screen-tech-chart', 'avgConsumption', 'screenTech', userSelections.television?.screenTech);
 
-            // Clothes Dryer Chart
-            createBarChart(clothesDryerData, '#clothes-dryer-chart', 'energyUsage', 'dryerType', userSelections.clothes_dryer?.dryerType);
+            createUnifiedBarChart(clothesWasherLoadSizeData, '#clothes-washer-load-size-chart', 'energyUsage', 'loadSize', userSelections.clothes_washer?.loadSize);
+            createUnifiedBarChart(clothesWasherTypeData, '#clothes-washer-type-chart', 'energyUsage', 'loadType', userSelections.clothes_washer?.loadingType);
 
-            // Air Conditioner Chart
-            createBarChart(airConditionerData, '#air-conditioner-chart', 'energyUsage', 'type', userSelections.air_conditioner?.type);
+            createUnifiedBarChart(clothesDryerData, '#clothes-dryer-chart', 'energyUsage', 'dryerType', userSelections.clothes_dryer?.dryerType);
 
-            // Refrigerator Chart
-            createBarChart(refrigeratorData, '#refrigerator-chart', 'avgUsage', 'volume', userSelections.refrigerator?.volume);
+            createUnifiedBarChart(airConditionerData, '#air-conditioner-chart', 'energyUsage', 'type', userSelections.air_conditioner?.type);
 
-            // Transport Chart
-            createBarChart(transportData, '#transport-chart', 'emissions', 'type');
+            createUnifiedBarChart(refrigeratorData, '#refrigerator-chart', 'avgUsage', 'volume', userSelections.refrigerator?.volume);
+
+            createUnifiedBarChart(transportData, '#transport-chart', 'emissions', 'type');
         }
+
+        // Debugging: Check sessionStorage content
+        console.log('sessionStorage content:', sessionStorage);
 
             // Function to update the emission comparison with the average Melbournian
             function updateEmissionComparison(userEmissions) {
@@ -1073,27 +1274,32 @@
 
             // Initialize the page on window load
             window.onload = function () {
+                // Retrieve emissions and selections data
+                const { categoryData, applianceData, transportData } = getEmissionsData();
+
+                // Initialize charts with the retrieved data
                 initCharts();
 
-                // Check and display total emissions
+                // Retrieve and display total emissions
                 const totalEmissions = parseFloat(sessionStorage.getItem('totalEmissions'));
                 console.log('Attempting to load totalEmissions from sessionStorage:', totalEmissions);
 
-                //Create Grouped Bar Chart
-                createGroupedBarChart(averagesData, "#grouped-bar-chart");
-                const totalCostSavings = calculateCostSaving(averagesData);
-
-                // Display total cost savings
-                document.getElementById('negative-differences').textContent = `$ ${totalCostSavings} / Year`;
-
                 if (!isNaN(totalEmissions) && totalEmissions !== 0) {
-                    console.log('Loaded totalEmissions:', totalEmissions); 
+                    console.log('Loaded totalEmissions:', totalEmissions);
                     updateEmissionComparison(totalEmissions);
                     displayEquivalences(totalEmissions);
                 } else {
                     console.error('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
                     alert('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
                 }
+
+                // Create the averagesData array and update the grouped bar chart
+                const averagesData = createAveragesData();
+                createGroupedBarChart(averagesData, "#grouped-bar-chart");
+
+                // Calculate and display total savings
+                const totalCostSavings = calculateCostSaving(averagesData);
+                displayTotalSavings(totalCostSavings);
             };
 
 
