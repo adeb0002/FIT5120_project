@@ -427,8 +427,8 @@ h2 {
     align-items: center;
     max-width: 600px;
     margin-top: 50px;
-    /* Adjust the margin to move the slider left or right */
     margin-left: -70px; /* Example: move slider 50px to the left */
+    position: relative; /* Ensure the container is positioned relative for child absolute positioning */
 }
 
 .slider {
@@ -440,7 +440,6 @@ h2 {
     opacity: 0.7;
     transition: opacity .15s ease-in-out, background-color .15s ease-in-out;
     border-radius: 20px;
-    /* Remove position: center; as it's not a valid property */
 }
 
 .slider:hover {
@@ -457,12 +456,11 @@ h2 {
     border-radius: 50%;
     box-shadow: 0 0 4px rgba(0,0,0,0.3);
     transition: background-color .15s ease-in-out;
-    position: relative; /* Keeps the thumb in the normal flow of the layout */
-    margin-top: 8px; /* Adjust to position the thumb below the track */
-    z-index: 2; /* Ensures the thumb is above the track */
+    position: relative;
+    margin-top: 8px;
+    z-index: 2;
 }
 
-/* Ensure consistency across different browsers */
 .slider::-moz-range-thumb {
     width: 24px;
     height: 24px;
@@ -481,51 +479,53 @@ h2 {
     font-size: 1.2em;
     font-weight: bold;
     margin-left: 10px;
-    margin-top: 10px; /* Added to provide space below the slider */
+    margin-top: 10px; /* Space above the slider value */
 }
 
 #slider-value-container {
     position: absolute;
     bottom: -40px; /* Adjust this value to place the value below the slider */
     left: 50%;
-    transform: translateX(-340%); /* Center the value container */
+    transform: translateX(-50%); /* Center the value container */
     white-space: nowrap;
 }
 
 .slider-icon {
     position: absolute;
-    left: 10px; /* Adjust as needed */
+    left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    width: 24px; /* Icon width */
-    height: 24px; /* Icon height */
-    background-image: url(../img/home.1024x910.png); /* Path to your icon */
+    width: 24px;
+    height: 24px;
+    background-image: url(../img/home.1024x910.png);
     background-size: cover;
 }
 
 /* Media query for tablets (max-width: 768px) */
 @media (max-width: 768px) {
     .slider-container {
-        margin-left: 0; /* Remove margin to center the slider */
-        max-width: 90%; /* Make slider container responsive */
+        margin-left: 0;
+        max-width: 90%;
     }
 
     .slider {
-        height: 16px; /* Adjust the slider height for smaller screens */
+        height: 16px;
     }
 
     .slider::-webkit-slider-thumb {
-        width: 28px; /* Adjust thumb size */
+        width: 28px;
         height: 28px;
     }
 
     .slider::-moz-range-thumb {
-        width: 20px; /* Adjust thumb size */
+        width: 20px;
         height: 20px;
     }
 
     .slider-value {
-        font-size: 1em; /* Adjust font size */
+        font-size: 1em;
+        margin-right: 20px; /* Adjust right margin */
+        margin-bottom: 40px; /* Increase bottom margin */
     }
 
     #slider-value-container {
@@ -533,35 +533,37 @@ h2 {
     }
 
     .slider-icon {
-        width: 20px; /* Adjust icon size */
+        width: 20px;
         height: 20px;
-        left: 5px; /* Adjust position */
+        left: 5px;
     }
 }
 
 /* Media query for mobile devices (max-width: 576px) */
 @media (max-width: 576px) {
     .slider-container {
-        margin-left: 0; /* Remove margin to center the slider */
-        max-width: 100%; /* Full width for mobile */
+        margin-left: 0;
+        max-width: 100%;
     }
 
     .slider {
-        height: 12px; /* Further reduce slider height */
+        height: 12px;
     }
 
     .slider::-webkit-slider-thumb {
-        width: 24px; /* Further reduce thumb size */
+        width: 24px;
         height: 24px;
     }
 
     .slider::-moz-range-thumb {
-        width: 18px; /* Further reduce thumb size */
+        width: 18px;
         height: 18px;
     }
 
     .slider-value {
-        font-size: 0.9em; /* Further adjust font size */
+        font-size: 0.9em;
+        margin-right: 40px; /* Increase right margin to move it further right */
+        margin-bottom: 90px; /* Increase bottom margin to move it lower */
     }
 
     #slider-value-container {
@@ -569,9 +571,9 @@ h2 {
     }
 
     .slider-icon {
-        width: 18px; /* Further reduce icon size */
+        width: 18px;
         height: 18px;
-        left: 2px; /* Further adjust position */
+        left: 2px;
     }
 }
 

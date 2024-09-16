@@ -1,0 +1,538 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', arial, sans-serif;
+}
+
+html, body {
+    background-color: #f2e8d5;
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden; /* This prevents scrolling */
+}
+
+ul {
+	list-style: none;
+	margin: 0px;
+}
+
+.header {
+    position: fixed;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    padding: 0;
+    z-index: 10000;
+    transition: all 0.2s ease-in-out;
+    height: 80px;
+    background-color: #131212d4;
+    text-align: center;
+    line-height: 40px;
+    color: white;
+}
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
+    text-shadow: none;
+}
+
+.navbar-brand {
+	line-height: 80px;
+	padding: 0px;
+}
+
+.navbar-nav>li>a {
+	color: #fff!important;
+	font-size: 13px;
+	font-weight: 300;
+	text-transform: uppercase;
+	text-shadow: none;
+	line-height: 80px;
+	padding: 0px;
+	letter-spacing: 0.5px;
+}
+
+.navbar-nav>li {
+	margin-left: 45px;
+}
+
+.header.active .navbar-nav>li>a {
+	font-family: 'Open Sans', arial, sans-serif;
+	font-size: 13px;
+	font-weight: 500;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	text-shadow: none;
+	color: #121212!important;
+}
+
+.header.active {
+    background-color: rgba(250, 250, 250, 0.98);
+    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+}
+.navbar-brand {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 25px;
+	text-transform: uppercase;
+	color: #fff!important;
+	transition: all 0.5s;
+
+}
+.navbar-brand em {
+	font-style: normal;
+	color: #f7c552;
+	font-size: 32px;
+}
+.header.active .navbar-brand {
+	color: #121212!important;
+}
+.header .navbar-brand {
+    font-weight: 800;
+}
+.navbar-inverse {
+	background-image: none;
+	background-color: transparent;
+}
+.header .navbar {
+    margin: 0;
+    border: none;
+}
+.page-section {
+    padding: 80px 0;
+}
+.navbar-inverse .navbar-toggle {
+	margin-top: 22px;
+    border-color: #69d76c!important;
+    background-color: #69d76c!important;
+}
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+	background-color: #f7c552;
+}
+bootstrap.min.css
+.navbar-toggle {
+    position: relative;
+    float: right;
+    padding: 9px 10px;
+    margin-top: 15px!important;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+@media (min-width: 768px) {
+    .header .navbar-brand {
+        padding-left: 0;
+    }
+    .navbar-nav {
+        float: right;
+    }
+}
+.page-section {
+    min-height: 100vh;
+    padding: 0;
+}
+
+@media (max-width: 480px) {
+    .page-section h1 {
+        font-size: 3em;
+    }
+    .page-section h2 {
+        font-size: 2em;
+    }
+    .page-section p {
+        font-size: 1em;
+        margin: 0 0 20px;
+    }
+}
+
+.baner-content {
+	width: 100%;
+  	padding-top: 35vh;
+  	text-align: center;
+  	background-image: url(../img/blog_item_01.jpg);
+  	vertical-align: middle;
+}
+
+.baner-content .text-content {
+	text-align: center;
+}
+
+.baner-content .text-content h2 {
+	font-size: 36px;
+	font-weight: 400;
+	color: #fff;
+}
+
+.baner-content .text-content h2 span {
+	font-weight: 700;
+	color: #33c1cf!important;
+}
+
+.baner-content .text-content h2 em {
+	font-style: normal;
+	font-weight: 700;
+	color: #f89624!important;
+}
+
+.baner-content .text-content p {
+	color: #fff;
+	font-size: 14px;
+	line-height: 24px;
+	padding: 0px 25%;
+}
+
+.baner-content .text-content .primary-white-button {
+	margin-top: 25px;
+}
+
+
+.parallax-content {
+    background-size: cover;
+    padding: 150px 0;
+    text-align: center;
+    color: #fff;
+}
+
+.parallax-content h2 {
+    font-size: 40px;
+    color: transparent;
+    /* Transparent text to show the gradient effect */
+    text-align: center;
+    margin-top: -10px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #28a745, #2c3e50);
+    /* Updated gradient for a fresher look */
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    /* Enhanced shadow for a more pronounced effect */
+    padding: 10px 20px;
+    /* Adjusted padding for better spacing */
+    border-radius: 10px;
+    /* Increased border radius for a more modern rounded look */
+    display: inline-block;
+    /* Ensures padding and border radius are applied properly */
+    background-color: #ffffff;
+    /* Optional background color to enhance the contrast if needed */
+}
+
+@media (max-width: 768px) {
+    .parallax-content {
+        padding: 120px 0; /* Adjusted padding for tablets and larger phones */
+    }
+
+    .parallax-content h2 {
+        font-size: 32px; /* Adjust font size for tablets and larger phones */
+        padding: 10px 20px; /* Adjusted padding for the heading */
+        line-height: 1.4; /* Increased line height for better readability */
+        text-align: center; /* Center the heading text */
+    }
+}
+
+@media (max-width: 480px) {
+    .parallax-content {
+        padding: 120px 0; /* Reduced padding for smaller phones */
+    }
+
+    .parallax-content h2 {
+        font-size: 28px; /* Smaller font size for small phones */
+        padding: 8px 16px; /* Adjusted padding for the heading */
+        line-height: 1.4; /* Increased line height for better readability */
+        text-align: center; /* Center the heading text */
+    }
+}
+
+/* Education Section */
+#education-section {
+    padding: 50px 0;
+    background-color: transparent;
+}
+#description {
+    font-size: 1.5em;
+    line-height: 1.8;
+    margin-top: -160px;
+}
+
+/* Responsive styles for tablets and smaller devices */
+@media (max-width: 768px) {
+    #education-section {
+        padding: 15px 8px; /* Further reduced horizontal padding for tablets */
+        max-width: 600px; /* Reduced max-width for tablets */
+    }
+
+    #description {
+        font-size: 1.3em; /* Slightly smaller font size */
+        line-height: 1.6; /* Adjust line height for readability */
+        margin-top: -100px; /* Adjust margin for better alignment */
+    }
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 480px) {
+    #education-section {
+        padding: 10px 3px; /* Further reduced horizontal padding for mobile */
+        max-width: 90%; /* Full width on small screens */
+    }
+
+    #description {
+        font-size: 1.2em; /* Smaller font size for mobile */
+        line-height: 1.4; /* Adjust line height for better readability */
+        margin-top: -100px; /* Adjust margin for better alignment */
+    }
+}
+
+.box-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+.box {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Default width for smaller screens */
+    max-width: 1200px; /* Increased maximum width for each box */
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Alternate background colors */
+.box:nth-of-type(odd) {
+    background-color: #fff; /* White for odd boxes */
+}
+
+.box:nth-of-type(even) {
+    background-color: #f5f2ee;
+}
+
+.box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+}
+
+
+.box h2 {
+    font-size: 2.2em;
+    color: #388e3c;
+    margin-bottom: 50px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.box p {
+    font-size: 18px; /* Adjust font size as needed */
+    line-height: 1.6; /* Increase line height for better readability */
+    color: #333; /* Dark gray text color for better contrast */
+    margin-bottom: 20px;
+}
+
+/* If you want to style lists specifically */
+.box ul {
+    list-style-type: disc; /* Default bullet points for lists */
+    margin-left: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #1b5e20;
+}
+
+.box li {
+    margin-bottom: 15px;
+}
+
+.box img {
+    width: 100%;
+    max-width: 800px;
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px;
+    margin: 20px auto; /* Center the image and add margin for spacing */
+    display: block;
+    margin-bottom: 50px;
+}
+
+/* Responsive styles for tablets and smaller devices */
+@media (max-width: 768px) {
+    .box h2 {
+        font-size: 1.7em; /* Adjusted for tablets */
+        margin-bottom: 30px; /* Reduced bottom margin */
+    }
+
+    .box {
+        padding: 15px;
+        max-width: 500px; /* Limited width for tablets */
+    }
+
+    .box p {
+        font-size: 16px; /* Adjusted for readability */
+    }
+
+    .box ul {
+        font-size: 16px; /* Adjusted for readability */
+        margin-left: 20px; /* Reduced left margin */
+    }
+
+    .box img {
+        margin-bottom: 30px; /* Adjusted bottom margin */
+    }
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 480px) {
+    .box h2 {
+        font-size: 1.5em; /* Smaller font size for mobile */
+        margin-bottom: 20px; /* Adjusted bottom margin */
+    }
+
+    .box {
+        padding: 10px;
+        max-width: 100%; /* Full width for mobile */
+    }
+
+    .box p {
+        font-size: 15px; /* Smaller font size */
+        line-height: 1.4; /* Adjusted line height */
+    }
+
+    .box ul {
+        font-size: 15px; /* Smaller font size */
+        margin-left: 15px; /* Reduced left margin */
+    }
+
+    .box img {
+        margin-bottom: 18px; /* Adjusted bottom margin */
+    }
+}
+
+/* Link Highlight */
+.link-highlight {
+    color: #28a745;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.link-highlight:hover {
+    color: #2e7d32;
+}
+
+/* Call to Action */
+.call-to-action {
+    background-color: #e8f5e9;
+    padding: 40px;
+    text-align: center;
+    margin-top: 50px;
+    border-radius: 12px;
+}
+
+.call-to-action h2 {
+    font-size: 2.2em;
+    color: #2e7d32;
+    margin-bottom: 20px;
+}
+
+.call-to-action p {
+    font-size: 1.3em;
+    margin-bottom: 30px;
+}
+
+.flat-button {
+    display: inline-block;
+    padding: 14px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+}
+
+.flat-button:hover {
+    background-color: #218838;
+    transform: translateY(-5px);
+    color: white;
+}
+
+/* Responsive styles for tablets and smaller devices */
+@media (max-width: 768px) {
+    .call-to-action {
+        padding: 30px;
+        margin-top: 30px;
+    }
+
+    .call-to-action h2 {
+        font-size: 1.8em; /* Adjusted font size for tablets */
+    }
+
+    .call-to-action p {
+        font-size: 1.3em; /* Adjusted font size for tablets */
+    }
+
+    .flat-button {
+        padding: 12px 25px;
+        font-size: 16px; /* Adjusted font size for tablets */
+    }
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 480px) {
+    .call-to-action {
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .call-to-action h2 {
+        font-size: 1.5em; /* Smaller font size for mobile */
+    }
+
+    .call-to-action p {
+        font-size: 1.2em; /* Smaller font size for mobile */
+    }
+
+    .flat-button {
+        padding: 10px 20px;
+        font-size: 14px; /* Smaller font size for mobile */
+    }
+}
+
+
+@media (max-width: 768px){
+	.baner-content .text-content p {
+		padding: 0px 10%;
+	}
+	#main-nav {
+		margin-left: -15px;
+		margin-right: -15px;
+		border-top: none;
+		margin-top: 15px;
+		background-color: rgba(250, 250, 250, 0.95);
+	}
+
+	.navbar-nav {
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+
+	.navbar-inverse .navbar-nav>li {
+		margin-left: 0px;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	}
+
+	.navbar-inverse .navbar-nav>li:last-child {
+		border-bottom: none;
+	}
+
+	.navbar-inverse .navbar-nav>li>a {
+		font-family: 'Roboto', sans-serif!important;
+		line-height: 55px;
+		color: #343434!important;
+	}
+
+}

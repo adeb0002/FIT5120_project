@@ -39,11 +39,11 @@
                 <div id="main-nav" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="index.html" class="scroll-top">Home</a></li>
-                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a>
-                        </li>
+                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a></li>
                         <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
                         <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
                         <li><a href="recommendations.html">Recommendations</a></li>
+                        <li><a href="education_hub.html">Education Hub</a></li>
                     </ul>
                 </div>
             </nav>
@@ -300,27 +300,17 @@
 
                     if (result[0]?.body) {
                         const parsedBody = JSON.parse(result[0].body);
-
-                        // Store the total emissions and individual emissions in session storage
-                        if (parsedBody?.total_emissions !== undefined) {
-                            sessionStorage.setItem('totalEmissions', parsedBody.total_emissions);
-                            console.log('Total emissions saved to sessionStorage:', parsedBody.total_emissions);
-                        } else {
-                            console.warn('Total emissions data is missing in response.');
-                        }
-
                         if (parsedBody?.individual_transport_emissions) {
                             sessionStorage.setItem('transportationData', JSON.stringify(parsedBody.individual_transport_emissions));
                             console.log('Transport data saved to sessionStorage:', parsedBody.individual_transport_emissions);
                         } else {
-                            console.warn('Individual transport emissions data is missing in response.');
+                            console.warn('Transport emissions data is missing in response.');
                         }
                     } else {
                         console.warn('Unexpected data format:', result);
                     }
 
-                    // Redirect to the next page
-                    window.location.href = 'emission_cal_appli.html';
+                    window.location.href = 'emission_cal_appli.html'; // Redirect to the next page
                 } else {
                     const errorText = await response.text(); // Log the error response
                     console.error('Error response from server:', response.status, errorText);
@@ -331,7 +321,6 @@
                 alert('Error sending data to the server. Please try again.');
             }
         }
-
 
         function validateAndNavigate() {
             const questions = document.querySelectorAll('#transportation-usage-section input[type="number"]');
@@ -363,7 +352,7 @@
             }
 
             // Save data to localStorage for debugging or future use
-            sessionStorage.setItem('transportationData', JSON.stringify(dataToSend));
+            localStorage.setItem('transportationData', JSON.stringify(dataToSend));
 
             console.log('Original data (input values):');
             questions.forEach(input => {
