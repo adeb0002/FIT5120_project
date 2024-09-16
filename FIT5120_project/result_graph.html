@@ -415,11 +415,14 @@
             return requestBody;
         }
 
+        // Modified function to create the line chart with highlight feature
         function createLineChart(data, selector, valueKey, labelKey, userInput) {
             const margin = { top: 20, right: 30, bottom: 50, left: 60 };
             const containerWidth = document.querySelector(selector).offsetWidth; // Get container width
             const width = containerWidth - margin.left - margin.right;
             const height = 300 - margin.top - margin.bottom;
+
+            const parsedUserInput = parseFloat(userInput); // Ensure the user input is parsed correctly
 
             const svg = d3.select(selector)
                 .html('') // Clear existing SVG content before drawing new chart
@@ -430,7 +433,7 @@
                 .attr('transform', `translate(${margin.left},${margin.top})`);
 
             const x = d3.scaleLinear()
-                .domain(d3.extent(data, d => d[labelKey])) // Automatically adjust to the min and max values of load size
+                .domain(d3.extent(data, d => parseFloat(d[labelKey]))) // Adjust to ensure parsing consistency
                 .range([0, width]);
 
             const y = d3.scaleLinear()
@@ -453,22 +456,29 @@
                 .attr('stroke', '#69b3a2')
                 .attr('stroke-width', 2)
                 .attr('d', d3.line()
-                    .x(d => x(d[labelKey]))
+                    .x(d => x(parseFloat(d[labelKey]))) // Parse values for consistency
                     .y(d => y(d[valueKey]))
                 );
 
+            // Highlight specific points
             svg.selectAll('.dot')
                 .data(data)
                 .enter()
                 .append('circle')
-                .attr('cx', d => x(d[labelKey]))
+                .attr('class', 'dot')
+                .attr('cx', d => x(parseFloat(d[labelKey])))
                 .attr('cy', d => y(d[valueKey]))
-                .attr('r', d => (d[labelKey] === userInput ? 6 : 4)) // Highlight the user input point with a larger size
-                .attr('fill', d => (d[labelKey] === userInput ? 'red' : '#69b3a2')) // Highlight the user input point with a different color
-                .attr('stroke', d => (d[labelKey] === userInput ? 'black' : 'none')) // Optional: add a stroke for further distinction
+                .attr('r', d => {
+                    const dataPoint = parseFloat(d[labelKey]);
+                    console.log(`Data Point: ${dataPoint}, User Input: ${parsedUserInput}`); // Add this log
+                    return Math.abs(dataPoint - parsedUserInput) < 0.01 ? 6 : 4; // Use a small tolerance to highlight
+                })
+                .attr('fill', d => Math.abs(parseFloat(d[labelKey]) - parsedUserInput) < 0.01 ? 'red' : '#69b3a2')
+                .attr('stroke', d => Math.abs(parseFloat(d[labelKey]) - parsedUserInput) < 0.01 ? 'black' : 'none')
                 .append('title')
                 .text(d => `Load Size: ${d[labelKey]}, Energy Usage: ${d[valueKey].toFixed(2)} kWh`);
         }
+
 
 
 
@@ -975,9 +985,6 @@
                 .text(d => `${d[valueKey].toFixed(2)} kg`);
         }
 
-
-
-
         // Function to handle sessionStorage data retrieval
         function getEmissionsData() {
             const categoryData = [
@@ -1291,9 +1298,9 @@
         // Get the total negative differences
         const totalCostSavings = calculateCostSaving(averagesData);
 
-        // Initialize charts with user selections
+        // Function to initialize charts with user selections
         function initCharts() {
-            const userSelections = getUserSelections();
+            const userSelections = getUserSelections(); // Retrieve user selections
             const { categoryData, applianceData, transportData } = getEmissionsData();
 
             console.log('Category Data:', categoryData);
@@ -1306,17 +1313,17 @@
             createUnifiedBarChart(tvScreenSizeData, '#tv-screen-size-chart', 'avgConsumption', 'screenSize', userSelections.television?.screenSize);
             createUnifiedBarChart(tvScreenTechData, '#tv-screen-tech-chart', 'avgConsumption', 'screenTech', userSelections.television?.screenTech);
 
-            // Use the line chart function and pass the user input for highlighting
-            createLineChart(clothesWasherLoadSizeData, '#clothes-washer-load-size-chart', 'energyUsage', 'loadSize', userSelections.clothes_washer?.loadSize);
-            
+            // Highlight the specific Load Size in the line chart
+            // Retrieve loadSize and log it
+            const loadSize = userSelections['clothes_washer']?.loadSize; 
+            console.log('Load Size from userSelections:', loadSize); // Debug log
+            createLineChart(clothesWasherLoadSizeData, '#clothes-washer-load-size-chart', 'energyUsage', 'loadSize', loadSize);
+
+
             createUnifiedBarChart(clothesWasherTypeData, '#clothes-washer-type-chart', 'energyUsage', 'loadType', userSelections.clothes_washer?.loadingType);
-
             createUnifiedBarChart(clothesDryerData, '#clothes-dryer-chart', 'energyUsage', 'dryerType', userSelections.clothes_dryer?.dryerType);
-
             createUnifiedBarChart(airConditionerData, '#air-conditioner-chart', 'energyUsage', 'type', userSelections.air_conditioner?.type);
-
             createUnifiedBarChart(refrigeratorData, '#refrigerator-chart', 'avgUsage', 'volume', userSelections.refrigerator?.volume);
-
             createUnifiedBarChart(transportData, '#transport-chart', 'emissions', 'type');
         }
 
