@@ -24,8 +24,10 @@
 
         .header {
             background: #333;
-            padding: 10px 0;
+            padding: 20px 0; /* Increased padding for more space */
+            margin-bottom: 10px; /* Add margin to create space below the header */
         }
+
 
         .navbar-nav>li>a {
             color: #fff;
@@ -40,24 +42,26 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 100%;
+            max-width: 1400px; /* Allow the container to be wider */
+            margin: 0 auto;
             padding: 20px;
-            max-width: 1200px;
-            margin: 20px auto;
-            gap: 30px;
+            gap: 20px;
         }
 
         .section {
-            width: 100%;
+            width: 95%; /* Increase the width to utilize more space */
+            max-width: 1000px; /* Increase max-width for wider sections */
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            margin: 10px 0;
+            margin: 20px 0; /* Increase margin for more spacing */
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
         }
+
         h2 {
             font-size: 2em; /* Relative to the body font size */
             text-align: center;
@@ -70,27 +74,35 @@
                 flex: 1 1 100%; 
             }*/
 
-            .chart-container {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 20px;
-                justify-content: space-between;
-                width: 100%;
-                box-sizing: border-box; /* Prevent overflow */
-                padding: 10px; /* Add padding for spacing */
-                overflow: hidden; /* Prevent overflowing charts */
-            }
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center; /* Center charts within the container */
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+        }
 
+        .chart-container h3 {
+            margin-bottom: 20px;
+        }
+
+        .chart {
+            flex: 1 1 45%;
+            min-width: 300px;
+            max-width: 45%;
+            margin-top: 20px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 768px) {
             .chart {
-                flex: 1 1 calc(50% - 20px); /* Make each chart take up to half of the container width minus the gap */
-                min-width: 300px;
-                max-width: calc(50% - 20px); /* Ensure that each chart does not exceed half of the container */
-                margin-top: 20px;
-                text-align: center;
-                box-sizing: border-box; /* Ensure padding and borders are included in the width */
-                overflow: hidden; /* Prevent overflowing content */
+                flex: 1 1 100%;
+                max-width: 100%;
             }
-
+        }
 
 
         .equivalence-container,
@@ -142,6 +154,18 @@
         img {
             max-width: 100%;
             height: auto;
+        }
+
+        #negative-differences {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: white;
+            background-color: #4CAF50;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            margin: 15px auto; /* Center the element */
+            width: fit-content; /* Ensures the text box wraps around the content */
         }
 
     </style>
@@ -222,29 +246,35 @@
 
 
         <!-- Chart Container -->
-        <div class="section chart">
-            <div class="chart-title">Emissions per Category (kg CO2)</div>
-            <div id="category-chart"></div>
-        </div>
+        <div class="dashboard-container">
+            <div class="section chart-container" id="category-chart-container">
+                <h3>Emissions per Category (kg CO2)</h3>
+                <div id="category-chart"></div>
+            </div>
 
-        <div class="section chart">
-            <div class="chart-title">Emissions per Appliance (kg CO2)</div>
-            <div id="appliance-chart"></div>
-        </div>
+            <div class="section chart-container" id="appliance-chart-container">
+                <h3>Emissions per Appliance (kg CO2)</h3>
+                <div id="appliance-chart"></div>
+            </div>
 
-        <!-- cost saving container -->
-        <div class="section chart">
-            <div class="chart-title">How your appliances compare to the average</div>
-            <div id="grouped-bar-chart"></div>
+            <!-- cost saving container -->
+            <div class="section chart-container" id="grouped-bar-chart-container">
+                <h3>How your appliances compare to the average</h3>
+                <div id="grouped-bar-chart"></div>
+                
+            </div>
+            <div class="section"> 
             <h4>Some of your appliances have room for improvement in terms of efficiency. By choosing smarter,
                 eco-friendly alternatives, we estimate that you could save:</h4>
             <p id="negative-differences"
                 style="font-size: 2.5em; font-weight: bold; color: white; background-color: #4CAF50; padding: 10px; border-radius: 5px; text-align: center; margin-top: 15px;">
             </p>
+            </div>
         </div>
 
         <!-- TV Charts Section -->
         <div class="section">
+            <h2>Television Energy Consumption</h2>
             <p>Compare your television's energy efficiency against other types of television sizes or screen technology types below...</p>
             <div class="chart-container">
                 <div class="chart">
@@ -260,6 +290,7 @@
 
         <!-- Clothes Washer Charts Section -->
         <div class="section">
+            <h2>Clothes Washer Energy Consumption</h2>
             <p>Compare your specific clothes washer's energy efficiency against others by load size or top vs front load types below...</p>
             <div class="chart-container">
                 <div class="chart">
@@ -276,6 +307,7 @@
 
         <!-- Clothes Dryer Charts Section -->
         <div class="section">
+            <h2>Clothes Dryer Energy Consumption</h2>
             <p>Compare your clothes dryer vs top/front load types below...</p>
             <div class="chart-container">
                 <div class="chart">
@@ -287,6 +319,7 @@
 
         <!-- Air Conditioner Charts Section -->
         <div class="section">
+            <h2>Air Conditioner Energy Consumption</h2>
             <p>Compare ducted vs non-ducted air conditioner types below...</p>
             <div class="chart-container">
                 <div class="chart">
@@ -298,6 +331,7 @@
 
         <!-- Refrigerator Charts Section -->
         <div class="section">
+            <h2>Refrigerator Energy Consumption</h2>
             <p>Compare refrigerators by volume below...</p>
             <div class="chart-container">
                 <div class="chart">
@@ -310,6 +344,7 @@
 
         <!-- Transport Emissions Section -->
         <div class="section">
+            <h2>Transportation Emissions</h2>
             <p>Lastly, let's take a look at how much your transportation choices emit...</p>
             <div class="chart-container">
                 <div class="chart">
@@ -380,11 +415,68 @@
             return requestBody;
         }
 
+        function createLineChart(data, selector, valueKey, labelKey, userInput) {
+            const margin = { top: 20, right: 30, bottom: 50, left: 60 };
+            const containerWidth = document.querySelector(selector).offsetWidth; // Get container width
+            const width = containerWidth - margin.left - margin.right;
+            const height = 300 - margin.top - margin.bottom;
+
+            const svg = d3.select(selector)
+                .html('') // Clear existing SVG content before drawing new chart
+                .append('svg')
+                .attr('width', width + margin.left + margin.right)
+                .attr('height', height + margin.top + margin.bottom)
+                .append('g')
+                .attr('transform', `translate(${margin.left},${margin.top})`);
+
+            const x = d3.scaleLinear()
+                .domain(d3.extent(data, d => d[labelKey])) // Automatically adjust to the min and max values of load size
+                .range([0, width]);
+
+            const y = d3.scaleLinear()
+                .domain([0, d3.max(data, d => d[valueKey])])
+                .nice()
+                .range([height, 0]);
+
+            svg.append('g')
+                .attr('transform', `translate(0, ${height})`)
+                .call(d3.axisBottom(x).ticks(data.length).tickFormat(d3.format("d"))) // Display integers on x-axis
+                .attr('font-size', '12px'); // Adjust font size for x-axis labels
+
+            svg.append('g')
+                .call(d3.axisLeft(y))
+                .attr('font-size', '12px'); // Adjust font size for y-axis labels
+
+            svg.append('path')
+                .datum(data)
+                .attr('fill', 'none')
+                .attr('stroke', '#69b3a2')
+                .attr('stroke-width', 2)
+                .attr('d', d3.line()
+                    .x(d => x(d[labelKey]))
+                    .y(d => y(d[valueKey]))
+                );
+
+            svg.selectAll('.dot')
+                .data(data)
+                .enter()
+                .append('circle')
+                .attr('cx', d => x(d[labelKey]))
+                .attr('cy', d => y(d[valueKey]))
+                .attr('r', d => (d[labelKey] === userInput ? 6 : 4)) // Highlight the user input point with a larger size
+                .attr('fill', d => (d[labelKey] === userInput ? 'red' : '#69b3a2')) // Highlight the user input point with a different color
+                .attr('stroke', d => (d[labelKey] === userInput ? 'black' : 'none')) // Optional: add a stroke for further distinction
+                .append('title')
+                .text(d => `Load Size: ${d[labelKey]}, Energy Usage: ${d[valueKey].toFixed(2)} kWh`);
+        }
+
+
+
         function createUnifiedBarChart(data, selector, valueKey, labelKey, userInput) {
             const margin = { top: 20, right: 20, bottom: 50, left: 50 };
             const containerWidth = document.querySelector(selector).offsetWidth; // Get container width
             const width = containerWidth - margin.left - margin.right;
-            const height = 300 - margin.top - margin.bottom; // Adjust height as needed
+            const height = 300 - margin.top - margin.bottom;
 
             const svg = d3.select(selector)
                 .html('')  // Clear existing SVG content before drawing new chart
@@ -406,10 +498,21 @@
 
             svg.append('g')
                 .attr('transform', `translate(0, ${height})`)
-                .call(d3.axisBottom(x))
+                .call(d3.axisBottom(x).tickFormat(label => {
+                // Convert label to string to avoid type errors
+                label = String(label); // Ensure the label is a string
+                // Custom label formatting
+                if (label.includes('less than')) {
+                    return label.replace('less than', '<');
+                } else if (label.includes('greater than')) {
+                    return label.replace('greater than', '>');
+                }
+                return label; // Return unchanged for other labels
+            }))
+
                 .selectAll('text')
-                .attr('transform', 'rotate(-45)')
-                .style('text-anchor', 'end');
+                .style('text-anchor', 'middle') // Center-align the text
+                .style('font-size', '10px'); // Adjust font size to minimize overlap
 
             svg.append('g')
                 .call(d3.axisLeft(y));
@@ -423,7 +526,7 @@
                 .attr('y', d => y(d[valueKey]))
                 .attr('width', x.bandwidth())
                 .attr('height', d => height - y(d[valueKey]))
-                .attr('fill', d => userInput && String(d[labelKey]).toLowerCase() === String(userInput).toLowerCase() ? 'red' : '#5ad18f');
+                .attr('fill', d => userInput && String(d[labelKey]).toLowerCase() === String(userInput).toLowerCase() ? 'red' : '#69b3a2');
 
             svg.selectAll('.label')
                 .data(data)
@@ -436,6 +539,7 @@
                 .style('font-size', '12px')
                 .text(d => `${d[valueKey].toFixed(2)} kg`);
         }
+
 
 
 
@@ -562,7 +666,7 @@
                 return; // Exit if no data is available
             }
 
-            const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+            const margin = { top: 20, right: 20, bottom: 70, left: 50 };
             const width = 500 - margin.left - margin.right;
             const height = 300 - margin.top - margin.bottom;
 
@@ -807,9 +911,8 @@
         }
 
 
-        // Adjust chart functions to highlight user-selected data
         function createBarChart(data, selector, valueKey, labelKey, userInput) {
-            const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+            const margin = { top: 20, right: 20, bottom: 90, left: 50 }; // Increased bottom margin
             const width = 500 - margin.left - margin.right;
             const height = 300 - margin.top - margin.bottom;
 
@@ -833,15 +936,22 @@
 
             svg.append('g')
                 .attr('transform', `translate(0, ${height})`)
-                .call(d3.axisBottom(x))
+                .call(d3.axisBottom(x).tickFormat(label => {
+                    // Custom label formatting
+                    if (label.includes('less than')) {
+                        return label.replace('less than', '<');
+                    } else if (label.includes('greater than')) {
+                        return label.replace('greater than', '>');
+                    }
+                    return label; // Return unchanged for other labels
+                }))
                 .selectAll('text')
-                .attr('transform', 'rotate(-45)')
-                .style('text-anchor', 'end');
+                .style('text-anchor', 'middle') // Center-align the text
+                .style('font-size', '10px'); // Adjust font size to minimize overlap
 
             svg.append('g')
                 .call(d3.axisLeft(y));
 
-            // Draw bars with highlighting for selected values
             svg.selectAll('.bar')
                 .data(data)
                 .enter()
@@ -851,62 +961,22 @@
                 .attr('y', d => y(d[valueKey]))
                 .attr('width', x.bandwidth())
                 .attr('height', d => height - y(d[valueKey]))
-                .attr('fill', d => {
-                    // Highlight the bar if it matches the user-selected value
-                    return String(d[labelKey]).toLowerCase() === String(userInput).toLowerCase() ? 'red' : '#69b3a2';
-                });
-        }
+                .attr('fill', d => userInput && String(d[labelKey]).toLowerCase() === String(userInput).toLowerCase() ? 'red' : '#69b3a2');
 
-
-        // Adjust chart functions to always display all data, highlighting user-selected data if available
-        function createBarChart(data, selector, valueKey, labelKey, userInput) {
-            const margin = { top: 20, right: 20, bottom: 50, left: 50 };
-            const width = 500 - margin.left - margin.right;
-            const height = 300 - margin.top - margin.bottom;
-
-            const svg = d3.select(selector)
-                .html('')  // Clear existing SVG content before drawing new chart
-                .append('svg')
-                .attr('width', width + margin.left + margin.right)
-                .attr('height', height + margin.top + margin.bottom)
-                .append('g')
-                .attr('transform', `translate(${margin.left}, ${margin.top})`);
-
-            const x = d3.scaleBand()
-                .domain(data.map(d => d[labelKey]))
-                .range([0, width])
-                .padding(0.1);
-
-            const y = d3.scaleLinear()
-                .domain([0, d3.max(data, d => d[valueKey])])
-                .nice()
-                .range([height, 0]);
-
-            svg.append('g')
-                .attr('transform', `translate(0, ${height})`)
-                .call(d3.axisBottom(x))
-                .selectAll('text')
-                .attr('transform', 'rotate(-45)')
-                .style('text-anchor', 'end');
-
-            svg.append('g')
-                .call(d3.axisLeft(y));
-
-            // Draw bars with highlighting for selected values
-            svg.selectAll('.bar')
+            svg.selectAll('.label')
                 .data(data)
                 .enter()
-                .append('rect')
-                .attr('class', 'bar')
-                .attr('x', d => x(d[labelKey]))
-                .attr('y', d => y(d[valueKey]))
-                .attr('width', x.bandwidth())
-                .attr('height', d => height - y(d[valueKey]))
-                .attr('fill', d => {
-                    // Highlight the bar if it matches the user-selected value
-                    return userInput && String(d[labelKey]).toLowerCase() === String(userInput).toLowerCase() ? 'red' : '#69b3a2';
-                });
+                .append('text')
+                .attr('class', 'label')
+                .attr('x', d => x(d[labelKey]) + x.bandwidth() / 2)
+                .attr('y', d => y(d[valueKey]) - 5)
+                .attr('text-anchor', 'middle')
+                .style('font-size', '12px')
+                .text(d => `${d[valueKey].toFixed(2)} kg`);
         }
+
+
+
 
         // Function to handle sessionStorage data retrieval
         function getEmissionsData() {
@@ -1127,7 +1197,7 @@
         }
 
         function createGroupedBarChart(data, selector) {
-            const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+            const margin = { top: 20, right: 20, bottom: 70, left: 50 };
             const width = 600 - margin.left - margin.right;
             const height = 400 - margin.top - margin.bottom;
 
@@ -1221,7 +1291,7 @@
         // Get the total negative differences
         const totalCostSavings = calculateCostSaving(averagesData);
 
-        // Function to initialize the charts with user selections
+        // Initialize charts with user selections
         function initCharts() {
             const userSelections = getUserSelections();
             const { categoryData, applianceData, transportData } = getEmissionsData();
@@ -1236,7 +1306,9 @@
             createUnifiedBarChart(tvScreenSizeData, '#tv-screen-size-chart', 'avgConsumption', 'screenSize', userSelections.television?.screenSize);
             createUnifiedBarChart(tvScreenTechData, '#tv-screen-tech-chart', 'avgConsumption', 'screenTech', userSelections.television?.screenTech);
 
-            createUnifiedBarChart(clothesWasherLoadSizeData, '#clothes-washer-load-size-chart', 'energyUsage', 'loadSize', userSelections.clothes_washer?.loadSize);
+            // Use the line chart function and pass the user input for highlighting
+            createLineChart(clothesWasherLoadSizeData, '#clothes-washer-load-size-chart', 'energyUsage', 'loadSize', userSelections.clothes_washer?.loadSize);
+            
             createUnifiedBarChart(clothesWasherTypeData, '#clothes-washer-type-chart', 'energyUsage', 'loadType', userSelections.clothes_washer?.loadingType);
 
             createUnifiedBarChart(clothesDryerData, '#clothes-dryer-chart', 'energyUsage', 'dryerType', userSelections.clothes_dryer?.dryerType);
@@ -1247,6 +1319,8 @@
 
             createUnifiedBarChart(transportData, '#transport-chart', 'emissions', 'type');
         }
+
+
 
         // Debugging: Check sessionStorage content
         console.log('sessionStorage content:', sessionStorage);
