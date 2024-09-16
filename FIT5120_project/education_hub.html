@@ -19,6 +19,7 @@
         .section-title {
             margin-bottom: 20px;
         }
+
         .call-to-action {
             background-color: #e0ffe5;
             padding: 20px;
@@ -26,235 +27,264 @@
             text-align: center;
             margin-top: 20px;
         }
+
         p {
             color: #444;
             margin-bottom: 20px
         }
+
         ul {
-            margin-bottom:20px;
+            margin-bottom: 20px;
             list-style-type: disc;
             margin-left: 20px
         }
+
         .flat-button {
             display: inline-block;
             padding: 12px 24px;
             font-size: 16px;
             font-weight: bold;
-            color: #ffffff; /* White text */
-            background-color: #007BFF; /* Flat blue background */
-            border: none; /* No border for a flat look */
-            border-radius: 4px; /* Slightly rounded corners */
-            text-decoration: none; /* Remove underline from the link */
-            text-align: center; /* Center the text inside the button */
-            transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            color: #ffffff;
+            /* White text */
+            background-color: #007BFF;
+            /* Flat blue background */
+            border: none;
+            /* No border for a flat look */
+            border-radius: 4px;
+            /* Slightly rounded corners */
+            text-decoration: none;
+            /* Remove underline from the link */
+            text-align: center;
+            /* Center the text inside the button */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            /* Smooth transitions */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow */
         }
 
         .flat-button:hover {
-            background-color: #0056b3; /* Darken the background on hover */
-            color: #ffffff; /* Ensure text stays white */
-            transform: translateY(-2px); /* Slightly lift the button on hover */
+            background-color: #0056b3;
+            /* Darken the background on hover */
+            color: #ffffff;
+            /* Ensure text stays white */
+            transform: translateY(-2px);
+            /* Slightly lift the button on hover */
         }
 
         .flat-button:active {
-            background-color: #004080; /* Darken further when pressed */
-            color: #ffffff; /* Ensure text stays white */
-            transform: translateY(0); /* Reset the lift effect when clicked */
+            background-color: #004080;
+            /* Darken further when pressed */
+            color: #ffffff;
+            /* Ensure text stays white */
+            transform: translateY(0);
+            /* Reset the lift effect when clicked */
         }
 
         .flat-button:focus {
-            outline: none; /* Remove the default focus outline */
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Add a focus ring for accessibility */
-            color: #ffffff; /* Ensure text stays white */
+            outline: none;
+            /* Remove the default focus outline */
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+            /* Add a focus ring for accessibility */
+            color: #ffffff;
+            /* Ensure text stays white */
         }
-
-
     </style>
 </head>
 
 <body>
-<!-- Header Section with Navigation Bar -->
-<div class="header">
-    <div class="container">
-        <nav class="navbar navbar-inverse" role="navigation">
-            <div class="navbar-header">
-                <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="index.html" class="navbar-brand scroll-top">
-                    <img src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
-                </a>
+    <!-- Header Section with Navigation Bar -->
+    <div class="header">
+        <div class="container">
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#main-nav">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="index.html" class="navbar-brand scroll-top">
+                        <img src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
+                    </a>
+                </div>
+                <div id="main-nav" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="index.html" class="scroll-top">Home</a></li>
+                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a>
+                        </li>
+                        <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
+                        <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
+                        <li><a href="recommendations.html">Recommendations</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="parallax-content" id="recommendations">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 style="margin-bottom: -50px;">Education Hub</h2>
+                </div>
             </div>
-            <div id="main-nav" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="index.html" class="scroll-top">Home</a></li>
-                    <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a></li>
-                    <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
-                    <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
-                    <li><a href="recommendations.html">Recommendations</a></li>
+        </div>
+    </div>
+
+    <!-- Education Section -->
+    <section id="education-section" class="container">
+        <p style="color: #444; text-align: center; font-size: 12px; margin: 0;">
+            Welcome to our education hub, here we aim to help you understand the broader impacts of climate change and
+            how your daily actions contribute to greenhouse gas emissions. By exploring how simple choices affect the
+            environment, you'll gain valuable insights into reducing your carbon footprint and making a positive impact
+            on our planet.
+        </p>
+
+        </p>
+        <!-- box 1 -->
+        <div class="box-container">
+            <div class="box">
+                <h2 class="section-title">Climate Change 101: Introduction to Greenhouse Gases</h2>
+                <p>The Earth’s atmosphere is composed of various gases, including greenhouse gases. Greenhouse gases in
+                    the atmosphere are necessary to keep the Earth warm. However, excessive concentrations of greenhouse
+                    gases can lead to dangerous warming.</p>
+                <p>There are four main types of greenhouse gases:</p>
+                <ul>
+                    <li>Carbon Dioxide (CO2)</li>
+                    <li>Methane (CH4)</li>
+                    <li>Nitrous Oxide (N2O)</li>
+                    <li>Fluorinated Gases</li>
                 </ul>
+
+                <p>CO2 (carbon dioxide) is the most used greenhouse gas (GHG) for metrics because:</p>
+                <ul>
+                    <li>CO2 is the most abundant greenhouse gas released by human activities.</li>
+                    <li>CO2 remains in the atmosphere for hundreds to thousands of years, making its impact long-lasting
+                        compared to other greenhouse gases.</li>
+                    <li>CO2 emissions are relatively easy to quantify and track.</li>
+                </ul>
+
+                <p>Global temperatures have increased as the concentration of greenhouse gases in the atmosphere has
+                    risen.</p>
+                <img src="https://images.unsplash.com/photo-1602980085374-7e743fff3cc6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Introduction to Greenhouse Gases" style="width:40%; height:auto; margin: 0 auto 20px auto; display: block;">
+
             </div>
-        </nav>
-    </div>
-</div>
+            <!-- box 2 -->
+            <div class="box">
+                <h2 class="section-title">Why Do Changing Temperatures Matter?</h2>
+                <p>A warmer climate changes weather patterns, making wet areas wetter and dry areas drier. This could
+                    lead to extensive flooding in some regions and water shortages in others.</p>
 
-<div class="parallax-content" id="recommendations">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 style="margin-bottom: -50px;">Education Hub</h2>
+                <p>Leading economies have committed to reaching net-zero emissions by 2050 to keep global warming to
+                    1.5°C above pre-industrial temperatures.</p>
+
+                <p>While even 1.5°C of warming could lead to harmful global consequences, the implications of 2°C of
+                    warming are even worse:</p>
+                <ul>
+                    <li>More than a third of the global population could experience severe heatwaves at least every 5
+                        years.</li>
+                    <li>Widespread food shortages could arise in Southern Africa, the Mediterranean, Central Europe, and
+                        the Amazon.</li>
+                    <li>Over 70% of Earth’s coastlines could see sea levels rise by 50 cm, resulting in extensive
+                        coastal flooding.</li>
+                    <li>More than 40% of the permafrost in the Arctic could disappear.</li>
+                </ul>
+
+                <p>All of this could lead to severe economic consequences.</p>
+                <img src="https://trapbag.com/wp-content/uploads/2024/07/Flooded-road-in-Australia.jpg" alt="Introduction to Greenhouse Gases" style="width:40%; height:auto; margin: 0 auto 20px auto; display: block;">
+
+            </div>
+            <!-- box 3 -->
+            <div class="box">
+                <h2 class="section-title">How Do My Day-to-Day Actions Affect Climate Change?</h2>
+                <p>Here's how this chain of events works:</p>
+                <ul>
+                    <li><strong>Energy Use:</strong> Everyday activities like heating your home, driving a car, or using
+                        appliances often rely on energy (e.g., gas or electricity) from fossil fuels, which release CO2
+                        when burned.</li>
+                    <li><strong>GHG Accumulation:</strong> These GHGs accumulate in the atmosphere, trapping heat that
+                        would otherwise escape into space (the greenhouse effect).</li>
+                    <li><strong>Global Warming:</strong> As more GHGs are emitted, the Earth's average temperature
+                        rises, leading to global warming.</li>
+                    <li><strong>Climate Change:</strong> Rising temperatures disrupt natural systems, altering weather
+                        patterns and increasing the frequency of extreme events.</li>
+                </ul>
+
+                <p>Local & Global Consequences: These changes can result in harsher conditions, affecting agriculture,
+                    biodiversity, and human health globally. On a local scale, it may lead to extreme heatwaves, water
+                    shortages, or stronger storms in your area. Economic consequences from these extreme climate events
+                    can also have severe adverse impacts on your career, lifestyle, and wellbeing.</p>
+            </div>
+            <!-- box 4 -->
+            <div class="box">
+                <h2 class="section-title">How to Prevent Further Warming?</h2>
+                <p>There are two main methods to prevent further warming:</p>
+                <ul>
+                    <li>Reflecting more sunlight back into space.</li>
+                    <li>Restricting the concentration of greenhouse gases in the atmosphere.</li>
+                </ul>
+
+                <p>Reflecting sunlight back into space poses harmful potential implications for global weather, so
+                    initiatives like ours around the world focus on reducing greenhouse gas emissions.</p>
+            </div>
+            <!-- box 5 -->
+            <div class="box">
+                <h2 class="section-title">How Do We Decarbonise?</h2>
+                <p>Decarbonising personal activities is key to reducing our carbon footprint and combating climate
+                    change. Whether it's through smarter transportation choices, home energy efficiency, or sustainable
+                    shopping habits, there are numerous ways to make a positive impact.</p>
+                <p>For a detailed guide on how to reduce your carbon emissions in various aspects of daily life—such as
+                    vehicle use, home energy, waste management, and more—please visit our <a
+                        href="/recommendations-page" class="link-highlight">Recommendations Page</a>.</p>
+            </div>
+
+        </div>
+
+        <div>
+
+
+
+
+
+
+
+
+
+
+            <h2 class="section-title">How Can You Minimise Your Carbon Footprint?</h2>
+            <p>Your personal carbon footprint consists of the greenhouse gases you emit from your daily activities. By
+                making mindful choices, you can reduce your emissions and contribute to mitigating climate change.</p>
+
+            <div class="call-to-action">
+                <h2>Take Action Today!</h2>
+                <p>Start by assessing your carbon footprint with our calculator and discover ways to reduce it.</p>
+                <a href="emission_cal_personal.html" class="flat-button">Calculate Your Emissions</a>
             </div>
         </div>
-    </div>
-</div>
-
-<!-- Education Section -->
-<section id="education-section" class="container">
-    <p style="color: #444; text-align: center; font-size: 12px; margin: 0;">
-        Welcome to our education hub, here we aim to help you understand the broader impacts of climate change and how your daily actions contribute to greenhouse gas emissions. By exploring how simple choices affect the environment, you'll gain valuable insights into reducing your carbon footprint and making a positive impact on our planet.
-    </p>
-    
-    </p>  
-    <!-- box 1 -->
-    <div class="box-container">
-        <div class="box">
-            <h2 class="section-title">Climate Change 101: Introduction to Greenhouse Gases</h2>
-            <p>The Earth’s atmosphere is composed of various gases, including greenhouse gases. Greenhouse gases in the atmosphere are necessary to keep the Earth warm. However, excessive concentrations of greenhouse gases can lead to dangerous warming.</p>   
-            <p>There are four main types of greenhouse gases:</p>
-            <ul>
-                <li>Carbon Dioxide (CO2)</li>
-                <li>Methane (CH4)</li>
-                <li>Nitrous Oxide (N2O)</li>
-                <li>Fluorinated Gases</li>
-            </ul>
-    
-            <p>CO2 (carbon dioxide) is the most used greenhouse gas (GHG) for metrics because:</p>
-            <ul>
-                <li>Prevalence: CO2 is the most abundant greenhouse gas released by human activities.</li>
-                <li>Long Atmospheric Lifespan: CO2 remains in the atmosphere for hundreds to thousands of years, making its impact long-lasting compared to other greenhouse gases.</li>
-                <li>Measurable Impact: CO2 emissions are relatively easy to quantify and track.</li>
-            </ul>
-    
-            <p>Global temperatures have increased as the concentration of greenhouse gases in the atmosphere has risen.</p>
-        </div>
-        <!-- box 2 -->
-        <div class="box">
-            <h2 class="section-title">Why Do Changing Temperatures Matter?</h2>
-            <p>A warmer climate changes weather patterns, making wet areas wetter and dry areas drier. This could lead to extensive flooding in some regions and water shortages in others.</p>
-            
-            <p>Leading economies have committed to reaching net-zero emissions by 2050 to keep global warming to 1.5°C above pre-industrial temperatures.</p>
-    
-            <p>While even 1.5°C of warming could lead to harmful global consequences, the implications of 2°C of warming are even worse:</p>
-            <ul>
-                <li>More than a third of the global population could experience severe heatwaves at least every 5 years.</li>
-                <li>Widespread food shortages could arise in Southern Africa, the Mediterranean, Central Europe, and the Amazon.</li>
-                <li>Over 70% of Earth’s coastlines could see sea levels rise by 50 cm, resulting in extensive coastal flooding.</li>
-                <li>More than 40% of the permafrost in the Arctic could disappear.</li>
-            </ul>
-            
-            <p>All of this could lead to severe economic consequences.</p>
-        </div>
-        <!-- box 3 -->
-        <div class="box">
-            <h2 class="section-title">How Do My Day-to-Day Actions Affect Climate Change?</h2>
-            <p>Here's how this chain of events works:</p>
-            <ul>
-                <li><strong>Energy Use:</strong> Everyday activities like heating your home, driving a car, or using appliances often rely on energy (e.g., gas or electricity) from fossil fuels, which release CO2 when burned.</li>
-                <li><strong>GHG Accumulation:</strong> These GHGs accumulate in the atmosphere, trapping heat that would otherwise escape into space (the greenhouse effect).</li>
-                <li><strong>Global Warming:</strong> As more GHGs are emitted, the Earth's average temperature rises, leading to global warming.</li>
-                <li><strong>Climate Change:</strong> Rising temperatures disrupt natural systems, altering weather patterns and increasing the frequency of extreme events.</li>
-            </ul>
-            
-            <p>Local & Global Consequences: These changes can result in harsher conditions, affecting agriculture, biodiversity, and human health globally. On a local scale, it may lead to extreme heatwaves, water shortages, or stronger storms in your area. Economic consequences from these extreme climate events can also have severe adverse impacts on your career, lifestyle, and wellbeing.</p>
-        </div>
-        <!-- box 4 -->
-        <div class="box">
-            <h2 class="section-title">How to Prevent Further Warming?</h2>
-            <p>There are two main methods to prevent further warming:</p>
-            <ul>
-                <li>Reflecting more sunlight back into space.</li>
-                <li>Restricting the concentration of greenhouse gases in the atmosphere.</li>
-            </ul>
-            
-            <p>Reflecting sunlight back into space poses harmful potential implications for global weather, so the world is focused on reducing greenhouse gas emissions.</p>
-        </div>
-        <!-- box 5 -->
-        <div class="box">
-            <h2 class="section-title">How Do We Decarbonize?</h2>
-            <p>In this section, we will explore how to decarbonize some of the largest CO2-emitting personal activities.</p>
-        
-            <h3>Vehicles</h3>
-            <ul>
-                <li>EVs and plug-in hybrids emit fewer emissions than traditional cars.</li>
-                <li>EV battery production has environmental impacts due to raw material mining and energy use.</li>
-                <li>Opt for public transportation when possible.</li>
-            </ul>
-        
-            <h3>Home Energy</h3>
-            <ul>
-                <li>Choose green energy providers (wind, solar, hydroelectric).</li>
-                <li>Use energy-efficient appliances, LED lighting, and proper insulation to reduce energy use.</li>
-            </ul>
-            
-            <h3>Waste Management</h3>
-            <ul>
-                <li>Minimize waste, reuse items, and recycle properly.</li>
-                <li>Compost organic waste to reduce methane emissions from landfills.</li>
-            </ul>
-            
-            <h3>Shopping Habits</h3>
-            <ul>
-                <li>Buy durable clothes from eco-friendly brands.</li>
-                <li>Opt for products with minimal packaging.</li>
-            </ul>
-        </div>
-    </div>
-    
-    <div>
-        
-       
-        
-        
-        
-        
-        
-        
-        
-        
-        <h2 class="section-title">How Can You Minimize Your Carbon Footprint?</h2>
-        <p>Your personal carbon footprint consists of the greenhouse gases you emit from your daily activities. By making mindful choices, you can reduce your emissions and contribute to mitigating climate change.</p>
-        
-        <div class="call-to-action">
-            <h2>Take Action Today!</h2>
-            <p>Start by assessing your carbon footprint with our calculator and discover ways to reduce it.</p>
-            <a href="emission_cal_personal.html" class="flat-button">Calculate Your Emissions</a>
-        </div>
-    </div>
-</section>
+    </section>
 
 
-<!-- Scripts -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script>
-    // Accordion functionality
-    document.addEventListener('DOMContentLoaded', function () {
-        var acc = document.getElementsByClassName("accordion");
-        for (var i = 0; i < acc.length; i++) {
-            acc[i].addEventListener("click", function () {
-                this.classList.toggle("active");
-                var panel = this.nextElementSibling;
-                if (panel.style.display === "block") {
-                    panel.style.display = "none";
-                } else {
-                    panel.style.display = "block";
-                }
-            });
-        }
-    });
-</script>
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        // Accordion functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            var acc = document.getElementsByClassName("accordion");
+            for (var i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    if (panel.style.display === "block") {
+                        panel.style.display = "none";
+                    } else {
+                        panel.style.display = "block";
+                    }
+                });
+            }
+        });
+    </script>
 </body>
+
 </html>
