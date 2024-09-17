@@ -300,17 +300,27 @@
 
                     if (result[0]?.body) {
                         const parsedBody = JSON.parse(result[0].body);
+
+                        // Store the total emissions and individual emissions in session storage
+                        if (parsedBody?.total_emissions !== undefined) {
+                            sessionStorage.setItem('totalEmissions', parsedBody.total_emissions);
+                            console.log('Total emissions saved to sessionStorage:', parsedBody.total_emissions);
+                        } else {
+                            console.warn('Total emissions data is missing in response.');
+                        }
+
                         if (parsedBody?.individual_transport_emissions) {
                             sessionStorage.setItem('transportationData', JSON.stringify(parsedBody.individual_transport_emissions));
                             console.log('Transport data saved to sessionStorage:', parsedBody.individual_transport_emissions);
                         } else {
-                            console.warn('Transport emissions data is missing in response.');
+                            console.warn('Individual transport emissions data is missing in response.');
                         }
                     } else {
                         console.warn('Unexpected data format:', result);
                     }
 
-                    window.location.href = 'emission_cal_appli.html'; // Redirect to the next page
+                    // Redirect to the next page
+                    window.location.href = 'emission_cal_appli.html';
                 } else {
                     const errorText = await response.text(); // Log the error response
                     console.error('Error response from server:', response.status, errorText);
@@ -321,6 +331,7 @@
                 alert('Error sending data to the server. Please try again.');
             }
         }
+
 
         function validateAndNavigate() {
             const questions = document.querySelectorAll('#transportation-usage-section input[type="number"]');
@@ -352,7 +363,7 @@
             }
 
             // Save data to localStorage for debugging or future use
-            localStorage.setItem('transportationData', JSON.stringify(dataToSend));
+            sessionStorage.setItem('transportationData', JSON.stringify(dataToSend));
 
             console.log('Original data (input values):');
             questions.forEach(input => {
