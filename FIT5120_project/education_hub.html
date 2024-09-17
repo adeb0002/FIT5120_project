@@ -28,73 +28,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <style>
-        body {
-            font-family: 'Open Sans', sans-serif;
-            padding: 20px;
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .quiz-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .question {
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .choices {
-            list-style: none;
-            padding: 0;
-        }
-
-        .choices li {
-            margin-bottom: 10px;
-        }
-
-        .choices input {
-            margin-right: 10px;
-        }
-
-        .submit-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .submit-btn:hover {
-            background-color: #45a049;
-        }
-
-        .result {
-            display: none;
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #e0f7fa;
-            border-left: 6px solid #00796b;
-        }
-
-        .correct {
-            color: green;
-        }
-
-        .wrong {
-            color: red;
-        }
-    </style>
 </head>
 
 <body>
@@ -136,7 +69,6 @@
             </div>
         </div>
     </div>
-    </div>
 
     <!-- Education Section -->
     <section id="education-section" class="container">
@@ -147,7 +79,6 @@
             on our planet.
         </p>
 
-        </p>
         <!-- box-container -->
         <div class="box-container">
             <!-- Box 1 -->
@@ -169,7 +100,8 @@
                 <ul>
                     <li>CO2 is the most abundant greenhouse gas released by human activities.</li>
                     <li>CO2 remains in the atmosphere for hundreds to thousands of years, making its impact long-lasting
-                        compared to other greenhouse gases.</li>
+                        compared to other greenhouse gases.
+                    </li>
                     <li>CO2 emissions are relatively easy to quantify and track.</li>
                 </ul>
                 <p>Global temperatures have increased as the concentration of greenhouse gases in the atmosphere has
@@ -188,11 +120,14 @@
                     warming are even worse:</p>
                 <ul>
                     <li>More than a third of the global population could experience severe heatwaves at least every 5
-                        years.</li>
+                        years.
+                    </li>
                     <li>Widespread food shortages could arise in Southern Africa, the Mediterranean, Central Europe, and
-                        the Amazon.</li>
+                        the Amazon.
+                    </li>
                     <li>Over 70% of Earth’s coastlines could see sea levels rise by 50 cm, resulting in extensive
-                        coastal flooding.</li>
+                        coastal flooding.
+                    </li>
                     <li>More than 40% of the permafrost in the Arctic could disappear.</li>
                 </ul>
                 <p>All of this could lead to severe economic consequences.</p>
@@ -204,13 +139,17 @@
                 <ul>
                     <li><strong>Energy Use:</strong> Everyday activities like heating your home, driving a car, or using
                         appliances often rely on energy (e.g., gas or electricity) from fossil fuels, which release CO2
-                        when burned.</li>
+                        when burned.
+                    </li>
                     <li><strong>GHG Accumulation:</strong> These GHGs accumulate in the atmosphere, trapping heat that
-                        would otherwise escape into space (the greenhouse effect).</li>
+                        would otherwise escape into space (the greenhouse effect).
+                    </li>
                     <li><strong>Global Warming:</strong> As more GHGs are emitted, the Earth's average temperature
-                        rises, leading to global warming.</li>
+                        rises, leading to global warming.
+                    </li>
                     <li><strong>Climate Change:</strong> Rising temperatures disrupt natural systems, altering weather
-                        patterns and increasing the frequency of extreme events.</li>
+                        patterns and increasing the frequency of extreme events.
+                    </li>
                 </ul>
                 <p>Local & Global Consequences: These changes can result in harsher conditions, affecting agriculture,
                     biodiversity, and human health globally. On a local scale, it may lead to extreme heatwaves, water
@@ -236,10 +175,11 @@
                     shopping habits, there are numerous ways to make a positive impact.</p>
                 <p>For a detailed guide on how to reduce your carbon emissions in various aspects of daily life—such as
                     vehicle use, home energy, waste management, and more—please visit our <a href="recommendations.html"
-                        class="link-highlight">Recommendations Page</a>.</p>
+                        class="link-highlight">Recommendations
+                        Page</a>.</p>
             </div>
 
-            
+
             <!-- Box 6 -->
             <div class="box box-highlight">
                 <h2 class="section-title">How Can You Minimise Your Carbon Footprint?</h2>
@@ -250,8 +190,9 @@
             </div>
 
             <!-- quiz box -->
-            <div class="quiz-container">
-                <h2>Think you know a thing or two about being green? Test yourself with a quick quiz below!</h2>
+            <div class="box quiz-container">
+                <h2>Think you know a thing or two about being green? </h2>
+                <h2>Test yourself with a quick quiz below!</h2>
                 <form id="quiz-form">
                     <div class="question">
                         1. Which of these is the most eco-friendly way to get around the City?
@@ -328,9 +269,7 @@
             <p>Start by assessing your carbon footprint with our calculator and discover ways to reduce it.</p>
             <a href="emission_cal_personal.html" class="flat-button">Calculate Your Emissions</a>
         </div>
-        </div>
     </section>
-
 
 
     <!-- Scripts -->
@@ -349,7 +288,7 @@
             const explanations = {
                 q1: 'Correct answer: Riding a bike or walking. These are the most sustainable options for getting around Melbourne, as they have zero emissions.',
                 q2: 'Correct answer: Composting at home or using council green waste bins. This diverts food waste from landfill, reducing methane emissions.',
-                q3: 'Correct answer: Use solar panels. Solar energy help reduce reliance on fossil fuels which is used to generate elctricity in the grid.',
+                q3: 'Correct answer: Use solar panels. Solar energy helps reduce reliance on fossil fuels, which are used to generate electricity in the grid.',
                 q4: 'Correct answer: Buy local, seasonal produce. This reduces the carbon footprint from transportation and supports local agriculture.',
                 q5: 'Correct answer: Taking shorter showers and using water-efficient fixtures. These actions are among the most effective ways to reduce water usage in homes.'
             };
@@ -377,6 +316,7 @@
             result.style.display = 'block';
             result.innerHTML = `${output}<br>You scored ${score} out of ${totalQuestions}.`;
         }
+
     </script>
 </body>
 
