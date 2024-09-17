@@ -42,7 +42,7 @@
                         <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a>
                         </li>
                         <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
-                        <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
+                        <li><a href="emission_cal_personal.html" id="clear-session-link">Emission Calculator</a></li>
                         <li><a href="recommendations.html">Recommendations</a></li>
                         <li><a href="education_hub.html">Education Hub</a></li>
                     </ul>
@@ -226,6 +226,12 @@
     </div>
 
     <script>
+
+        // Clear session storage when clicking "Emission Calculator" link
+        document.getElementById('clear-session-link').addEventListener('click', function () {
+                sessionStorage.clear();
+                console.log('SessionStorage cleared for Emission Calculator link.');
+            });
 
         document.addEventListener('DOMContentLoaded', function () {
             const emissionsBtn = document.getElementById('emissions-btn');
