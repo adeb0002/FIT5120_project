@@ -161,7 +161,7 @@
                         <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a>
                         </li>
                         <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
-                        <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
+                        <li><a href="emission_cal_cover.html">Emission Calculator</a></li>
                         <li><a href="recommendations.html">Recommendations</a></li>
                         <li><a href="education_hub.html">Education Hub</a></li>
                     </ul>
@@ -188,7 +188,7 @@
 
         <!-- Main content -->
         <div class="main-content">
-            
+
             <div class="section" id="section1">
                 <h1 style="color: rgb(0, 0, 0); font-weight: bold;">Welcome to the EcoInsight Education Hub!</h1>
                 <p><br>Here we aim to help you understand the broader impacts of climate change and how your daily
@@ -413,40 +413,40 @@
                         var sectionID = $(this).attr("data-id");
                         scrollToID('#' + sectionID, 750);
                     });
-            
+
                     // Scroll to top action
                     $('.scroll-top').on('click', function (event) {
                         event.preventDefault();
                         $('html, body').animate({ scrollTop: 0 }, 'slow');
                     });
-            
+
                     // Mobile nav toggle
                     $('#nav-toggle').on('click', function (event) {
                         event.preventDefault();
                         $('#main-nav').toggleClass("open");
                     });
                 });
-            
+
                 // Scroll function
                 function scrollToID(id, speed) {
                     // Set offset to 0 to scroll to the top of the page
                     var targetOffset = $(id).offset().top;
                     $('html, body').animate({ scrollTop: targetOffset }, speed);
-            
+
                     var mainNav = $('#main-nav');
                     if (mainNav.hasClass("open")) {
                         mainNav.css("height", "1px").removeClass("in").addClass("collapse");
                         mainNav.removeClass("open");
                     }
                 }
-            
+
                 if (typeof console === "undefined") {
                     console = {
                         log: function () { }
                     };
                 }
             </script>
-            
+
     </body>
 
     <footer>
@@ -510,7 +510,4 @@
             </div>
         </section>
     </footer>
-
-
-
 </html>
