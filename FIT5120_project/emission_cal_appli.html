@@ -562,6 +562,11 @@
                             formattedItem.hours_per_day = item.hours_per_day;
                             break;
                         case 'dishwasher':
+                            // Add the hours/usage_per_week for dishwasher
+                            formattedItem.usage_per_week = item.usage_per_week;
+                            break;
+                        case 'clothes_dryer':
+                            // Add the hours/usage_per_week for clothes dryer
                             formattedItem.usage_per_week = item.usage_per_week;
                             break;
                         default:
@@ -634,6 +639,7 @@
                 hideLoading();
             }
         }
+
 
         function validateAndNavigate() {
             let isValid = true;

@@ -987,11 +987,14 @@
 
         // Function to handle sessionStorage data retrieval
         function getEmissionsData() {
-            const categoryData = [
+            let categoryData = [
                 { category: 'Electricity', emissions: parseFloat(sessionStorage.getItem('applianceEmissions') || 0) },
                 { category: 'Transport', emissions: parseFloat(sessionStorage.getItem('transportEmissions') || 0) },
                 { category: 'Gas', emissions: parseFloat(sessionStorage.getItem('gasEmissions') || 0) }
             ];
+
+            // Filter out categories with zero emissions
+            categoryData = categoryData.filter(item => item.emissions > 0);
 
             const individualApplianceEmissions = JSON.parse(sessionStorage.getItem('individualApplianceEmissions') || '{}');
             const individualTransportEmissions = JSON.parse(sessionStorage.getItem('transportationData') || '{}');
@@ -1012,6 +1015,7 @@
 
             return { categoryData, applianceData, transportData };
         }
+
 
 
         function getUserSelections() {
@@ -1051,6 +1055,25 @@
 
             console.log('User selections retrieved from sessionStorage:', userSelections);
             return userSelections;
+        }
+
+        function getApplianceEmissionsData() {
+            const individualApplianceEmissions = JSON.parse(sessionStorage.getItem('individualApplianceEmissions') || '{}');
+
+            const applianceData = Object.entries(individualApplianceEmissions)
+                .map(([appliance, emissions]) => ({
+                    appliance,
+                    emissions: parseFloat(emissions)
+                }))
+                .filter(item => item.emissions > 0); // Filter out appliances with zero emissions
+
+            return applianceData;
+        }
+
+        // Create the pie chart for appliances
+        function createAppliancePieChart() {
+            const applianceData = getApplianceEmissionsData();
+            createPieChart(applianceData, '#appliance-chart', 'emissions', 'appliance');
         }
 
 
@@ -1381,6 +1404,9 @@
                 // Calculate and display total savings
                 const totalCostSavings = calculateCostSaving(averagesData);
                 displayTotalSavings(totalCostSavings);
+
+                // Recreate the pie chart for appliances
+                createAppliancePieChart();
             };
 
 
