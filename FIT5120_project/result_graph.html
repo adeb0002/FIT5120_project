@@ -180,7 +180,7 @@
                                                <li><a href="index.html">Home</a></li>
                         <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a></li>
                         <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
-                        <li><a href="emission_cal_cover.html" id="emission-calculator-link">Emission Calculator</a></li>
+                        <li><a href="#" id="clear-session-link">Emission Calculator</a></li>
                         <li><a href="recommendations.html">Recommendations</a></li>
                         <li><a href="education_hub.html">Education Hub</a></li>
                     </ul>
@@ -351,14 +351,14 @@
 
     <script>
 
-        function clearAllSessionStorage() {
-                sessionStorage.clear(); // Clears all data from session storage
-            }
-
-            document.getElementById('clear-session-link').addEventListener('click', function () {
-                        sessionStorage.clear();
-                        console.log('SessionStorage cleared for Emission Calculator link.');
-                    });
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('clear-session-link').addEventListener('click', function (event) {
+                event.preventDefault();
+                sessionStorage.clear();
+                console.log('SessionStorage cleared for Emission Calculator link.');
+                window.location.href = "emission_cal_cover.html";
+            });
+        });
 
        // Constants for equivalences and offsets
         const CO2_PER_KM_PETROL_CAR = 0.17048; // in kg per km

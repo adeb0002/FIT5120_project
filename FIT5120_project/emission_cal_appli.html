@@ -153,10 +153,9 @@
                 event.preventDefault();
                 sessionStorage.clear();
                 console.log('SessionStorage cleared for Emission Calculator link.');
-                window.location.href = "emission_cal_personal.html";
+                window.location.href = "emission_cal_cover.html";
             });
         });
-
         function saveDataToSessionStorage() {
             // Retrieve selected appliances
             const selectedAppliances = Array.from(document.querySelectorAll('#appliance-selection .btn.selected-green'))
