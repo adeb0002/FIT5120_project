@@ -77,6 +77,11 @@
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('Clearing session storage...');
+            sessionStorage.clear(); // Clear session storage on page load
+        });
+
         const startButton = document.getElementById('startButton');
         const mainContainer = document.querySelector('.main-container');
 
