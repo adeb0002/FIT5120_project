@@ -154,6 +154,19 @@
             margin: 15px auto; /* Center the element */
             width: fit-content; /* Ensures the text box wraps around the content */
         }
+        .arc text {
+            fill: black;  /* Ensure text color is visible */
+            font-size: 14px; /* Increase font size for better readability */
+            font-weight: bold; /* Make the text bold for clarity */
+            visibility: visible; /* Ensure the text is visible */
+        }
+
+        .arc polyline {
+            stroke: black; /* Ensure the lines are visible */
+            stroke-width: 1px;
+            fill: none;
+        }
+
 
     </style>
 </head>
@@ -547,9 +560,6 @@
                 .style('font-size', '12px')
                 .text(d => `${d[valueKey].toFixed(2)} kg`);
         }
-
-
-
 
         async function fetchApplianceEmissions() {
             showLoading();
@@ -1077,17 +1087,16 @@
         }
 
 
-        // Function to create a pie chart with legend
         function createPieChart(data, selector, valueKey, labelKey) {
-            const width = 300;
-            const height = 300;
+            const width = 400;  
+            const height = 400;
             const radius = Math.min(width, height) / 2;
 
             const svg = d3.select(selector)
-                .html('')  // Clear existing SVG content before drawing new chart
+                .html('')  
                 .append('svg')
                 .attr('width', width)
-                .attr('height', height + 50) // Extra space for legend
+                .attr('height', height + 100) 
                 .append('g')
                 .attr('transform', `translate(${width / 2}, ${height / 2})`);
 
@@ -1100,6 +1109,10 @@
                 .innerRadius(0)
                 .outerRadius(radius);
 
+            const outerArc = d3.arc()
+                .innerRadius(radius * 0.9)
+                .outerRadius(radius * 0.9);
+
             const arcs = svg.selectAll('arc')
                 .data(pie(data))
                 .enter()
@@ -1110,92 +1123,64 @@
                 .attr('d', arc)
                 .attr('fill', d => color(d.data[labelKey]));
 
-            // Add labels to the pie slices
-            arcs.append('text')
-                .attr('transform', d => `translate(${arc.centroid(d)})`)
-                .attr('text-anchor', 'middle')
-                .style('font-size', '12px')
-                .text(d => `${d.data[labelKey]} (${d.data[valueKey].toFixed(2)} kg)`);
+            // Add lines connecting labels to the pie slices
+            arcs.append('polyline')
+                .attr('points', d => {
+                    const posA = arc.centroid(d); 
+                    const posB = outerArc.centroid(d); 
+                    const posC = outerArc.centroid(d); 
+                    posC[0] = radius * 1.05 * (midAngle(d) < Math.PI ? 1 : -1); 
+                    return [posA, posB, posC];
+                })
+                .style('fill', 'none')
+                .style('stroke', 'black')
+                .style('stroke-width', '1px');
 
-            // Add a legend below the pie chart
+            // Add labels outside the pie chart
+            arcs.append('text')
+                .attr('transform', d => {
+                    const pos = outerArc.centroid(d);
+                    pos[0] = radius * 1.1 * (midAngle(d) < Math.PI ? 1 : -1); 
+                    return `translate(${pos})`;
+                })
+                .attr('text-anchor', d => midAngle(d) < Math.PI ? 'start' : 'end')
+                .style('font-size', '12px')
+                .text(d => {
+                    const labelText = `${d.data[labelKey]} (${d.data[valueKey].toFixed(2)} kg)`;
+                    console.log("Label Text: ", labelText); // Debugging log to verify label text
+                    return labelText;
+                });
+
             const legend = d3.select(selector)
                 .append('div')
-                .attr('class', 'legend');
+                .attr('class', 'legend')
+                .style('margin-top', '20px');
 
             const legendItems = legend.selectAll('.legend-item')
                 .data(data)
                 .enter()
                 .append('div')
-                .attr('class', 'legend-item');
+                .attr('class', 'legend-item')
+                .style('display', 'flex')
+                .style('align-items', 'center')
+                .style('margin-bottom', '5px');
 
             legendItems.append('div')
                 .attr('class', 'legend-color-box')
+                .style('width', '12px')
+                .style('height', '12px')
+                .style('margin-right', '8px')
                 .style('background-color', d => color(d[labelKey]));
 
             legendItems.append('span')
                 .attr('class', 'legend-text')
                 .text(d => `${d[labelKey]}: ${d[valueKey].toFixed(2)} kg CO2`);
-        }
 
-            // Function to create a pie chart with legend
-            function createPieChart(data, selector, valueKey, labelKey) {
-                const width = 300;
-                const height = 300;
-                const radius = Math.min(width, height) / 2;
-
-                const svg = d3.select(selector)
-                    .html('')  // Clear existing SVG content before drawing new chart
-                    .append('svg')
-                    .attr('width', width)
-                    .attr('height', height + 50) // Extra space for legend
-                    .append('g')
-                    .attr('transform', `translate(${width / 2}, ${height / 2})`);
-
-                const color = d3.scaleOrdinal(d3.schemeCategory10);
-
-                const pie = d3.pie()
-                    .value(d => d[valueKey]);
-
-                const arc = d3.arc()
-                    .innerRadius(0)
-                    .outerRadius(radius);
-
-                const arcs = svg.selectAll('arc')
-                    .data(pie(data))
-                    .enter()
-                    .append('g')
-                    .attr('class', 'arc');
-
-                arcs.append('path')
-                    .attr('d', arc)
-                    .attr('fill', d => color(d.data[labelKey]));
-
-                // Add labels to the pie slices
-                arcs.append('text')
-                    .attr('transform', d => `translate(${arc.centroid(d)})`)
-                    .attr('text-anchor', 'middle')
-                    .style('font-size', '12px')
-                    .text(d => `${d.data[labelKey]} (${d.data[valueKey].toFixed(2)} kg)`);
-
-                // Add a legend below the pie chart
-                const legend = d3.select(selector)
-                    .append('div')
-                    .attr('class', 'legend');
-
-                const legendItems = legend.selectAll('.legend-item')
-                    .data(data)
-                    .enter()
-                    .append('div')
-                    .attr('class', 'legend-item');
-
-                legendItems.append('div')
-                    .attr('class', 'legend-color-box')
-                    .style('background-color', d => color(d[labelKey]));
-
-                legendItems.append('span')
-                    .attr('class', 'legend-text')
-                    .text(d => `${d[labelKey]}: ${d[valueKey].toFixed(2)} kg CO2`);
+            // Function to calculate the mid-angle for positioning
+            function midAngle(d) {
+                return d.startAngle + (d.endAngle - d.startAngle) / 2;
             }
+        }
 
             function getTransportEmissionsData() {
                 // Retrieve data from local storage
