@@ -7,6 +7,9 @@
     <title>EcoInsight Melbourne</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
 
     <!-- Fonts and CSS -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
@@ -43,7 +46,7 @@
                         <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">our mission</a>
                         </li>
                         <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
-                        <li><a href="emission_cal_cover.html">Emission Calculator</a></li>
+                        <li><a href="#" id="clear-session-link">Emission Calculator</a></li>
                         <li><a href="recommendations.html">Recommendations</a></li>
                         <li><a href="education_hub.html">Education Hub</a></li>
                     </ul>
@@ -142,6 +145,15 @@
                 }
                 clearSessionStorage();
                 window.history.back();
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('clear-session-link').addEventListener('click', function (event) {
+                event.preventDefault();
+                sessionStorage.clear();
+                console.log('SessionStorage cleared for Emission Calculator link.');
+                window.location.href = "emission_cal_personal.html";
             });
         });
 

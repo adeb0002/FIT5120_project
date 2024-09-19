@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Emission Charts</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
@@ -352,13 +355,10 @@
                 sessionStorage.clear(); // Clears all data from session storage
             }
 
-        document.getElementById('emission-calculator-link').addEventListener('click', function(event) {
-            // Clear all session storage data before navigating
-            clearAllSessionStorage();
-            
-            // Navigation will proceed as usual after clearing storage
-            // If you want to handle navigation manually or do something else, you can modify this section
-        });
+            document.getElementById('clear-session-link').addEventListener('click', function () {
+                        sessionStorage.clear();
+                        console.log('SessionStorage cleared for Emission Calculator link.');
+                    });
 
        // Constants for equivalences and offsets
         const CO2_PER_KM_PETROL_CAR = 0.17048; // in kg per km
@@ -471,7 +471,7 @@
                     console.log(`Data Point: ${dataPoint}, User Input: ${parsedUserInput}`); // Add this log
                     return Math.abs(dataPoint - parsedUserInput) < 0.01 ? 6 : 4; // Use a small tolerance to highlight
                 })
-                .attr('fill', d => Math.abs(parseFloat(d[labelKey]) - parsedUserInput) < 0.01 ? 'red' : '#69b3a2')
+                .attr('fill', d => Math.abs(parseFloat(d[labelKey]) - parsedUserInput) < 0.01 ? 'darkgreen' : '#69b3a2')
                 .attr('stroke', d => Math.abs(parseFloat(d[labelKey]) - parsedUserInput) < 0.01 ? 'black' : 'none')
                 .append('title')
                 .text(d => `Load Size: ${d[labelKey]}, Energy Usage: ${d[valueKey].toFixed(2)} kWh`);
@@ -534,7 +534,7 @@
                 .attr('y', d => y(d[valueKey]))
                 .attr('width', x.bandwidth())
                 .attr('height', d => height - y(d[valueKey]))
-                .attr('fill', d => userInput && String(d[labelKey]).toLowerCase() === String(userInput).toLowerCase() ? 'red' : '#69b3a2');
+                .attr('fill', d => userInput && String(d[labelKey]).toLowerCase() === String(userInput).toLowerCase() ? 'darkgreen' : '#69b3a2');
 
             svg.selectAll('.label')
                 .data(data)
@@ -971,7 +971,7 @@
                 .attr('y', d => y(d[valueKey]))
                 .attr('width', x.bandwidth())
                 .attr('height', d => height - y(d[valueKey]))
-                .attr('fill', d => userInput && String(d[labelKey]).toLowerCase() === String(userInput).toLowerCase() ? 'red' : '#69b3a2');
+                .attr('fill', d => userInput && String(d[labelKey]).toLowerCase() === String(userInput).toLowerCase() ? 'darkgreen' : '#69b3a2');
 
             svg.selectAll('.label')
                 .data(data)
