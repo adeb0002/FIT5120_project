@@ -266,8 +266,7 @@ bootstrap.min.css .navbar-toggle {
     box-sizing: border-box; /* Ensure padding is included in height */
     max-width: 1200px; /* Set a maximum width for the section */
     width: 100%; /* Allow section to take full width */
-    margin-left: auto; /* Center the section */
-    margin-right: auto; /* Center the section */
+    margin-left: 280px; /* Center the section */
 }
 
 .image-container {
@@ -518,11 +517,13 @@ bootstrap.min.css .navbar-toggle {
 }
 
 .quiz-section {
-    background-color: #E8C6B2; /* Light background for quiz section */
+    background-color: #f9f9f9; /* Light background for quiz section */
     padding: 20px; /* Add padding */
-    border-radius: 10px; /* Rounded corners */
+    border-radius: 8px; /* Rounded corners */
     margin-bottom: 20px;
     max-width: 1200px;
+    margin-left: 280px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
 }
 
 .quiz-section h2 {
@@ -645,13 +646,21 @@ input[type="radio"] {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-    .question {
-        font-size: 1.2em;
-        margin: 15px 0 5px;
+    .quiz-section {
+        margin-left: 20px; /* Adjust margin for smaller screens */
+        padding: 15px; /* Adjust padding */
     }
 
-    .quiz-container ul.choices label {
-        font-size: 16px;
+    .quiz-section h2 {
+        font-size: 1.8em; /* Smaller heading */
+    }
+
+    .question {
+        font-size: 1.3em;
+    }
+
+    .choices li label{
+        padding: 8px; /* Smaller padding for list items */
     }
 
     .submit-btn {
@@ -665,13 +674,22 @@ input[type="radio"] {
 }
 
 @media (max-width: 480px) {
-    .question {
-        font-size: 1em;
-        margin: 10px 0 5px;
+    .quiz-section {
+        margin-left: 0; /* Remove left margin */
+        padding: 10px; /* Further adjust padding */
     }
 
-    .quiz-container ul.choices label {
-        font-size: 14px;
+    .quiz-section h2 {
+        font-size: 1.6em; /* Even smaller heading */
+    }
+
+    .question {
+        font-size: 1.2em;
+    }
+
+    .choices li label {
+        font-size: 16px; /* Adjust font size for choices */
+        padding: 6px; /* Further reduce padding */
     }
 
     .submit-btn {
