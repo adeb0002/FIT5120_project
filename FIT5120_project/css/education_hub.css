@@ -718,7 +718,7 @@ input[type="radio"] {
 }
 
 #navigation li a {
-    color: #4B3C2E; /* Link color */
+    color: #e6df66; /* Link color */
     display: flex; /* Use flexbox */
     align-items: center; /* Center text vertically */
     justify-content: flex-start; /* Align text to the left */
@@ -732,11 +732,11 @@ input[type="radio"] {
 }
 
 #navigation li a.link1 {
-    background: #E1B99A; /* Background color for link1 */
+    background: #6BA368; /* Background color for link1 */
 }
 
 #navigation li a.link2 {
-    background: #E8C6B2; /* Background color for link2 */
+    background: #2E8B57; /* Background color for link2 */
 }
 
 #navigation li.current a {
@@ -788,7 +788,7 @@ input[type="radio"] {
     text-decoration: none; /* Remove underline */
     text-transform: uppercase; /* Uppercase text */
     font-size: 24px; /* Slightly larger font size for emphasis */
-    background-color: #D1A78D; /* Background color for the title */
+    background-color: #3D9140; /* Background color for the title */
     text-align: left; /* Align text to the left */
     margin-bottom: 0; /* Remove space below the title */
     margin-top: 0px;
