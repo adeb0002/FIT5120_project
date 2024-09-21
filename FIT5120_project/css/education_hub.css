@@ -329,6 +329,12 @@ bootstrap.min.css .navbar-toggle {
     background-size: cover; /* Cover the area with the icon */
 }
 
+.section:hover {
+    background-color: #e6e6e6; /* Slightly darker background on hover */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    transform: scale(1.02); /* Slightly scale up the section */
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
     .section {
@@ -398,7 +404,12 @@ bootstrap.min.css .navbar-toggle {
     padding: 40px;
     text-align: center;
     margin-top: 50px;
-    border-radius: 12px;
+}
+
+.call-to-action:hover {
+    background-color: #c8e6c9; /* Darker background color on hover */
+    transform: scale(1.05); /* Slightly scale up the element */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
 }
 
 .call-to-action h2 {
