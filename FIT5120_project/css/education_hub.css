@@ -782,13 +782,13 @@ input[type="radio"] {
 }
 
 .sidebar-title {
-    color: #fff; /* Change text color to white for contrast */
+    color: #02164d; /* Change text color to white for contrast */
     height: 100px; /* Fixed height */
     padding: 30px 20px; /* Increase top padding */
     text-decoration: none; /* Remove underline */
     text-transform: uppercase; /* Uppercase text */
     font-size: 24px; /* Slightly larger font size for emphasis */
-    background-color: #3D9140; /* Background color for the title */
+    background-color: #FFD700; /* Background color for the title */
     text-align: left; /* Align text to the left */
     margin-bottom: 0; /* Remove space below the title */
     margin-top: 0px;

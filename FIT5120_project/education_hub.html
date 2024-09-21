@@ -27,40 +27,40 @@
     <!-- JavaScript files -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 
+<body>
     <!-- Header Section with Navigation Bar -->
     <div class="header">
         <div class="container">
-            <nav class="navbar navbar-inverse" role="navigation">
+            <nav class="navbar navbar-inverse">
                 <div class="navbar-header">
-                    <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse"
-                        data-target="#main-nav">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="index.html" class="navbar-brand scroll-top">
+                    <a href="index.html" class="navbar-brand">
                         <img src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
                     </a>
                 </div>
-                <div id="main-nav" class="collapse navbar-collapse">
+                <div class="collapse navbar-collapse" id="main-nav">
                     <ul class="nav navbar-nav">
                         <li><a href="index.html" class="scroll-top">Home</a></li>
-                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a>
-                        </li>
+                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">our mission</a></li>
                         <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
-                        <li><a href="emission_cal_cover.html">Emission Calculator</a></li>
+                        <li><a href="emission_cal_cover.html" id="clear-session-link">Emission Calculator</a></li>
                         <li><a href="recommendations.html">Recommendations</a></li>
                         <li><a href="education_hub.html">Education Hub</a></li>
                     </ul>
                 </div>
             </nav>
-            </div>
+        </div>
     </div>
-</head>
 
-<body>
 <div class="sidebar">
     <ul id="navigation">
     <li>
@@ -270,19 +270,6 @@
 
 <script type="text/javascript">
 $(document).ready(function () {
-    // Navigation click actions
-    $('.scroll-link').click(function (event) {
-        event.preventDefault();
-        var sectionID = $(this).data("id");
-        scrollToSection(sectionID);
-    });
-
-    // Scroll to top action
-    $('.scroll-top').click(function (event) {
-        event.preventDefault();
-        $('html, body').animate({ scrollTop: 0 }, 'slow');
-    });
-
     // Mobile nav toggle
     $('#nav-toggle').click(function (event) {
         event.preventDefault();
