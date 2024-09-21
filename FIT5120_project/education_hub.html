@@ -27,120 +27,9 @@
     <!-- JavaScript files -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <style>
-        .sidebar {
-            height: 100vh;
-            width: 250px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #f8f9fa;
-            padding-top: 140px;
-            border-right: 1px solid #ddd;
-        }
 
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .sidebar ul li {
-            padding: 10px;
-            text-align: left;
-        }
-
-        .sidebar ul li a {
-            text-decoration: none;
-            color: #333;
-            display: block;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        .sidebar ul li a:hover {
-            background-color: #3e443c;
-            color: white;
-        }
-
-        .section {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 20px;
-            background-color: #fff;
-            margin-bottom: 20px;
-            margin-left: 300px;
-            margin-right: 50px;
-            margin-top: 20px;
-        }
-
-        .quiz-section {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 20px;
-            background-color: #fff;
-            margin-bottom: 20px;
-            margin-left: 300px;
-            margin-right: 50px;
-        }
-
-        .section ul {
-            list-style-type: disc;
-            /* Ensures bullet points are shown as dots */
-            padding-left: 20px;
-            /* Adds space between bullet points and text */
-        }
-
-        .section ol {
-            padding-left: 20px;
-            /* Adds space between bullet points and text */
-        }
-
-        .section ul li {
-            color: #333;
-            /* Optional: sets the text color of list items */
-        }
-
-        .choices {
-            list-style-type: none;
-            /* Removes the default list bullets */
-            padding-left: 0;
-            /* Removes the padding from the left */
-        }
-
-        .choices li {
-            margin-bottom: 10px;
-            /* Optional: adds space between list items */
-        }
-        /* Styles for the header */
-        .header {
-            background-color: #3B3A3A;
-            position: sticky; /* Keeps the header at the top of the viewport */
-            top: 0; /* Aligns the header at the top */
-            width: 100%;
-            z-index: 1000; /* Ensures the header is above other content */
-        }
-        .section-image {
-            display: block;
-            max-width: 50%;
-            height: auto;
-            margin: 20px auto;
-            border-radius: 10px; /* Adds space around the image */
-        }
-
-        .section-header-image {
-            display: block;
-            width: 100%;
-            height: auto;
-            margin: 0 auto 20px auto; /* Adjust spacing as needed */
-            border-bottom: 2px solid #ddd;
-            border-radius: 10px;
-            /* Optional: adds a border below the image for visual separation */
-        }
-
-
-    </style>
     <!-- Header Section with Navigation Bar -->
-    <div class="header" style="background-color: #3B3A3A;">
+    <div class="header">
         <div class="container">
             <nav class="navbar navbar-inverse" role="navigation">
                 <div class="navbar-header">
@@ -167,120 +56,139 @@
                     </ul>
                 </div>
             </nav>
-        </div>
+            </div>
     </div>
 </head>
 
 <body>
-        <!-- Navbar -->
-        <div class="sidebar">
-            <h3 style="margin-left: 19px">Menu</h3>
-            <ul>
-                <li><a href="#" class="scroll-top">Welcome</a></li>
-                <li><a href="#section2">Climate Change 101</a></li>
-                <li><a href="#section3">Why Do Changing Temperatures Matter?</a></li>
-                <li><a href="#section4">How Do My Daily Actions Affect Climate Change?</a></li>
-                <li><a href="#section5">How to Prevent Further Warming?</a></li>
-                <li><a href="#section6">How Do We Decarbonise?</a></li>
-                <li><a href="#section7">Test your Knowledge</a></li>
-            </ul>
-        </div>
-
+<div class="sidebar">
+    <ul id="navigation">
+    <li>
+        <h2 class="sidebar-title">Our Resources</h2> <!-- Changed to h2 -->
+    </li>
+    <li>
+        <a href="#section2" class="link1">Climate Change 101</a>
+    </li>
+    <li>
+        <a href="#section3" class="link2">Why Do Changing Temperatures Matter?</a>
+    </li>
+    <li>
+        <a href="#section4" class="link1">How Do My Daily Actions Affect Climate Change?</a>
+    </li>
+    <li>
+        <a href="#section5" class="link2">How to Prevent Further Warming?</a>
+    </li>
+    <li>
+        <a href="#section6" class="link1">How Do We Decarbonise?</a>
+    </li>
+    <li>
+        <a href="#section7" class="link2">Test your Knowledge</a>
+    </li>
+        <li>
+        <a href="#section8" class="link1">Take action today</a>
+    </li>
+</ul>
+</div>
         <!-- Main content -->
         <div class="main-content">
 
-            <div class="section" id="section1">
-                <h1 style="color: rgb(0, 0, 0); font-weight: bold;">Welcome to the EcoInsight Education Hub!</h1>
-                <p><br>Here we aim to help you understand the broader impacts of climate change and how your daily
-                    actions contribute to greenhouse gas emissions. By exploring how simple choices affect the
-                    environment, you'll gain valuable insights into reducing your carbon footprint. </p>
+            <div class="education-section" id="section2">
+                <h1>Explore the EcoInsight Education Hub</h1>
             </div>
+<div class="section">
+    <div class="image-container">
+        <img src="https://images.unsplash.com/photo-1627222054897-0c04eed872b8?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Climate Change 101" class="section-header-image">
+    </div>
+    <div class="text-content">
+        <h2>Climate Change 101: Introduction to Greenhouse Gases</h2>
+        <p>The Earth’s atmosphere is composed of various gases, including greenhouse gases. These gases are necessary to keep the Earth warm. However, excessive concentrations of greenhouse gases can lead to dangerous warming.</p>
+        <p>The four main types of greenhouse gases are:</p>
+        <ul>
+            <li>Carbon Dioxide (CO2)</li>
+            <li>Methane (CH4)</li>
+            <li>Nitrous Oxide (N2O)</li>
+            <li>Fluorinated Gases</li>
+        </ul>
+        <p>CO2 (carbon dioxide) is the most used greenhouse gas (GHG) for metrics because:</p>
+        <ul>
+            <li>CO2 is the most abundant greenhouse gas released by human activities.</li>
+            <li>CO2 remains in the atmosphere for hundreds to thousands of years, making its impact long-lasting compared to other greenhouse gases.</li>
+            <li>CO2 emissions are relatively easy to quantify and track.</li>
+        </ul>
+       <div id="section3">
+    <p>Global temperatures have increased as the concentration of greenhouse gases in the atmosphere has risen. This is the most dangerous outcome of climate change.</p>
+</div>
+    </div>
+</div>
 
-            <div class="section" >
-                <img src="https://images.unsplash.com/photo-1627222054897-0c04eed872b8?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Climate Change 101" class="section-header-image" id="section2">
-                <h2>Climate Change 101: Introduction to Greenhouse Gases</h2>
-                <p><br>The Earth’s atmosphere is composed of various gases, including greenhouse gases. These gases are
-                    necessary to keep the Earth warm. However, excessive concentrations of greenhouse gases can lead to
-                    dangerous warming.</p>
-                <p><br>The four main types of greenhouse gases are:</p>
-                <ul>
-                    <li>Carbon Dioxide (CO2)</li>
-                    <li>Methane (CH4)</li>
-                    <li>Nitrous Oxide (N2O)</li>
-                    <li>Fluorinated Gases</li>
-                </ul>
-                <p><br>CO2 (carbon dioxide) is the most used greenhouse gas (GHG) for metrics because:</p>
-                <ul>
-                    <li>CO2 is the most abundant greenhouse gas released by human activities.</li>
-                    <li>CO2 remains in the atmosphere for hundreds to thousands of years, making its impact long-lasting
-                        compared to other greenhouse gases.</li>
-                    <li>CO2 emissions are relatively easy to quantify and track.</li>
-                </ul>
-                <p><br>Global temperatures have increased as the concentration of greenhouse gases in the atmosphere has
-                    risen. This is the most dangerous outcome of climate change.</p>
+<div class="section">
+    <div class="image-container">
+        <img src="https://images.unsplash.com/photo-1615092296061-e2ccfeb2f3d6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Changing Temperatures" class="section-header-image">
+    </div>
+    <div class="text-content">
+        <h2>Why Do Changing Temperatures Matter?</h2>
+        <p>A warmer climate changes weather patterns, making wet areas wetter and dry areas drier. This could lead to extensive flooding in some regions and water shortages in others. Leading economies have committed to reaching net-zero emissions by 2050 to keep global warming to 1.5°C above pre-industrial temperatures. While even 1.5°C of warming could lead to harmful global consequences, the implications of 2°C of warming are even worse:</p>
+        <ul>
+            <li>More than a third of the global population could experience severe heatwaves at least every 5 years.</li>
+            <li>Widespread food shortages could arise in Southern Africa, the Mediterranean, Central Europe, and the Amazon.</li>
+            <li>Over 70% of Earth’s coastlines could see sea levels rise by 50 cm, resulting in extensive coastal flooding.</li>
+            <div id="section4">
+            <li>More than 40% of the permafrost in the Arctic could disappear.</li>
+                </div>
+        </ul>
+    </div>
+</div>
+
+<div class="section">
+    <div class="image-container">
+        <img src="https://images.unsplash.com/photo-1481437156560-3205f6a55735?q=80&w=2990&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Daily Actions" class="section-header-image">
+    </div>
+    <div class="text-content">
+        <h2>How Do My Daily Actions Affect Climate Change?</h2>
+        <p>Here's how this chain of events works where your daily actions become greenhouse gas emissions:</p>
+        <ol>
+            <li>Everyday activities rely on energy from burning fossil fuels, which release GHGs.</li>
+            <li>These GHGs accumulate in the atmosphere, trapping heat that would otherwise escape into space.</li>
+            <li>As more GHGs are emitted, the Earth's average temperature rises.</li>
+            <li>Rising temperatures disrupt natural systems, altering weather patterns and increasing the frequency of extreme events.</li>
+            <div id="section5">
+            <li>These changes result in harsher climate conditions, devastating agriculture, biodiversity, and human health globally.</li>
             </div>
+        </ol>
+    </div>
+</div>
 
-            <div class="section" >
-                <img src="https://images.unsplash.com/photo-1615092296061-e2ccfeb2f3d6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Changing Temperatures" class="section-header-image" id="section3">
-                <h2>Why Do Changing Temperatures Matter?</h2>
-                <p><br>A warmer climate changes weather patterns, making wet areas wetter and dry areas drier. This could
-                    lead to extensive flooding in some regions and water shortages in others. Leading economies have
-                    committed to reaching net-zero emissions by 2050 to keep global warming to 1.5°C above
-                    pre-industrial temperatures. While even 1.5°C of warming could lead to harmful global consequences,
-                    the implications of 2°C of warming are even worse:</p>
-                <ul>
-                    <li>More than a third of the global population could experience severe heatwaves at least every 5
-                        years.</li>
-                    <li>Widespread food shortages could arise in Southern Africa, the Mediterranean, Central Europe, and
-                        the Amazon.</li>
-                    <li>Over 70% of Earth’s coastlines could see sea levels rise by 50 cm, resulting in extensive
-                        coastal flooding.</li>
-                    <li>More than 40% of the permafrost in the Arctic could disappear.</li>
-                </ul>
-            </div>
+<div class="section">
+    <div class="image-container">
+        <img src="https://images.unsplash.com/photo-1561978879-84fa00184ef2?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Prevention" class="section-header-image">
+    </div>
+    <div class="text-content">
+        <h2>How to Prevent Further Warming</h2>
+        <p>There are two ways to prevent further warming:</p>
+        <ul>
+            <li>Reflect more sunlight back into space (with harmful side effects).</li>
+            <div id="section6">
+            <li>Reduce greenhouse gas concentrations in the atmosphere (the safer option).</li></div>
+        </ul>
+        <p>However, reflecting sunlight back into space poses harmful potential implications for global weather, so initiatives like ours around the world focus on reducing greenhouse gas emissions
+            instead.</p>
+    </div>
+</div>
 
-            <div class="section" >
-                <img src="https://images.unsplash.com/photo-1481437156560-3205f6a55735?q=80&w=2990&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Daily Actions" class="section-header-image" id="section4">
-                <h2>How Do My Daily Actions Affect Climate Change?</h2>
-                <p><br>Here's how this chain of events works where your daily actions becomes greenhouse gas emissions:</p>
-                <ol>
-                    <li>Everyday activities rely on energy from burning fossil fuels, which release GHGs.</li>
-                    <li>These GHGs accumulate in the atmosphere, trapping heat that would otherwise escape into space.
-                    </li>
-                    <li>As more GHGs are emitted, the Earth's average temperature rises.</li>
-                    <li>Rising temperatures disrupt natural systems, altering weather patterns and increasing the
-                        frequency of extreme events.</li>
-                    <li>These changes result in harsher climate conditions, devastating agriculture, biodiversity, and
-                        human health globally.</li>
-                </ol>
-            </div>
+<div class="section">
+    <div class="image-container">
+        <img src="https://images.unsplash.com/photo-1562743227-dbfb8875c61b?q=80&w=2952&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Decarbonise" class="section-header-image">
+    </div>
+    <div class="text-content">
+        <h2>How Do We Decarbonise?</h2>
+        <p>Decarbonising personal activities is key to reducing our carbon footprint and combating climate change. Whether it's through smarter transportation choices, home energy efficiency, or sustainable shopping habits, there are numerous ways to make a positive impact.</p>
+        <p>For a detailed guide on how to reduce your carbon emissions in various aspects of daily life—such
+            <div id="section7">as vehicle use, home energy, waste management, and more—please visit our <a href="recommendations.html" class="link-highlight">Recommendation Page</a>.</p>
+        </div>
+    </div>
+</div>
 
-            <div class="section" >
-                <img src="https://images.unsplash.com/photo-1561978879-84fa00184ef2?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Prevention" class="section-header-image" id="section5">
-                <!-- <img src="https://media0.giphy.com/media/MsjwOAnbFzOXm/giphy.gif?cid=6c09b9528gyffeejp8y21vuzpha2f677uf8ce89y5fna2acz&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g" alt="Prevention" class="section-header-image"> -->
-                <h2>How to Prevent Further Warming</h2>
-                <p><Br>There are two ways to prevent further warming:</p>
-                <ul>
-                    <li>Reflect more sunlight back into space (with harmful side effects).</li>
-                    <li>Reduce greenhouse gas concentrations in the atmosphere (the safer option).</li>
-                </ul>
-                <p><br>However, reflecting sunlight back into space poses harmful potential implications for global
-                    weather, so initiatives like ours around the world focus on reducing greenhouse gas emissions
-                    instead.</p>
-            </div>
-
-            <div class="section">
-                <img src="https://images.unsplash.com/photo-1562743227-dbfb8875c61b?q=80&w=2952&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Decarbonise" class="section-header-image" id="section6">
-                <h2>How Do We Decarbonise?</h2>
-                <p><br>Decarbonising personal activities is key to reducing our carbon footprint and combating climate
-                    change. Whether it's through smarter transportation choices, home energy efficiency, or sustainable
-                    shopping habits, there are numerous ways to make a positive impact.</p>
-                <p>For a detailed guide on how to reduce your carbon emissions in various aspects of daily life—such as
-                    vehicle use, home energy, waste management, and more—please visit our <a href="recommendations.html"
-                        class="link-highlight">Recommendations Page</a>.</p>
-            </div>
-
-            <div class="quiz-section" id="section7">
+            <div class="quiz-section">
                 <h2>Test Your Knowledge</h2>
                 <p>Think you know a thing or two about climate change? Test your knowledge with our quiz below.</p>
                 <form id="quiz-form">
@@ -342,7 +250,7 @@
                         <li><label><input type="radio" name="q5" value="d"> The V-Line (Regional Train)</label></li>
                     </ul>
 
-                    <button type="button" class="submit-btn" onclick="checkAnswers()">Submit</button>
+                    <button type="button" class="submit-btn" onclick="checkAnswers()"><div id="section8">Submit</div></button>
                 </form>
 
                 <div id="result" class="result"></div>
@@ -351,163 +259,160 @@
             <div class="call-to-action" style="position:sticky;">
                 <h2>Take Action Today!</h2>
                 <p>Start by assessing your carbon footprint with our calculator and discover ways to reduce it.</p>
-                <a href="emission_cal_personal.html" class="flat-button">Calculate Your Emissions</a>
+                <a href="emission_cal_cover.html" class="flat-button">Calculate Your Emissions</a>
             </div>
 
             <!-- Scripts -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script>
-                function checkAnswers() {
-                    const answers = {
-                        q1: 'b', // Riding a bike or walking
-                        q2: 'b', // Composting at home or using council green waste bins
-                        q3: 'a', // Use solar panels and choose GreenPower
-                        q4: 'b', // Buy local, seasonal produce from farmers' markets
-                        q5: 'a'  // Taking shorter showers and using water-efficient fixtures
-                    };
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
 
-                    const explanations = {
-                        q1: 'Correct answer: Container Deposit Scheme. Did you know that for some elegible containers, you could be getting 10 cents back per bottle/can at a deposit station in your neighbourhood?',
-                        q2: 'Correct answer: 2023. Melbourne was only recently named the most sustainable city in the world by the sustainable travel index',
-                        q3: 'Correct answer: Environmental Protection Agency (EPA) are the Victorias independent environmental regulator.',
-                        q4: 'Correct answer: Buy local, seasonal produce. This reduces the carbon footprint from transportation and supports local agriculture.',
-                        q5: 'Correct answer: Trams are the most efficient form of public transport.'
-                    };
+<script type="text/javascript">
+$(document).ready(function () {
+    // Navigation click actions
+    $('.scroll-link').click(function (event) {
+        event.preventDefault();
+        var sectionID = $(this).data("id");
+        scrollToSection(sectionID);
+    });
 
-                    const form = document.getElementById('quiz-form');
-                    const result = document.getElementById('result');
-                    let output = '';
-                    let score = 0;
-                    let totalQuestions = 5;
+    // Scroll to top action
+    $('.scroll-top').click(function (event) {
+        event.preventDefault();
+        $('html, body').animate({ scrollTop: 0 }, 'slow');
+    });
 
-                    for (let [question, correctAnswer] of Object.entries(answers)) {
-                        const selected = form.querySelector(`input[name="${question}"]:checked`);
-                        if (selected) {
-                            if (selected.value === correctAnswer) {
-                                score++;
-                                output += `<p class="correct">Question ${question.slice(-1)}: Correct! ${explanations[question]}</p>`;
-                            } else {
-                                output += `<p class="wrong">Question ${question.slice(-1)}: Wrong! ${explanations[question]}</p>`;
-                            }
-                        } else {
-                            output += `<p class="wrong">Question ${question.slice(-1)}: No answer selected! ${explanations[question]}</p>`;
-                        }
-                    }
+    // Mobile nav toggle
+    $('#nav-toggle').click(function (event) {
+        event.preventDefault();
+        $('#main-nav').toggleClass("open");
+    });
 
-                    result.style.display = 'block';
-                    result.innerHTML = `${output}<br>You scored ${score} out of ${totalQuestions}.`;
-                }
+    // Highlight current navigation item
+    $('#navigation li a').click(function() {
+        $('#navigation li.current').removeClass('current'); // Remove 'current' class from all
+        $(this).parent().addClass('current'); // Add to clicked item
+    });
 
-            </script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-            <script src="js/vendor/bootstrap.min.js"></script>
-            <script src="js/plugins.js"></script>
-            <script src="js/main.js"></script>
+    // Quiz answer checking
+    $('#quiz-form').on('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+        checkAnswers();
+    });
+});
 
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    // Navigation click actions
-                    $('.scroll-link').on('click', function (event) {
-                        event.preventDefault();
-                        var sectionID = $(this).attr("data-id");
-                        scrollToID('#' + sectionID, 750);
-                    });
+function scrollToSection(sectionID) {
+    var fixedNavbarHeight = 200; // Height of your navbar
+    var offsetAdjustment = 50; // Additional space below the navbar
+    var targetOffset = $('#' + sectionID).offset().top - fixedNavbarHeight - offsetAdjustment; // Adjust for navbar height and additional space
 
-                    // Scroll to top action
-                    $('.scroll-top').on('click', function (event) {
-                        event.preventDefault();
-                        $('html, body').animate({ scrollTop: 0 }, 'slow');
-                    });
+    console.log("Target Offset:", targetOffset); // Debugging line
 
-                    // Mobile nav toggle
-                    $('#nav-toggle').on('click', function (event) {
-                        event.preventDefault();
-                        $('#main-nav').toggleClass("open");
-                    });
-                });
+    // Check if the targetOffset is a valid number
+    if (!isNaN(targetOffset)) {
+        // Scroll to the target section with adjusted offset
+        $('html, body').animate({ scrollTop: targetOffset }, 750);
+    } else {
+        console.error("Invalid target offset for section:", sectionID);
+    }
+}
 
-                // Scroll function
-                function scrollToID(id, speed) {
-                    // Set offset to 0 to scroll to the top of the page
-                    var targetOffset = $(id).offset().top;
-                    $('html, body').animate({ scrollTop: targetOffset }, speed);
+// Function to check answers in the quiz
+function checkAnswers() {
+    const answers = {
+        q1: 'b',
+        q2: 'b',
+        q3: 'a',
+        q4: 'b',
+        q5: 'a'
+    };
 
-                    var mainNav = $('#main-nav');
-                    if (mainNav.hasClass("open")) {
-                        mainNav.css("height", "1px").removeClass("in").addClass("collapse");
-                        mainNav.removeClass("open");
-                    }
-                }
+    const explanations = {
+        q1: 'Correct answer: Container Deposit Scheme. Did you know that for some eligible containers, you could be getting 10 cents back per bottle/can at a deposit station in your neighborhood?',
+        q2: 'Correct answer: 2023. Melbourne was only recently named the most sustainable city in the world by the sustainable travel index.',
+        q3: 'Correct answer: Environmental Protection Agency (EPA) are Victoria’s independent environmental regulator.',
+        q4: 'Correct answer: Buy local, seasonal produce. This reduces the carbon footprint from transportation and supports local agriculture.',
+        q5: 'Correct answer: Trams are the most efficient form of public transport.'
+    };
 
-                if (typeof console === "undefined") {
-                    console = {
-                        log: function () { }
-                    };
-                }
-            </script>
+    const form = document.getElementById('quiz-form');
+    const result = document.getElementById('result');
+    let output = '';
+    let score = 0;
+    const totalQuestions = Object.keys(answers).length;
 
+    for (let [question, correctAnswer] of Object.entries(answers)) {
+        const selected = form.querySelector(`input[name="${question}"]:checked`);
+        if (selected) {
+            if (selected.value === correctAnswer) {
+                score++;
+                output += `<p class="correct">Question ${question.slice(-1)}: Correct!</p>
+                           <p>${explanations[question]}</p>`;
+            } else {
+                output += `<p class="wrong">Question ${question.slice(-1)}: Wrong!</p>
+                           <p>${explanations[question]}</p>`;
+            }
+        } else {
+            output += `<p class="wrong">Question ${question.slice(-1)}: No answer selected!</p>
+                       <p>${explanations[question]}</p>`;
+        }
+    }
+
+    result.style.display = 'block';
+    result.innerHTML = `${output}<br><span class="score">You scored ${score} out of ${totalQuestions}.</span>`;
+}
+</script>
+        </div>
     </body>
 
     <footer>
-        <section id="learn-more-section"
-            style="position: sticky; padding: 60px; background-color: #f8f9fa; text-align: center; font-family: 'Arial', sans-serif;">
-            <h2 style="color: #333; font-size: 2.5em; margin-bottom: 40px;">Learn More</h2>
+    <section id="learn-more-section"
+        style="position: sticky; padding: 60px; background-color: #f8f9fa; text-align: center; font-family: 'Arial', sans-serif;">
+        <h2 style="color: #333; font-size: 2.5em; margin-bottom: 40px;">Learn More</h2>
 
-            <div class="learn-more-container"
-                style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; max-width: 1200px; margin: 0 auto;">
+        <div class="learn-more-container"
+            style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; max-width: 1200px; margin: 0 auto;">
 
-                <!-- Box 1 -->
-                <div class="learn-more-box"
-                    style="flex: 1 1 calc(33.33% - 20px); background-color: white; padding: 20px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); transition: transform 0.3s, box-shadow 0.3s;">
-                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2944&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt="Article 1 Image"
-                        style="width: 100%; height: auto; border-radius: 15px 15px 0 0; object-fit: cover;">
-                    <div style="padding: 15px;">
-                        <h3 style="color: #539f53; font-size: 1.8em; margin-bottom: 10px;">How Australia compares to the
-                            rest of the world on CO2 emissions </h3>
-                        <p style="color: #666; font-size: 1em; margin-bottom: 15px;">See a global comparison of
-                            Australia’s emissions versus other countries, helping you understand where Australia stands
-                            and how your individual actions contribute on a global stage.</p>
-                        <a href="https://www.sbs.com.au/news/article/interactive-how-australia-compares-to-the-rest-of-the-world-on-co2-emissions/7oooxwnnm"
-                            style="color: #539f53; text-decoration: none; font-weight: bold;">Learn More</a>
-                    </div>
+            <!-- Box 1 -->
+            <div class="learn-more-box">
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2944&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Article 1 Image" class="learn-more-image">
+                <div class="learn-more-content">
+                    <h3>How Australia compares to the rest of the world on CO2 emissions</h3>
+                    <p>See a global comparison of Australia’s emissions versus other countries, helping you understand where Australia stands
+                        and how your individual actions contribute on a global stage.</p>
+                    <a href="https://www.sbs.com.au/news/article/interactive-how-australia-compares-to-the-rest-of-the-world-on-co2-emissions/7oooxwnnm"
+                        class="learn-more-link">Learn More</a>
                 </div>
-
-                <!-- Box 2 -->
-                <div class="learn-more-box"
-                    style="flex: 1 1 calc(33.33% - 20px); background-color: white; padding: 20px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); transition: transform 0.3s, box-shadow 0.3s;">
-                    <img src="https://images.unsplash.com/photo-1594100065443-5cd99dfd40e1?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt="Article 2 Image"
-                        style="width: 100%; height: auto; border-radius: 15px 15px 0 0; object-fit: cover;">
-                    <div style="padding: 15px;">
-                        <h3 style="color: #539f53; font-size: 1.8em; margin-bottom: 10px;">Australian passenger vehicle
-                            emissions: too high and getting worse</h3>
-                        <p style="color: #666; font-size: 1em; margin-bottom: 15px;">Learn how Australia's greenhouse
-                            emissions are contributing to global environmental degradation, and see the cost
-                            implications for Australian households.</p>
-                        <a href="https://www.uts.edu.au/news/social-justice-sustainability/australian-passenger-vehicle-emissions-too-high-and-getting-worse"
-                            style="color: #539f53; text-decoration: none; font-weight: bold;">Learn More</a>
-                    </div>
-                </div>
-
-                <!-- Box 3 -->
-                <div class="learn-more-box"
-                    style="flex: 1 1 calc(33.33% - 20px); background-color: white; padding: 20px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); transition: transform 0.3s, box-shadow 0.3s;">
-                    <img src="https://plus.unsplash.com/premium_photo-1667566903049-c48abf0a2414?q=80&w=2944&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt="Article 3 Image"
-                        style="width: 100%; height: auto; border-radius: 15px 15px 0 0; object-fit: cover;">
-                    <div style="padding: 15px;">
-                        <h3 style="color: #539f53; font-size: 1.8em; margin-bottom: 10px;">Farming Down Under:
-                            Agriculture’s role in Australia’s climate pollution</h3>
-                        <p style="color: #666; font-size: 1em; margin-bottom: 15px;">Learn about the unique role that
-                            the agriculture industry plays in our country, and how this impacts climate change.</p>
-                        <a href="https://www.climatecouncil.org.au/resources/australia-agriculture-climate-change-emissions-methane/"
-                            style="color: #539f53; text-decoration: none; font-weight: bold;">Learn More</a>
-                    </div>
-                </div>
-
             </div>
-        </section>
-    </footer>
+
+            <!-- Box 2 -->
+            <div class="learn-more-box">
+                <img src="https://images.unsplash.com/photo-1594100065443-5cd99dfd40e1?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Article 2 Image" class="learn-more-image">
+                <div class="learn-more-content">
+                    <h3>Australian passenger vehicle emissions: too high and getting worse</h3>
+                    <p>Learn how Australia's greenhouse emissions are contributing to global environmental degradation, and see the cost
+                        implications for Australian households.</p>
+                    <a href="https://www.uts.edu.au/news/social-justice-sustainability/australian-passenger-vehicle-emissions-too-high-and-getting-worse"
+                        class="learn-more-link">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Box 3 -->
+            <div class="learn-more-box">
+                <img src="https://plus.unsplash.com/premium_photo-1667566903049-c48abf0a2414?q=80&w=2944&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Article 3 Image" class="learn-more-image">
+                <div class="learn-more-content">
+                    <h3>Farming Down Under: Agriculture’s role in Australia’s climate pollution</h3>
+                    <p>Learn about the unique role that the agriculture industry plays in our country, and how this impacts climate change.</p>
+                    <a href="https://www.climatecouncil.org.au/resources/australia-agriculture-climate-change-emissions-methane/"
+                        class="learn-more-link">Learn More</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</footer>
 </html>

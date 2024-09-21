@@ -72,12 +72,9 @@
             <div class="cover-right">
                 <h1>Discover Your Carbon Impact</h1>
                 <p>Join the journey towards a sustainable future by calculating your CO2 footprint.</p>
-                <button id="startButton">START NOW TO MAKE A DIFFERENCE!</button>
+                <button id="startButton" onclick="window.location.href='emission_cal_personal.html'">START NOW TO MAKE A DIFFERENCE!</button>
             </div>
         </div>
-
-        <!-- Question Section loaded via iframe -->
-        <iframe id="questionSection" src="emission_cal_personal.html"></iframe>
     </div>
 
     <script>
@@ -92,6 +89,7 @@
         startButton.addEventListener('click', function () {
             mainContainer.style.transform = 'translateX(-50%)';
         });
+
     </script>
 
 </body>
