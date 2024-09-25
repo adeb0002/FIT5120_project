@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Eco Simulation</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/emission_appli.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f4f4f4;
+        }
+    
+        .simulation-container {
+            display: flex;
+            flex-direction: column; /* Changed to column to stack vertically */
+            align-items: center; /* Center-align the children */
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 0px; /* Adjusted padding */
+        }
+    
+        .header-section {
+            text-align: center; /* Center the header content */
+            width: 100%; /* Full width */
+            padding: 100px 0 0; /* Padding top and bottom */
+        }
+    
+        .form-charts-container {
+            display: flex;
+            width: 100%; /* Full width to match the header section */
+            justify-content: space-between; /* Space between form and charts */
+        }
+    
+        .form-section, .charts-section {
+            flex: 1; /* Each takes up half of the container */
+            padding: 20px;
+        }
+    
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+    
+        .chart {
+            flex-basis: 100%; /* Charts take full width of their container */
+            padding: 20px;
+            margin-top: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    
+        @media (max-width: 800px) {
+            .form-charts-container {
+                flex-direction: column; /* Stack vertically on smaller screens */
+            }
+        }
+    
+        .slider {
+            width: 100%;
+            margin: 15px 0;
+        }
+    
+        h4 {
+            margin-top: 20px;
+        }
+    
+        button {
+            margin: 20px 10px;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+    
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            text-align: center;
+            background-color: #f1f1f1;
+        }
+    
+        .highlight {
+            color: green;
+            font-weight: bold;
+        }
+
+        .option-item {
+            margin-bottom: 10px; /* Space between options */
+        }
+
+        .option-item label {
+            margin-right: 10px; /* Space between label and radio button */
+        }
+
+        input[type="radio"] {
+            visibility: visible;
+            position: relative; /* Sometimes necessary based on layout */
+            opacity: 1; /* In case they have been faded out */
+        }
+
+        .checkmark-label {
+            margin-left: 5px; /* Small space after the checkbox for 'Yes' */
+        }
+
+        input[type="checkbox"] {
+            visibility: visible; /* Ensures checkboxes are not hidden */
+            opacity: 1; /* Ensures full opacity */
+            margin-right: 5px; /* Spacing between checkbox and label */
+        }
+    </style>
+    
+</head>
+<body>
+    <!-- Header Section with Navigation Bar -->
+    <div class="header">
+        <div class="container">
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span the class="icon-bar"></span>
+                        <span the class="icon-bar"></span>
+                    </button>
+                    <a href="index.html" class="navbar-brand scroll-top">
+                        <img src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
+                    </a>
+                </div>
+                <div id="main-nav" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="index.html" class="scroll-top">Home</a></li>
+                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a></li>
+                        <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
+                        <li><a href="#" id="clear-session-link">Emission Calculator</a></li>
+                        <li><a href="recommendations.html">Recommendations</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    
+    <div class="simulation-container">
+        <div class="header-section">
+            <h1>Eco Simulation</h1>
+            <p>Adjust your lifestyle choices to see real-time changes in carbon emissions and cost savings. Click Apply at the bottom of the screen to see the changes, or click reset to start again.</p>
+        </div>
+        
+        <div class="form-charts-container">
+            <div class="form-section">
+            
+                <h4>Energy:</h4>
+                <div class="option-item">
+                    <label>Solar Panels: </label>
+                    <input type="checkbox" id="solar-panels-yes" name="solar-panels" value="yes">
+                    <label for="solar-panels-yes">Yes</label>
+                    <input type="checkbox" id="solar-panels-no" name="solar-panels" value="no">
+                    <label for="solar-panels-no">No</label>
+                </div>
+                <div class="option-item">
+                    <label>Gas Water Heater: </label>
+                    <input type="checkbox" id="gas-water-heater-yes" name="gas-water-heater" value="yes">
+                    <label for="gas-water-heater-yes">Yes</label>
+                    <input type="checkbox" id="gas-water-heater-no" name="gas-water-heater" value="no">
+                    <label for="gas-water-heater-no">No</label>
+                </div>
+                
+                
+            <h4>Transport:</h4>
+            <label>Commute by <span class="highlight">CAR</span> (km per week): 
+                <input type="range" id="car-commute" min="0" max="100" value="0" class="slider"> 
+                <span id="car-commute-output">0km</span>
+            </label>
+
+            <h4>Appliance use:</h4>
+            <label>TV screen: No TV / LCD / <span class="highlight">Plasma</span> / LED / OLED</label>
+            <br>
+            <label>How many hours of dishwasher per week: 
+                <input type="range" id="dishwasher-hours" min="0" max="30" value="0" class="slider"> 
+                <span id="dishwasher-output">0 hours</span>
+            </label>
+            <br>
+            <label>How many hours of clothes washer per week: 
+                <input type="range" id="washer-hours" min="0" max="30" value="0" class="slider"> 
+                <span id="washer-output">0 hours</span>
+            </label>
+            <br>
+            <label>How many hours of clothes dryer per week: 
+                <input type="range" id="dryer-hours" min="0" max="30" value="0" class="slider"> 
+                <span id="dryer-output">0 hours</span>
+            </label>
+            <br>
+            <label>How many hours of air conditioner per week: 
+                <input type="range" id="ac-hours" min="0" max="30" value="0" class="slider"> 
+                <span id="ac-output">0 hours</span>
+            </label>
+            <!-- Existing content omitted for brevity -->
+        
+            <h4>Other Adjustments:</h4>
+            <div class="option-item">
+                <label>What type of lightbulb?</label>
+                <input type="checkbox" id="lightbulb-led" name="lightbulb-type" value="LED">
+                <label for="lightbulb-led">LED</label>
+                <input type="checkbox" id="lightbulb-traditional" name="lightbulb-type" value="Traditional">
+                <label for="lightbulb-traditional">Traditional</label>
+            </div>
+
+            <div class="option-item">
+                <label>Do your windows have glazing?</label>
+                <input type="checkbox" id="windows-single" name="window-glazing" value="Single">
+                <label for="windows-single">Single</label>
+                <input type="checkbox" id="windows-double" name="window-glazing" value="Double">
+                <label for="windows-double">Double</label>
+            </div>
+
+            <div class="option-item">
+                <label>Smart Thermostat:</label>
+                <input type="checkbox" id="thermostat-yes" name="smart-thermostat" value="Yes">
+                <label for="thermostat-yes">Yes</label>
+                <input type="checkbox" id="thermostat-no" name="smart-thermostat" value="No">
+                <label for="thermostat-no">No</label>
+            </div>
+
+            <div class="option-item">
+                <label>Electric Vehicle Ownership:</label>
+                <input type="checkbox" id="ev-yes" name="ev-ownership" value="Yes">
+                <label for="ev-yes">Yes</label>
+                <input type="checkbox" id="ev-no" name="ev-ownership" value="No">
+                <label for="ev-no">No</label>
+            </div>
+
+        
+            <button onclick="applyChanges()">Apply</button>
+            <button onclick="resetChanges()">Reset</button>
+
+        </div>
+
+        <div class="charts-section">
+            <div class="chart-container">
+                <div class="chart">
+                    <h4>Emissions Change</h4>
+                    <canvas id="emissionsChart"></canvas>
+                </div>
+                <div class="chart">
+                    <h4>Cost Change</h4>
+                    <canvas id="costChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <footer>
+            Ready to take action?
+            <p>Use our <a href="#">Emissions Calculator</a> to discover your personal carbon footprint and ways to reduce it.</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const carCommuteInput = document.getElementById('car-commute');
+    const dishwasherInput = document.getElementById('dishwasher-hours');
+    const washerInput = document.getElementById('washer-hours');
+    const dryerInput = document.getElementById('dryer-hours');
+    const acInput = document.getElementById('ac-hours');
+
+    // Event listeners to update display values
+    carCommuteInput.addEventListener('input', updateDisplayValues);
+    dishwasherInput.addEventListener('input', updateDisplayValues);
+    washerInput.addEventListener('input', updateDisplayValues);
+    dryerInput.addEventListener('input', updateDisplayValues);
+    acInput.addEventListener('input', updateDisplayValues);
+
+    function updateDisplayValues() {
+        document.getElementById('car-commute-output').innerText = `${carCommuteInput.value} km`;
+        document.getElementById('dishwasher-output').innerText = `${dishwasherInput.value} hours`;
+        document.getElementById('washer-output').innerText = `${washerInput.value} hours`;
+        document.getElementById('dryer-output').innerText = `${dryerInput.value} hours`;
+        document.getElementById('ac-output').innerText = `${acInput.value} hours`;
+    }
+
+    function applyChanges() {
+        const data = {
+            solarPanels: document.getElementById('solar-panels').checked,
+            gasWaterHeater: document.getElementById('gas-water-heater').checked,
+            carCommute: carCommuteInput.value,
+            dishwasherHours: dishwasherInput.value,
+            washerHours: washerInput.value,
+            dryerHours: dryerInput.value,
+            acHours: acInput.value
+        };
+
+        const emissions = calculateEmissions(data);
+        const costs = calculateCostChange(data);
+
+        // Save data to session storage
+        sessionStorage.setItem('emissionsData', JSON.stringify(emissions));
+        sessionStorage.setItem('costsData', JSON.stringify(costs));
+
+        // Update charts
+        updateCharts(emissions, costs);
+    }
+
+    function resetChanges() {
+        sessionStorage.removeItem('emissionsData');
+        sessionStorage.removeItem('costsData');
+        updateDisplayValues();
+        updateCharts([0, 0, 0, 0], [0, 0, 0, 0]);
+    }
+
+    function calculateEmissions(data) {
+        return [
+            data.carCommute * 0.2,
+            data.dishwasherHours * 0.5,
+            data.washerHours * 0.4,
+            data.dryerHours * 0.6,
+            data.acHours * 0.3
+        ];
+    }
+
+    function calculateCostChange(data) {
+        return [
+            data.carCommute * 0.07,
+            data.dishwasherHours * 0.1,
+            data.washerHours * 0.08,
+            data.dryerHours * 0.11,
+            data.acHours * 0.09
+        ];
+    }
+
+    function updateCharts(emissions, costs) {
+        const ctxEmissions = document.getElementById('emissionsChart').getContext('2d');
+        const ctxCosts = document.getElementById('costChart').getContext('2d');
+
+        new Chart(ctxEmissions, {
+            type: 'bar',
+            data: {
+                labels: ['Car', 'Dishwasher', 'Washer', 'Dryer', 'Air Conditioner'],
+                datasets: [{
+                    label: 'Emissions (kg CO2)',
+                    data: emissions,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: { scales: { y: { beginAtZero: true } } }
+        });
+
+        new Chart(ctxCosts, {
+            type: 'line',
+            data: {
+                labels: ['Car', 'Dishwasher', 'Washer', 'Dryer', 'Air Conditioner'],
+                datasets: [{
+                    label: 'Cost Change ($)',
+                    data: costs,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: { scales: { y: { beginAtZero: true } } }
+        });
+    }
+
+    // Load any existing data from session storage on page load
+    window.onload = function() {
+        const storedEmissions = JSON.parse(sessionStorage.getItem('emissionsData'));
+        const storedCosts = JSON.parse(sessionStorage.getItem('costsData'));
+        if (storedEmissions && storedCosts) {
+            updateCharts(storedEmissions, storedCosts);
+        } else {
+            resetChanges();
+        }
+    };
+</script>
+
+</body>
+</html>
