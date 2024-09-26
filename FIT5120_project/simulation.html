@@ -23,132 +23,149 @@
             font-family: 'Open Sans', sans-serif;
             background-color: #f4f4f4;
         }
-    
+
         .simulation-container {
             display: flex;
-            flex-direction: column; /* Changed to column to stack vertically */
-            align-items: center; /* Center-align the children */
+            flex-direction: column;
+            align-items: center;
             margin: 0 auto;
             max-width: 1200px;
-            padding: 0px; /* Adjusted padding */
+            padding: 0px;
         }
-    
+
         .header-section {
-            text-align: center; /* Center the header content */
-            width: 100%; /* Full width */
-            padding: 100px 0 0; /* Padding top and bottom */
+            text-align: center;
+            width: 100%;
+            padding: 100px 0 0 0;
         }
-    
+
         .form-charts-container {
             display: flex;
-            width: 100%; /* Full width to match the header section */
-            justify-content: space-between; /* Space between form and charts */
+            width: 100%;
+            justify-content: space-between;
+            margin-top: 0;
         }
-    
+
         .form-section, .charts-section {
-            flex: 1; /* Each takes up half of the container */
+            flex: 1;
             padding: 20px;
         }
-    
+
         .chart-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
         }
-    
+
         .chart {
-            flex-basis: 100%; /* Charts take full width of their container */
+            flex-basis: 100%;
             padding: 20px;
             margin-top: 20px;
             background: white;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-    
+
         @media (max-width: 800px) {
             .form-charts-container {
-                flex-direction: column; /* Stack vertically on smaller screens */
+                flex-direction: column;
             }
         }
-    
+
         .slider {
             width: 100%;
             margin: 15px 0;
         }
-    
+
         h4 {
             margin-top: 20px;
         }
-    
+
         button {
             margin: 20px 10px;
-            padding: 10px 20px;
+            padding: 15px 30px;
             font-weight: bold;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
         }
-    
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .reset-btn {
+            background-color: #f44336;
+        }
+
+        .reset-btn:hover {
+            background-color: #e53935;
+        }
+
         footer {
             margin-top: 40px;
             padding: 20px;
             text-align: center;
             background-color: #f1f1f1;
         }
-    
+
         .highlight {
             color: green;
             font-weight: bold;
         }
 
-        .option-item {
-            margin-bottom: 10px; /* Space between options */
-        }
-
-        .option-item label {
-            margin-right: 10px; /* Space between label and radio button */
+        .btn-radio {
+            background-color: #f4f4f4;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         input[type="radio"] {
-            visibility: visible;
-            position: relative; /* Sometimes necessary based on layout */
-            opacity: 1; /* In case they have been faded out */
+            display: none;
         }
 
-        .checkmark-label {
-            margin-left: 5px; /* Small space after the checkbox for 'Yes' */
-        }
-
-        input[type="checkbox"] {
-            visibility: visible; /* Ensures checkboxes are not hidden */
-            opacity: 1; /* Ensures full opacity */
-            margin-right: 5px; /* Spacing between checkbox and label */
+        input[type="radio"]:checked + .btn-radio {
+            background-color: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
         }
 
         .radio-question {
             margin-bottom: 20px;
         }
 
-        .radio-question label {
-            display: block; /* Force the question to be on its own line */
-            margin-bottom: 10px;
+        .radio-option-group {
+            display: inline-flex; /* This ensures buttons stay in a row */
+            flex-wrap: wrap;      /* Allows wrapping if there's not enough space */
         }
 
         .radio-option {
-            display: inline-block; /* Keep the radio buttons on the same line */
-            margin-right: 15px; /* Space between the buttons */
+            margin-right: 15px;   /* Space between buttons */
+            margin-bottom: 10px;  /* Ensure some space between buttons if they wrap */
         }
 
-        .checkbox-option {
-            display: inline-block; /* Ensures the checkboxes stay on the same line */
-            margin-right: 15px; /* Adds space between YES and NO checkboxes */
+        .button-section {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
         }
 
-        .form-group {
+        .total-emissions {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
             margin-bottom: 20px;
         }
-
-
     </style>
-    
 </head>
+
 <body>
     <!-- Header Section with Navigation Bar -->
     <div class="header">
@@ -177,15 +194,22 @@
             </nav>
         </div>
     </div>
-    
+
     <div class="simulation-container">
         <div class="header-section">
             <h1>Eco Simulation</h1>
-            <p>Adjust your lifestyle choices to see real-time changes in carbon emissions and cost savings. Click Apply at the bottom of the screen to see the changes, or click reset to start again.</p>
-        </div>
+            <p>Adjust your lifestyle choices to see real-time changes in carbon emissions and cost savings.</p>
+            
+            <!-- Prominent Apply and Reset buttons at the top -->
+            <div class="button-section">
+                <button onclick="applyChanges()">Apply</button>
+                <button class="reset-btn" onclick="resetChanges()">Reset</button>
+            </div>
 
-        <div class="summary-section">
-            <span id="total-emissions">Total CO2 Emissions: 0 kg</span>
+            <!-- Total CO2 Emissions Display -->
+            <div class="total-emissions">
+                <span id="total-emissions">Total CO2 Emissions: 0 kg</span>
+            </div>
         </div>
 
         <div class="form-charts-container">
@@ -196,28 +220,23 @@
 
                 <div class="form-group">
                     <label>Solar Panels:</label>
-                    <div class="checkbox-option">
-                        <input type="checkbox" id="solar-panels-yes" name="solar-panels" value="yes">
-                        <label for="solar-panels-yes">YES</label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="checkbox" id="solar-panels-no" name="solar-panels" value="no">
-                        <label for="solar-panels-no">NO</label>
+                    <div class="radio-option">
+                        <input type="radio" id="solar-yes" name="solar-panels" value="yes">
+                        <label for="solar-yes" class="btn-radio">Yes</label>
+                        <input type="radio" id="solar-no" name="solar-panels" value="no">
+                        <label for="solar-no" class="btn-radio">No</label>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>Gas Water Heater:</label>
-                    <div class="checkbox-option">
-                        <input type="checkbox" id="gas-water-heater-yes" name="gas-water-heater" value="yes">
-                        <label for="gas-water-heater-yes">YES</label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="checkbox" id="gas-water-heater-no" name="gas-water-heater" value="no">
-                        <label for="gas-water-heater-no">NO</label>
+                    <div class="radio-option">
+                        <input type="radio" id="gas-yes" name="gas-water-heater" value="yes">
+                        <label for="gas-yes" class="btn-radio">Yes</label>
+                        <input type="radio" id="gas-no" name="gas-water-heater" value="no">
+                        <label for="gas-no" class="btn-radio">No</label>
                     </div>
                 </div>
-
 
                 <!-- Transport Section with four different transport types -->
                 <h4>Transport:</h4>
@@ -262,23 +281,26 @@
                 </div>
                 <div class="form-group radio-question">
                     <label for="television-screen-tech">What screen technology does your television use?</label>
-                    <div class="radio-option">
-                        <input type="radio" id="tech-lcd" name="television-screen-tech" value="LCD" required>
-                        <label for="tech-lcd" class="radio-label">LCD</label>
-                    </div>
-                    <div class="radio-option">
-                        <input type="radio" id="tech-plasma" name="television-screen-tech" value="Plasma" required>
-                        <label for="tech-plasma" class="radio-label">Plasma</label>
-                    </div>
-                    <div class="radio-option">
-                        <input type="radio" id="tech-led" name="television-screen-tech" value="LED" required>
-                        <label for="tech-led" class="radio-label">LED</label>
-                    </div>
-                    <div class="radio-option">
-                        <input type="radio" id="tech-oled" name="television-screen-tech" value="OLED" required>
-                        <label for="tech-oled" class="radio-label">OLED</label>
+                    <div class="radio-option-group">
+                        <div class="radio-option">
+                            <input type="radio" id="tech-lcd" name="television-screen-tech" value="LCD" required>
+                            <label for="tech-lcd" class="radio-label btn-radio">LCD</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="tech-plasma" name="television-screen-tech" value="Plasma" required>
+                            <label for="tech-plasma" class="radio-label btn-radio">Plasma</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="tech-led" name="television-screen-tech" value="LED" required>
+                            <label for="tech-led" class="radio-label btn-radio">LED</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="tech-oled" name="television-screen-tech" value="OLED" required>
+                            <label for="tech-oled" class="radio-label btn-radio">OLED</label>
+                        </div>
                     </div>
                 </div>
+                
                 <div class="form-group">
                     <label for="television-hours">How many hours do you watch television a week?</label>
                     <input type="number" class="form-control" id="television-hours" name="television-hours" min="1" value="1" required>
@@ -305,15 +327,18 @@
                 </h3>
                 <div class="form-group radio-question">
                     <label for="clothes-washer-loading">What type of loading is your clothes washer?</label>
-                    <div class="radio-option">
-                        <input type="radio" id="washer-loading-front" name="clothes-washer-loading" value="Front" required>
-                        <label for="washer-loading-front" class="radio-label">Front</label>
-                    </div>
-                    <div class="radio-option">
-                        <input type="radio" id="washer-loading-top" name="clothes-washer-loading" value="Top" required>
-                        <label for="washer-loading-top" class="radio-label">Top</label>
+                    <div class="radio-option-group">
+                        <div class="radio-option">
+                            <input type="radio" id="washer-loading-front" name="clothes-washer-loading" value="Front" required>
+                            <label for="washer-loading-front" class="radio-label btn-radio">Front</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="washer-loading-top" name="clothes-washer-loading" value="Top" required>
+                            <label for="washer-loading-top" class="radio-label btn-radio">Top</label>
+                        </div>
                     </div>
                 </div>
+                
                 <div class="form-group">
                     <label for="clothes-washer-load-size">What load size is your clothes washer?</label>
                 </div>
@@ -335,15 +360,18 @@
                     </span>
                     <span class="text">Clothes Dryer</span>
                 </h3>
+
                 <div class="form-group radio-question">
                     <label for="clothes-dryer-type">What type of clothes dryer do you use?</label>
-                    <div class="radio-option">
-                        <input type="radio" id="dryer-type-vented" name="clothes-dryer-type" value="Vented" required>
-                        <label for="dryer-type-vented" class="radio-label">Vented</label>
-                    </div>
-                    <div class="radio-option">
-                        <input type="radio" id="dryer-type-condenser" name="clothes-dryer-type" value="Condenser" required>
-                        <label for="dryer-type-condenser" class="radio-label">Condenser</label>
+                    <div class="radio-option-group">
+                        <div class="radio-option">
+                            <input type="radio" id="dryer-type-vented" name="clothes-dryer-type" value="Vented" required>
+                            <label for="dryer-type-vented" class="radio-label btn-radio">Vented</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="dryer-type-condenser" name="clothes-dryer-type" value="Condenser" required>
+                            <label for="dryer-type-condenser" class="radio-label btn-radio">Condenser</label>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -360,17 +388,19 @@
                 </h3>
                 <div class="form-group radio-question">
                     <label for="air-conditioner-type">Is your air conditioner ducted or non-ducted?</label>
-                    <div class="radio-option">
-                        <input type="radio" id="ac-type-ducted" name="air-conditioner-type" value="Ducted" required>
-                        <label for="ac-type-ducted" class="radio-label">Ducted</label>
-                    </div>
-                    <div class="radio-option">
-                        <input type="radio" id="ac-type-non-ducted" name="air-conditioner-type" value="Non Ducted" required>
-                        <label for="ac-type-non-ducted" class="radio-label">Non Ducted</label>
-                    </div>
-                    <div class="radio-option">
-                        <input type="radio" id="ac-type-both" name="air-conditioner-type" value="Both" required>
-                        <label for="ac-type-both" class="radio-label">Both</label>
+                    <div class="radio-option-group">
+                        <div class="radio-option">
+                            <input type="radio" id="ac-type-ducted" name="air-conditioner-type" value="Ducted" required>
+                            <label for="ac-type-ducted" class="radio-label btn-radio">Ducted</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="ac-type-non-ducted" name="air-conditioner-type" value="Non Ducted" required>
+                            <label for="ac-type-non-ducted" class="radio-label btn-radio">Non Ducted</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="ac-type-both" name="air-conditioner-type" value="Both" required>
+                            <label for="ac-type-both" class="radio-label btn-radio">Both</label>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -400,10 +430,11 @@
                     </select>
                 </div>
 
-                <br>
-                <button onclick="applyChanges()">Apply</button>
-                <button onclick="resetChanges()">Reset</button>
-
+                <!-- Apply and Reset buttons at the bottom -->
+                <div class="button-section">
+                    <button onclick="applyChanges()">Apply</button>
+                    <button class="reset-btn" onclick="resetChanges()">Reset</button>
+                </div>
             </div>
 
             <div class="charts-section">
