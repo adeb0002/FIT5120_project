@@ -457,17 +457,35 @@
         <p>Use our <a href="#">Emissions Calculator</a> to discover your personal carbon footprint and ways to reduce it.</p>
     </footer>
 
+    <!-- Add a loading animation or spinner (hidden initially) -->
+    <div id="loading-animation" style="display: none;">
+        <img src="img/loading.gif" alt="Loading..." style="width: 100px; height: auto;">
+        <p>Calculating, please wait...</p>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
     <script>
+        // Function to show the loading animation
+        function showLoading() {
+            document.getElementById('loading-animation').style.display = 'block';  // Show the loading animation
+        }
+
+        // Function to hide the loading animation
+        function hideLoading() {
+            document.getElementById('loading-animation').style.display = 'none';   // Hide the loading animation
+        }
+
         // Get references to input fields
         const solarPanels = document.getElementById('solar-panels');
         const gasWaterHeater = document.getElementById('gas-water-heater');
-    
+
         const carDistance = document.getElementById('car-distance');
         const trainDistance = document.getElementById('train-distance');
         const busDistance = document.getElementById('bus-distance');
         const tramDistance = document.getElementById('tram-distance');
-    
+
         const tvScreenSize = document.getElementById('tv-screen-size');
         const televisionHours = document.getElementById('television-hours');
         const dishwasherUsage = document.getElementById('dishwasher-usage');
@@ -475,9 +493,20 @@
         const dryerUsage = document.getElementById('clothes-dryer-usage');
         const acHours = document.getElementById('air-conditioner-hours');
         const refrigeratorVolume = document.getElementById('refrigerator-volume');
+        const clothesWasherLoadSize = document.getElementById('clothes-washer-load-size'); 
     
         // Function to retrieve current emissions from sessionStorage
+        // Function to retrieve current emissions from sessionStorage
         function getCurrentEmissions() {
+            // Fetch the individual transport modes emissions
+            const privateVehicleEmissions = parseFloat(sessionStorage.getItem('transportationData')?.private_vehicle || 0);
+            const busEmissions = parseFloat(sessionStorage.getItem('transportationData')?.bus || 0);
+            const trainEmissions = parseFloat(sessionStorage.getItem('transportationData')?.train || 0);
+            const tramEmissions = parseFloat(sessionStorage.getItem('transportationData')?.tram || 0);
+
+            // Calculate total transport emissions by summing up all the modes
+            const totalTransportEmissions = privateVehicleEmissions + busEmissions + trainEmissions + tramEmissions;
+
             return {
                 television: JSON.parse(sessionStorage.getItem('emissions_television'))?.appliance_emissions || 0,
                 dishwasher: JSON.parse(sessionStorage.getItem('emissions_dishwasher'))?.appliance_emissions || 0,
@@ -485,9 +514,10 @@
                 clothes_dryer: JSON.parse(sessionStorage.getItem('emissions_clothes_dryer'))?.appliance_emissions || 0,
                 air_conditioner: JSON.parse(sessionStorage.getItem('emissions_air_conditioner'))?.appliance_emissions || 0,
                 refrigerator: JSON.parse(sessionStorage.getItem('emissions_refrigerator'))?.appliance_emissions || 0,
-                transport: sessionStorage.getItem('transportEmissions') || 0
+                transport: totalTransportEmissions // Set total transport emissions
             };
         }
+
 
         // Function to retrieve the value of the selected radio button
         function getSelectedRadioValue(name) {
@@ -500,62 +530,239 @@
             return null; // Return null if no selection is made
         }
     
-        // Function to send data to the backend and get simulated emissions
-        function applyChanges() {
-            const data = {
-                solarPanels: getSelectedRadioValue('solar-panels'),
-                gasWaterHeater: getSelectedRadioValue('gas-water-heater'),
-                tvScreenSize: tvScreenSize.value,
-                televisionHours: parseFloat(televisionHours.value),
-                dishwasherUsage: parseFloat(dishwasherUsage.value),
-                washerUsage: parseFloat(washerUsage.value),
-                dryerUsage: parseFloat(dryerUsage.value),
-                acHours: parseFloat(acHours.value),
-                refrigeratorVolume: refrigeratorVolume.value,
-                carDistance: parseFloat(carDistance.value),
-                trainDistance: parseFloat(trainDistance.value),
-                busDistance: parseFloat(busDistance.value),
-                tramDistance: parseFloat(tramDistance.value)
-            };
-    
-            // Send the data to the backend for simulated emissions calculation
-            fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-            .then(response => response.json())
-            .then(result => {
-                const totalEmissions = result.total_emissions || 0;
-                document.getElementById('total-emissions').innerText = `Total CO2 Emissions: ${totalEmissions.toFixed(2)} kg`;
-    
-                // Update charts with the new values
-                updateCharts(result.simulated_emissions);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+        // Function to retrieve the value of the selected radio button
+        function getSelectedRadioValue(name) {
+            const radios = document.getElementsByName(name);
+            for (let radio of radios) {
+                if (radio.checked) {
+                    return radio.value;
+                }
+            }
+            return null; // Return null if no selection is made
         }
-    
+
+        async function sendDataToLambda(data) {
+            showLoading();
+            
+            try {
+                const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)  // Send data as-is, no need for extra formatting
+                });
+
+                if (!response.ok) {
+                    const errorDetails = await response.text();
+                    console.error(`Response failed: Status ${response.status} - ${errorDetails}`);
+                    throw new Error(`Failed to send data. Status ${response.status}`);
+                }
+
+                const results = await response.json();
+                if (Array.isArray(results)) {
+                    let totalEmissions = 0;
+                    let simulatedEmissions = {};
+
+                    // Iterate over the array of responses
+                    results.forEach(result => {
+                        const resultBody = JSON.parse(result.body);
+                        
+                        // Aggregate emissions
+                        totalEmissions += resultBody.appliance_emissions || resultBody.transport_emissions || 0;
+                        
+                        // Aggregate individual emissions
+                        if (resultBody.individual_appliance_emissions) {
+                            Object.assign(simulatedEmissions, resultBody.individual_appliance_emissions);
+                        }
+                        if (resultBody.individual_transport_emissions) {
+                            Object.assign(simulatedEmissions, resultBody.individual_transport_emissions);
+                        }
+                    });
+
+                    // Update the total CO2 emissions
+                    document.getElementById('total-emissions').innerText = `Total CO2 Emissions: ${totalEmissions.toFixed(2)} kg`;
+                    
+
+                    console.log("Simulated Emissions Data:", simulatedEmissions);
+
+                    // Update the charts with the simulated emissions data
+                    updateCharts(simulatedEmissions);
+                } else {
+                    console.error("Error in the Lambda response:", results);
+                }
+
+            } catch (error) {
+                console.error('Error sending data to Lambda:', error);
+                alert('There was an error submitting your data. Please try again.');
+            } finally {
+                hideLoading();
+            }
+        }
+
+
+
+        function applyChanges() {
+            let requests = [];
+
+            // Process Solar Panel Data
+            const solarPanelVal = getSelectedRadioValue('solar-panels');
+            const gridDependenceVal = 100; // Assuming this as a default grid dependence percentage for now
+            if (solarPanelVal) {
+                requests.push({
+                    type: 'solar',  // Add type field for solar
+                    solar_panels: solarPanelVal,
+                    grid_dependence: gridDependenceVal
+                });
+            }
+
+            // Process Television Data
+            const tvScreenSizeVal = tvScreenSize.value || null;
+            const tvScreenTech = getSelectedRadioValue('television-screen-tech') || null;
+            const tvHours = televisionHours.value ? parseFloat(televisionHours.value) : 0;
+
+            if (tvScreenSizeVal && tvScreenTech && tvHours > 0) {
+                requests.push({
+                    type: 'appliance',  // Add type field
+                    appliance_type: 'television',
+                    screen_size_category: tvScreenSizeVal,
+                    screen_technology: tvScreenTech,
+                    hours: tvHours
+                });
+            }
+
+            // Process Dishwasher Data
+            const dishwasherUsageVal = dishwasherUsage.value ? parseFloat(dishwasherUsage.value) : 0;
+            if (dishwasherUsageVal > 0) {
+                requests.push({
+                    type: 'appliance',  // Add type field
+                    appliance_type: 'dishwasher',
+                    usage_per_week: dishwasherUsageVal
+                });
+            }
+
+            // Process Clothes Washer Data
+            const washerLoadingType = getSelectedRadioValue('clothes-washer-loading') || null;
+            const washerLoadSizeVal = clothesWasherLoadSize.value ? parseFloat(clothesWasherLoadSize.value) : 0;
+            const washerUsageVal = washerUsage.value ? parseFloat(washerUsage.value) : 0;
+
+            if (washerLoadingType && washerLoadSizeVal > 0 && washerUsageVal > 0) {
+                requests.push({
+                    type: 'appliance',  // Add type field
+                    appliance_type: 'clothes_washer',
+                    Loading: washerLoadingType,
+                    Cap: washerLoadSizeVal,
+                    usage_per_week: washerUsageVal
+                });
+            }
+
+            // Process Clothes Dryer Data
+            const dryerType = getSelectedRadioValue('clothes-dryer-type') || null;
+            const dryerUsageValue = dryerUsage.value ? parseFloat(dryerUsage.value) : 0;
+            if (dryerType && dryerUsageValue > 0) {
+                requests.push({
+                    type: 'appliance',  // Add type field
+                    appliance_type: 'clothes_dryer',
+                    Type: dryerType,
+                    usage_per_week: dryerUsageValue
+                });
+            }
+
+            // Process Air Conditioner Data
+            const acType = getSelectedRadioValue('air-conditioner-type') || null;
+            const acHoursVal = acHours.value ? parseFloat(acHours.value) : 0;
+            if (acType && acHoursVal > 0) {
+                requests.push({
+                    type: 'appliance',  // Add type field
+                    appliance_type: 'air_conditioner',
+                    Configuration1: acType,
+                    hours_per_day: acHoursVal
+                });
+            }
+
+            // Process Refrigerator Data
+            const refrigeratorVolumeVal = refrigeratorVolume.value || null;
+            if (refrigeratorVolumeVal) {
+                requests.push({
+                    type: 'appliance',  // Add type field
+                    appliance_type: 'refrigerator',
+                    volume_category: refrigeratorVolumeVal
+                });
+            }
+
+            // Process Gas Water Heater Data
+            const gasWaterHeaterVal = getSelectedRadioValue('gas-water-heater');
+            if (gasWaterHeaterVal) {
+                requests.push({
+                    type: 'gas',  // Add type field for gas water heater
+                    heater_type: gasWaterHeaterVal === 'yes' ? 'instantaneous' : 'none'
+                });
+            }
+
+            // Process Transportation Data
+            const transportationData = [
+                { type: 'transportation', transportation_type: 'bus', kms: busDistance.value ? parseFloat(busDistance.value) : 0 },
+                { type: 'transportation', transportation_type: 'private_vehicle', kms: carDistance.value ? parseFloat(carDistance.value) : 0 },
+                { type: 'transportation', transportation_type: 'train', kms: trainDistance.value ? parseFloat(trainDistance.value) : 0 },
+                { type: 'transportation', transportation_type: 'tram', kms: tramDistance.value ? parseFloat(tramDistance.value) : 0 }
+            ];
+
+            // Add transportation data to the request
+            requests.push(...transportationData);
+
+            // Send the combined requests to the Lambda function
+            sendDataToLambda(requests);
+        }
+
+        let emissionsChartInstance = null;
+        let costChartInstance = null;
+
         // Function to update emissions and cost charts
         function updateCharts(simulatedEmissions) {
             const currentEmissions = getCurrentEmissions();
+
+            // Define the categories for the emissions chart
             const categories = ['Television', 'Dishwasher', 'Washer', 'Dryer', 'Air Conditioner', 'Transport'];
-    
-            const currentEmissionsArray = [
-                currentEmissions.television, currentEmissions.dishwasher, currentEmissions.clothes_washer, 
-                currentEmissions.clothes_dryer, currentEmissions.air_conditioner, currentEmissions.transport
-            ];
-    
+
+            // Combine transportation emissions into one value for both current and simulated data
+            const simulatedTransportEmissions = (simulatedEmissions?.bus || 0) + 
+                                                (simulatedEmissions?.private_vehicle || 0) + 
+                                                (simulatedEmissions?.train || 0) + 
+                                                (simulatedEmissions?.tram || 0);
+
+            const currentTransportEmissions = (currentEmissions.bus || 0) + 
+                                            (currentEmissions.private_vehicle || 0) + 
+                                            (currentEmissions.train || 0) + 
+                                            (currentEmissions.tram || 0);
+
+            // Use default values (0) if any of the properties in simulatedEmissions are undefined
             const simulatedEmissionsArray = [
-                simulatedEmissions.television, simulatedEmissions.dishwasher, simulatedEmissions.clothes_washer, 
-                simulatedEmissions.clothes_dryer, simulatedEmissions.air_conditioner, simulatedEmissions.transport
+                simulatedEmissions?.television || 0, 
+                simulatedEmissions?.dishwasher || 0, 
+                simulatedEmissions?.clothes_washer || 0, 
+                simulatedEmissions?.clothes_dryer || 0, 
+                simulatedEmissions?.air_conditioner || 0, 
+                simulatedTransportEmissions // Combine transport emissions
             ];
-    
-            // Update emissions chart
-            new Chart(document.getElementById('emissionsChart'), {
+
+            const currentEmissionsArray = [
+                currentEmissions.television || 0, 
+                currentEmissions.dishwasher || 0, 
+                currentEmissions.clothes_washer || 0, 
+                currentEmissions.clothes_dryer || 0, 
+                currentEmissions.air_conditioner || 0, 
+                currentTransportEmissions // Combine transport emissions
+            ];
+
+            // Calculate the energy cost per unit
+            const energyCostPerUnit = 0.1901; // cost per unit of energy
+            const currentCosts = currentEmissionsArray.map(e => e * energyCostPerUnit);
+            const simulatedCosts = simulatedEmissionsArray.map(e => e * energyCostPerUnit);
+
+            // Destroy previous chart instances if they exist
+            if (emissionsChartInstance) emissionsChartInstance.destroy();
+            if (costChartInstance) costChartInstance.destroy();
+
+            // Create the emissions chart
+            emissionsChartInstance = new Chart(document.getElementById('emissionsChart'), {
                 type: 'bar',
                 data: {
                     labels: categories,
@@ -565,15 +772,37 @@
                     ]
                 },
                 options: {
-                    scales: { y: { beginAtZero: true } }
-                }
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                maxRotation: 0, // Ensures no label rotation
+                                minRotation: 0 // Ensures no label rotation
+                            }
+                        },
+                        y: { 
+                            beginAtZero: true 
+                        }
+                    },
+                    plugins: {
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'start',
+                            formatter: function(value) {
+                                return typeof value === 'number' && !isNaN(value) ? value.toFixed(2) : ''; 
+                            },
+                            color: '#444', // Color of the labels
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels]
             });
-    
-            // Update cost chart (example logic for cost calculation)
-            const currentCosts = currentEmissionsArray.map(e => e * 0.1);  // Example conversion to cost
-            const simulatedCosts = simulatedEmissionsArray.map(e => e * 0.1);  // Example conversion to cost
-    
-            new Chart(document.getElementById('costChart'), {
+
+            // Create the cost chart
+            costChartInstance = new Chart(document.getElementById('costChart'), {
                 type: 'bar',
                 data: {
                     labels: categories,
@@ -583,11 +812,38 @@
                     ]
                 },
                 options: {
-                    scales: { y: { beginAtZero: true } }
-                }
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                maxRotation: 0, // Ensures no label rotation
+                                minRotation: 0 // Ensures no label rotation
+                            }
+                        },
+                        y: { 
+                            beginAtZero: true 
+                        }
+                    },
+                    plugins: {
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'start',
+                            formatter: function(value) {
+                                return typeof value === 'number' && !isNaN(value) ? `$${value.toFixed(2)}` : ''; 
+                            },
+                            color: '#444', // Color of the labels
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels]
             });
         }
-    
+
+
+
         // Reset function to clear session storage and reset charts
         function resetChanges() {
             sessionStorage.removeItem('simulationData');
@@ -597,26 +853,8 @@
     
         // Load existing data from session storage on page load
         window.onload = function () {
-            const storedData = JSON.parse(sessionStorage.getItem('simulationData'));
+            const storedData = sessionStorage.getItem('simulationData');
             if (storedData) {
-                solarPanels.checked = storedData.solarPanels || false;
-                gasWaterHeater.checked = storedData.gasWaterHeater || false;
-    
-                // Populate fields with stored data
-                carDistance.value = storedData.carDistance || 20;
-                trainDistance.value = storedData.trainDistance || 20;
-                busDistance.value = storedData.busDistance || 20;
-                tramDistance.value = storedData.tramDistance || 20;
-    
-                tvScreenSize.value = storedData.tvScreenSize || '';
-                televisionHours.value = storedData.televisionHours || 1;
-                dishwasherUsage.value = storedData.dishwasherUsage || 1;
-                washerUsage.value = storedData.washerUsage || 1;
-                dryerUsage.value = storedData.dryerUsage || 1;
-                acHours.value = storedData.acHours || 1;
-                refrigeratorVolume.value = storedData.refrigeratorVolume || '';
-    
-                // Load stored data into charts
                 applyChanges();
             } else {
                 resetChanges();
