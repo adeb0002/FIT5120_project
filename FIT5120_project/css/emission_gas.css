@@ -236,9 +236,8 @@ h2 {
 
 .icon-label-container {
     display: flex;
-    align-items: flex-start; /* Align items vertically center */
-    margin-bottom: 20px;
-    margin-left: -80px;
+    align-items: center; /* Align items vertically center */
+    margin-bottom: 20px; /* Add space between the label and slider */
 }
 
 label[for="gas-water-heater"] {
@@ -247,7 +246,7 @@ label[for="gas-water-heater"] {
     font-size: 1.5em; /* Adjust the size of the text */
     font-weight: bold; /* Makes the text bold */
     color: #333;
-    text-align: left;/* Optional: Adjust the text color */
+    text-align: center;/* Optional: Adjust the text color */
 }
 
 label[for="instantaneous-storage"] {
@@ -291,7 +290,7 @@ label[for="instantaneous-storage"] {
         margin-top: 20px;
         text-align: left;
         /* Align text to the left */
-        margin-left: 20px;
+        margin-left: 0;
         /* Remove left margin to align to the left */
     }
 
@@ -340,7 +339,7 @@ label[for="instantaneous-storage"] {
         /* Adjust margin for better spacing */
         text-align: left;
         /* Align text to the left */
-        margin-left: 110px;
+        margin-left: 30px;
         /* Remove left margin to align to the left */
     }
 
@@ -351,7 +350,7 @@ label[for="instantaneous-storage"] {
         /* Adjust margin for better spacing */
         text-align: left;
         /* Align text to the left */
-        margin-left: 110px;
+        margin-left: 30px;
         /* Remove left margin to align to the left */
     }
 
@@ -365,14 +364,14 @@ label[for="instantaneous-storage"] {
     .gas-icon-1 {
         margin-top: 40px;
         /* Adjust margin for better positioning */
-        margin-left: 80px;
+        margin-left: 0;
         /* Align icon to the left */
     }
 
     .gas-icon-2 {
         margin-top: 60px;
         /* Adjust margin for better positioning */
-        margin-left: 80px;
+        margin-left: 0;
         /* Align icon to the left */
     }
 }
@@ -576,6 +575,7 @@ input[type="number"] {
     display: flex;
     gap: 10px;
     margin-top: 20px;
+    margin-left: 70px;
 }
 
 .button-group .btn {
@@ -784,13 +784,13 @@ input[type="number"] {
 
 /* Specific styles for the first info box */
 #grid-info-1 {
-    left: 350px;
+    left: 400px;
     top: 200px;
 }
 
 /* Specific styles for the second info box */
 #grid-info-2 {
-    left: 400px; /* Adjust left positioning to move it to the right */
+    left: 450px; /* Adjust left positioning to move it to the right */
     top: 450px; /* Set base font size for the text */
 
 }
