@@ -1,45 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Personalised Recommendations</title>
-    <meta name="description" content="Below are personalised recommendations based on your appliance usage and transport habits.">
+    <title>EcoInsight Melbourne</title>
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
 
-    <!-- Fonts and CSS -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/recommendations.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <!-- Bootstrap CSS (CDN) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- Other CSS files -->
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/fontAwesome.css">
+    <link rel="stylesheet" href="css/hero-slider.css">
+    <link rel="stylesheet" href="css/owl-carousel.css">
+    <link rel="stylesheet" href="css/personal_recommendations.css">
+    <link rel="stylesheet" href="css/lightbox.css">
+
+    <!-- JavaScript files -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
     <!-- Header Section with Navigation Bar -->
     <div class="header">
         <div class="container">
-            <nav class="navbar navbar-inverse" role="navigation">
+            <nav class="navbar navbar-inverse">
                 <div class="navbar-header">
-                    <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse"
-                        data-target="#main-nav">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="index.html" class="navbar-brand scroll-top">
+                    <a href="index.html" class="navbar-brand">
                         <img src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
                     </a>
                 </div>
-                <div id="main-nav" class="collapse navbar-collapse">
+                <div class="collapse navbar-collapse" id="main-nav">
                     <ul class="nav navbar-nav">
                         <li><a href="index.html" class="scroll-top">Home</a></li>
-                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a></li>
+                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">our mission</a></li>
                         <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
-                        <li><a href="#" id="clear-session-link">Emission Calculator</a></li>
+                        <li><a href="emission_cal_cover.html" id="clear-session-link">Emission Calculator</a></li>
                         <li><a href="recommendations.html">Recommendations</a></li>
+                        <li><a href="education_hub.html">Education Hub</a></li>
                     </ul>
                 </div>
             </nav>
