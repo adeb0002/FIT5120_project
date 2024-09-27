@@ -235,7 +235,7 @@
         <div class="input-container">
             <input type="number" class="form-control" id="${btn.dataset.value}-usage" min="1" placeholder="Enter kilometers">
             ${btn.dataset.value === 'private-vehicle' || btn.dataset.value === 'bus' || btn.dataset.value === 'train' || btn.dataset.value === 'tram' ?
-                                `<button type="button" id="display-map-button-${btn.dataset.value}" class="map-button">Display Map</button>`
+                                `<button type="button" id="display-map-button-${btn.dataset.value}" class="map-button">Calculate Now</button>`
                                 : ''}
         </div>
     `;

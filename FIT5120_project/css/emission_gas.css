@@ -236,8 +236,9 @@ h2 {
 
 .icon-label-container {
     display: flex;
-    align-items: center; /* Align items vertically center */
-    margin-bottom: 20px; /* Add space between the label and slider */
+    align-items: flex-start; /* Align items vertically center */
+    margin-bottom: 20px;
+    margin-left: -80px;
 }
 
 label[for="gas-water-heater"] {
@@ -246,7 +247,7 @@ label[for="gas-water-heater"] {
     font-size: 1.5em; /* Adjust the size of the text */
     font-weight: bold; /* Makes the text bold */
     color: #333;
-    text-align: center;/* Optional: Adjust the text color */
+    text-align: left;/* Optional: Adjust the text color */
 }
 
 label[for="instantaneous-storage"] {
@@ -290,7 +291,7 @@ label[for="instantaneous-storage"] {
         margin-top: 20px;
         text-align: left;
         /* Align text to the left */
-        margin-left: 0;
+        margin-left: 20px;
         /* Remove left margin to align to the left */
     }
 
@@ -339,7 +340,7 @@ label[for="instantaneous-storage"] {
         /* Adjust margin for better spacing */
         text-align: left;
         /* Align text to the left */
-        margin-left: 30px;
+        margin-left: 110px;
         /* Remove left margin to align to the left */
     }
 
@@ -350,7 +351,7 @@ label[for="instantaneous-storage"] {
         /* Adjust margin for better spacing */
         text-align: left;
         /* Align text to the left */
-        margin-left: 30px;
+        margin-left: 110px;
         /* Remove left margin to align to the left */
     }
 
@@ -364,14 +365,14 @@ label[for="instantaneous-storage"] {
     .gas-icon-1 {
         margin-top: 40px;
         /* Adjust margin for better positioning */
-        margin-left: 0;
+        margin-left: 80px;
         /* Align icon to the left */
     }
 
     .gas-icon-2 {
         margin-top: 60px;
         /* Adjust margin for better positioning */
-        margin-left: 0;
+        margin-left: 80px;
         /* Align icon to the left */
     }
 }
@@ -443,7 +444,7 @@ label[for="instantaneous-storage"] {
 /* Media query for tablets (max-width: 768px) */
 @media (max-width: 768px) {
     .floating-buttons {
-        position: fixed;
+        position: relative;
         /* Fix position relative to the viewport */
         bottom: 10px;
         /* Distance from bottom */
@@ -454,7 +455,8 @@ label[for="instantaneous-storage"] {
         /* Space between buttons */
         gap: 10px;
         /* Space between buttons */
-        margin: 0;
+        margin-top: 200px;
+        margin-left: 0px;
         /* Reset margin */
         transform: none;
         /* Remove any existing transform */
@@ -464,7 +466,6 @@ label[for="instantaneous-storage"] {
         position: absolute;
         /* Absolute positioning within the container */
         left: 0;
-        /* Align to the left */
     }
 
     #next-button {
@@ -486,7 +487,7 @@ label[for="instantaneous-storage"] {
 /* Media query for mobile devices (max-width: 576px) */
 @media (max-width: 576px) {
     .floating-buttons {
-        position: fixed;
+        position: relative;
         /* Fix position relative to the viewport */
         bottom: 5px;
         /* Distance from bottom */
@@ -497,7 +498,8 @@ label[for="instantaneous-storage"] {
         /* Space between buttons */
         gap: 8px;
         /* Space between buttons */
-        margin: 0;
+        margin-top: 200px;
+        margin-left: 0px;
         /* Reset margin */
         transform: none;
         /* Remove any existing transform */
@@ -513,7 +515,7 @@ label[for="instantaneous-storage"] {
     #next-button {
         position: absolute;
         /* Absolute positioning within the container */
-        right: 40px;
+        right: -10px;
         /* Align to the right */
     }
 
@@ -574,7 +576,6 @@ input[type="number"] {
     display: flex;
     gap: 10px;
     margin-top: 20px;
-    margin-left: 70px;
 }
 
 .button-group .btn {
@@ -596,7 +597,6 @@ input[type="number"] {
     display: flex;
     gap: 10px;
     margin-top: 20px;
-    margin-left: 35px;
 }
 
 .button-group-2 .btn {
@@ -784,13 +784,13 @@ input[type="number"] {
 
 /* Specific styles for the first info box */
 #grid-info-1 {
-    left: 450px;
+    left: 350px;
     top: 200px;
 }
 
 /* Specific styles for the second info box */
 #grid-info-2 {
-    left: 450px; /* Adjust left positioning to move it to the right */
+    left: 400px; /* Adjust left positioning to move it to the right */
     top: 450px; /* Set base font size for the text */
 
 }
@@ -811,7 +811,7 @@ input[type="number"] {
 
     #grid-info-2 {
         left: 10%; /* Center the info box more on smaller screens */
-        top: 400px; /* Adjust top position */
+        top: 250px; /* Adjust top position */
     }
 }
 
@@ -830,6 +830,69 @@ input[type="number"] {
 
     #grid-info-2 {
         left: 5%; /* Center the info box */
-        top: 300px; /* Adjust top position */
+        top: 230px; /* Adjust top position */
+    }
+}
+
+.button-group-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: left /* Center items horizontally */
+    max-width: 250px; /* Limit the width of the button group */
+    margin-left: -50px;
+}
+
+.button-container {
+    display: flex; /* Align button and image vertically */
+    flex-direction: column; /* Stack button above the image */
+    align-items: flex-start; /* Align items to the start (left) */
+    margin: 20px 0; /* Space between button containers */
+    padding: 10px; /* Add padding around each button-container */
+    border: 1px solid #ccc; /* Optional: add a border for distinction */
+    border-radius: 8px; /* Optional: rounded corners */
+    transition: box-shadow 0.3s ease;
+    width: 500px; /* Set a fixed width for the container */
+    max-width: 100%; /* Ensure it doesn't exceed the parent width */
+}
+
+.button-container:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Shadow effect on hover */
+}
+
+.heater-image {
+    width: 400px; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-top: 10px; /* Space between button and image */
+}
+
+/* Media query for 748px */
+@media (max-width: 748px) {
+    .button-group-2 {
+        max-width: 100%; /* Full width on smaller screens */
+        margin-left: 0; /* Reset margin */
+    }
+
+    .button-container {
+        max-width: 100%; /* Ensure container takes full width */
+    }
+
+    .heater-image {
+        width: 100%; /* Make image responsive */
+    }
+}
+
+/* Media query for 480px */
+@media (max-width: 480px) {
+    .button-group-2 {
+        max-width: 100%; /* Full width on mobile screens */
+    }
+
+    .button-container {
+        margin: 10px 0; /* Reduce space between containers */
+        padding: 5px; /* Adjust padding for mobile */
+    }
+
+    .heater-image {
+        width: 100%; /* Make image fully responsive */
     }
 }
