@@ -166,6 +166,23 @@
             stroke-width: 1px;
             fill: none;
         }
+        .navigate-btn {
+            margin: 20px auto;
+            padding: 15px 30px;
+            font-weight: bold;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            display: block;
+            width: fit-content;
+        }
+
+        .navigate-btn:hover {
+            background-color: #45a049;
+        }
 
 
     </style>
@@ -354,6 +371,9 @@
                 </div>
             </div>
         </div>
+        <div class="section">
+            <button id="navigate-to-simulation" class="navigate-btn">Go to Simulation Page</button>
+        </div>
     </div>
 
     <!-- Loading Animation with Tree GIF -->
@@ -363,6 +383,10 @@
     </div>
 
     <script>
+
+        document.getElementById('navigate-to-simulation').addEventListener('click', function () {
+            window.location.href = 'simulation.html'; // Adjust the file path as needed
+        });
 
         document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('clear-session-link').addEventListener('click', function (event) {
