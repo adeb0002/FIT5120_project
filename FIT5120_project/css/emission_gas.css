@@ -729,3 +729,107 @@ input[type="number"] {
         color: #343434 !important;
     }
 }
+
+/* Style for the question mark icon */
+.question-icon {
+    color: green;
+    margin-left: 10px;
+    margin-top: 295px;
+    cursor: pointer;
+    font-size: 20px;
+    position: relative; /* Ensure the icon has a positioning context */
+    z-index: 10; /* Higher z-index than #grid-info */
+}
+
+/* Responsive styles for the question icon */
+@media (max-width: 768px) {
+    .question-icon {
+        font-size: 18px; /* Slightly smaller font size for tablets */
+        margin-top: 20px; /* Adjust margin for tablets */
+        margin-left: 8px; /* Slightly reduced left margin */
+    }
+}
+
+@media (max-width: 480px) {
+    .question-icon {
+        font-size: 16px; /* Further reduced font size for mobile */
+        margin-top: 200px; /* Further adjusted margin for mobile */
+        margin-left: 5px; /* Further reduced left margin */
+    }
+}
+
+/* General styles for both info boxes */
+.grid-info {
+    position: absolute; /* Positioned absolutely to place it based on the icon's position */
+    display: none; /* Initially hidden */
+    z-index: 999; /* Ensure it's on top of other elements */
+    background-color: #f9f9f9; /* Light background color */
+    border: 1px solid green; /* Green border for distinction */
+    padding: 30px; /* Further increased padding for more space around the content */
+    border-radius: 8px; /* Slightly larger rounded corners */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+    width: 400px;
+    height: auto;
+    /* Optional: Add a transition for a smooth appearance */
+    transition: opacity 0.3s ease; /* Transition effect for opacity */
+    opacity: 0; /* Initially hidden */
+    font-size: 16px;
+}
+
+/* Show class to display the grid info */
+.grid-info.show {
+   display: block; /* Show the info box */
+    opacity: 1; /* Make it fully visible */
+}
+
+/* Specific styles for the first info box */
+#grid-info-1 {
+    left: 450px;
+    top: 200px;
+}
+
+/* Specific styles for the second info box */
+#grid-info-2 {
+    left: 450px; /* Adjust left positioning to move it to the right */
+    top: 450px; /* Set base font size for the text */
+
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .grid-info {
+        width: 80%; /* Use 80% of the viewport width for smaller screens */
+        padding: 20px; /* Adjust padding for smaller screens */
+        font-size: 14px; /* Decrease font size for better fit */
+    }
+
+    /* Adjust positioning for smaller screens */
+    #grid-info-1 {
+        left: 10%; /* Center the info box more on smaller screens */
+        top: 150px; /* Adjust top position */
+    }
+
+    #grid-info-2 {
+        left: 10%; /* Center the info box more on smaller screens */
+        top: 400px; /* Adjust top position */
+    }
+}
+
+@media (max-width: 480px) {
+    .grid-info {
+        width: 95%; /* Use 95% of the viewport width for mobile */
+        padding: 15px; /* Further adjust padding for mobile */
+        font-size: 12px; /* Further decrease font size for better fit */
+    }
+
+    /* Adjust positioning for mobile screens */
+    #grid-info-1 {
+        left: 5%; /* Center the info box */
+        top: 150px; /* Adjust top position */
+    }
+
+    #grid-info-2 {
+        left: 5%; /* Center the info box */
+        top: 300px; /* Adjust top position */
+    }
+}
