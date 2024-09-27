@@ -322,6 +322,11 @@
                         if (parsedBody?.individual_transport_emissions) {
                             sessionStorage.setItem('transportationData', JSON.stringify(parsedBody.individual_transport_emissions));
                             console.log('Transport data saved to sessionStorage:', parsedBody.individual_transport_emissions);
+
+                            // Calculate total transportation emissions and store them
+                            const totalTransportEmissions = Object.values(parsedBody.individual_transport_emissions).reduce((sum, value) => sum + value, 0);
+                            sessionStorage.setItem('totalTransportEmissions', totalTransportEmissions);
+                            console.log('Total transportation emissions saved to sessionStorage:', totalTransportEmissions);
                         } else {
                             console.warn('Individual transport emissions data is missing in response.');
                         }
@@ -341,6 +346,7 @@
                 alert('Error sending data to the server. Please try again.');
             }
         }
+
 
 
         function validateAndNavigate() {

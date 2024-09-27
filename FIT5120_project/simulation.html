@@ -476,7 +476,7 @@
                         window.location.href = "emission_cal_cover.html";
                     });
                 });
-                
+
         // Function to show the loading animation
         function showLoading() {
             document.getElementById('loading-animation').style.display = 'block';  // Show the loading animation
@@ -813,7 +813,7 @@
 
             // Create the cost chart
             costChartInstance = new Chart(document.getElementById('costChart'), {
-                type: 'bar',
+                type: 'line',
                 data: {
                     labels: categories,
                     datasets: [
