@@ -96,14 +96,21 @@
                                 </label>
                                 <div id="grid-info-2" class="grid-info" style="display: none;"></div>
                             </div>
-                            <div id="instantaneous-storage">
-                                <div class="button-group-2">
-                                    <button type="button" class="btn" data-value="instantaneous">Instantaneous</button>
-                                    <button type="button" class="btn" data-value="storage">Storage</button>
-                                </div>
-                            </div>
-                        </div>
+                           <div id="instantaneous-storage">
+    <div class="button-group-2">
+        <div class="button-container">
+            <button type="button" class="btn" data-value="instantaneous">Instantaneous</button>
+            <img src="img/instant_gas.jpg" alt="Instantaneous Heater" class="heater-image">
+        </div>
+        <div class="button-container">
+            <button type="button" class="btn" data-value="storage">Storage</button>
+            <img src="img/storage_gas.jpg" alt="Storage Heater" class="heater-image">
+        </div>
+    </div>
+</div>
+                             </div>
                     </div>
+
 
                     <div class="floating-buttons" id="next-button-section">
                         <a href="emission_cal_solar.html" class="scroll-link" id="back-button">
@@ -328,7 +335,7 @@
             const infoText = `
         Look at the heater unit or manual.
         <br><br>
-        <strong>Instant heaters</strong> heat water on demand and are therefore small and compact, while <strong>storage heaters</strong> are larger as they have a tank.
+        <strong>Instantaneous heaters</strong> heat water on demand and are therefore small and compact, while <strong>storage heaters</strong> are larger as they have a tank.
     `;
 
             const gridInfo = $('#grid-info-2'); // Use the second info box

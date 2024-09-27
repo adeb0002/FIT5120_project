@@ -657,7 +657,7 @@ input[type="number"] {
     padding: 10px 20px;
     font-size: 1.2em;
     font-weight: bold; /* Corrected property name */
-    width: 150px;
+    width: auto;
     border: 1px solid #28a745;
     border-radius: 20px;
     background-color: #d9e7d4; /* Existing background color */
@@ -670,7 +670,7 @@ input[type="number"] {
     .map-button {
         padding: 6px 12px;
         font-size: 1em;
-        width: 120px;
+        width: auto;
     }
 }
 
@@ -678,7 +678,7 @@ input[type="number"] {
     .map-button {
         padding: 8px 16px; /* Reduce padding */
         font-size: 1em; /* Adjust font size */
-        width: 120px; /* Narrower width */
+        width: auto; /* Narrower width */
         border-radius: 15px; /* Smaller border radius */
     }
 }
