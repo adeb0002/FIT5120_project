@@ -96,19 +96,20 @@
                                 </label>
                                 <div id="grid-info-2" class="grid-info" style="display: none;"></div>
                             </div>
-                           <div id="instantaneous-storage">
-    <div class="button-group-2">
-        <div class="button-container">
-            <button type="button" class="btn" data-value="instantaneous">Instantaneous</button>
-            <img src="img/instant_gas.jpg" alt="Instantaneous Heater" class="heater-image">
-        </div>
-        <div class="button-container">
-            <button type="button" class="btn" data-value="storage">Storage</button>
-            <img src="img/storage_gas.jpg" alt="Storage Heater" class="heater-image">
-        </div>
-    </div>
-</div>
-                             </div>
+                            <div id="instantaneous-storage">
+                                <div class="button-group-2">
+                                    <div class="button-container">
+                                        <button type="button" class="btn"
+                                            data-value="instantaneous">Instantaneous</button>
+                                        <img src="img/instant_gas.jpg" alt="Instantaneous Heater" class="heater-image">
+                                    </div>
+                                    <div class="button-container">
+                                        <button type="button" class="btn" data-value="storage">Storage</button>
+                                        <img src="img/storage_gas.jpg" alt="Storage Heater" class="heater-image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
 
@@ -308,29 +309,27 @@
             $('[data-toggle="tooltip"]').tooltip();
         });
 
-        $('#grid-info-icon-1').on('click', function () {
-            console.log('Grid info icon clicked!'); // Debugging output
-
+        $('#grid-info-icon-1').on('mouseenter', function () {
             const infoText = `
-        Check your water heater or utility bill.
-        <br>
-        If it mentions gas usage for heating water, select <strong>"yes"</strong>. Otherwise, you may have an electric or solar water heater.
-        <br><br>
-        If you live in a new home built <strong>after 1 January 2024</strong>, you will not have a gas connection as natural gas connections have been banned, so select <strong>"no"</strong>.
+        Check your water heater or utility bill.<br>
+        If it mentions gas usage for heating water, <strong>select "yes".</strong><br>
+        Otherwise, you may have an electric or solar water heater.<br></br>
+        If you live in a new home built after 1 January 2024, you will not have a gas connection as natural gas connections have been banned, so <strong>select "no".</strong>
     `;
 
             const gridInfo = $('#grid-info-1'); // Use the first info box
-            if (gridInfo.is(':visible')) {
-                gridInfo.removeClass('show'); // Remove 'show' class to hide it
-                setTimeout(() => gridInfo.hide(), 300); // Hide after the transition
-            } else {
-                gridInfo.html(infoText).addClass('show').show(); // Add 'show' class to display it
-                console.log('Info text set:', infoText); // Debugging output
-            }
+            gridInfo.html(infoText).addClass('show').show(); // Add 'show' class to display it
+            console.log('Info text set:', infoText); // Debugging output
         });
 
-        $('#grid-info-icon-2').on('click', function () {
-            console.log('Grid info icon 2 clicked!'); // Debugging output
+        $('#grid-info-icon-1').on('mouseleave', function () {
+            const gridInfo = $('#grid-info-1'); // Use the first info box
+            gridInfo.removeClass('show'); // Remove 'show' class to hide it
+            setTimeout(() => gridInfo.hide(), 300); // Hide after the transition
+        });
+
+        $('#grid-info-icon-2').on('mouseenter', function () {
+            console.log('Grid info icon 2 hovered!'); // Debugging output
 
             const infoText = `
         Look at the heater unit or manual.
@@ -339,13 +338,14 @@
     `;
 
             const gridInfo = $('#grid-info-2'); // Use the second info box
-            if (gridInfo.is(':visible')) {
-                gridInfo.removeClass('show'); // Remove 'show' class to hide it
-                setTimeout(() => gridInfo.hide(), 300); // Hide after the transition
-            } else {
-                gridInfo.html(infoText).addClass('show').show(); // Add 'show' class to display it
-                console.log('Info text set:', infoText); // Debugging output
-            }
+            gridInfo.html(infoText).addClass('show').show(); // Add 'show' class to display it
+            console.log('Info text set:', infoText); // Debugging output
+        });
+
+        $('#grid-info-icon-2').on('mouseleave', function () {
+            const gridInfo = $('#grid-info-2'); // Use the second info box
+            gridInfo.removeClass('show'); // Remove 'show' class to hide it
+            setTimeout(() => gridInfo.hide(), 300); // Hide after the transition
         });
     </script>
 </body>

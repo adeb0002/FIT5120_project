@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -71,42 +72,46 @@
                         aria-valuemax="100"></div>
                 </div>
             </div>
-            <div class="col-md-9">
-                <form id="emission-form">
-                    <!-- Section 1: Appliance Selection -->
-                    <div class="form-group">
-                        <div class="icon-label-container">
-                            <div class="appliance-icon-1"></div>
-                            <label for="appliance-selection">What appliance(s) do you have in your household?</label>
-                        </div>
-                        <div id="appliance-selection" class="button-group">
-                            <button type="button" class="btn" data-value="television">Television</button>
-                            <button type="button" class="btn" data-value="dishwasher">Dishwasher</button>
-                            <button type="button" class="btn" data-value="clothes_washer">Clothes Washer</button>
-                            <button type="button" class="btn" data-value="clothes_dryer">Clothes Dryer</button>
-                            <button type="button" class="btn" data-value="air_conditioner">Air Conditioner</button>
-                            <button type="button" class="btn" data-value="refrigerator">Refrigerator</button>
-                            <button type="button" class="btn" data-value="none" id="none-checkbox">None of the above
-                            </button>
-                        </div>
-
-                        <!-- Section 2: Usage Hours (hidden initially) -->
-                        <div id="appliance-usage-section" style="display: none;">
-                            <div id="usage-questions"></div>
-                        </div>
-                    </div>
-                </form>
-            </div>
         </div>
+        <div class="col-md-9">
+            <form id="emission-form">
+                <!-- Section 1: Appliance Selection -->
+                <div class="form-group">
+                    <div class="icon-label-container">
+                        <div class="appliance-icon-1"></div>
+                        <label for="appliance-selection">What appliance(s) do you have in your household?</label>
+                    </div>
+                    <div id="appliance-selection" class="button-group">
+                        <button type="button" class="btn" data-value="television">Television</button>
+                        <button type="button" class="btn" data-value="dishwasher">Dishwasher</button>
+                        <button type="button" class="btn" data-value="clothes_washer">Clothes Washer</button>
+                        <button type="button" class="btn" data-value="clothes_dryer">Clothes Dryer</button>
+                        <button type="button" class="btn" data-value="air_conditioner">Air Conditioner</button>
+                        <button type="button" class="btn" data-value="refrigerator">Refrigerator</button>
+                        <button type="button" class="btn" data-value="none" id="none-checkbox">None of the above
+                        </button>
+                    </div>
+
+                    <!-- Section 2: Usage Hours (hidden initially) -->
+                    <div id="appliance-usage-section" style="display: none;">
+                        <div id="divider"></div>
+                        <div id="usage-questions"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     </div>
 
     <!-- Floating Navigation Buttons -->
     <div class="floating-buttons">
         <a href="emission_cal_trans.html" class="scroll-link" id="back-button">
-            <i class="fa fa-arrow-left"></i> Back</a>
-
+            <i class="fa fa-arrow-left"></i> Back
+        </a>
         <a href="#" class="scroll-link" id="next-button">
-            Next <i class="fa fa-arrow-right"></i></a>
+            Next <i class="fa fa-arrow-right"></i>
+        </a>
+    </div>
     </div>
 
     <!-- JavaScript -->
@@ -144,7 +149,7 @@
                     clearSessionStorage();
                 }
                 clearSessionStorage();
-                window.history.back();
+                window.location.href = 'emission_cal_trans.html';
             });
         });
 
@@ -292,6 +297,7 @@
             // Define the HTML for each appliance's questions with headers and corresponding images
             const applianceQuestions = {
                 'television': `
+        <div class="question-box">
                 <h3 class="icon-text">
                     <span class="icon">
                         <img src="img/television.png" alt="Television Icon">
@@ -299,7 +305,13 @@
                     <span class="text">Television</span>
                 </h3>
                     <div class="form-group">
-                        <label for="tv-screen-size">What screen size is your television?</label>
+            <label for="tv-screen-size">What screen size is your television?
+    <span class="question-icon" id="tv-size-info-icon" data-toggle="tooltip">
+        <i class="fa fa-question-circle"></i>
+    </span></label>
+    <div id="tv-size-info" class="info">
+        Measure your TV’s screen diagonal from corner to corner in inches (not including the bezel). If you don’t know, you can also check the model information in the manual, online. The model number can commonly be found on the back of the TV.
+    </div>
                         <select id="tv-screen-size" class="form-control" style="width: 500px;">
                             <option value="">--Select Size--</option>
                             <option value="Less than 40">Less than 40"</option>
@@ -313,30 +325,48 @@
                         </select>
                     </div>
                     <div class="form-group radio-question">
-                        <label for="television-screen-tech">What screen technology does your television use?</label>
-                        <div class="radio-option">
-                            <input type="radio" id="tech-lcd" name="television-screen-tech" value="LCD" required>
-                            <label for="tech-lcd" class="radio-label">LCD</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="tech-plasma" name="television-screen-tech" value="Plasma" required>
-                            <label for="tech-plasma" class="radio-label">Plasma</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="tech-led" name="television-screen-tech" value="LED" required>
-                            <label for="tech-led" class="radio-label">LED</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="tech-oled" name="television-screen-tech" value="OLED" required>
-                            <label for="tech-oled" class="radio-label">OLED</label>
-                        </div>
-                    </div>
+                        <label for="television-screen-tech">What screen technology does your television use?
+                        <span class="question-icon" id="screen-tech-info-icon" data-toggle="tooltip">
+                        <i class="fa fa-question-circle"></i>
+                    </span>
+                </label>
+                <div id="screen-tech-info" class="info">
+                    The model number is usually found on a label on the back of your TV.<br>
+                    You can use this number to search for more information or the user manual online.
+                    <br></br>
+                    Here's some tips to help you tell the difference:<br>
+                    <strong>Plasma:</strong> Typically thicker and heavier.<br>
+                    <strong>LCD:</strong> Older technology, thinner than Plasma but thicker than LED.<br>
+                    <strong>LED:</strong> Most common type of panel nowadays. Popular in the entry to mid-range TV bracket.<br>
+                    <strong>OLED:</strong> Highest picture quality, slimmest, and usually the most expensive option.<br>
+                </div>
+               <div class="tv-radio-group">
+    <div class="tv-radio-option">
+        <input type="radio" id="tech-lcd" name="television-screen-tech" value="LCD" required>
+        <label for="tech-lcd" class="radio-label">LCD</label>
+    </div>
+    <div class="tv-radio-option">
+        <input type="radio" id="tech-plasma" name="television-screen-tech" value="Plasma" required>
+        <label for="tech-plasma" class="radio-label">Plasma</label>
+    </div>
+    <div class="tv-radio-option">
+        <input type="radio" id="tech-led" name="television-screen-tech" value="LED" required>
+        <label for="tech-led" class="radio-label">LED</label>
+    </div>
+    <div class="tv-radio-option">
+        <input type="radio" id="tech-oled" name="television-screen-tech" value="OLED" required>
+        <label for="tech-oled" class="radio-label">OLED</label>
+    </div>
+</div>
+
                     <div class="form-group">
                         <label for="television-hours">How many hours do you watch television a week?</label>
                         <input type="number" class="form-control" id="television-hours" name="television-hours" min="1" value="1" required>
                     </div>
+                    </div>
                 `,
                 'dishwasher': `
+        <div class="question-box">
                 <h3 class="icon-text">
                     <span class="icon">
                         <img src="img/dishwasher.png" alt="Dishwasher Icon">
@@ -347,8 +377,10 @@
                         <label for="dishwasher-usage">How many times do you use the dishwasher a week?</label>
                         <input type="number" class="form-control" id="dishwasher-usage" name="dishwasher-usage" min="1" value="1" required>
                     </div>
+                    </div>
                 `,
                 'clothes_washer': `
+        <div class="question-box">
                 <h3 class="icon-text">
                     <span class="icon">
                         <img src="img/clotheswasher.png" alt="Clotheswasher Icon">
@@ -356,19 +388,46 @@
                     <span class="text">Clothes Washer</span>
                 </h3>
                     <div class="form-group radio-question">
-                        <label for="clothes-washer-loading">What type of loading is your clothes washer?</label>
-                        <div class="radio-option">
-                            <input type="radio" id="washer-loading-front" name="clothes-washer-loading" value="Front" required>
-                            <label for="washer-loading-front" class="radio-label">Front</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="washer-loading-top" name="clothes-washer-loading" value="Top" required>
-                            <label for="washer-loading-top" class="radio-label">Top</label>
-                        </div>
+                        <label for="clothes-washer-loading">What type of loading is your clothes washer?
+                        <span class="question-icon" id="clothes-washer-loading-icon" data-toggle="tooltip">
+            <i class="fa fa-question-circle"></i>
+        </span>
+    </label>
+    <div id="clothes-washer-loading-info" class="info">
+                        Select whether your washer is top-loading or front-loading.<br>
+                        <strong>Top-loading washers</strong> tend to use more water, while <strong>front-loading washers</strong>are more energy and water-efficient.
                     </div>
+
+<div class="radio-group">
+    <div class="radio-option">
+        <input type="radio" id="washer-loading-front" name="clothes-washer-loading" value="Front" required>
+        <label for="washer-loading-front" class="radio-label">Front</label>
+        <img src="img/front_washer.png" alt="Front Loading Washer" class="front-washer-image">
+    </div>
+
+    <div class="radio-option">
+        <input type="radio" id="washer-loading-top" name="clothes-washer-loading" value="Top" required>
+        <label for="washer-loading-top" class="radio-label">Top</label>
+        <img src="img/top_washer.png" alt="Top Loading Washer" class="top-washer-image">
+    </div>
+</div>
                     <div class="form-group">
-                        <label for="clothes-washer-load-size">What load size is your clothes washer?</label>
+                        <label for="clothes-washer-load-size">What load size is your clothes washer?
+
+                         <span class="question-icon" id="clothes-washer-load-size-icon" data-toggle="tooltip">
+                <i class="fa fa-question-circle"></i>
+            </span>
+        </label>
+    </div>
+    <div id="clothes-washer-size-info" class="info">
+                        Check your washing machine’s capacity, usually labeled in kilograms.<br>
+                        If you’re unsure, look in the manual or online for your machine’s specifications.<br>
+                        If you're unsure of your washer's load size, use these categories as a guide:<br>
+                        <strong>Large: Over 11 kg</strong><br>
+                        <strong>Medium: Between 8 and 11 kg</strong><br>
+                        <strong>Small: Less than 8 kg</strong><br>
                     </div>
+
                     <div class="slider-container">
     <input type="range" class="slider" id="clothes-washer-load-size" name="clothes-washer-load-size" min="2" max="19" step="0.5" value="10.5" required>
     <div id="slider-value-container">
@@ -379,8 +438,10 @@
                         <label for="clothes-washer-usage">How many times do you use the clothes washer a week?</label>
                         <input type="number" class="form-control" id="clothes-washer-usage" name="clothes-washer-usage" min="1" value="1" required>
                     </div>
+                    </div>
                 `,
                 'clothes_dryer': `
+        <div class="question-box">
                 <h3 class="icon-text">
                     <span class="icon">
                         <img src="img/clothesdryer.png" alt="Clothesdryer Icon">
@@ -388,22 +449,35 @@
                     <span class="text">Clothes Dryer</span>
                 </h3>
                     <div class="form-group radio-question">
-                        <label for="clothes-dryer-type">What type of clothes dryer do you use?</label>
-                        <div class="radio-option">
+                        <label for="clothes-dryer-type">What type of clothes dryer do you use?
+                         <span class="question-icon" id="clothes-dryer-type-icon" data-toggle="tooltip">
+                <i class="fa fa-question-circle"></i>
+            </span>
+        </label>
+            <div id="clothes-dryer-type-info" class="info">
+                        Check for a hose connected to the back of your dryer.<br>
+                        <strong>Vented dryers</strong> have a hose that vents hot air outside.<br>
+                        If there’s no hose and your dryer collects moisture in a water tank or drains automatically, it’s a <strong>condenser dryer</strong>.
+                    </div>
+                     <div class="dryer-radio-group">
+                        <div class="dryer-radio-option">
                             <input type="radio" id="dryer-type-vented" name="clothes-dryer-type" value="Vented" required>
                             <label for="dryer-type-vented" class="radio-label">Vented</label>
                         </div>
-                        <div class="radio-option">
+                        <div class="dryer-radio-option">
                             <input type="radio" id="dryer-type-condenser" name="clothes-dryer-type" value="Condenser" required>
                             <label for="dryer-type-condenser" class="radio-label">Condenser</label>
                         </div>
+                    </div>
                     </div>
                     <div class="form-group">
                         <label for="clothes-dryer-usage">How many times do you use the clothes dryer a week?</label>
                         <input type="number" class="form-control" id="clothes-dryer-usage" name="clothes-dryer-usage" min="1" value="1" required>
                     </div>
+                    </div>
                 `,
                 'air_conditioner': `
+        <div class="question-box">
                 <h3 class="icon-text">
                     <span class="icon">
                         <img src="img/air_conditioner.png">
@@ -411,26 +485,40 @@
                     <span class="text">Air Conditioner</span>
                 </h3>
                     <div class="form-group radio-question">
-                        <label for="air-conditioner-type">Is your air conditioner ducted or non-ducted?</label>
-                        <div class="radio-option">
-                            <input type="radio" id="ac-type-ducted" name="air-conditioner-type" value="Ducted" required>
-                            <label for="ac-type-ducted" class="radio-label">Ducted</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="ac-type-non-ducted" name="air-conditioner-type" value="Non Ducted" required>
-                            <label for="ac-type-non-ducted" class="radio-label">Non Ducted</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="ac-type-both" name="air-conditioner-type" value="Both" required>
-                            <label for="ac-type-both" class="radio-label">Both</label>
-                        </div>
+                        <label for="air-conditioner-type">Is your air conditioner ducted or non-ducted?
+                        <span class="question-icon" id="air-type-icon" data-toggle="tooltip">
+            <i class="fa fa-question-circle"></i>
+        </span></label>
+        <div id="air-type-info" class="info">
+                        To determine if your air conditioner is ducted or non-ducted, check the airflow system.<br>
+                         If it uses vents to distribute air throughout multiple rooms, it’s a <strong>ducted system</strong>.<br>
+                         If it consists of wall-mounted units that cool individual rooms without ductwork, it’s <strong>a non-ducted system</strong>.
                     </div>
+                          <div class="radio-group">
+        <div class="radio-option">
+            <input type="radio" id="ac-type-ducted" name="air-conditioner-type" value="Ducted" required>
+            <label for="ac-type-ducted" class="radio-label">Ducted</label>
+            <img src="img/ducted.jpg" alt="Ducted Air Conditioner" class="ducted-image">
+        </div>
+        <div class="radio-option">
+            <input type="radio" id="ac-type-non-ducted" name="air-conditioner-type" value="Non Ducted" required>
+            <label for="ac-type-non-ducted" class="radio-label">Non Ducted</label>
+            <img src="img/non-ducted.jpg" alt="Non-Ducted Air Conditioner" class="non-ducted-image">
+        </div>
+        <div class="radio-option">
+            <input type="radio" id="ac-type-both" name="air-conditioner-type" value="Both" required>
+            <label for="ac-type-both" class="radio-label">Both</label>
+        </div>
+    </div>
+</div>
                     <div class="form-group">
                         <label for="air-conditioner-hours">How many hours do you use the air conditioner in a week?</label>
                         <input type="number" class="form-control" id="air-conditioner-hours" name="air-conditioner-hours" min="1" value="1" required>
                     </div>
+                    </div>
                 `,
                 'refrigerator': `
+        <div class="question-box">
                 <h3 class="icon-text">
                     <span class="icon">
                         <img src="img/refrigerator.png" alt="Refrigerator Icon">
@@ -438,7 +526,14 @@
                     <span class="text">Refrigerator</span>
                 </h3>
                     <div class="form-group">
-                        <label for="refrigerator-volume">What volume is your refrigerator?</label>
+                        <label for="refrigerator-volume">What volume is your refrigerator?
+                        <span class="question-icon" id="refrigerator-volume-icon" data-toggle="tooltip">
+        <i class="fa fa-question-circle"></i>
+    </span></label>
+    <div id="refrigerator-volume-info" class="info">
+            Look inside the refrigerator or the manual for the total internal volume, typically measured in liters (e.g., 400L).<br>
+            If unsure, look up your fridge model online.
+                    </div>
                         <select class="form-control" id="refrigerator-volume" name="refrigerator-volume" style="width: 500px;" required>
                             <option value="">--Select Volume--</option>
                             <option value="<99L">Less than 99L</option>
@@ -450,6 +545,7 @@
                             <option value="600-699L">600 - 699L</option>
                             <option value=">700L">More than 700L</option>
                         </select>
+                    </div>
                     </div>
                 `
             };
@@ -482,7 +578,114 @@
                 usageSection.style.display = 'none';
                 document.getElementById('next-button').style.display = 'none';
             }
+
+            initializeTooltips();
         }
+
+        function initializeTooltips() {
+            const tvSizeInfoIcon = document.getElementById('tv-size-info-icon');
+            const screenTechInfoIcon = document.getElementById('screen-tech-info-icon');
+            const clothesWasherLoadingIcon = document.getElementById('clothes-washer-loading-icon');
+            const clothesWasherLoadSizeIcon = document.getElementById('clothes-washer-load-size-icon');
+            const clothesDryerTypeIcon = document.getElementById('clothes-dryer-type-icon');
+            const clothesDryerTypeTooltip = document.getElementById('clothes-dryer-type-info');
+            const airConditionerTypeIcon = document.getElementById('air-type-icon');
+            const airConditionerTypeTooltip = document.getElementById('air-type-info');
+            const refrigeratorVolumeIcon = document.getElementById('refrigerator-volume-icon');
+            const refrigeratorVolumeTooltip = document.getElementById('refrigerator-volume-info');
+
+
+            const tvSizeTooltip = document.getElementById('tv-size-info');
+            const screenTechTooltip = document.getElementById('screen-tech-info');
+            const clothesWasherLoadingTooltip = document.getElementById('clothes-washer-loading-info');
+            const clothesWasherLoadSizeTooltip = document.getElementById('clothes-washer-size-info');
+
+            // TV Size Tooltip
+            if (tvSizeInfoIcon && tvSizeTooltip) {
+                tvSizeInfoIcon.addEventListener('mouseenter', function () {
+                    tvSizeTooltip.style.display = 'block';
+                });
+
+                tvSizeInfoIcon.addEventListener('mouseleave', function () {
+                    tvSizeTooltip.style.display = 'none';
+                });
+            }
+
+            // Screen Technology Tooltip
+            if (screenTechInfoIcon && screenTechTooltip) {
+                screenTechInfoIcon.addEventListener('mouseenter', function () {
+                    screenTechTooltip.style.display = 'block';
+                });
+
+                screenTechInfoIcon.addEventListener('mouseleave', function () {
+                    screenTechTooltip.style.display = 'none';
+                });
+            }
+
+            // Clothes Washer Loading Tooltip
+            if (clothesWasherLoadingIcon && clothesWasherLoadingTooltip) {
+                clothesWasherLoadingIcon.addEventListener('mouseenter', function () {
+                    clothesWasherLoadingTooltip.style.display = 'block';
+                });
+
+                clothesWasherLoadingIcon.addEventListener('mouseleave', function () {
+                    clothesWasherLoadingTooltip.style.display = 'none';
+                });
+            } else {
+                console.warn('Tooltip elements for clothes washer loading not found in the DOM.');
+            }
+
+            // Clothes Washer Load Size Tooltip
+            if (clothesWasherLoadSizeIcon && clothesWasherLoadSizeTooltip) {
+                clothesWasherLoadSizeIcon.addEventListener('mouseenter', function () {
+                    clothesWasherLoadSizeTooltip.style.display = 'block';
+                });
+
+                clothesWasherLoadSizeIcon.addEventListener('mouseleave', function () {
+                    clothesWasherLoadSizeTooltip.style.display = 'none';
+                });
+            } else {
+                console.warn('Tooltip elements for clothes washer load size not found in the DOM.');
+            }
+
+            // Clothes Dryer Type Tooltip
+            if (clothesDryerTypeIcon && clothesDryerTypeTooltip) {
+                clothesDryerTypeIcon.addEventListener('mouseenter', function () {
+                    clothesDryerTypeTooltip.style.display = 'block';
+                });
+
+                clothesDryerTypeIcon.addEventListener('mouseleave', function () {
+                    clothesDryerTypeTooltip.style.display = 'none';
+                });
+            } else {
+                console.warn('Tooltip element for clothes dryer type not found in the DOM.');
+            }
+            if (airConditionerTypeIcon && airConditionerTypeTooltip) {
+                airConditionerTypeIcon.addEventListener('mouseenter', function () {
+                    airConditionerTypeTooltip.style.display = 'block';
+                });
+
+                airConditionerTypeIcon.addEventListener('mouseleave', function () {
+                    airConditionerTypeTooltip.style.display = 'none';
+                });
+            } else {
+                console.warn('Tooltip element for air conditioner type not found in the DOM.');
+            }
+            if (refrigeratorVolumeIcon && refrigeratorVolumeTooltip) {
+                refrigeratorVolumeIcon.addEventListener('mouseenter', function () {
+                    refrigeratorVolumeTooltip.style.display = 'block';
+                });
+
+                refrigeratorVolumeIcon.addEventListener('mouseleave', function () {
+                    refrigeratorVolumeTooltip.style.display = 'none';
+                });
+            } else {
+                console.warn('Tooltip elements for refrigerator volume not found in the DOM.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initializeTooltips);
+
 
         function showQuestions() {
             const selectedAppliances = Array.from(document.querySelectorAll('#appliance-selection .btn.selected-green'))
@@ -640,7 +843,6 @@
             }
         }
 
-
         function validateAndNavigate() {
             let isValid = true;
             const applianceData = [];
@@ -780,6 +982,8 @@
                 sendDataToLambda(data);
             }
         }
+
+
     </script>
 </body>
 

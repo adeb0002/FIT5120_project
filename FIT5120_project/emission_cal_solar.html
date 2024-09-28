@@ -295,26 +295,30 @@
             $('[data-toggle="tooltip"]').tooltip();
         });
 
-        $('#grid-info-icon').on('click', function () {
-            console.log('Grid info icon clicked!'); // Debugging output
+        // Show the info box on mouseenter
+        $('#grid-info-icon').on('mouseenter', function () {
+            console.log('Grid info icon hovered!'); // Debugging output
 
             const infoText = `
-            This is the proportion of electricity you use that is drawn from the grid rather than solar panel generated.
-            <br><br>
-            <strong>Grid Dependency = (Electricity Imported / Total Electricity Used) * 100</strong>
-            <br><br>
-            Note: These figures can often be found in your electricity bill.
-            <br><br>
-        `;
+        This is the proportion of electricity you use that is drawn from the grid rather than solar panel generated.
+        <br><br>
+        <strong>Grid Dependency = (Electricity Imported / Total Electricity Used) * 100</strong>
+        <br><br>
+        Note: These figures can often be found in your electricity bill.
+        <br><br>
+    `;
 
             const gridInfo = $('#grid-info');
-            if (gridInfo.is(':visible')) {
-                gridInfo.removeClass('show'); // Remove 'show' class to hide it
-                setTimeout(() => gridInfo.hide(), 300); // Hide after the transition
-            } else {
-                gridInfo.html(infoText).addClass('show').show(); // Add 'show' class to display it
-                console.log('Info text set:', infoText); // Debugging output
-            }
+            gridInfo.html(infoText).addClass('show').show(); // Add 'show' class to display it
+            console.log('Info text set:', infoText); // Debugging output
+        });
+
+        // Hide the info box on mouseleave
+        $('#grid-info-icon').on('mouseleave', function () {
+            const gridInfo = $('#grid-info');
+            gridInfo.removeClass('show'); // Remove 'show' class to hide it
+            setTimeout(() => gridInfo.hide(), 300); // Hide after the transition
+            console.log('Grid info hidden'); // Debugging output
         });
     </script>
 </body>
