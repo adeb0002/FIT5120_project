@@ -928,24 +928,16 @@ input[type="number"] {
 
 .button-container {
     display: flex;
-    /* Align button and image vertically */
     flex-direction: column;
-    /* Stack button above the image */
     align-items: flex-start;
-    /* Align items to the start (left) */
     margin: 20px 0;
-    /* Space between button containers */
     padding: 10px;
-    /* Add padding around each button-container */
     border: 1px solid #ccc;
-    /* Optional: add a border for distinction */
     border-radius: 8px;
-    /* Optional: rounded corners */
     transition: box-shadow 0.3s ease;
-    width: 500px;
-    /* Set a fixed width for the container */
-    max-width: 100%;
-    /* Ensure it doesn't exceed the parent width */
+    width: 80%; /* Use percentage to make it larger while responsive */
+    max-width: 1200px; /* Set a larger maximum width */
+    min-width: 500px; /* Set a minimum width to avoid being too small */
 }
 
 .button-container:hover {
