@@ -33,10 +33,62 @@
             padding: 0px;
         }
 
+        /* Header styling */
         .header-section {
             text-align: center;
-            width: 100%;
-            padding: 100px 0 0 0;
+            padding: 130px 0 0 0;
+            background-color: #f5f5f5; /* Light background */
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        /* Main Title Styling */
+        .header-section h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #1f3b4d; /* Dark color for primary text */
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+
+        /* Container for subtitle */
+        .subtitle-container {
+            display: flex;
+            justify-content: center; /* Centers the subtitle container */
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        /* Header title */
+        .header-section p {
+            font-size: 1.2em;
+            color: #67b53f; /* Accent color for secondary text */
+            margin: 10px 0;
+        }
+
+        /* Styling for the lines */
+        .subtitle-text::before,
+        .subtitle-text::after {
+            content: '';
+            display: inline-block;
+            width: 220px; /* Length of the line on both sides */
+            height: 2px;
+            background-color: #4e8e31; /* Green color for the lines */
+            margin: 0 15px; /* Space between the text and the lines */
+        }
+
+        /* Ensure that the text is in the middle */
+        .subtitle-text {
+            font-size: 1.2em;
+            color: #4e8e31;
+            white-space: nowrap; /* Prevent text wrapping */
+        }
+
+        /* Header description */
+        .header-section p {
+            font-size: 1.4em;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         .form-charts-container {
@@ -73,7 +125,7 @@
         }
 
         .slider {
-            width: 100%;
+            width: 50%;
             margin: 15px 0;
         }
 
@@ -157,12 +209,39 @@
             margin-top: 20px;
         }
 
-        .total-emissions {
-            font-size: 20px;
+        .button-section button {
+            padding: 15px 30px;
+            font-size: 1.2em;
             font-weight: bold;
-            color: #333;
-            margin-bottom: 20px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 50px;
+            margin: 0 15px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+
+        .button-section button:hover {
+            background-color: #45a049;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .total-emissions {
+            font-size: 2em;
+            font-weight: bold;
+            color: #1f3b4d;
+            padding: 20px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .value-container {
+            display: flex;
+            justify-content: center; /* Centers the content horizontally */
+            margin-top: 10px; /* Optional: Adds some space above the value */
+        }
+
     </style>
 </head>
 
@@ -198,8 +277,11 @@
     <div class="simulation-container">
         <div class="header-section">
             <h1>Eco Simulation</h1>
-            <p>Adjust your lifestyle choices to see real-time changes in carbon emissions and cost savings.</p>
-            
+            <!-- Subtitle with dividers -->
+            <div class="subtitle-container">
+                <span class="subtitle-text">Adjust your lifestyle choices to see real-time changes in carbon emissions and cost savings.</span>
+            </div>
+
             <!-- Prominent Apply and Reset buttons at the top -->
             <div class="button-section">
                 <button onclick="applyChanges()">Apply</button>
@@ -214,243 +296,256 @@
 
         <div class="form-charts-container">
             <div class="form-section">
-
-                <!-- Energy Section -->
-                <h4>Energy:</h4>
-
-                <div class="form-group">
-                    <label>Solar Panels:</label>
-                    <div class="radio-option">
-                        <input type="radio" id="solar-yes" name="solar-panels" value="yes">
-                        <label for="solar-yes" class="btn-radio">Yes</label>
-                        <input type="radio" id="solar-no" name="solar-panels" value="no">
-                        <label for="solar-no" class="btn-radio">No</label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Gas Water Heater:</label>
-                    <div class="radio-option">
-                        <input type="radio" id="gas-yes" name="gas-water-heater" value="yes">
-                        <label for="gas-yes" class="btn-radio">Yes</label>
-                        <input type="radio" id="gas-no" name="gas-water-heater" value="no">
-                        <label for="gas-no" class="btn-radio">No</label>
-                    </div>
-                </div>
-
-                <!-- Transport Section with four different transport types -->
-                <h4>Transport:</h4>
-                <label for="car-distance">Car Commute (km/week):</label>
-                <input type="range" id="car-distance" class="slider" min="0" max="100" value="20" step="1">
-                <span id="car-value">20km</span>
-
-                <label for="train-distance">Train Commute (km/week):</label>
-                <input type="range" id="train-distance" class="slider" min="0" max="100" value="20" step="1">
-                <span id="train-value">20km</span>
-
-                <label for="bus-distance">Bus Commute (km/week):</label>
-                <input type="range" id="bus-distance" class="slider" min="0" max="100" value="20" step="1">
-                <span id="bus-value">20km</span>
-
-                <label for="tram-distance">Tram Commute (km/week):</label>
-                <input type="range" id="tram-distance" class="slider" min="0" max="100" value="20" step="1">
-                <span id="tram-value">20km</span>
-
-                <h4>Appliance Use:</h4>
-
-                <!-- Television Section -->
-                <h3 class="icon-text">
-                    <span class="icon">
-                        <img src="img/television.png" alt="Television Icon">
-                    </span>
-                    <span class="text">Television</span>
-                </h3>
-                <div class="form-group">
-                    <label for="tv-screen-size">What screen size is your television?</label>
-                    <select id="tv-screen-size" class="form-control" style="width: 500px;">
-                        <option value="">--Select Size--</option>
-                        <option value="Less than 40">Less than 40"</option>
-                        <option value="40-49">40 - 49"</option>
-                        <option value="50-59">50 - 59"</option>
-                        <option value="60-69">60 - 69"</option>
-                        <option value="70-79">70 - 79"</option>
-                        <option value="80-89">80 - 89"</option>
-                        <option value="90-99">90 - 99"</option>
-                        <option value="Greater than 100">Greater than 100"</option>
-                    </select>
-                </div>
-                <div class="form-group radio-question">
-                    <label for="television-screen-tech">What screen technology does your television use?</label>
-                    <div class="radio-option-group">
-                        <div class="radio-option">
-                            <input type="radio" id="tech-lcd" name="television-screen-tech" value="LCD" required>
-                            <label for="tech-lcd" class="radio-label btn-radio">LCD</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="tech-plasma" name="television-screen-tech" value="Plasma" required>
-                            <label for="tech-plasma" class="radio-label btn-radio">Plasma</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="tech-led" name="television-screen-tech" value="LED" required>
-                            <label for="tech-led" class="radio-label btn-radio">LED</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="tech-oled" name="television-screen-tech" value="OLED" required>
-                            <label for="tech-oled" class="radio-label btn-radio">OLED</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="television-hours">How many hours do you watch television a week?</label>
-                    <input type="number" class="form-control" id="television-hours" name="television-hours" min="1" value="1" required>
-                </div>
-
-                <!-- Dishwasher Section -->
-                <h3 class="icon-text">
-                    <span class="icon">
-                        <img src="img/dishwasher.png" alt="Dishwasher Icon">
-                    </span>
-                    <span class="text">Dishwasher</span>
-                </h3>
-                <div class="form-group">
-                    <label for="dishwasher-usage">How many times do you use the dishwasher a week?</label>
-                    <input type="number" class="form-control" id="dishwasher-usage" name="dishwasher-usage" min="1" value="1" required>
-                </div>
-
-                <!-- Clothes Washer Section -->
-                <h3 class="icon-text">
-                    <span class="icon">
-                        <img src="img/clotheswasher.png" alt="Clotheswasher Icon">
-                    </span>
-                    <span class="text">Clothes Washer</span>
-                </h3>
-                <div class="form-group radio-question">
-                    <label for="clothes-washer-loading">What type of loading is your clothes washer?</label>
-                    <div class="radio-option-group">
-                        <div class="radio-option">
-                            <input type="radio" id="washer-loading-front" name="clothes-washer-loading" value="Front" required>
-                            <label for="washer-loading-front" class="radio-label btn-radio">Front</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="washer-loading-top" name="clothes-washer-loading" value="Top" required>
-                            <label for="washer-loading-top" class="radio-label btn-radio">Top</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="clothes-washer-load-size">What load size is your clothes washer?</label>
-                </div>
-                <div class="slider-container">
-                    <input type="range" class="slider" id="clothes-washer-load-size" name="clothes-washer-load-size" min="2" max="19" step="0.5" value="10.5" required>
-                    <div id="slider-value-container">
-                        <span id="load-size-value">10.5 kg</span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="clothes-washer-usage">How many times do you use the clothes washer a week?</label>
-                    <input type="number" class="form-control" id="clothes-washer-usage" name="clothes-washer-usage" min="1" value="1" required>
-                </div>
-
-                <!-- Clothes Dryer Section -->
-                <h3 class="icon-text">
-                    <span class="icon">
-                        <img src="img/clothesdryer.png" alt="Clothesdryer Icon">
-                    </span>
-                    <span class="text">Clothes Dryer</span>
-                </h3>
-
-                <div class="form-group radio-question">
-                    <label for="clothes-dryer-type">What type of clothes dryer do you use?</label>
-                    <div class="radio-option-group">
-                        <div class="radio-option">
-                            <input type="radio" id="dryer-type-vented" name="clothes-dryer-type" value="Vented" required>
-                            <label for="dryer-type-vented" class="radio-label btn-radio">Vented</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="dryer-type-condenser" name="clothes-dryer-type" value="Condenser" required>
-                            <label for="dryer-type-condenser" class="radio-label btn-radio">Condenser</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="clothes-dryer-usage">How many times do you use the clothes dryer a week?</label>
-                    <input type="number" class="form-control" id="clothes-dryer-usage" name="clothes-dryer-usage" min="1" value="1" required>
-                </div>
-
-                <!-- Air Conditioner Section -->
-                <h3 class="icon-text">
-                    <span class="icon">
-                        <img src="img/air_conditioner.png">
-                    </span>
-                    <span class="text">Air Conditioner</span>
-                </h3>
-                <div class="form-group radio-question">
-                    <label for="air-conditioner-type">Is your air conditioner ducted or non-ducted?</label>
-                    <div class="radio-option-group">
-                        <div class="radio-option">
-                            <input type="radio" id="ac-type-ducted" name="air-conditioner-type" value="Ducted" required>
-                            <label for="ac-type-ducted" class="radio-label btn-radio">Ducted</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="ac-type-non-ducted" name="air-conditioner-type" value="Non Ducted" required>
-                            <label for="ac-type-non-ducted" class="radio-label btn-radio">Non Ducted</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="ac-type-both" name="air-conditioner-type" value="Both" required>
-                            <label for="ac-type-both" class="radio-label btn-radio">Both</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="air-conditioner-hours">How many hours do you use the air conditioner in a week?</label>
-                    <input type="number" class="form-control" id="air-conditioner-hours" name="air-conditioner-hours" min="1" value="1" required>
-                </div>
-
-                <!-- Refrigerator Section -->
-                <h3 class="icon-text">
-                    <span class="icon">
-                        <img src="img/refrigerator.png" alt="Refrigerator Icon">
-                    </span>
-                    <span class="text">Refrigerator</span>
-                </h3>
-                <div class="form-group">
-                    <label for="refrigerator-volume">What volume is your refrigerator?</label>
-                    <select class="form-control" id="refrigerator-volume" name="refrigerator-volume" style="width: 500px;" required>
-                        <option value="">--Select Volume--</option>
-                        <option value="<99L">Less than 99L</option>
-                        <option value="100-199L">100 - 199L</option>
-                        <option value="200-299L">200 - 299L</option>
-                        <option value="300-399L">300 - 399L</option>
-                        <option value="400-499L">400 - 499L</option>
-                        <option value="500-599L">500 - 599L</option>
-                        <option value="600-699L">600 - 699L</option>
-                        <option value=">700L">More than 700L</option>
-                    </select>
-                </div>
-
-                <!-- Apply and Reset buttons at the bottom -->
+                <!-- Prominent Apply and Reset buttons at the top -->
                 <div class="button-section">
-                    <button onclick="applyChanges()">Apply</button>
-                    <button class="reset-btn" onclick="resetChanges()">Reset</button>
+                    <button onclick="toggleSection('energy-section')">Energy</button>
+                    <button onclick="toggleSection('transport-section')">Transport</button>
+                    <button onclick="toggleSection('appliance-section')">Appliance Use</button>
+                </div>
+                
+                <!-- Energy Section (hidden by default) -->
+                <div id="energy-section" class="form-section" style="display:none;">
+                    <div class="subtitle-container">
+                        <span class="subtitle-text">Energy</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Solar Panels:</label>
+                        <div class="radio-option">
+                            <input type="radio" id="solar-yes" name="solar-panels" value="yes">
+                            <label for="solar-yes" class="btn-radio">Yes</label>
+                            <input type="radio" id="solar-no" name="solar-panels" value="no">
+                            <label for="solar-no" class="btn-radio">No</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Gas Water Heater:</label>
+                        <div class="radio-option">
+                            <input type="radio" id="gas-yes" name="gas-water-heater" value="yes">
+                            <label for="gas-yes" class="btn-radio">Yes</label>
+                            <input type="radio" id="gas-no" name="gas-water-heater" value="no">
+                            <label for="gas-no" class="btn-radio">No</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Transport Section (hidden by default) -->
+                <div id="transport-section" class="form-section" style="display:none;">
+                    <div class="subtitle-container">
+                        <span class="subtitle-text">Transport</span>
+                    </div>
+                    <label for="car-distance">Car Commute (km/week):</label>
+                    <input type="range" id="car-distance" class="slider" min="0" max="100" value="20" step="1" oninput="updateValue('car-distance', 'car-value')">
+                    <div class="value-container">
+                        <span id="car-value">20km</span>
+                    </div>
+                
+                    <label for="train-distance">Train Commute (km/week):</label>
+                    <input type="range" id="train-distance" class="slider" min="0" max="100" value="20" step="1" oninput="updateValue('train-distance', 'train-value')">
+                    <div class="value-container">
+                        <span id="train-value">20km</span>
+                    </div>
+                
+                    <label for="bus-distance">Bus Commute (km/week):</label>
+                    <input type="range" id="bus-distance" class="slider" min="0" max="100" value="20" step="1" oninput="updateValue('bus-distance', 'bus-value')">
+                    <div class="value-container">
+                        <span id="bus-value">20km</span>
+                    </div>
+                
+                    <label for="tram-distance">Tram Commute (km/week):</label>
+                    <input type="range" id="tram-distance" class="slider" min="0" max="100" value="20" step="1" oninput="updateValue('tram-distance', 'tram-value')">
+                    <div class="value-container">
+                        <span id="tram-value">20km</span>
+                    </div>
+                </div>
+                
+                <!-- Appliance Use Section (hidden by default) -->
+                <div id="appliance-section" class="form-section" style="display:none;">
+                    <div class="subtitle-container">
+                        <span class="subtitle-text">Appliance</span>
+                    </div>
+                    <!-- Television Section -->
+                    <h3 class="icon-text">
+                        <span class="icon">
+                            <img src="img/television.png" alt="Television Icon">
+                        </span>
+                        <span class="text">Television</span>
+                    </h3>
+                    <div class="form-group">
+                        <label for="tv-screen-size">What screen size is your television?</label>
+                        <select id="tv-screen-size" class="form-control" style="width: 500px;">
+                            <option value="">--Select Size--</option>
+                            <option value="Less than 40">Less than 40"</option>
+                            <option value="40-49">40 - 49"</option>
+                            <option value="50-59">50 - 59"</option>
+                            <option value="60-69">60 - 69"</option>
+                            <option value="70-79">70 - 79"</option>
+                            <option value="80-89">80 - 89"</option>
+                            <option value="90-99">90 - 99"</option>
+                            <option value="Greater than 100">Greater than 100"</option>
+                        </select>
+                    </div>
+                    <div class="form-group radio-question">
+                        <label for="television-screen-tech">What screen technology does your television use?</label>
+                        <div class="radio-option-group">
+                            <div class="radio-option">
+                                <input type="radio" id="tech-lcd" name="television-screen-tech" value="LCD" required>
+                                <label for="tech-lcd" class="radio-label btn-radio">LCD</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="tech-plasma" name="television-screen-tech" value="Plasma" required>
+                                <label for="tech-plasma" class="radio-label btn-radio">Plasma</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="tech-led" name="television-screen-tech" value="LED" required>
+                                <label for="tech-led" class="radio-label btn-radio">LED</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="tech-oled" name="television-screen-tech" value="OLED" required>
+                                <label for="tech-oled" class="radio-label btn-radio">OLED</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="television-hours">How many hours do you watch television a week?</label>
+                        <input type="number" class="form-control" id="television-hours" name="television-hours" min="1" value="1" required>
+                    </div>
+                
+                    <!-- Dishwasher Section -->
+                    <h3 class="icon-text">
+                        <span class="icon">
+                            <img src="img/dishwasher.png" alt="Dishwasher Icon">
+                        </span>
+                        <span class="text">Dishwasher</span>
+                    </h3>
+                    <div class="form-group">
+                        <label for="dishwasher-usage">How many times do you use the dishwasher a week?</label>
+                        <input type="number" class="form-control" id="dishwasher-usage" name="dishwasher-usage" min="1" value="1" required>
+                    </div>
+                
+                    <!-- Clothes Washer Section -->
+                    <h3 class="icon-text">
+                        <span class="icon">
+                            <img src="img/clotheswasher.png" alt="Clotheswasher Icon">
+                        </span>
+                        <span class="text">Clothes Washer</span>
+                    </h3>
+                    <div class="form-group radio-question">
+                        <label for="clothes-washer-loading">What type of loading is your clothes washer?</label>
+                        <div class="radio-option-group">
+                            <div class="radio-option">
+                                <input type="radio" id="washer-loading-front" name="clothes-washer-loading" value="Front" required>
+                                <label for="washer-loading-front" class="radio-label btn-radio">Front</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="washer-loading-top" name="clothes-washer-loading" value="Top" required>
+                                <label for="washer-loading-top" class="radio-label btn-radio">Top</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clothes-washer-load-size">Clothes Washer Load Size (kg):</label>
+                        <input type="range" id="clothes-washer-load-size" class="slider" min="2" max="19" value="10" step="1" oninput="updateClothesWasherValue()">
+                        <div class="value-container">
+                            <span id="clothes-washer-value">10 kg</span>
+                        </div>
+                    </div>                
+                    <div class="form-group">
+                        <label for="clothes-washer-usage">How many times do you use the clothes washer a week?</label>
+                        <input type="number" class="form-control" id="clothes-washer-usage" name="clothes-washer-usage" min="1" value="1" required>
+                    </div>
+        
+                    <!-- Clothes Dryer Section -->
+                    <h3 class="icon-text">
+                        <span class="icon">
+                            <img src="img/clothesdryer.png" alt="Clothesdryer Icon">
+                        </span>
+                        <span class="text">Clothes Dryer</span>
+                    </h3>
+                    <div class="form-group radio-question">
+                        <label for="clothes-dryer-type">What type of clothes dryer do you use?</label>
+                        <div class="radio-option-group">
+                            <div class="radio-option">
+                                <input type="radio" id="dryer-type-vented" name="clothes-dryer-type" value="Vented" required>
+                                <label for="dryer-type-vented" class="radio-label btn-radio">Vented</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="dryer-type-condenser" name="clothes-dryer-type" value="Condenser" required>
+                                <label for="dryer-type-condenser" class="radio-label btn-radio">Condenser</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clothes-dryer-usage">How many times do you use the clothes dryer a week?</label>
+                        <input type="number" class="form-control" id="clothes-dryer-usage" name="clothes-dryer-usage" min="1" value="1" required>
+                    </div>
+        
+                    <!-- Air Conditioner Section -->
+                    <h3 class="icon-text">
+                        <span class="icon">
+                            <img src="img/air_conditioner.png" alt="Air Conditioner Icon">
+                        </span>
+                        <span class="text">Air Conditioner</span>
+                    </h3>
+                    <div class="form-group radio-question">
+                        <label for="air-conditioner-type">Is your air conditioner ducted or non-ducted?</label>
+                        <div class="radio-option-group">
+                            <div class="radio-option">
+                                <input type="radio" id="ac-type-ducted" name="air-conditioner-type" value="Ducted" required>
+                                <label for="ac-type-ducted" class="radio-label btn-radio">Ducted</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="ac-type-non-ducted" name="air-conditioner-type" value="Non Ducted" required>
+                                <label for="ac-type-non-ducted" class="radio-label btn-radio">Non Ducted</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="ac-type-both" name="air-conditioner-type" value="Both" required>
+                                <label for="ac-type-both" class="radio-label btn-radio">Both</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="air-conditioner-hours">How many hours do you use the air conditioner in a week?</label>
+                        <input type="number" class="form-control" id="air-conditioner-hours" name="air-conditioner-hours" min="1" value="1" required>
+                    </div>
+                
+                    <!-- Refrigerator Section -->
+                    <h3 class="icon-text">
+                        <span class="icon">
+                            <img src="img/refrigerator.png" alt="Refrigerator Icon">
+                        </span>
+                        <span class="text">Refrigerator</span>
+                    </h3>
+                    <div class="form-group">
+                        <label for="refrigerator-volume">What volume is your refrigerator?</label>
+                        <select class="form-control" id="refrigerator-volume" name="refrigerator-volume" style="width: 500px;" required>
+                            <option value="">--Select Volume--</option>
+                            <option value="<99L">Less than 99L</option>
+                            <option value="100-199L">100 - 199L</option>
+                            <option value="200-299L">200 - 299L</option>
+                            <option value="300-399L">300 - 399L</option>
+                            <option value="400-499L">400 - 499L</option>
+                            <option value="500-599L">500 - 599L</option>
+                            <option value="600-699L">600 - 699L</option>
+                            <option value=">700L">More than 700L</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
-            <div class="charts-section">
-                <div class="chart-container">
-                    <div class="chart">
-                        <h4>Emissions (Current vs Simulated)</h4>
-                        <canvas id="emissionsChart"></canvas>
-                    </div>
-                    <div class="chart">
-                        <h4>Cost (Current vs Simulated)</h4>
-                        <canvas id="costChart"></canvas>
-                    </div>
-                </div>                
+        <div class="charts-section">
+            <div class="chart-container">
+                <div class="chart">
+                    <h4>Emissions (Current vs Simulated)</h4>
+                    <canvas id="emissionsChart"></canvas>
+                </div>
+                <div class="chart">
+                    <h4>Cost (Current vs Simulated)</h4>
+                    <canvas id="costChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
+</div>
 
     <footer>
         Ready to take action?
@@ -467,6 +562,37 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
     <script>
+
+        // Toggles visibility of the section
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section.style.display === 'none' || section.style.display === '') {
+                section.style.display = 'block';
+            } else {
+                section.style.display = 'none';
+            }
+        }
+        function showSection(sectionId) {
+            // Hide all sections first
+            document.getElementById('energy-section').style.display = 'none';
+            document.getElementById('transport-section').style.display = 'none';
+            document.getElementById('appliance-section').style.display = 'none';
+            
+            // Show the clicked section
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        function updateClothesWasherValue() {
+            const washerSlider = document.getElementById('clothes-washer-load-size');
+            const washerValueDisplay = document.getElementById('clothes-washer-value');
+            washerValueDisplay.textContent = `${washerSlider.value} kg`;
+        }
+
+        function updateValue(sliderId, valueId) {
+            const slider = document.getElementById(sliderId);
+            const valueDisplay = document.getElementById(valueId);
+            valueDisplay.textContent = `${slider.value} km`;
+        }
 
         document.addEventListener('DOMContentLoaded', function () {
                     document.getElementById('clear-session-link').addEventListener('click', function (event) {
