@@ -43,7 +43,7 @@
                         </li>
                         <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
                         <li><a href="#" id="clear-session-link">Emission Calculator</a></li>
-                        <li><a href="recommendations.html">Recommendations</a></li>
+                        <li><a href="personal_recommendations.html">Recommendations</a></li>
                         <li><a href="education_hub.html">Education Hub</a></li>
                     </ul>
                 </div>
@@ -352,17 +352,36 @@
 
             // Check validation only if "None of the above" is not selected
             if (!noneButtonSelected) {
-                questions.forEach(input => {
-                    if (input.value.trim() === '' || isNaN(input.value) || input.value < 1) {
-                        valid = false;
-                        input.style.borderColor = 'red';
-                    } else {
-                        input.style.borderColor = '';
-                        const type = input.id.replace('-usage', ''); // Get the transportation type from input id
-                        dataToSend.push({ type: 'transportation', transportation_type: type.replace(/-/g, '_'), kms: parseFloat(input.value) });
-                    }
-                });
+    questions.forEach(input => {
+        if (input.value.trim() === '' || isNaN(input.value) || input.value < 1) {
+            valid = false;
+            input.style.borderColor = 'red';
+        } else {
+            input.style.borderColor = '';
+            const type = input.id.replace('-usage', ''); // Get the transportation type from input id
+            dataToSend.push({
+                type: 'transportation',
+                transportation_type: type.replace(/-/g, '_'),
+                kms: parseFloat(input.value)
+            });
+
+            // Store kilometers in sessionStorage based on transportation type using the original if-else structure
+            if (type === 'private-vehicle') {
+                sessionStorage.setItem('totalDistance_car', input.value);
+                console.log('Private vehicle kilometers saved to sessionStorage:', input.value);
+            } else if (type === 'bus') {
+                sessionStorage.setItem('totalDistance_bus', input.value);
+                console.log('Bus kilometers saved to sessionStorage:', input.value);
+            } else if (type === 'train') {
+                sessionStorage.setItem('totalDistance_train', input.value);
+                console.log('Train kilometers saved to sessionStorage:', input.value);
+            } else if (type === 'tram') {
+                sessionStorage.setItem('totalDistance_tram', input.value);
+                console.log('Tram kilometers saved to sessionStorage:', input.value);
             }
+        }
+    });
+}
 
             // If "None of the above" is selected, skip validation errors and still prepare data to send
             if (noneButtonSelected) {
