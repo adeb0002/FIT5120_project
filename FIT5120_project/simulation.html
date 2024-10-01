@@ -22,6 +22,7 @@
             padding: 0;
             font-family: 'Open Sans', sans-serif;
             background-color: #f4f4f4;
+            overflow:auto;
         }
 
         .simulation-container {
@@ -240,6 +241,22 @@
             display: flex;
             justify-content: center; /* Centers the content horizontally */
             margin-top: 10px; /* Optional: Adds some space above the value */
+        }
+
+        #backToTopBtn {
+            display: block; /* Temporarily force display for testing */
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999; /* Ensure the button is on top of other elements */
+            width: 50px;
+            height: 50px;
+            background-color: red; /* Visible background color for testing */
+            cursor: pointer;
+        }
+
+        #backToTopBtn:hover {
+            opacity: 0.8; /* Slight opacity change on hover */
         }
 
     </style>
@@ -545,6 +562,8 @@
             </div>
         </div>
     </div>
+    <img src="img/rocket-ship.png" id="backToTopBtn" onclick="scrollToTop()" alt="Back to Top">
+
 </div>
 
     <footer>
@@ -562,6 +581,30 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
     <script>
+
+       // Function to scroll smoothly to the top
+       function scrollToTop() {
+            console.log("Back to Top button clicked!");
+            window.scrollTo(0, 0);  // Scroll immediately to the top
+        }
+
+
+        // Show the "Back to Top" button after scrolling down 100px
+        window.addEventListener('scroll', function() {
+            const backToTopBtn = document.getElementById("backToTopBtn");
+            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+            console.log("Scroll Position:", scrollPosition);  // Debugging scroll position
+
+            if (scrollPosition > 100) {  // Show after scrolling 100px
+                backToTopBtn.style.display = "block";  // Show the button
+                console.log("Showing Back to Top button");  // Debugging visibility
+            } else {
+                backToTopBtn.style.display = "none";  // Hide the button
+                console.log("Hiding Back to Top button");  // Debugging hidden state
+            }
+        });
+
 
         // Toggles visibility of the section
         function toggleSection(sectionId) {
