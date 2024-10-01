@@ -4,16 +4,18 @@
     font-family: 'Roboto', arial, sans-serif;
 }
 
-html, body {
+html,
+body {
     background-color: #f2e8d5;
     height: 100%;
     margin: 0;
-    overflow-x: hidden; /* This prevents scrolling */
+    overflow-x: hidden;
+    /* This prevents scrolling */
 }
 
 ul {
-	list-style: none;
-	margin: 0px;
+    list-style: none;
+    margin: 0px;
 }
 
 .header {
@@ -25,44 +27,46 @@ ul {
     z-index: 10000;
     transition: all 0.2s ease-in-out;
     height: 80px;
-    background-color: #131212d4; /* Charcoal Grey with opacity */
+    background-color: #131212d4;
+    /* Charcoal Grey with opacity */
     text-align: center;
     line-height: 40px;
     color: white;
 }
 
-.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-nav>li>a {
     text-shadow: none;
 }
 
 .navbar-brand {
-	line-height: 80px;
-	padding: 0px;
+    line-height: 80px;
+    padding: 0px;
 }
 
 .navbar-nav>li>a {
-	color: #fff!important;
-	font-size: 13px;
-	font-weight: 300;
-	text-transform: uppercase;
-	text-shadow: none;
-	line-height: 80px;
-	padding: 0px;
-	letter-spacing: 0.5px;
+    color: #fff !important;
+    font-size: 13px;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-shadow: none;
+    line-height: 80px;
+    padding: 0px;
+    letter-spacing: 0.5px;
 }
 
 .navbar-nav>li {
-	margin-left: 45px;
+    margin-left: 45px;
 }
 
 .header.active .navbar-nav>li>a {
-	font-family: 'Open Sans', arial, sans-serif;
-	font-size: 13px;
-	font-weight: 500;
-	letter-spacing: 0.5px;
-	text-transform: uppercase;
-	text-shadow: none;
-	color: #121212!important;
+    font-family: 'Open Sans', arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-shadow: none;
+    color: #121212 !important;
 }
 
 .header.active {
@@ -71,50 +75,60 @@ ul {
     -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
 }
+
 .navbar-brand {
-	font-family: 'Open Sans', sans-serif;
-	font-size: 25px;
-	text-transform: uppercase;
-	color: #fff!important;
-	transition: all 0.5s;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #fff !important;
+    transition: all 0.5s;
 
 }
+
 .navbar-brand em {
-	font-style: normal;
-	color: #f7c552;
-	font-size: 32px;
+    font-style: normal;
+    color: #f7c552;
+    font-size: 32px;
 }
+
 .header.active .navbar-brand {
-	color: #121212!important;
+    color: #121212 !important;
 }
+
 .header .navbar-brand {
     font-weight: 800;
 }
+
 .navbar-inverse {
-	background-image: none;
-	background-color: transparent;
+    background-image: none;
+    background-color: transparent;
 }
+
 .header .navbar {
     margin: 0;
     border: none;
 }
+
 .page-section {
     padding: 80px 0;
 }
+
 .navbar-inverse .navbar-toggle {
-	margin-top: 22px;
-    border-color: #69d76c!important;
-    background-color: #69d76c!important;
+    margin-top: 22px;
+    border-color: #69d76c !important;
+    background-color: #69d76c !important;
 }
-.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
-	background-color: #f7c552;
+
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+    background-color: #f7c552;
 }
-bootstrap.min.css
-.navbar-toggle {
+
+bootstrap.min.css .navbar-toggle {
     position: relative;
     float: right;
     padding: 9px 10px;
-    margin-top: 15px!important;
+    margin-top: 15px !important;
     margin-right: 15px;
     margin-bottom: 8px;
     background-color: transparent;
@@ -122,14 +136,17 @@ bootstrap.min.css
     border: 1px solid transparent;
     border-radius: 4px;
 }
+
 @media (min-width: 768px) {
     .header .navbar-brand {
         padding-left: 0;
     }
+
     .navbar-nav {
         float: right;
     }
 }
+
 .page-section {
     min-height: 100vh;
     padding: 0;
@@ -139,9 +156,11 @@ bootstrap.min.css
     .page-section h1 {
         font-size: 3em;
     }
+
     .page-section h2 {
         font-size: 2em;
     }
+
     .page-section p {
         font-size: 1em;
         margin: 0 0 20px;
@@ -149,43 +168,43 @@ bootstrap.min.css
 }
 
 .baner-content {
-	width: 100%;
-  	padding-top: 35vh;
-  	text-align: center;
-  	background-image: url(../img/blog_item_01.jpg);
-  	vertical-align: middle;
+    width: 100%;
+    padding-top: 35vh;
+    text-align: center;
+    background-image: url(../img/blog_item_01.jpg);
+    vertical-align: middle;
 }
 
 .baner-content .text-content {
-	text-align: center;
+    text-align: center;
 }
 
 .baner-content .text-content h2 {
-	font-size: 36px;
-	font-weight: 400;
-	color: #fff;
+    font-size: 36px;
+    font-weight: 400;
+    color: #fff;
 }
 
 .baner-content .text-content h2 span {
-	font-weight: 700;
-	color: #33c1cf!important;
+    font-weight: 700;
+    color: #33c1cf !important;
 }
 
 .baner-content .text-content h2 em {
-	font-style: normal;
-	font-weight: 700;
-	color: #f89624!important;
+    font-style: normal;
+    font-weight: 700;
+    color: #f89624 !important;
 }
 
 .baner-content .text-content p {
-	color: #fff;
-	font-size: 14px;
-	line-height: 24px;
-	padding: 0px 25%;
+    color: #fff;
+    font-size: 14px;
+    line-height: 24px;
+    padding: 0px 25%;
 }
 
 .baner-content .text-content .primary-white-button {
-	margin-top: 25px;
+    margin-top: 25px;
 }
 
 .is-invalid {
@@ -202,15 +221,18 @@ h2 {
     font-weight: 800;
     margin-top: 120px;
     margin-left: 200px;
-    margin-bottom: 20px; /* Space below the heading */
+    margin-bottom: 20px;
+    /* Space below the heading */
     color: #28a745;
     line-height: 1.4;
     text-transform: uppercase;
-    width: 100%; /* Ensure the heading takes full width of the container */
+    width: 100%;
+    /* Ensure the heading takes full width of the container */
     white-space: nowrap;
 }
 
 @media (max-width: 768px) {
+
     /* Tablets and small desktops */
     h2 {
         font-size: 2.5rem;
@@ -223,6 +245,7 @@ h2 {
 }
 
 @media (max-width: 480px) {
+
     /* Mobile devices */
     h2 {
         font-size: 2rem;
@@ -236,47 +259,65 @@ h2 {
 
 .icon-label-container {
     display: flex;
-    align-items: center; /* Align items vertically center */
-    margin-bottom: 20px; /* Add space between the label and slider */
+    align-items: center;
+    /* Align items vertically center */
+    margin-bottom: 20px;
+    /* Add space between the label and slider */
 }
 
 label[for="appliance-selection"] {
-    display: block; /* Makes the label a block-level element */
-    margin-top: 300px; /* Adjust this value as needed for positioning */
-    font-size: 1.5em; /* Adjust the size of the text */
-    font-weight: bold; /* Makes the text bold */
-    color: #333; /* Optional: Adjust the text color */
+    display: block;
+    /* Makes the label a block-level element */
+    margin-top: 30px;
+    /* Adjust this value as needed for positioning */
+    font-size: 1.5em;
+    /* Adjust the size of the text */
+    font-weight: bold;
+    /* Makes the text bold */
+    color: #333;
+    /* Optional: Adjust the text color */
 }
 
 /* Style for each question group */
 #usage-questions .form-group {
     margin-top: 50px;
-    margin-bottom: 40px; /* Space between questions */
+    margin-bottom: 40px;
+    /* Space between questions */
 }
 
 /* Style for labels */
 #usage-questions label {
     margin-top: 5px;
-    font-weight: bold; /* Bold text for labels */
+    font-weight: bold;
+    /* Bold text for labels */
     display: block;
-    margin-bottom: 5px; /* Space between label and input */
+    margin-bottom: 5px;
+    /* Space between label and input */
     color: #333;
-    font-size: 1.5em;/* Dark grey color for text */
+    font-size: 1.5em;
+    /* Dark grey color for text */
 }
 
 /* Style for inputs */
 #usage-questions input[type="number"] {
-    width: 100%; /* Full width of the container */
-    padding: 10px; /* Padding inside the input */
-    border: 1px solid #ccc; /* Border around the input */
-    border-radius: 4px; /* Slightly rounded corners */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    width: 100%;
+    /* Full width of the container */
+    padding: 10px;
+    /* Padding inside the input */
+    border: 1px solid #ccc;
+    /* Border around the input */
+    border-radius: 4px;
+    /* Slightly rounded corners */
+    box-sizing: border-box;
+    /* Include padding and border in the element's total width and height */
 }
 
 /* Style for invalid inputs */
 #usage-questions input[type="number"].is-invalid {
-    border-color: #e74c3c; /* Red border for invalid inputs */
-    background-color: #fdd; /* Light red background */
+    border-color: #e74c3c;
+    /* Red border for invalid inputs */
+    background-color: #fdd;
+    /* Light red background */
 }
 
 .appliance-icon-1 {
@@ -284,63 +325,95 @@ label[for="appliance-selection"] {
     height: 40px;
     background-image: url('../img/appliance.png');
     background-size: cover;
-    margin-right: 10px;
-    margin-top: 300px;
+    margin-left: 450px;
+    margin-top: 30px;
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
+/* Responsive Styles */
+@media (max-width: 748px) {
     .icon-label-container {
-        flex-direction: column; /* Stack icon and label vertically */
-        align-items: flex-start; /* Align items to the start */
-        margin-bottom: 10px; /* Reduce space between the label and slider */
+        flex-direction: column;
+        /* Stack items vertically */
+        align-items: flex-start;
+        /* Align items to the start */
     }
 
     label[for="appliance-selection"] {
-        margin-top: 100px; /* Reduce top margin for smaller screens */
-        font-size: 1.2em; /* Slightly smaller text */
+        font-size: 1.2em;
+        margin-top: -20px;
+        margin-left: 35px;
     }
 
     #usage-questions label {
-        font-size: 1.2em; /* Slightly smaller text for labels */
+        font-size: 1.2em;
+        /* Slightly smaller font size */
+        margin-top: 10px;
+        margin-left: 35px;
+    }
+
+    #usage-questions .form-group {
+        margin-top: 30px;
+        /* Reduced top margin */
+        margin-bottom: 20px;
+        /* Reduced bottom margin */
     }
 
     .appliance-icon-1 {
-        width: 30px; /* Smaller icon */
-        height: 30px;
-        /* Adjusted margin-top to move the icon higher */
-        margin-top: -5px; /* Change to the desired value */
+        margin-left: 0;
+        /* Center icon in mobile view */
+        margin-top: 20px;
+        /* Adjust top margin */
     }
 }
 
 @media (max-width: 480px) {
-    .icon-label-container {
-        margin-bottom: 10px;
-        margin-top: 60px;
-    }
-
     label[for="appliance-selection"] {
-        margin-top: -25px; /* Further reduce top margin */
         font-size: 1.1em;
+        margin-top: -20px;
         margin-left: 35px;
     }
 
     #usage-questions label {
         font-size: 1.1em;
-        margin-top: -20px;
+        /* Further reduce font size */
+        margin-top: 10px;
+        text-align: left;
+        /* Align text to the left */
+        display: block;
+        /* Ensure the label is a block element */
+        width: 100%;
+        /* Ensure it takes the full width for alignment */
+        margin: 0;
+        /* Remove right margin to prevent overflow */
+        padding: 0 10px;
+        /* Add horizontal padding for spacing within the box */
+    }
+
+    #usage-questions input[type="number"] {
+        padding: 8px;
+        /* Reduce padding for smaller screens */
     }
 
     .appliance-icon-1 {
-        width: 30px; /* Even smaller icon */
+        width: 30px;
+        /* Smaller icon */
         height: 30px;
+        /* Smaller icon */
+    }
+
+    #usage-questions .form-group {
+        margin-top: 20px;
+        /* Further reduced top margin */
+        margin-bottom: 10px;
+        /* Further reduced bottom margin */
     }
 }
 
 /* Common floating buttons styles */
 .floating-buttons {
     position: relative;
-    margin-top: 80px;
-    bottom: 50px;
+    margin-top: 120px;
+    bottom: 15px;
     margin-left: 500px;
     transform: translateX(-50%);
     display: flex;
@@ -380,25 +453,32 @@ label[for="appliance-selection"] {
 }
 
 /* Icon Styling inside Buttons */
-#back-button i, #next-button i {
-    margin-right: 8px; /* Space between icon and text */
+#back-button i,
+#next-button i {
+    margin-right: 8px;
+    /* Space between icon and text */
 }
 
 /* Ensure no conflicting styles for floating-buttons links */
 .floating-buttons a {
-    background: #28a745; /* Green background */
+    background: #28a745;
+    /* Green background */
     color: white;
-    padding: 20px 30px; /* Adjusted padding for better button size */
+    padding: 20px 30px;
+    /* Adjusted padding for better button size */
     border-radius: 20px;
     text-decoration: none;
     font-weight: bold;
     text-align: center;
     display: inline-flex;
-    align-items: center; /* Center text and icon vertically */
+    align-items: center;
+    /* Center text and icon vertically */
     transition: background-color .3s ease;
 }
+
 .floating-buttons a:hover {
-    background-color: #00332b; /* Darker shade for hover effect */
+    background-color: #00332b;
+    /* Darker shade for hover effect */
 }
 
 /* Media query for tablets (max-width: 768px) */
@@ -488,8 +568,10 @@ label[for="appliance-selection"] {
 }
 
 .progress {
-    width: 400%; /* Make the progress bar container take full width of the column */
-    margin: 30px auto; /* Add some margin and center it */
+    width: 400%;
+    /* Make the progress bar container take full width of the column */
+    margin: 30px auto;
+    /* Add some margin and center it */
 }
 
 .progress-bar {
@@ -541,7 +623,7 @@ label[for="appliance-selection"] {
     flex-direction: column;
     gap: 10px;
     margin-top: 20px;
-    margin-left: 70px;
+    margin-left: 550px;
 }
 
 .button-group .btn {
@@ -556,70 +638,91 @@ label[for="appliance-selection"] {
 }
 
 .button-group .btn.selected-green {
-    background-color: #28a745; /* Green background */
-    color: white; /* White text */
+    background-color: #28a745;
+    /* Green background */
+    color: white;
+    /* White text */
 }
 
 .button-group .btn.selected-green.active {
-    background-color: #28a745; /* Green background */
-    color: white; /* White text */
+    background-color: #28a745;
+    /* Green background */
+    color: white;
+    /* White text */
 }
 
 /* Responsive styles */
 @media (max-width: 768px) {
     .button-group {
-        margin-left: 30px; /* Adjust margin for smaller screens */
+        margin-left: 30px;
+        /* Adjust margin for smaller screens */
     }
 
     .button-group .btn {
-        padding: 8px 14px; /* Make buttons full width */
-        font-size: 1.1em; /* Slightly reduce font size */
+        padding: 8px 14px;
+        /* Make buttons full width */
+        font-size: 1.1em;
+        /* Slightly reduce font size */
     }
 }
 
 @media (max-width: 480px) {
     .button-group {
-        margin-left: 10px; /* Further reduce margin */
+        margin-left: 10px;
+        /* Further reduce margin */
     }
 
-    .button-group .btn{
-        padding: 8px 14px; /* Reduce padding */
-        font-size: 1.1em; /* Further reduce font size */
+    .button-group .btn {
+        padding: 8px 14px;
+        /* Reduce padding */
+        font-size: 1.1em;
+        /* Further reduce font size */
     }
 }
 
 input[type="number"] {
-    width: 50%; /* Adjust the percentage to make the input bar shorter */
-    max-width: 500px; /* Optional: Set a maximum width */
+    width: 50%;
+    /* Adjust the percentage to make the input bar shorter */
+    max-width: 500px;
+    /* Optional: Set a maximum width */
     display: inline-block;
 }
 
 .radio-option {
     margin-top: 20px;
-    margin-right: 15px; /* Adjust spacing between options */
-    display: inline-block; /* Display options in a row */
+    margin-right: 15px;
+    /* Adjust spacing between options */
+    display: inline-block;
+    /* Display options in a row */
 }
 
 input[type="radio"] {
-    display: none; /* Hide the default radio button */
+    display: none;
+    /* Hide the default radio button */
 }
 
 .radio-label {
     cursor: pointer;
-    padding: 8px 15px; /* Smaller padding */
+    padding: 8px 15px;
+    /* Smaller padding */
     border: 1px solid #ced4da;
     border-radius: 10px;
     background-color: #f8f9fa;
     transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
-    display: inline-block; /* Make labels behave like inline-blocks */
-    font-size: 16px !important; /* Ensure font size is smaller */
+    display: inline-block;
+    /* Make labels behave like inline-blocks */
+    font-size: 16px !important;
+    /* Ensure font size is smaller */
     font-weight: normal !important;
 }
 
-input[type="radio"]:checked + .radio-label {
-    background-color: #28a745 !important;  /* Green background when selected */
-    color: white !important;  /* White text when selected */
-    border-color: #007bff !important; /* Blue border when selected */
+input[type="radio"]:checked+.radio-label {
+    background-color: #28a745 !important;
+    /* Green background when selected */
+    color: white !important;
+    /* White text when selected */
+    border-color: #007bff !important;
+    /* Blue border when selected */
 }
 
 .slider-container {
@@ -653,11 +756,14 @@ input[type="radio"]:checked + .radio-label {
     background: #4CAF50;
     cursor: pointer;
     border-radius: 50%;
-    box-shadow: 0 0 4px rgba(0,0,0,0.3);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
     transition: background-color .15s ease-in-out;
-    position: relative; /* Keeps the thumb in the normal flow of the layout */
-    margin-top: 8px; /* Adjust to position the thumb below the track */
-    z-index: 2; /* Ensures the thumb is above the track */
+    position: relative;
+    /* Keeps the thumb in the normal flow of the layout */
+    margin-top: 8px;
+    /* Adjust to position the thumb below the track */
+    z-index: 2;
+    /* Ensures the thumb is above the track */
 }
 
 /* Ensure consistency across different browsers */
@@ -667,7 +773,7 @@ input[type="radio"]:checked + .radio-label {
     background: #4CAF50;
     cursor: pointer;
     border-radius: 50%;
-    box-shadow: 0 0 4px rgba(0,0,0,0.3);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
     transition: background-color .15s ease-in-out;
 }
 
@@ -676,25 +782,34 @@ input[type="radio"]:checked + .radio-label {
 }
 
 #load-size-value {
-    font-size: 1.2em; /* Make text larger */
-    font-weight: bold; /* Make text bold */
+    font-size: 1.2em;
+    /* Make text larger */
+    font-weight: bold;
+    /* Make text bold */
 }
 
 #slider-value-container {
-     position: relative; /* Change to relative to align it properly */
-     margin-top: 20px; /* Add margin to move it lower below the slider */
-    text-align: center; /* Center align the text within the container */
+    position: relative;
+    /* Change to relative to align it properly */
+    margin-top: 20px;
+    /* Add margin to move it lower below the slider */
+    text-align: center;
+    /* Center align the text within the container */
     white-space: nowrap;
 }
 
 .slider-icon {
     position: absolute;
-    left: 10px; /* Adjust as needed */
+    left: 10px;
+    /* Adjust as needed */
     top: 50%;
     transform: translateY(-50%);
-    width: 24px; /* Icon width */
-    height: 24px; /* Icon height */
-    background-image: url(../img/home.1024x910.png); /* Path to your icon */
+    width: 24px;
+    /* Icon width */
+    height: 24px;
+    /* Icon height */
+    background-image: url(../img/home.1024x910.png);
+    /* Path to your icon */
     background-size: cover;
 }
 
@@ -706,7 +821,8 @@ input[type="radio"]:checked + .radio-label {
 .icon {
     height: 30px;
     margin-right: 10px;
-    margin-top: 30px;
+    margin-top: -20px;
+    margin-left: 20px;
 }
 
 .icon img {
@@ -714,61 +830,76 @@ input[type="radio"]:checked + .radio-label {
 }
 
 .text {
-    font-weight: bold; /* Bold text for labels */
+    font-weight: bold;
+    /* Bold text for labels */
     display: block;
-    margin-top: 25px;
-    color: #2d6a4f; /* Text color */
+    margin-top: -20px;
+    color: #2d6a4f;
+    /* Text color */
     font-size: 1.1em;
 }
 
 @media (max-width: 768px) {
     input[type="number"] {
-        width: 80%; /* Increase width for smaller screens */
+        max-width: 90%;
+        /* Use a percentage for responsiveness */
+        display: block;
     }
 
     .radio-label {
-        font-size: 14px !important; /* Smaller font size for smaller screens */
-        padding: 6px 12px; /* Adjust padding */
+        font-size: 14px !important;
+        /* Smaller font size for smaller screens */
+        padding: 6px 12px;
+        /* Adjust padding */
     }
 
     .slider-container {
-        max-width: 100%; /* Full width for smaller screens */
+        width: 80%;
+        /* Full width for smaller screens */
         margin-top: 30px;
     }
 
     .slider {
-        height: 15px; /* Reduce slider height */
+        height: 15px;
+        /* Reduce slider height */
     }
 
     #load-size-value {
-        font-size: 1em; /* Reduce text size */
+        font-size: 1em;
+        /* Reduce text size */
     }
 
     .slider-icon {
-        width: 15px; /* Smaller icon */
+        width: 15px;
+        /* Smaller icon */
         height: 15px;
     }
 
     .icon {
         height: 25px;
         margin-right: 8px;
-        margin-top: 20px;
+        margin-top: -30px;
     }
 
     .text {
-        font-size: 1.1em; /* Slightly smaller text */
+        font-size: 1.1em;
+        /* Slightly smaller text */
     }
 }
 
 /* Small screens: phones */
 @media (max-width: 480px) {
     input[type="number"] {
-        width: 100%; /* Full width for very small screens */
+        max-width: 80%;
+        /* Use a percentage for responsiveness */
+        display: block;
     }
 
     .radio-label {
-        font-size: 12px !important; /* Smaller font size for very small screens */
-        padding: 5px 10px; /* Reduce padding */
+        font-size: 12px !important;
+        /* Smaller font size for very small screens */
+        padding: 5px 10px;
+        /* Reduce padding */
     }
 
     .slider-container {
@@ -776,7 +907,8 @@ input[type="radio"]:checked + .radio-label {
     }
 
     .slider {
-        height: 12px; /* Reduce slider height further */
+        height: 12px;
+        /* Reduce slider height further */
     }
 
     .slider-icon {
@@ -787,7 +919,7 @@ input[type="radio"]:checked + .radio-label {
     .icon {
         height: 20px;
         margin-right: 5px;
-        margin-top: 15px;
+        margin-top: -30px;
     }
 
     .text {
@@ -831,28 +963,563 @@ input[type="radio"]:checked + .radio-label {
 }
 
 /* General styles for all screen sizes */
-#tv-screen-size, #refrigerator-volume {
-    width: 500px; /* Default width for larger screens */
-    padding: 10px; /* Add padding for better UX */
-    font-size: 12px; /* Set a default font size */
-    border-radius: 4px; /* Rounded corners for aesthetics */
-    border: 1px solid #ccc; /* Border styling */
-    box-sizing: border-box; /* Ensure padding is included in width */
+#tv-screen-size,
+#refrigerator-volume {
+    width: 500px;
+    /* Default width for larger screens */
+    padding: 10px;
+    /* Add padding for better UX */
+    font-size: 12px;
+    /* Set a default font size */
+    border-radius: 4px;
+    /* Rounded corners for aesthetics */
+    border: 1px solid #ccc;
+    /* Border styling */
+    box-sizing: border-box;
+    /* Ensure padding is included in width */
 }
 
-/* For medium screens (tablets, small laptops) */
-@media (max-width: 768px) {
-    #tv-screen-size, #refrigerator-volume {
-        width: 100%; /* Shorter width for medium screens */
-        font-size: 12px; /* Slightly smaller font size */
+/* Responsive Styles */
+@media (max-width: 748px) {
+
+    #tv-screen-size,
+    #refrigerator-volume {
+        max-width: 90%;
+        /* Limit to 90% of the container width on smaller screens */
+        padding: 8px;
+        /* Adjust padding for smaller screens */
     }
 }
 
-/* For small screens (phones) */
 @media (max-width: 480px) {
-    #tv-screen-size, #refrigerator-volume {
-        width: 100%; /* Slightly shorter width for small screens */
-        font-size: 12px; /* Smaller font size */
-        padding: 6px; /* Reduce padding */
+
+    #tv-screen-size,
+    #refrigerator-volume {
+        max-width: 80%;
+        /* Full width on very small screens */
+        padding: 6px;
+        /* Further adjust padding */
+    }
+}
+
+#divider {
+    width: 120%;
+    /* Set to a percentage to control the width */
+    height: 2px;
+    /* Increased height for a bolder appearance */
+    background-color: #ccc;
+    /* Light grey color for the divider */
+    margin: 20px auto;
+    margin-left: 80px;
+}
+
+.question-box {
+    border: 2px solid green;
+    /* Light grey border */
+    border-radius: 8px;
+    /* Rounded corners */
+    margin-bottom: 30px;
+    /* Space between boxes */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+    padding: 20px;
+    /* Inner padding for spacing */
+    transition: box-shadow 0.3s ease;
+    /* Smooth transition for hover effect */
+    margin-left: 250px;
+    width: 1100px;
+}
+
+.question-box:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    /* Darker shadow on hover */
+    transform: scale(1.0);
+    /* Slightly scale up the box */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    /* Smooth transitions */
+}
+
+.question-icon {
+    color: green;
+    margin-left: 10px;
+    margin-top: 295px;
+    cursor: pointer;
+    font-size: 20px;
+    position: relative;
+    /* Ensure the icon has a positioning context */
+    z-index: 10;
+    /* Higher z-index than #grid-info */
+}
+
+/* Responsive Styles */
+@media (max-width: 748px) {
+    #divider {
+        margin-left: 0;
+        /* Center the divider on smaller screens */
+        width: 100%;
+        /* Full width for divider */
+    }
+
+    .question-box {
+        margin-left: 20px;
+        /* Reduced left margin */
+        width: calc(100% - 40px);
+        /* Responsive width with padding */
+    }
+
+    .question-icon {
+        margin-top: 20px;
+        /* Adjust margin for icon */
+        font-size: 18px;
+        /* Slightly smaller font size */
+    }
+}
+
+@media (max-width: 480px) {
+    .question-box {
+        margin-left: 10px;
+        /* Further reduce left margin */
+        width: calc(100% - 20px);
+        /* Full width with padding */
+        padding: 10px;
+        /* Reduce padding */
+    }
+
+    .question-icon {
+        margin-top: 10px;
+        /* Further adjust margin */
+        font-size: 16px;
+        /* Further reduce font size */
+    }
+}
+
+.info {
+    position: absolute;
+    background-color: white;
+    border: 1.5px solid green;
+    padding: 10px;
+    z-index: 1000;
+    /* Make sure it's above other elements */
+    display: none;
+    /* Initially hidden */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+    line-height: 1.6;
+    /* Increased line height for readability */
+    font-size: 14px;
+    /* Base font size */
+}
+
+.info.visible {
+    display: block;
+    /* Show when 'visible' class is added */
+}
+
+#tv-size-info {
+    margin-top: -20px;
+    margin-left: 370px;
+}
+
+/* Responsive Styles */
+@media (max-width: 748px) {
+    #tv-size-info {
+        margin-top: -10px;
+        /* Adjust top margin for smaller screens */
+        margin-left: 20px;
+        /* Reduce left margin for smaller screens */
+        width: 90%;
+        /* Make info box take up more width */
+        left: 5%;
+        /* Center align the info box */
+    }
+}
+
+@media (max-width: 480px) {
+    #tv-size-info {
+        margin-top: -5px;
+        /* Further adjust top margin */
+        margin-left: 10px;
+        /* Further reduce left margin */
+        font-size: 12px;
+        /* Reduce font size for very small screens */
+        width: 95%;
+        /* Make info box wider */
+        left: 2.5%;
+        /* Center align the info box */
+    }
+}
+
+#screen-tech-info {
+    margin-top: -10px;
+    /* Space above the info box */
+    margin-left: 500px;
+}
+
+/* Responsive Styles */
+@media (max-width: 748px) {
+    #screen-tech-info {
+        margin-left: 20px;
+        /* Adjust left margin for medium screens */
+        margin-top: 0;
+        /* Reset top margin for better spacing */
+        width: calc(100% - 40px);
+        /* Take full width minus some padding */
+    }
+}
+
+@media (max-width: 480px) {
+    #screen-tech-info {
+        margin-left: 10px;
+        /* Further adjust left margin for small screens */
+        width: calc(100% - 20px);
+        /* Ensure it takes full width with less padding */
+        font-size: 0.9em;
+        /* Optional: Adjust font size for smaller screens */
+    }
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-direction: row;
+    /* Ensures items are in a row */
+    justify-content: flex-start;
+    /* Aligns items to the start */
+}
+
+.top-washer-image {
+    width: 230px;
+    /* Adjust size as needed */
+    height: auto;
+    margin-left: 0px;
+    /* Adds spacing between the label and the image */
+}
+
+.front-washer-image {
+    width: 140px;
+    /* Adjust size as needed */
+    height: auto;
+    margin-left: 10px;
+    /* Adds spacing between the label and the image */
+}
+
+.radio-group {
+    display: flex;
+    justify-content: flex-start;
+    /* Aligns buttons to the start */
+    gap: 100px;
+    /* Reduces the space between the buttons */
+}
+
+/* Responsive Styles */
+@media (max-width: 748px) {
+    .radio-option {
+        flex-direction: column;
+        /* Stack items vertically */
+        align-items: flex-start;
+        /* Align items to the start */
+    }
+
+    .radio-group {
+        gap: 50px;
+        /* Reduce space between buttons */
+        flex-wrap: wrap;
+        /* Allow buttons to wrap to the next line */
+    }
+
+    .top-washer-image,
+    .front-washer-image {
+        width: 180px;
+        /* Adjust size for medium screens */
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .radio-option {
+        align-items: center;
+        /* Center items on small screens */
+    }
+
+    .radio-group {
+        gap: 20px;
+        /* Further reduce space between buttons */
+    }
+
+    .top-washer-image,
+    .front-washer-image {
+        width: 150px;
+        /* Further adjust size for small screens */
+        margin-top: 10px;
+        height: auto;
+        /* Optional: add spacing above images */
+    }
+}
+
+#clothes-washer-loading-info {
+    margin-top: -20px;
+    margin-left: 450px;
+}
+
+/* Responsive Styles */
+@media (max-width: 748px) {
+    #clothes-washer-loading-info {
+        margin-left: 20%;
+        /* Adjust margin for medium screens */
+        margin-top: -15px;
+        /* Optionally adjust top margin */
+    }
+}
+
+@media (max-width: 480px) {
+    #clothes-washer-loading-info {
+        margin-left: 10%;
+        /* Further reduce margin for small screens */
+        margin-top: -10px;
+        /* Further adjust top margin */
+    }
+}
+
+.tv-radio-group {
+    display: flex;
+    /* Use flexbox for layout */
+    flex-direction: row;
+    /* Align items in a row */
+    gap: 20px;
+    /* Space between radio options */
+    justify-content: flex-start;
+    /* Align items to the start */
+    margin-bottom: 15px;
+    /* Space below the group */
+}
+
+.tv-radio-option {
+    display: flex;
+    /* Align input and label in a row */
+    align-items: center;
+    /* Center align the items vertically */
+}
+
+/* Responsive Styles */
+@media (max-width: 748px) {
+    .tv-radio-group {
+        flex-direction: column;
+        /* Stack items vertically */
+        gap: 10px;
+        /* Reduce gap for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .tv-radio-group {
+        gap: 5px;
+        /* Further reduce gap for very small screens */
+    }
+
+    .tv-radio-option {
+        font-size: 1em;
+        /* Slightly reduce font size */
+    }
+}
+
+#clothes-washer-size-info {
+    margin-top: -60px;
+    margin-left: 390px;
+}
+
+/* Responsive Styles */
+@media (max-width: 748px) {
+    #clothes-washer-size-info {
+        margin-left: 20%;
+        /* Adjust margin for medium screens */
+        margin-top: -15px;
+        /* Optionally adjust top margin */
+    }
+}
+
+@media (max-width: 480px) {
+    #clothes-washer-size-info {
+        margin-left: 10%;
+        /* Further reduce margin for small screens */
+        margin-top: -10px;
+        /* Further adjust top margin */
+    }
+}
+
+.dryer-radio-group {
+    display: flex;
+    /* Use flexbox for layout */
+    flex-direction: row;
+    /* Align items in a row */
+    gap: 20px;
+    /* Space between radio options */
+    justify-content: flex-start;
+    /* Align items to the start */
+    margin-bottom: 15px;
+    /* Space below the group */
+}
+
+.dryer-radio-option {
+    display: flex;
+    /* Align input and label in a row */
+    align-items: center;
+    /* Center align the items vertically */
+}
+
+/* Responsive Styles */
+@media (max-width: 748px) {
+    .dryer-radio-group {
+        flex-direction: column;
+        /* Stack items vertically on medium screens */
+        gap: 10px;
+        /* Reduce gap for better spacing */
+    }
+}
+
+@media (max-width: 480px) {
+    .dryer-radio-group {
+        gap: 5px;
+        /* Further reduce gap for small screens */
+    }
+
+    .dryer-radio-option {
+        font-size: 1.1em;
+        /* Slightly increase font size for readability */
+    }
+}
+
+#clothes-dryer-type-info {
+    margin-top: -20px;
+    margin-left: 390px;
+}
+
+/* Responsive Styles */
+@media (max-width: 748px) {
+    #clothes-dryer-type-info {
+        margin-left: 20%;
+        /* Adjust margin for medium screens */
+        margin-top: -15px;
+        /* Optionally adjust top margin */
+    }
+}
+
+@media (max-width: 480px) {
+    #clothes-dryer-type-info {
+        margin-left: 10%;
+        /* Further reduce margin for small screens */
+        margin-top: -10px;
+        /* Further adjust top margin */
+    }
+}
+
+.ducted-image {
+    width: 200px;
+    /* Set a fixed width for images */
+    height: 150px;
+    /* Maintain aspect ratio */
+    border-radius: 5px;
+    /* Optional: round the corners of the images */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Optional: add a subtle shadow */
+    transition: transform 0.2s;
+    /* Optional: smooth hover effect */
+    margin-left: 20px;
+}
+
+.non-ducted-image {
+    width: 200px;
+    /* Set a fixed width for images */
+    height: 150px;
+    /* Maintain aspect ratio */
+    border-radius: 5px;
+    /* Optional: round the corners of the images */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Optional: add a subtle shadow */
+    transition: transform 0.2s;
+    /* Optional: smooth hover effect */
+    margin-left: 20px;
+}
+
+/* Responsive Styles */
+@media (max-width: 748px) {
+
+    .ducted-image,
+    .non-ducted-image {
+        width: 90%;
+        /* Use 90% width on medium screens */
+        height: auto;
+        /* Maintain aspect ratio */
+        margin-left: auto;
+        /* Center the image */
+        margin-right: auto;
+        /* Center the image */
+        margin-top: 10px;
+        /* Add space above the image */
+    }
+}
+
+@media (max-width: 480px) {
+
+    .ducted-image,
+    .non-ducted-image {
+        width: 100%;
+        /* Full width for small screens */
+        height: auto;
+        /* Maintain aspect ratio */
+        margin-left: 0;
+        /* Reset margin for small screens */
+        margin-right: 0;
+        /* Reset margin for small screens */
+    }
+}
+
+#air-type-info {
+    margin-top: -20px;
+    margin-left: 450px;
+}
+
+/* Responsive Styles */
+@media (max-width: 748px) {
+    #air-type-info {
+        margin-left: 20%;
+        /* Adjust margin for medium screens */
+        margin-top: -15px;
+        /* Optionally adjust top margin */
+    }
+}
+
+@media (max-width: 480px) {
+    #air-type-info {
+        margin-left: 10%;
+        /* Further reduce margin for small screens */
+        margin-top: -10px;
+        /* Further adjust top margin */
+    }
+}
+
+#refrigerator-volume-info {
+    margin-top: -20px;
+    margin-left: 340px;
+
+}
+
+/* Responsive Styles */
+@media (max-width: 748px) {
+    #refrigerator-volume-info {
+        margin-left: 20%;
+        /* Adjust margin for medium screens */
+        margin-top: -15px;
+        /* Optionally adjust top margin */
+    }
+}
+
+@media (max-width: 480px) {
+    #refrigerator-volume-info {
+        margin-left: 10%;
+        /* Further reduce margin for small screens */
+        margin-top: -10px;
+        /* Further adjust top margin */
     }
 }

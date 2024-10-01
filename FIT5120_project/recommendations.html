@@ -39,11 +39,11 @@
                 <div id="main-nav" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="index.html" class="scroll-top">Home</a></li>
-                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a>
-                        </li>
+                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a></li>
                         <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
-                        <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
+                        <li><a href="emission_cal_cover.html" id="clear-session-link">Emission Calculator</a></li>
                         <li><a href="recommendations.html">Recommendations</a></li>
+                        <li><a href="education_hub.html">Education Hub</a></li>
                     </ul>
                 </div>
             </nav>
@@ -75,7 +75,7 @@
                         <div class="flip-card">
                             <div class="flip-card-inner">
                                 <div class="flip-card-front">
-                                    <img src="img/dishwasher_ikea.jpg" alt="Dishwasher" class="recommendations-photo">
+                                    <img src="img/dishwasher-ikea.jpg" alt="Dishwasher" class="recommendations-photo">
                                 </div>
                                 <div class="flip-card-back">
                                     <p>Run your dishwasher only when it's full and use the energy-saving mode. Reducing
@@ -225,6 +225,12 @@
     </div>
 
     <script>
+
+        // Clear session storage when clicking "Emission Calculator" link
+        document.getElementById('clear-session-link').addEventListener('click', function () {
+                sessionStorage.clear();
+                console.log('SessionStorage cleared for Emission Calculator link.');
+            });
 
         document.addEventListener('DOMContentLoaded', function () {
             const emissionsBtn = document.getElementById('emissions-btn');

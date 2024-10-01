@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Emission Charts</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
@@ -22,41 +25,28 @@
             padding: 0;
         }
 
-        .header {
-            background: #333;
-            padding: 10px 0;
-        }
-
-        .navbar-nav>li>a {
-            color: #fff;
-            font-size: 16px;
-        }
-
-        .navbar-brand img {
-            height: 50px;
-        }
-
         .dashboard-container {
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 100%;
+            max-width: 1400px; /* Allow the container to be wider */
+            margin: 0 auto;
             padding: 20px;
-            max-width: 1200px;
-            margin: 20px auto;
-            gap: 30px;
+            gap: 20px;
         }
 
         .section {
-            width: 100%;
+            width: 95%; /* Increase the width to utilize more space */
+            max-width: 1000px; /* Increase max-width for wider sections */
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            margin: 10px 0;
+            margin: 20px 0; /* Increase margin for more spacing */
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
         }
 
         h2 {
@@ -73,11 +63,40 @@
                 flex: 1 1 100%; 
             }*/
 
+<<<<<<< HEAD
         .chart {
+=======
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center; /* Center charts within the container */
+>>>>>>> main
             width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        .chart-container h3 {
+            margin-bottom: 20px;
+        }
+
+        .chart {
+            flex: 1 1 45%;
+            min-width: 300px;
+            max-width: 45%;
             margin-top: 20px;
             text-align: center;
+            box-sizing: border-box;
         }
+
+        @media (max-width: 768px) {
+            .chart {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+        }
+
 
         .equivalence-container,
         .offset-container {
@@ -103,6 +122,7 @@
         .chart-title {
             font-size: 1.2em;
             font-weight: bold;
+            margin-bottom: 10px;
         }
 
         .legend {
@@ -132,6 +152,52 @@
             max-width: 100%;
             height: auto;
         }
+<<<<<<< HEAD
+=======
+
+        #negative-differences {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: white;
+            background-color: #4CAF50;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            margin: 15px auto; /* Center the element */
+            width: fit-content; /* Ensures the text box wraps around the content */
+        }
+        .arc text {
+            fill: black;  /* Ensure text color is visible */
+            font-size: 14px; /* Increase font size for better readability */
+            font-weight: bold; /* Make the text bold for clarity */
+            visibility: visible; /* Ensure the text is visible */
+        }
+
+        .arc polyline {
+            stroke: black; /* Ensure the lines are visible */
+            stroke-width: 1px;
+            fill: none;
+        }
+        .navigate-btn {
+            margin: 20px auto;
+            padding: 15px 30px;
+            font-weight: bold;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            display: block;
+            width: fit-content;
+        }
+
+        .navigate-btn:hover {
+            background-color: #45a049;
+        }
+
+
+>>>>>>> main
     </style>
 </head>
 
@@ -149,17 +215,23 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a href="index.html" class="navbar-brand">
-                        <img src="img/logo.png" alt="EcoInsight Logo">
+                        <img src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">>
                     </a>
                 </div>
                 <div id="main-nav" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
+<<<<<<< HEAD
                         <li><a href="index.html">Home</a></li>
                         <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a>
                         </li>
+=======
+                                               <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a></li>
+>>>>>>> main
                         <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
-                        <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
-                        <li><a href="recommendations.html">Recommendations</a></li>
+                        <li><a href="#" id="clear-session-link">Emission Calculator</a></li>
+                        <li><a href="personal_recommendations.html">Recommendations</a></li>
+                        <li><a href="education_hub.html">Education Hub</a></li>
                     </ul>
                 </div>
             </nav>
@@ -212,16 +284,49 @@
 
 
         <!-- Chart Container -->
-        <div class="section chart">
-            <div class="chart-title">Emissions per Category (kg CO2)</div>
-            <div id="category-chart"></div>
+        <div class="dashboard-container">
+            <div class="section chart-container" id="category-chart-container">
+                <h3>Emissions per Category (kg CO2)</h3>
+                <div id="category-chart"></div>
+            </div>
+
+            <div class="section chart-container" id="appliance-chart-container">
+                <h3>Emissions per Appliance (kg CO2)</h3>
+                <div id="appliance-chart"></div>
+            </div>
+
+            <!-- cost saving container -->
+            <div class="section chart-container" id="grouped-bar-chart-container">
+                <h3>How your appliances compare to the average</h3>
+                <div id="grouped-bar-chart"></div>
+                
+            </div>
+            <div class="section"> 
+            <h4>Some of your appliances have room for improvement in terms of efficiency. By choosing smarter,
+                eco-friendly alternatives, we estimate that you could save:</h4>
+            <p id="negative-differences"
+                style="font-size: 2.5em; font-weight: bold; color: white; background-color: #4CAF50; padding: 10px; border-radius: 5px; text-align: center; margin-top: 15px;">
+            </p>
+            </div>
         </div>
 
-        <div class="section chart">
-            <div class="chart-title">Emissions per Appliance (kg CO2)</div>
-            <div id="appliance-chart"></div>
+        <!-- TV Charts Section -->
+        <div class="section">
+            <h2>Television Energy Consumption</h2>
+            <p>Compare your television's energy efficiency against other types of television sizes or screen technology types below...</p>
+            <div class="chart-container">
+                <div class="chart">
+                    <div class="chart-title">TV Screen Size Energy Consumption</div>
+                    <div id="tv-screen-size-chart"></div>
+                </div>
+                <div class="chart">
+                    <div class="chart-title">TV Screen Technology Energy Consumption</div>
+                    <div id="tv-screen-tech-chart"></div>
+                </div>
+            </div>
         </div>
 
+<<<<<<< HEAD
         <!-- cost saving container -->
         <div class="section chart">
             <div class="chart-title">How your appliances compare to the average</div>
@@ -259,12 +364,78 @@
 
         <div id="refrigerator-chart" class="section chart">
             <div class="chart-title">Refrigerator Energy Usage by Volume</div>
+=======
+        <!-- Clothes Washer Charts Section -->
+        <div class="section">
+            <h2>Clothes Washer Energy Consumption</h2>
+            <p>Compare your specific clothes washer's energy efficiency against others by load size or top vs front load types below...</p>
+            <div class="chart-container">
+                <div class="chart">
+                    <div class="chart-title">Clothes Washer Energy Usage by Load Size</div>
+                    <div id="clothes-washer-load-size-chart"></div>
+                </div>
+                <div class="chart">
+                    <div class="chart-title">Clothes Washer Type Energy Usage</div>
+                    <div id="clothes-washer-type-chart"></div>
+                </div>
+            </div>
+>>>>>>> main
         </div>
 
 
-        <div class="section chart">
-            <div class="chart-title">Emissions by Transport Mode (kg CO2)</div>
-            <div id="transport-chart"></div>
+        <!-- Clothes Dryer Charts Section -->
+        <div class="section">
+            <h2>Clothes Dryer Energy Consumption</h2>
+            <p>Compare your clothes dryer vs top/front load types below...</p>
+            <div class="chart-container">
+                <div class="chart">
+                    <div class="chart-title">Clothes Dryer Energy Consumption</div>
+                    <div id="clothes-dryer-chart"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Air Conditioner Charts Section -->
+        <div class="section">
+            <h2>Air Conditioner Energy Consumption</h2>
+            <p>Compare ducted vs non-ducted air conditioner types below...</p>
+            <div class="chart-container">
+                <div class="chart">
+                    <div class="chart-title">Air Conditioner Energy Usage</div>
+                    <div id="air-conditioner-chart"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Refrigerator Charts Section -->
+        <div class="section">
+            <h2>Refrigerator Energy Consumption</h2>
+            <p>Compare refrigerators by volume below...</p>
+            <div class="chart-container">
+                <div class="chart">
+                    <div class="chart-title">Refrigerator Energy Usage by Volume</div>
+                    <div id="refrigerator-chart"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Transport Emissions Section -->
+        <div class="section">
+            <h2>Transportation Emissions</h2>
+            <p>Lastly, let's take a look at how much your transportation choices emit...</p>
+            <div class="chart-container">
+                <div class="chart">
+                    <div class="chart-title">Emissions by Transport Mode (kg CO2)</div>
+                    <div id="transport-chart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <a href="personal_recommendations.html">
+    <button id="navigate-to-personal-recom" class="navigate-btn">See Personalised Recommendations</button>
+</a>
+            <button id="navigate-to-simulation" class="navigate-btn">Go to Simulation Page</button>
         </div>
     </div>
 
@@ -275,7 +446,25 @@
     </div>
 
     <script>
+<<<<<<< HEAD
         // Constants for equivalences and offsets
+=======
+
+        document.getElementById('navigate-to-simulation').addEventListener('click', function () {
+            window.location.href = 'simulation.html'; // Adjust the file path as needed
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('clear-session-link').addEventListener('click', function (event) {
+                event.preventDefault();
+                sessionStorage.clear();
+                console.log('SessionStorage cleared for Emission Calculator link.');
+                window.location.href = "emission_cal_cover.html";
+            });
+        });
+
+       // Constants for equivalences and offsets
+>>>>>>> main
         const CO2_PER_KM_PETROL_CAR = 0.17048; // in kg per km
         const CO2_PER_ICE_SQUARE_METER = 333.33; // in kg per m^2 (1000kg CO2 = 3 m^2 ice)
         const TREES_TO_OFFSET_CO2 = 21.77; // Each tree offsets 21.77 kg of CO2 per year
@@ -326,6 +515,141 @@
             }
 
             return requestBody;
+        }
+
+        // Modified function to create the line chart with highlight feature
+        function createLineChart(data, selector, valueKey, labelKey, userInput) {
+            const margin = { top: 20, right: 30, bottom: 50, left: 60 };
+            const containerWidth = document.querySelector(selector).offsetWidth; // Get container width
+            const width = containerWidth - margin.left - margin.right;
+            const height = 300 - margin.top - margin.bottom;
+
+            const parsedUserInput = parseFloat(userInput); // Ensure the user input is parsed correctly
+
+            const svg = d3.select(selector)
+                .html('') // Clear existing SVG content before drawing new chart
+                .append('svg')
+                .attr('width', width + margin.left + margin.right)
+                .attr('height', height + margin.top + margin.bottom)
+                .append('g')
+                .attr('transform', `translate(${margin.left},${margin.top})`);
+
+            const x = d3.scaleLinear()
+                .domain(d3.extent(data, d => parseFloat(d[labelKey]))) // Adjust to ensure parsing consistency
+                .range([0, width]);
+
+            const y = d3.scaleLinear()
+                .domain([0, d3.max(data, d => d[valueKey])])
+                .nice()
+                .range([height, 0]);
+
+            svg.append('g')
+                .attr('transform', `translate(0, ${height})`)
+                .call(d3.axisBottom(x).ticks(data.length).tickFormat(d3.format("d"))) // Display integers on x-axis
+                .attr('font-size', '12px'); // Adjust font size for x-axis labels
+
+            svg.append('g')
+                .call(d3.axisLeft(y))
+                .attr('font-size', '12px'); // Adjust font size for y-axis labels
+
+            svg.append('path')
+                .datum(data)
+                .attr('fill', 'none')
+                .attr('stroke', '#69b3a2')
+                .attr('stroke-width', 2)
+                .attr('d', d3.line()
+                    .x(d => x(parseFloat(d[labelKey]))) // Parse values for consistency
+                    .y(d => y(d[valueKey]))
+                );
+
+            // Highlight specific points
+            svg.selectAll('.dot')
+                .data(data)
+                .enter()
+                .append('circle')
+                .attr('class', 'dot')
+                .attr('cx', d => x(parseFloat(d[labelKey])))
+                .attr('cy', d => y(d[valueKey]))
+                .attr('r', d => {
+                    const dataPoint = parseFloat(d[labelKey]);
+                    console.log(`Data Point: ${dataPoint}, User Input: ${parsedUserInput}`); // Add this log
+                    return Math.abs(dataPoint - parsedUserInput) < 0.01 ? 6 : 4; // Use a small tolerance to highlight
+                })
+                .attr('fill', d => Math.abs(parseFloat(d[labelKey]) - parsedUserInput) < 0.01 ? 'darkgreen' : '#69b3a2')
+                .attr('stroke', d => Math.abs(parseFloat(d[labelKey]) - parsedUserInput) < 0.01 ? 'black' : 'none')
+                .append('title')
+                .text(d => `Load Size: ${d[labelKey]}, Energy Usage: ${d[valueKey].toFixed(2)} kWh`);
+        }
+
+
+
+
+        function createUnifiedBarChart(data, selector, valueKey, labelKey, userInput) {
+            const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+            const containerWidth = document.querySelector(selector).offsetWidth; // Get container width
+            const width = containerWidth - margin.left - margin.right;
+            const height = 300 - margin.top - margin.bottom;
+
+            const svg = d3.select(selector)
+                .html('')  // Clear existing SVG content before drawing new chart
+                .append('svg')
+                .attr('width', width + margin.left + margin.right)
+                .attr('height', height + margin.top + margin.bottom)
+                .append('g')
+                .attr('transform', `translate(${margin.left},${margin.top})`);
+
+            const x = d3.scaleBand()
+                .domain(data.map(d => d[labelKey]))
+                .range([0, width])
+                .padding(0.1);
+
+            const y = d3.scaleLinear()
+                .domain([0, d3.max(data, d => d[valueKey])])
+                .nice()
+                .range([height, 0]);
+
+            svg.append('g')
+                .attr('transform', `translate(0, ${height})`)
+                .call(d3.axisBottom(x).tickFormat(label => {
+                // Convert label to string to avoid type errors
+                label = String(label); // Ensure the label is a string
+                // Custom label formatting
+                if (label.includes('less than')) {
+                    return label.replace('less than', '<');
+                } else if (label.includes('greater than')) {
+                    return label.replace('greater than', '>');
+                }
+                return label; // Return unchanged for other labels
+            }))
+
+                .selectAll('text')
+                .style('text-anchor', 'middle') // Center-align the text
+                .style('font-size', '10px'); // Adjust font size to minimize overlap
+
+            svg.append('g')
+                .call(d3.axisLeft(y));
+
+            svg.selectAll('.bar')
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr('class', 'bar')
+                .attr('x', d => x(d[labelKey]))
+                .attr('y', d => y(d[valueKey]))
+                .attr('width', x.bandwidth())
+                .attr('height', d => height - y(d[valueKey]))
+                .attr('fill', d => userInput && String(d[labelKey]).toLowerCase() === String(userInput).toLowerCase() ? 'darkgreen' : '#69b3a2');
+
+            svg.selectAll('.label')
+                .data(data)
+                .enter()
+                .append('text')
+                .attr('class', 'label')
+                .attr('x', d => x(d[labelKey]) + x.bandwidth() / 2)
+                .attr('y', d => y(d[valueKey]) - 5)
+                .attr('text-anchor', 'middle')
+                .style('font-size', '12px')
+                .text(d => `${d[valueKey].toFixed(2)} kg`);
         }
 
         async function fetchApplianceEmissions() {
@@ -451,7 +775,7 @@
                 return; // Exit if no data is available
             }
 
-            const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+            const margin = { top: 20, right: 20, bottom: 70, left: 50 };
             const width = 500 - margin.left - margin.right;
             const height = 300 - margin.top - margin.bottom;
 
@@ -515,72 +839,110 @@
 
 
         // Data for charts
+<<<<<<< HEAD
         const averagesData = [
             { appliance: "Television", userConsumption: 50, avgConsumption: 37 },
             { appliance: "Clothes Washer", userConsumption: 58, avgConsumption: 70 },
             { appliance: "Clothes Dryer", userConsumption: 40, avgConsumption: 62 },
             { appliance: "Air Conditioner", userConsumption: 91, avgConsumption: 30 },
             { appliance: "Refrigerator", userConsumption: 30, avgConsumption: 20 }
+=======
+
+        const averagesData = [
+            { appliance: "Television", userConsumption: 50, avgConsumption: 654.73 },
+            { appliance: "Clothes Washer", userConsumption: 58, avgConsumption: 32.65 },
+            { appliance: "Clothes Dryer", userConsumption: 40, avgConsumption: 224.52 },
+            { appliance: "Air Conditioner", userConsumption: 91, avgConsumption: 20.01 },
+            { appliance: "Refrigerator", userConsumption: 30, avgConsumption: 353.52 }
+>>>>>>> main
         ];
 
         const tvScreenSizeData = [
-            { screenSize: 'less than 40', avgConsumption: 20 },
-            { screenSize: '40-49', avgConsumption: 45 },
-            { screenSize: '50-59', avgConsumption: 67 },
-            { screenSize: '60-69', avgConsumption: 53 },
-            { screenSize: '70-79', avgConsumption: 23 },
-            { screenSize: '80-89', avgConsumption: 14 },
-            { screenSize: '90-99', avgConsumption: 5 },
-            { screenSize: 'greater than 100', avgConsumption: 2 }
+            { screenSize: 'less than 40', avgConsumption: 114.02 },
+            { screenSize: '40-49', avgConsumption: 229.27 },
+            { screenSize: '50-59', avgConsumption: 349.04 },
+            { screenSize: '60-69', avgConsumption: 515.98 },
+            { screenSize: '70-79', avgConsumption: 659.81 },
+            { screenSize: '80-89', avgConsumption: 871.68 },
+            { screenSize: '90-99', avgConsumption: 1145.47 },
+            { screenSize: 'greater than 100', avgConsumption: 1352.56 }
         ];
 
         const tvScreenTechData = [
-            { screenTech: 'OLED', avgConsumption: 10 },
-            { screenTech: 'LED', avgConsumption: 50 },
-            { screenTech: 'LCD', avgConsumption: 30 },
-            { screenTech: 'Plasma', avgConsumption: 90 }
+            { screenTech: 'OLED', avgConsumption: 491.74 },
+            { screenTech: 'LED', avgConsumption: 441.19 },
+            { screenTech: 'LCD', avgConsumption: 312.73 },
+            { screenTech: 'Plasma', avgConsumption: 428.00 }
         ];
 
         const clothesWasherLoadSizeData = [
-            { loadSize: 0, energyUsage: 2 },
-            { loadSize: 1, energyUsage: 6 },
-            { loadSize: 2, energyUsage: 14 },
-            { loadSize: 3, energyUsage: 24 },
-            { loadSize: 4, energyUsage: 30 },
-            { loadSize: 5, energyUsage: 36 },
-            { loadSize: 6, energyUsage: 38 },
-            { loadSize: 7, energyUsage: 40 }
+            { loadSize: 5, energyUsage: 47.74 },
+            { loadSize: 6, energyUsage: 34.81 },
+            { loadSize: 7, energyUsage: 14.57 },
+            { loadSize: 8, energyUsage: 25.22 },
+            { loadSize: 9, energyUsage: 45.01 },
+            { loadSize: 10, energyUsage: 35.41 },
+            { loadSize: 11, energyUsage: 62.37 },
+            { loadSize: 12, energyUsage: 51.48 },
+            { loadSize: 13, energyUsage: 67.38 },
+            { loadSize: 14, energyUsage: 69.53 }
         ];
 
         const clothesWasherTypeData = [
-            { loadType: 'Front', energyUsage: 10 },
-            { loadType: 'Top', energyUsage: 80 }
+            { loadType: 'Front', energyUsage: 27.68 },
+            { loadType: 'Top', energyUsage: 42.74 }
         ];
 
         const clothesDryerData = [
-            { dryerType: 'Vented', energyUsage: 20 },
-            { dryerType: 'Condensed', energyUsage: 50 }
+            { dryerType: 'Vented', energyUsage: 274.64 },
+            { dryerType: 'Condensed', energyUsage: 174.39 }
         ];
 
         const airConditionerData = [
-            { type: 'Ducted', energyUsage: 20 },
-            { type: 'Non Ducted', energyUsage: 90 }
+            { type: 'Ducted', energyUsage: 28.15 },
+            { type: 'Non Ducted', energyUsage: 9.72 }
         ];
 
         const refrigeratorData = [
-            { volume: 'less than 99', avgUsage: 321 },
-            { volume: '100-199L', avgUsage: 590 },
-            { volume: '200-299L', avgUsage: 400 },
-            { volume: '300-399L', avgUsage: 352 },
-            { volume: '400-499L', avgUsage: 512 },
-            { volume: '500-599L', avgUsage: 222 },
-            { volume: '600-699L', avgUsage: 124 },
-            { volume: 'greater than 700L', avgUsage: 515 }
+            { volume: 'less than 99', avgUsage: 153.57 },
+            { volume: '100-199L', avgUsage: 213.19 },
+            { volume: '200-299L', avgUsage: 291.03 },
+            { volume: '300-399L', avgUsage: 321.92 },
+            { volume: '400-499L', avgUsage: 372.28 },
+            { volume: '500-599L', avgUsage: 442.72 },
+            { volume: '600-699L', avgUsage: 482.45 },
+            { volume: 'greater than 700L', avgUsage: 551.03 }
         ];
 
         // Retrieve data from local storage with default values to avoid undefined/null
         const clothesWasherLoadSize = parseFloat(localStorage.getItem('clothesWasherLoadSize')) || 0;
         const clothesWasherLoadingType = localStorage.getItem('clothesWasherLoadingType') || '';
+
+        // Constants for calculations
+        const ENERGY_COST_PER_UNIT = 0.1901; // Energy cost per unit in dollars
+
+        // Example data retrieval from session storage
+        const applianceData = JSON.parse(sessionStorage.getItem('applianceData')) || [];
+        const individualApplianceEmissions = JSON.parse(sessionStorage.getItem('individualApplianceEmissions')) || {};
+
+        // Sample average consumptions data; adjust according to your real data
+        const averageConsumptions = {
+            television: 385,
+            clothes_washer: 520,
+            clothes_dryer: 720,
+            air_conditioner: 540,
+            refrigerator: 420
+        };
+
+        // Map the data from session storage to the format expected by the calculation function
+        const data = applianceData.map(appliance => {
+            const userConsumption = individualApplianceEmissions[appliance] * 1000; // Convert to kWh
+            const avgConsumption = averageConsumptions[appliance.toLowerCase().replace(/\s+/g, '_')];
+            return { appliance, userConsumption, avgConsumption };
+        });
+
+        // Calculate the total cost savings
+        const totalSavings = calculateCostSaving(data);
 
         // Create the user input object, ensuring that it matches the data format in charts
         const userInputLoadSize = {
@@ -588,11 +950,85 @@
             energyUsage: clothesWasherLoadSizeData.find(d => d.loadSize === clothesWasherLoadSize)?.energyUsage || 0
         };
 
+        function displayTotalSavings(totalSavings) {
+            // Find the container where you want to display the savings
+            const savingsContainer = document.getElementById('negative-differences');
+            savingsContainer.textContent = `$${totalSavings} per year`; // Display the formatted savings
+        }
+
+        // Function to dynamically update the comparison section
+        function updateComparisonSection() {
+            // Calculate the total cost savings
+            const totalSavings = calculateCostSaving(averagesData);
+
+            // Find the container where you want to display the savings
+            const savingsContainer = document.getElementById('negative-differences');
+            if (totalSavings > 0) {
+                savingsContainer.textContent = `$${totalSavings} per year`;
+                savingsContainer.style.backgroundColor = '#4CAF50'; // Green for positive savings
+            } else {
+                savingsContainer.textContent = 'No significant savings identified';
+                savingsContainer.style.backgroundColor = '#f44336'; // Red for no savings
+            }
+
+            // Update other relevant dynamic parts
+            // Example: Update bar chart dynamically if not done elsewhere
+            createGroupedBarChart(averagesData, "#grouped-bar-chart");
+        }
+
         // Log to ensure correct retrieval and format
         console.log('User input load size:', userInputLoadSize);
         console.log('User input loading type:', clothesWasherLoadingType);
         console.log('Retrieved clothesWasherLoadSize:', clothesWasherLoadSize);
         console.log('Retrieved clothesWasherLoadingType:', clothesWasherLoadingType);
+        
+
+        // Function to dynamically create the averagesData array using session storage
+        function createAveragesData() {
+            // Retrieve individual appliance emissions from session storage
+            const individualApplianceEmissions = JSON.parse(sessionStorage.getItem('individualApplianceEmissions')) || {};
+            
+            // Define the average consumptions for comparison
+            const averageConsumptions = {
+                television: 37,
+                clothes_washer: 70,
+                clothes_dryer: 62,
+                air_conditioner: 30,
+                refrigerator: 20
+            };
+
+            // Build the averagesData array dynamically based on retrieved user data
+            const averagesData = [
+                {
+                    appliance: "Television",
+                    userConsumption: individualApplianceEmissions.television ? individualApplianceEmissions.television * 1000 : 0, // Convert to kWh if needed
+                    avgConsumption: averageConsumptions.television
+                },
+                {
+                    appliance: "Clothes Washer",
+                    userConsumption: individualApplianceEmissions.clothes_washer ? individualApplianceEmissions.clothes_washer * 1000 : 0,
+                    avgConsumption: averageConsumptions.clothes_washer
+                },
+                {
+                    appliance: "Clothes Dryer",
+                    userConsumption: individualApplianceEmissions.clothes_dryer ? individualApplianceEmissions.clothes_dryer * 1000 : 0,
+                    avgConsumption: averageConsumptions.clothes_dryer
+                },
+                {
+                    appliance: "Air Conditioner",
+                    userConsumption: individualApplianceEmissions.air_conditioner ? individualApplianceEmissions.air_conditioner * 1000 : 0,
+                    avgConsumption: averageConsumptions.air_conditioner
+                },
+                {
+                    appliance: "Refrigerator",
+                    userConsumption: individualApplianceEmissions.refrigerator ? individualApplianceEmissions.refrigerator * 1000 : 0,
+                    avgConsumption: averageConsumptions.refrigerator
+                }
+            ];
+
+            console.log('Averages Data:', averagesData); // Log to verify correctness
+            return averagesData;
+        }
 
         function createGroupedBarChart(data, selector) {
             const margin = { top: 20, right: 20, bottom: 50, left: 50 };
@@ -704,12 +1140,12 @@
         const totalCostSavings = calculateCostSaving(averagesData);
 
         function createBarChart(data, selector, valueKey, labelKey, userInput) {
-            const margin = { top: 20, right: 20, bottom: 50, left: 50 };
-            const width = 400 - margin.left - margin.right;
+            const margin = { top: 20, right: 20, bottom: 90, left: 50 }; // Increased bottom margin
+            const width = 500 - margin.left - margin.right;
             const height = 300 - margin.top - margin.bottom;
 
             const svg = d3.select(selector)
-                .html('')
+                .html('')  // Clear existing SVG content before drawing new chart
                 .append('svg')
                 .attr('width', width + margin.left + margin.right)
                 .attr('height', height + margin.top + margin.bottom)
@@ -728,18 +1164,22 @@
 
             svg.append('g')
                 .attr('transform', `translate(0, ${height})`)
-                .call(d3.axisBottom(x))
+                .call(d3.axisBottom(x).tickFormat(label => {
+                    // Custom label formatting
+                    if (label.includes('less than')) {
+                        return label.replace('less than', '<');
+                    } else if (label.includes('greater than')) {
+                        return label.replace('greater than', '>');
+                    }
+                    return label; // Return unchanged for other labels
+                }))
                 .selectAll('text')
-                .attr('transform', 'rotate(-45)')
-                .style('text-anchor', 'end');
+                .style('text-anchor', 'middle') // Center-align the text
+                .style('font-size', '10px'); // Adjust font size to minimize overlap
 
             svg.append('g')
                 .call(d3.axisLeft(y));
 
-            console.log('Data for bars:', data);
-            console.log('User input for highlighting:', userInput);
-
-            // Ensure matching is consistent and values are formatted correctly
             svg.selectAll('.bar')
                 .data(data)
                 .enter()
@@ -749,113 +1189,122 @@
                 .attr('y', d => y(d[valueKey]))
                 .attr('width', x.bandwidth())
                 .attr('height', d => height - y(d[valueKey]))
-                .attr('fill', d => {
-                    const isMatch = String(d[labelKey]).toLowerCase() === String(userInput).toLowerCase();
-                    console.log(`Comparing ${d[labelKey]} with ${userInput}: ${isMatch ? 'Match' : 'No Match'}`);
-                    return isMatch ? 'red' : '#69b3a2'; // Highlight bar if matches user input
-                });
-        }
+                .attr('fill', d => userInput && String(d[labelKey]).toLowerCase() === String(userInput).toLowerCase() ? 'darkgreen' : '#69b3a2');
 
-
-        function createLineChart(data, selector, valueKey, labelKey, userInput) {
-            const margin = { top: 20, right: 20, bottom: 50, left: 50 };
-            const width = 400 - margin.left - margin.right;
-            const height = 300 - margin.top - margin.bottom;
-
-            const svg = d3.select(selector)
-                .html('')
-                .append('svg')
-                .attr('width', width + margin.left + margin.right)
-                .attr('height', height + margin.top + margin.bottom)
-                .append('g')
-                .attr('transform', `translate(${margin.left}, ${margin.top})`);
-
-            const x = d3.scaleLinear()
-                .domain(d3.extent(data, d => d[labelKey]))
-                .range([0, width]);
-
-            const y = d3.scaleLinear()
-                .domain([0, d3.max(data, d => d[valueKey])])
-                .nice()
-                .range([height, 0]);
-
-            const line = d3.line()
-                .x(d => x(d[labelKey]))
-                .y(d => y(d[valueKey]));
-
-            svg.append('g')
-                .attr('transform', `translate(0, ${height})`)
-                .call(d3.axisBottom(x));
-
-            svg.append('g')
-                .call(d3.axisLeft(y));
-
-            svg.append('path')
-                .datum(data)
-                .attr('fill', 'none')
-                .attr('stroke', '#69b3a2')
-                .attr('stroke-width', 1.5)
-                .attr('d', line);
-
-            // Highlight the user input point on the line
-            svg.selectAll('.highlight')
-                .data([userInput])
+            svg.selectAll('.label')
+                .data(data)
                 .enter()
-                .append('circle')
-                .attr('cx', d => x(d[labelKey]))
-                .attr('cy', d => y(d[valueKey]))
-                .attr('r', 6)
-                .attr('fill', 'red')
-                .attr('stroke', 'black')
-                .attr('stroke-width', 1.5);
+                .append('text')
+                .attr('class', 'label')
+                .attr('x', d => x(d[labelKey]) + x.bandwidth() / 2)
+                .attr('y', d => y(d[valueKey]) - 5)
+                .attr('text-anchor', 'middle')
+                .style('font-size', '12px')
+                .text(d => `${d[valueKey].toFixed(2)} kg`);
         }
 
-
-
-
-        // Function to retrieve emissions data from localStorage dynamically
+        // Function to handle sessionStorage data retrieval
         function getEmissionsData() {
-            // Retrieve and parse data from local storage
-            const categoryData = [
-                { category: 'Electricity', emissions: parseFloat(localStorage.getItem('applianceEmissions') || 0) },
-                { category: 'Transport', emissions: parseFloat(localStorage.getItem('transportEmissions') || 0) },
-                { category: 'Gas', emissions: parseFloat(localStorage.getItem('gasEmissions') || 0) }
+            let categoryData = [
+                { category: 'Electricity', emissions: parseFloat(sessionStorage.getItem('applianceEmissions') || 0) },
+                { category: 'Transport', emissions: parseFloat(sessionStorage.getItem('transportEmissions') || 0) },
+                { category: 'Gas', emissions: parseFloat(sessionStorage.getItem('gasEmissions') || 0) }
             ];
 
-            const individualApplianceEmissions = JSON.parse(localStorage.getItem('individualApplianceEmissions') || '{}');
-            const individualTransportEmissions = JSON.parse(localStorage.getItem('individualTransportEmissions') || '{}'); // Retrieve transport emissions
+            // Filter out categories with zero emissions
+            categoryData = categoryData.filter(item => item.emissions > 0);
 
-            // Format appliance data for charts
+            const individualApplianceEmissions = JSON.parse(sessionStorage.getItem('individualApplianceEmissions') || '{}');
+            const individualTransportEmissions = JSON.parse(sessionStorage.getItem('transportationData') || '{}');
+
+            // Debug logs to check data
+            console.log('Individual Appliance Emissions:', individualApplianceEmissions);
+            console.log('Individual Transport Emissions:', individualTransportEmissions);
+
             const applianceData = Object.entries(individualApplianceEmissions).map(([type, emissions]) => ({
-                type: type,
+                type,
                 emissions: parseFloat(emissions)
             }));
 
-            // Format transport data for charts
             const transportData = Object.entries(individualTransportEmissions).map(([type, emissions]) => ({
-                type: type,
+                type: type.replace('_', ' '),
                 emissions: parseFloat(emissions)
             }));
-
-            // Log data to ensure it's correctly retrieved
-            console.log('Retrieved individualApplianceEmissions:', individualApplianceEmissions);
-            console.log('Retrieved individualTransportEmissions:', individualTransportEmissions);
 
             return { categoryData, applianceData, transportData };
         }
 
 
-        // Function to create a pie chart with legend
+
+        function getUserSelections() {
+            const selectedAppliances = JSON.parse(sessionStorage.getItem('applianceData')) || [];
+            const userSelections = {};
+
+            selectedAppliances.forEach(appliance => {
+                userSelections[appliance] = {
+                    hours: sessionStorage.getItem(`${appliance}-hours`) || null,
+                };
+
+                switch (appliance) {
+                    case 'television':
+                        userSelections[appliance].screenSize = sessionStorage.getItem('television-screen-size');
+                        userSelections[appliance].screenTech = sessionStorage.getItem('television-screen-tech');
+                        break;
+                    case 'clothes_washer':
+                        userSelections[appliance].loadingType = sessionStorage.getItem('clothes_washer-loading');
+                        userSelections[appliance].loadSize = parseFloat(sessionStorage.getItem('clothes_washer-load-size'));
+                        break;
+                    case 'clothes_dryer':
+                        userSelections[appliance].dryerType = sessionStorage.getItem('clothes_dryer-type');
+                        break;
+                    case 'air_conditioner':
+                        userSelections[appliance].type = sessionStorage.getItem('air_conditioner-type');
+                        break;
+                    case 'refrigerator':
+                        userSelections[appliance].volume = sessionStorage.getItem('refrigerator-volume');
+                        break;
+                    case 'dishwasher':
+                        userSelections[appliance].usage = sessionStorage.getItem('dishwasher-usage');
+                        break;
+                    default:
+                        console.warn(`No specific handling for ${appliance}`);
+                }
+            });
+
+            console.log('User selections retrieved from sessionStorage:', userSelections);
+            return userSelections;
+        }
+
+        function getApplianceEmissionsData() {
+            const individualApplianceEmissions = JSON.parse(sessionStorage.getItem('individualApplianceEmissions') || '{}');
+
+            const applianceData = Object.entries(individualApplianceEmissions)
+                .map(([appliance, emissions]) => ({
+                    appliance,
+                    emissions: parseFloat(emissions)
+                }))
+                .filter(item => item.emissions > 0); // Filter out appliances with zero emissions
+
+            return applianceData;
+        }
+
+        // Create the pie chart for appliances
+        function createAppliancePieChart() {
+            const applianceData = getApplianceEmissionsData();
+            createPieChart(applianceData, '#appliance-chart', 'emissions', 'appliance');
+        }
+
+
         function createPieChart(data, selector, valueKey, labelKey) {
-            const width = 300;
-            const height = 300;
+            const width = 400;  
+            const height = 400;
             const radius = Math.min(width, height) / 2;
 
             const svg = d3.select(selector)
-                .html('')  // Clear existing SVG content before drawing new chart
+                .html('')  
                 .append('svg')
                 .attr('width', width)
-                .attr('height', height + 50) // Extra space for legend
+                .attr('height', height + 100) 
                 .append('g')
                 .attr('transform', `translate(${width / 2}, ${height / 2})`);
 
@@ -868,6 +1317,10 @@
                 .innerRadius(0)
                 .outerRadius(radius);
 
+            const outerArc = d3.arc()
+                .innerRadius(radius * 0.9)
+                .outerRadius(radius * 0.9);
+
             const arcs = svg.selectAll('arc')
                 .data(pie(data))
                 .enter()
@@ -878,43 +1331,64 @@
                 .attr('d', arc)
                 .attr('fill', d => color(d.data[labelKey]));
 
-            // Add labels to the pie slices
-            arcs.append('text')
-                .attr('transform', d => `translate(${arc.centroid(d)})`)
-                .attr('text-anchor', 'middle')
-                .style('font-size', '12px')
-                .text(d => `${d.data[labelKey]} (${d.data[valueKey].toFixed(2)} kg)`);
+            // Add lines connecting labels to the pie slices
+            arcs.append('polyline')
+                .attr('points', d => {
+                    const posA = arc.centroid(d); 
+                    const posB = outerArc.centroid(d); 
+                    const posC = outerArc.centroid(d); 
+                    posC[0] = radius * 1.05 * (midAngle(d) < Math.PI ? 1 : -1); 
+                    return [posA, posB, posC];
+                })
+                .style('fill', 'none')
+                .style('stroke', 'black')
+                .style('stroke-width', '1px');
 
-            // Add a legend below the pie chart
+            // Add labels outside the pie chart
+            arcs.append('text')
+                .attr('transform', d => {
+                    const pos = outerArc.centroid(d);
+                    pos[0] = radius * 1.1 * (midAngle(d) < Math.PI ? 1 : -1); 
+                    return `translate(${pos})`;
+                })
+                .attr('text-anchor', d => midAngle(d) < Math.PI ? 'start' : 'end')
+                .style('font-size', '12px')
+                .text(d => {
+                    const labelText = `${d.data[labelKey]} (${d.data[valueKey].toFixed(2)} kg)`;
+                    console.log("Label Text: ", labelText); // Debugging log to verify label text
+                    return labelText;
+                });
+
             const legend = d3.select(selector)
                 .append('div')
-                .attr('class', 'legend');
+                .attr('class', 'legend')
+                .style('margin-top', '20px');
 
             const legendItems = legend.selectAll('.legend-item')
                 .data(data)
                 .enter()
                 .append('div')
-                .attr('class', 'legend-item');
+                .attr('class', 'legend-item')
+                .style('display', 'flex')
+                .style('align-items', 'center')
+                .style('margin-bottom', '5px');
 
             legendItems.append('div')
                 .attr('class', 'legend-color-box')
+                .style('width', '12px')
+                .style('height', '12px')
+                .style('margin-right', '8px')
                 .style('background-color', d => color(d[labelKey]));
 
             legendItems.append('span')
                 .attr('class', 'legend-text')
                 .text(d => `${d[labelKey]}: ${d[valueKey].toFixed(2)} kg CO2`);
-        }
 
-        // Initialize charts using the dynamic data
-        function initCharts() {
-            const { categoryData, applianceData, transportData } = getEmissionsData();
-
-            if (!categoryData.length && !applianceData.length && !transportData.length) {
-                console.warn('No data available to display.');
-                // Optionally, you can display a message to the user
-                alert('No emissions data available to display.');
-                return;
+            // Function to calculate the mid-angle for positioning
+            function midAngle(d) {
+                return d.startAngle + (d.endAngle - d.startAngle) / 2;
             }
+<<<<<<< HEAD
 
             // Create pie charts with the retrieved data
             createPieChart(categoryData, '#category-chart', 'emissions', 'category');
@@ -1014,6 +1488,13 @@
 
             createPieChart(categoryData, '#category-chart', 'emissions', 'category');
             createPieChart(applianceData, '#appliance-chart', 'emissions', 'type');
+=======
+        }
+
+            function getTransportEmissionsData() {
+                // Retrieve data from local storage
+                const transportData = JSON.parse(sessionStorage.getItem('transportationData') || '{}');
+>>>>>>> main
 
             const transportData = getTransportEmissionsData(); // Ensure this retrieves correctly
 
@@ -1023,6 +1504,7 @@
                 return;
             }
 
+<<<<<<< HEAD
             createBarChart(transportData, '#transport-chart', 'emissions', 'type'); // Make sure these keys align
         }
 
@@ -1060,11 +1542,214 @@
                 alert('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
             }
         };
+=======
+            function calculateCostSaving(data) {
+            let totalPositiveDifference = 0;
+
+            data.forEach(item => {
+                const difference = item.userConsumption - item.avgConsumption;
+                if (difference > 0) {
+                    totalPositiveDifference += difference;
+                }
+            });
+
+            return Math.round(totalPositiveDifference * 0.1901);
+        }
+
+        function createGroupedBarChart(data, selector) {
+            const margin = { top: 20, right: 20, bottom: 70, left: 50 };
+            const width = 600 - margin.left - margin.right;
+            const height = 400 - margin.top - margin.bottom;
+
+            // Clear any previous content
+            const svg = d3.select(selector)
+                .html('')
+                .append('svg')
+                .attr('width', width + margin.left + margin.right)
+                .attr('height', height + margin.top + margin.bottom)
+                .append('g')
+                .attr('transform', `translate(${margin.left},${margin.top})`);
+
+            // Define the scales
+            const x0 = d3.scaleBand()
+                .domain(data.map(d => d.appliance))
+                .range([0, width])
+                .padding(0.2);
+
+            const x1 = d3.scaleBand()
+                .domain(["userConsumption", "avgConsumption"])
+                .range([0, x0.bandwidth()])
+                .padding(0.05);
+
+            const y = d3.scaleLinear()
+                .domain([0, d3.max(data, d => Math.max(d.userConsumption, d.avgConsumption))])
+                .nice()
+                .range([height, 0]);
+
+            // Define colors
+            const color = d3.scaleOrdinal()
+                .domain(["userConsumption", "avgConsumption"])
+                .range(["#5ad18f", "#d3d3d3"]); // Pastel green for userConsumption, light grey for avgConsumption
+
+            // Function to get a darker shade of a color
+            function darkenColor(color, factor) {
+                return d3.color(color).darker(factor).toString();
+            }
+
+            // Add the X axis
+            svg.append('g')
+                .attr('class', 'x axis')
+                .attr('transform', `translate(0,${height})`)
+                .call(d3.axisBottom(x0));
+
+            // Add the Y axis
+            svg.append('g')
+                .attr('class', 'y axis')
+                .call(d3.axisLeft(y));
+
+            // Create the bars
+            const groups = svg.selectAll('.group')
+                .data(data)
+                .enter().append('g')
+                .attr('class', 'group')
+                .attr('transform', d => `translate(${x0(d.appliance)},0)`);
+
+            // Create the bars
+            const bars = groups.selectAll('rect')
+                .data(d => ["userConsumption", "avgConsumption"].map(key => ({ key, value: d[key], avgConsumption: d.avgConsumption })))
+                .enter().append('rect')
+                .attr('x', d => x1(d.key))
+                .attr('y', d => y(d.value))
+                .attr('width', x1.bandwidth())
+                .attr('height', d => height - y(d.value))
+                .attr('fill', d => {
+                    if (d.key === "userConsumption") {
+                        // Use the avgConsumption from the data bound to the current rect
+                        const barColor = d.value > d.avgConsumption ? "#f0674f" : "#5ad18f";
+                        return barColor; // Softer pastel red and green
+                    } else {
+                        return color(d.key); // Use the color scale for avgConsumption
+                    }
+                });
+
+            // Add data labels for the difference between bars
+            groups.append('text')
+                .attr('x', d => x1("userConsumption") + x1.bandwidth() / 2) // Centered above the group
+                .attr('y', d => y(Math.max(d.userConsumption, d.avgConsumption)) - 5) // Position above the higher bar
+                .attr('text-anchor', 'middle')
+                .attr('font-size', '12px')
+                .attr('fill', d => {
+                    if (d.userConsumption > d.avgConsumption) {
+                        return darkenColor("#f0674f", 0.5); // Darker shade of red
+                    } else {
+                        return darkenColor("#5ad18f", 0.5); // Darker shade of green
+                    }
+                })
+                .text(d => `${Math.round(d.userConsumption - d.avgConsumption)} kWh/year`); // Rounded difference with suffix
+        }
+
+        // Get the total negative differences
+        const totalCostSavings = calculateCostSaving(averagesData);
+
+        // Function to initialize charts with user selections
+        function initCharts() {
+            const userSelections = getUserSelections(); // Retrieve user selections
+            const { categoryData, applianceData, transportData } = getEmissionsData();
+
+            console.log('Category Data:', categoryData);
+            console.log('Appliance Data:', applianceData);
+            console.log('Transport Data:', transportData);
+
+            createPieChart(categoryData, '#category-chart', 'emissions', 'category');
+            createPieChart(applianceData, '#appliance-chart', 'emissions', 'type');
+
+            createUnifiedBarChart(tvScreenSizeData, '#tv-screen-size-chart', 'avgConsumption', 'screenSize', userSelections.television?.screenSize);
+            createUnifiedBarChart(tvScreenTechData, '#tv-screen-tech-chart', 'avgConsumption', 'screenTech', userSelections.television?.screenTech);
+
+            // Highlight the specific Load Size in the line chart
+            // Retrieve loadSize and log it
+            const loadSize = userSelections['clothes_washer']?.loadSize; 
+            console.log('Load Size from userSelections:', loadSize); // Debug log
+            createLineChart(clothesWasherLoadSizeData, '#clothes-washer-load-size-chart', 'energyUsage', 'loadSize', loadSize);
+
+
+            createUnifiedBarChart(clothesWasherTypeData, '#clothes-washer-type-chart', 'energyUsage', 'loadType', userSelections.clothes_washer?.loadingType);
+            createUnifiedBarChart(clothesDryerData, '#clothes-dryer-chart', 'energyUsage', 'dryerType', userSelections.clothes_dryer?.dryerType);
+            createUnifiedBarChart(airConditionerData, '#air-conditioner-chart', 'energyUsage', 'type', userSelections.air_conditioner?.type);
+            createUnifiedBarChart(refrigeratorData, '#refrigerator-chart', 'avgUsage', 'volume', userSelections.refrigerator?.volume);
+            createUnifiedBarChart(transportData, '#transport-chart', 'emissions', 'type');
+        }
+
+
+
+        // Debugging: Check sessionStorage content
+        console.log('sessionStorage content:', sessionStorage);
+
+            // Function to update the emission comparison with the average Melbournian
+            function updateEmissionComparison(userEmissions) {
+                const difference = (userEmissions - AVERAGE_WEEKLY_EMISSIONS) / AVERAGE_WEEKLY_EMISSIONS;
+                const percentageDifference = (difference * 100).toFixed(2);
+                const comparisonElement = document.getElementById('comparison-percentage');
+
+                if (difference > 0) {
+                    comparisonElement.textContent = `${percentageDifference}% more`;
+                    comparisonElement.style.color = 'red';
+                } else if (difference < 0) {
+                    comparisonElement.textContent = `${Math.abs(percentageDifference)}% less`;
+                    comparisonElement.style.color = 'green';
+                } else {
+                    comparisonElement.textContent = `equal to the average`;
+                    comparisonElement.style.color = 'blue';
+                }
+
+                document.getElementById('user-emissions').textContent = userEmissions.toFixed(2);
+            }
+
+
+            // Initialize the page on window load
+            window.onload = function () {
+                // Retrieve emissions and selections data
+                const { categoryData, applianceData, transportData } = getEmissionsData();
+
+                // Initialize charts with the retrieved data
+                initCharts();
+
+                // Retrieve and display total emissions
+                const totalEmissions = parseFloat(sessionStorage.getItem('totalEmissions'));
+                console.log('Attempting to load totalEmissions from sessionStorage:', totalEmissions);
+
+                if (!isNaN(totalEmissions) && totalEmissions !== 0) {
+                    console.log('Loaded totalEmissions:', totalEmissions);
+                    updateEmissionComparison(totalEmissions);
+                    displayEquivalences(totalEmissions);
+                } else {
+                    console.error('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
+                    alert('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
+                }
+
+                // Create the averagesData array and update the grouped bar chart
+                const averagesData = createAveragesData();
+                createGroupedBarChart(averagesData, "#grouped-bar-chart");
+
+                // Calculate and display total savings
+                const totalCostSavings = calculateCostSaving(averagesData);
+                displayTotalSavings(totalCostSavings);
+
+                // Recreate the pie chart for appliances
+                createAppliancePieChart();
+            };
+>>>>>>> main
 
 
 
 
+<<<<<<< HEAD
     </script>
 </body>
 
 </html>
+=======
+        </script>
+    </body>
+    </html>
+>>>>>>> main

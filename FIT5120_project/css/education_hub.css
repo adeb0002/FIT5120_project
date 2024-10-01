@@ -1,0 +1,943 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', arial, sans-serif;
+}
+
+html,
+body {
+    background-color: #f2e8d5;
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+    /* This prevents scrolling */
+}
+
+ul {
+    list-style: none;
+    margin: 0px;
+}
+
+.header {
+    position: fixed;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    padding: 0;
+    z-index: 10000;
+    transition: all 0.2s ease-in-out;
+    height: 80px;
+    background-color: #131212d4;
+    text-align: center;
+    line-height: 40px;
+    color: white;
+}
+
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-nav>li>a {
+    text-shadow: none;
+}
+
+.navbar-brand {
+    line-height: 80px;
+    padding: 0px;
+}
+
+.navbar-nav>li>a {
+    color: #fff !important;
+    font-size: 13px;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-shadow: none;
+    line-height: 80px;
+    padding: 0px;
+    letter-spacing: 0.5px;
+}
+
+.navbar-nav>li {
+    margin-left: 45px;
+}
+
+.header.active .navbar-nav>li>a {
+    font-family: 'Open Sans', arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-shadow: none;
+    color: #121212 !important;
+}
+
+.header.active {
+    background-color: rgba(250, 250, 250, 0.98);
+    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+}
+
+.navbar-brand {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #fff !important;
+    transition: all 0.5s;
+
+}
+
+.navbar-brand em {
+    font-style: normal;
+    color: #f7c552;
+    font-size: 32px;
+}
+
+.header.active .navbar-brand {
+    color: #121212 !important;
+}
+
+.header .navbar-brand {
+    font-weight: 800;
+}
+
+.navbar-inverse {
+    background-image: none;
+    background-color: transparent;
+}
+
+.header .navbar {
+    margin: 0;
+    border: none;
+}
+
+.page-section {
+    padding: 80px 0;
+}
+
+.navbar-inverse .navbar-toggle {
+    margin-top: 22px;
+    border-color: #69d76c !important;
+    background-color: #69d76c !important;
+}
+
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+    background-color: #f7c552;
+}
+
+bootstrap.min.css .navbar-toggle {
+    position: relative;
+    float: right;
+    padding: 9px 10px;
+    margin-top: 15px !important;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+@media (min-width: 768px) {
+    .header .navbar-brand {
+        padding-left: 0;
+    }
+
+    .navbar-nav {
+        float: right;
+    }
+}
+
+.page-section {
+    min-height: 100vh;
+    padding: 0;
+}
+
+@media (max-width: 480px) {
+    .page-section h1 {
+        font-size: 3em;
+    }
+
+    .page-section h2 {
+        font-size: 2em;
+    }
+
+    .page-section p {
+        font-size: 1em;
+        margin: 0 0 20px;
+    }
+}
+
+.baner-content {
+    width: 100%;
+    padding-top: 35vh;
+    text-align: center;
+    background-image: url(../img/blog_item_01.jpg);
+    vertical-align: middle;
+}
+
+.baner-content .text-content {
+    text-align: center;
+}
+
+.baner-content .text-content h2 {
+    font-size: 36px;
+    font-weight: 400;
+    color: #fff;
+}
+
+.baner-content .text-content h2 span {
+    font-weight: 700;
+    color: #33c1cf !important;
+}
+
+.baner-content .text-content h2 em {
+    font-style: normal;
+    font-weight: 700;
+    color: #f89624 !important;
+}
+
+.baner-content .text-content p {
+    color: #fff;
+    font-size: 14px;
+    line-height: 24px;
+    padding: 0px 25%;
+}
+
+.baner-content .text-content .primary-white-button {
+    margin-top: 25px;
+}
+
+.education-section h1 {
+    font-size: 40px;
+    color: transparent;
+    /* Transparent text to show the gradient effect */
+    text-align: center;
+    margin-top: 125px;
+    margin-bottom: 50px;
+    margin-left: 500px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #28a745, #2c3e50);
+    /* Updated gradient for a fresher look */
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    /* Enhanced shadow for a more pronounced effect */
+    padding: 10px 20px;
+    /* Adjusted padding for better spacing */
+    border-radius: 10px;
+    /* Increased border radius for a more modern rounded look */
+    display: inline-block;
+    /* Ensures padding and border radius are applied properly */
+    background-color: #ffffff;
+    /* Optional background color to enhance the contrast if needed */
+}
+
+.education-section h1:hover {
+    color: #3CB371; /* Change color on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); /* Darker shadow on hover */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .education-section h1 {
+        font-size: 30px; /* Adjust font size */
+        margin-left: 0; /* Center the title on smaller screens */
+        margin-top: 100px; /* Adjust top margin */
+    }
+}
+
+@media (max-width: 480px) {
+    .education-section h1 {
+        font-size: 30px; /* Further reduce font size */
+        margin-top: 100px; /* Adjust top margin */
+        margin-bottom: 30px; /* Adjust bottom margin */
+    }
+}
+
+.section {
+    display: flex; /* Use flexbox for layout */
+    align-items: flex-start; /* Align items to the top */
+    margin-top: 10px; /* Reduced space between sections */
+    margin-bottom: 15px; /* Reduced space between sections */
+    background-color: #f9f9f9; /* Light background color */
+    border-radius: 8px; /* Optional: rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+    padding: 20px; /* Reduced padding */
+    box-sizing: border-box; /* Ensure padding is included in height */
+    max-width: 1200px; /* Set a maximum width for the section */
+    width: 100%; /* Allow section to take full width */
+    margin-left: 280px; /* Center the section */
+}
+
+.image-container {
+    flex: 0 0 350px; /* Fixed width for image */
+    margin-right: 20px; /* Space between image and text */
+}
+
+.text-content {
+    flex: 1; /* Allow text content to take remaining space */
+}
+
+.section-header-image {
+    width: 100%; /* Full width of container */
+    height: 500px; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensure the image covers the area */
+    border: 3px solid #fff; /* Optional: Add a border */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Add shadow */
+}
+
+.section h2 {
+    color: #4B3C2E; /* Darker color for headings */
+    margin: 24px 0; /* Space around headings */
+    font-size: 1.8em; /* Slightly larger size for emphasis */
+    font-weight: bold; /* Make headings bold */
+    text-transform: uppercase; /* Optional: uppercase for style */
+    border-bottom: 2px solid #2c3e50; /* Optional: underline for emphasis */
+    padding-bottom: 8px; /* Space between heading and underline */
+}
+
+.section p {
+    color: #4B3C2E; /* Dark gray for text */
+    line-height: 1.8; /* Increased line height for better readability */
+    margin: 12px 0; /* Space between paragraphs */
+    font-size: 1.3em; /* Slightly larger font size */
+}
+
+.section ul, ol {
+    margin-left: 30px; /* Indent lists for better structure */
+    color: #1E7A34; /* Dark gray for list items */
+    font-size: 1.2em;
+    padding: 10px 0; /* Vertical padding for lists */
+    list-style: none; /* Remove default bullets */
+}
+
+.section ul li, ol li {
+    margin-bottom: 10px; /* Space between list items */
+    position: relative; /* Positioning for custom bullets */
+    padding-left: 25px; /* Space for the icon */
+}
+
+.section ul li::before, ol li::before {
+    content: ''; /* Use a custom icon */
+    position: absolute; /* Position the icon */
+    left: 0; /* Align to the left */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for vertical alignment */
+    width: 20px; /* Width of the icon */
+    height: 20px; /* Height of the icon */
+    background-image: url('../img/plant.png');
+    background-size: cover; /* Cover the area with the icon */
+}
+
+.section:hover {
+    background-color: #e6e6e6; /* Slightly darker background on hover */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    transform: scale(1.02); /* Slightly scale up the section */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .section {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items */
+        padding: 20px; /* Increase padding for better spacing */
+        margin-top: 20px; /* Add top margin for separation */
+    }
+
+    .image-container {
+        width: 100%; /* Full width for image container */
+        margin-right: 0; /* Remove right margin */
+        margin-bottom: 15px; /* Add bottom margin */
+    }
+
+    .section-header-image {
+        height: auto; /* Allow height to adjust */
+        max-height: 300px; /* Set a maximum height for smaller screens */
+    }
+
+    .text-content {
+        text-align: left; /* Center text on smaller screens */
+        padding: 0 15px; /* Add side padding for better spacing */
+    }
+
+    .section h2 {
+        font-size: 1.6em; /* Adjust heading size for medium screens */
+    }
+
+    .section p {
+        font-size: 1.2em;
+         text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    .section {
+        width: 100%; /* Ensure sections take full width */
+        margin: 0; /* Remove margins to use the full width */
+    }
+
+    .section h2 {
+        font-size: 1.4em;
+        margin-top: -50px;/* Further adjust heading size */
+    }
+
+    .section p {
+        font-size: 1.1em;
+        text-align: left;/* Further adjust paragraph size */
+    }
+
+    .section ul li, ol li {
+        font-size: 1em; /* Adjust list item size */
+        padding-left: 20px;
+        text-align: left;/* Add some left padding */
+    }
+
+    .section ul li::before, ol li::before {
+        width: 15px; /* Smaller icon size for mobile */
+        height: 15px; /* Smaller icon size for mobile */
+    }
+}
+
+/* Call to Action */
+.call-to-action {
+    background-color: #e8f5e9;
+    padding: 40px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.call-to-action:hover {
+    background-color: #c8e6c9; /* Darker background color on hover */
+    transform: scale(1.05); /* Slightly scale up the element */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+}
+
+.call-to-action h2 {
+    font-size: 2.2em;
+    color: #2e7d32;
+    margin-bottom: 20px;
+}
+
+.call-to-action p {
+    font-size: 1.3em;
+    margin-bottom: 30px;
+}
+
+.flat-button {
+    display: inline-block;
+    padding: 14px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+}
+
+.flat-button:hover {
+    background-color: #218838;
+    transform: translateY(-5px);
+    color: white;
+}
+
+/* Responsive styles for tablets and smaller devices */
+@media (max-width: 768px) {
+    .call-to-action {
+        padding: 30px;
+        margin-top: 30px;
+    }
+
+    .call-to-action h2 {
+        font-size: 1.8em;
+        /* Adjusted font size for tablets */
+    }
+
+    .call-to-action p {
+        font-size: 1.3em;
+        /* Adjusted font size for tablets */
+    }
+
+    .flat-button {
+        padding: 12px 25px;
+        font-size: 16px;
+        /* Adjusted font size for tablets */
+    }
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 480px) {
+    .call-to-action {
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .call-to-action h2 {
+        font-size: 1.5em;
+        /* Smaller font size for mobile */
+    }
+
+    .call-to-action p {
+        font-size: 1.2em;
+        /* Smaller font size for mobile */
+    }
+
+    .flat-button {
+        padding: 10px 20px;
+        font-size: 14px;
+        /* Smaller font size for mobile */
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .baner-content .text-content p {
+        padding: 0px 10%;
+    }
+
+    #main-nav {
+        margin-left: -15px;
+        margin-right: -15px;
+        border-top: none;
+        margin-top: 15px;
+        background-color: rgba(250, 250, 250, 0.95);
+    }
+
+    .navbar-nav {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .navbar-inverse .navbar-nav>li {
+        margin-left: 0px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-inverse .navbar-nav>li:last-child {
+        border-bottom: none;
+    }
+
+    .navbar-inverse .navbar-nav>li>a {
+        font-family: 'Roboto', sans-serif !important;
+        line-height: 55px;
+        color: #343434 !important;
+    }
+
+}
+
+.quiz-section {
+    background-color: #f9f9f9; /* Light background for quiz section */
+    padding: 20px; /* Add padding */
+    border-radius: 8px; /* Rounded corners */
+    margin-bottom: 20px;
+    max-width: 1200px;
+    margin-left: 280px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+}
+
+.quiz-section h2 {
+    color: #4B3C2E; /* Darker color for headings */
+    margin: 24px 0; /* Space around headings */
+    font-size: 2em; /* Slightly larger size for emphasis */
+    font-weight: bold; /* Make headings bold */
+    text-transform: uppercase; /* Uppercase for style */
+    border-bottom: 2px solid #2c3e50; /* Underline for emphasis */
+    padding-bottom: 8px; /* Space between heading and underline */
+    position: relative; /* Position relative for icon placement */
+    margin-left: 50px;
+}
+
+.quiz-section h2::before {
+    content: ''; /* Required for pseudo-elements */
+    display: inline-block; /* Make the icon inline */
+    width: 40px; /* Width of the icon */
+    height: 40px; /* Height of the icon */
+    background-image: url('../img/test.png'); /* Adjust the path if necessary */
+    background-size: contain; /* Make sure the icon fits */
+    background-repeat: no-repeat; /* Prevent repeating */
+    position: absolute; /* Position the icon */
+    left: -50px; /* Adjust position from the left */
+    top: 50%; /* Center the icon vertically */
+    transform: translateY(-50%); /* Adjust for perfect centering */
+}
+
+
+.quiz-section p {
+    color: #4B3C2E; /* Dark gray for text */
+    line-height: 1.8; /* Increased line height for readability */
+    margin: 12px 0; /* Space between paragraphs */
+    font-size: 1.3em; /* Slightly larger font size */
+}
+
+.question {
+    margin: 15px 0; /* Space around questions */
+    font-weight: bold; /* Ensure question text is not bold */
+    font-size: 1.3em; /* Slightly larger font size for questions */
+    color: #1E7A34; /* Darker text color for better contrast */
+}
+
+.choices {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    line-height: 1.5; /* Increase line height for readability */
+    color: #333;
+}
+
+.choices li {
+    padding: 10px; /* Add padding to each list item */
+    border-bottom: 1px solid #ddd; /* Optional: add a border between items */
+    font-weight: normal !important; /* Ensure list item text is not bold */
+}
+
+.choices li label {
+    font-weight: normal !important;
+    font-size: 1.2em;
+}
+
+.choices li:last-child {
+    border-bottom: none;
+    font-weight: normal !important; /* Remove border for the last item */
+}
+
+label {
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+input[type="radio"] {
+    margin-right: 10px; /* Space between radio button and text */
+}
+
+/* Submit Button */
+.submit-btn {
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    font-size: 1.5em;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.submit-btn:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+/* Result Box */
+.result {
+    margin-top: 20px;
+    font-size: 1.1em;
+    text-align: left;
+}
+
+.correct {
+    color: green !important;
+    font-weight: normal;
+}
+
+.wrong {
+    color: red !important;
+    font-weight: normal;
+}
+
+.score {
+    font-size: 1.3em; /* Adjust size as needed */
+    font-weight: bold; /* Make the text bold */
+    color: black; /* Optional: set the color to match your design */
+    margin-top: 20px; /* Optional: add some space above */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .quiz-section {
+        margin-left: 20px; /* Adjust margin for smaller screens */
+        padding: 15px; /* Adjust padding */
+    }
+
+    .quiz-section h2 {
+        font-size: 1.8em; /* Smaller heading */
+    }
+
+    .question {
+        font-size: 1.3em;
+    }
+
+    .choices li label{
+        padding: 8px; /* Smaller padding for list items */
+    }
+
+    .submit-btn {
+        font-size: 1.2em;
+        padding: 10px 20px;
+    }
+
+    .result {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .quiz-section {
+        margin-left: 0; /* Remove left margin */
+        padding: 10px; /* Further adjust padding */
+    }
+
+    .quiz-section h2 {
+        font-size: 1.6em; /* Even smaller heading */
+    }
+
+    .question {
+        font-size: 1.2em;
+    }
+
+    .choices li label {
+        font-size: 16px; /* Adjust font size for choices */
+        padding: 6px; /* Further reduce padding */
+    }
+
+    .submit-btn {
+        font-size: 1em;
+        padding: 8px 15px;
+    }
+
+    .result {
+        font-size: 1em;
+    }
+}
+
+.sidebar {
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    font-family: "calibre"; /* Set font family */
+}
+
+#navigation {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#navigation li a {
+    color: #e6df66; /* Link color */
+    display: flex; /* Use flexbox */
+    align-items: center; /* Center text vertically */
+    justify-content: flex-start; /* Align text to the left */
+    height: 97px; /* Fixed height for consistent size */
+    padding: 0 15px; /* Adjust horizontal padding */
+    text-decoration: none; /* Remove underline */
+    text-transform: uppercase; /* Uppercase text */
+    font-size: 18px; /* Font size for uniformity */
+    line-height: normal;
+    font-weight: bold;
+}
+
+#navigation li a.link1 {
+    background: #6BA368; /* Background color for link1 */
+}
+
+#navigation li a.link2 {
+    background: #2E8B57; /* Background color for link2 */
+}
+
+#navigation li.current a {
+    background: #FFD700; /* Background for the current link */
+    color: #02164d;
+}
+
+#navigation li a:hover {
+    color: #fff799; /* Hover text color */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px; /* Reduce sidebar width on smaller screens */
+    }
+
+    #navigation li a {
+        font-size: 16px; /* Adjust font size */
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        display: none; /* Keep this to hide visually */
+        height: 0; /* Eliminate height */
+        overflow: hidden; /* Prevent any overflow */
+        width: 0; /* Eliminate width */
+    }
+}
+}
+
+
+/* Adjustments for Sections */
+.section,
+.quiz-section {
+    margin-left: 270px; /* Add margin to accommodate the sidebar */
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.sidebar-title {
+    color: #02164d; /* Change text color to white for contrast */
+    height: 100px; /* Fixed height */
+    padding: 30px 20px; /* Increase top padding */
+    text-decoration: none; /* Remove underline */
+    text-transform: uppercase; /* Uppercase text */
+    font-size: 24px; /* Slightly larger font size for emphasis */
+    background-color: #FFD700; /* Background color for the title */
+    text-align: left; /* Align text to the left */
+    margin-bottom: 0; /* Remove space below the title */
+    margin-top: 0px;
+    /* Remove unnecessary flex properties */
+}
+
+#navigation li {
+    margin: 0; /* Remove margin from list items */
+}
+
+.learn-more-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.learn-more-box {
+    flex: 1 1 calc(33.33% - 20px);
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+}
+
+.learn-more-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.learn-more-image {
+    width: 100%;
+    height: auto;
+    border-radius: 15px 15px 0 0;
+    object-fit: cover;
+}
+
+.learn-more-content {
+    padding: 15px;
+    text-align: left;
+}
+
+.learn-more-content h3 {
+    color: #539f53;
+    font-size: 1.6em;
+    margin-bottom: 10px;
+}
+
+.learn-more-content p {
+    color: black;
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+.learn-more-link {
+    display: inline-block;
+    color: white;
+    background-color: #4CAF50;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.learn-more-link:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+    color: white;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .learn-more-box {
+        flex: 1 1 calc(50% - 20px); /* Two boxes per row */
+    }
+
+    .learn-more-content h3 {
+        font-size: 1.5em; /* Adjust heading size */
+    }
+
+    .learn-more-content p {
+        font-size: 1.2em; /* Adjust paragraph size */
+    }
+
+    .learn-more-link {
+        font-size: 1.1em; /* Adjust link size */
+        padding: 8px 16px; /* Adjust padding */
+    }
+}
+
+@media (max-width: 480px) {
+    .learn-more-box {
+        flex: 1 1 100%; /* One box per row */
+    }
+
+    .learn-more-content h3 {
+        font-size: 1.3em; /* Further adjust heading size */
+    }
+
+    .learn-more-content p {
+        font-size: 1.05em; /* Further adjust paragraph size */
+    }
+
+    .learn-more-link {
+        font-size: 1em; /* Further adjust link size */
+        padding: 6px 12px; /* Adjust padding */
+    }
+}
+
+#section7 {
+   color: #4B3C2E; /* Dark gray for text */
+    line-height: 1.8; /* Increased line height for better readability */
+    margin: 12px 0; /* Space between paragraphs */
+   font-size: 1.3em; /* Slightly larger font size */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    #section7 {
+        font-size: 1.2em; /* Adjust font size for medium screens */
+        line-height: 1.6; /* Slightly reduce line height */
+        margin: 10px 0; /* Reduce margin */
+    }
+}
+
+@media (max-width: 480px) {
+    #section7 {
+        font-size: 1.1em; /* Further adjust font size for small screens */
+        line-height: 1.5; /* Further reduce line height */
+        margin: 8px 0; /* Further reduce margin */
+    }
+}

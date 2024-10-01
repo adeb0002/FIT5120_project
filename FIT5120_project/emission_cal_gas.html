@@ -7,6 +7,9 @@
     <title>EcoInsight Melbourne</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
 
     <!-- Fonts and CSS -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
@@ -42,8 +45,9 @@
                         <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">our mission</a>
                         </li>
                         <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
-                        <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
-                        <li><a href="recommendations.html">Recommendations</a></li>
+                        <li><a href="#" id="clear-session-link">Emission Calculator</a></li>
+                        <li><a href="personal_recommendations.html">Recommendations</a></li>
+                        <li><a href="education_hub.html">Education Hub</a></li>
                     </ul>
                 </div>
             </nav>
@@ -67,7 +71,12 @@
                     <div class="form-group">
                         <div class="icon-label-container">
                             <div class="gas-icon-1"></div>
-                            <label for="gas-water-heater">Do you use a gas water heater?</label>
+                            <label for="gas-water-heater">Do you use a gas water heater?
+                                <span class="question-icon" id="grid-info-icon-1" data-toggle="tooltip">
+                                    <i class="fa fa-question-circle"></i>
+                                </span>
+                            </label>
+                            <div id="grid-info-1" class="grid-info" style="display: none;"></div>
                         </div>
                         <div id="gas-water-heater">
                             <div class="button-group">
@@ -80,23 +89,36 @@
                         <div class="form-group" id="instantaneous-storage-section" style="display: none;">
                             <div class="icon-label-container">
                                 <div class="gas-icon-2"></div>
-                                <label for="instantaneous-storage">What type is the gas water heater?</label>
+                                <label for="instantaneous-storage">What type is the gas water heater?
+                                    <span class="question-icon" id="grid-info-icon-2" data-toggle="tooltip">
+                                        <i class="fa fa-question-circle"></i>
+                                    </span>
+                                </label>
+                                <div id="grid-info-2" class="grid-info" style="display: none;"></div>
                             </div>
                             <div id="instantaneous-storage">
                                 <div class="button-group-2">
-                                    <button type="button" class="btn" data-value="instantaneous">Instantaneous</button>
-                                    <button type="button" class="btn" data-value="storage">Storage</button>
+                                    <div class="button-container">
+                                        <button type="button" class="btn"
+                                            data-value="instantaneous">Instantaneous</button>
+                                        <img src="img/instant_gas.jpg" alt="Instantaneous Heater" class="heater-image">
+                                    </div>
+                                    <div class="button-container">
+                                        <button type="button" class="btn" data-value="storage">Storage</button>
+                                        <img src="img/storage_gas.jpg" alt="Storage Heater" class="heater-image">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
 
                     <div class="floating-buttons" id="next-button-section">
                         <a href="emission_cal_solar.html" class="scroll-link" id="back-button">
                             <i class="fa fa-arrow-left"></i> Back
                         </a>
 
-                        <a href="#" class="scroll-link" id="next-button" style="display: none;">
+                        <a href="emission_cal_trans.html" class="scroll-link" id="next-button" style="display: none;">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </div>
@@ -114,7 +136,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 
     <script>
+
         document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('clear-session-link').addEventListener('click', function (event) {
+                event.preventDefault();
+                sessionStorage.clear();
+                console.log('SessionStorage cleared for Emission Calculator link.');
+                window.location.href = "emission_cal_cover.html";
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('clear-session-link').addEventListener('click', function (event) {
+                event.preventDefault();
+                sessionStorage.clear();
+                console.log('SessionStorage cleared for Emission Calculator link.');
+                window.location.href = "emission_cal_cover.html";
+            });
+
             const gasHeaterButtons = document.querySelectorAll('#gas-water-heater .btn');
             const heaterTypeButtons = document.querySelectorAll('#instantaneous-storage-section .btn');
             const instantaneousStorageSection = document.getElementById('instantaneous-storage-section');
@@ -158,13 +196,13 @@
                     // Show or hide the next question based on the selected button
                     if (this.getAttribute('data-value') === 'yes') {
                         instantaneousStorageSection.style.display = 'block'; // Show the next question section
+                        nextButton.style.display = 'none'; // Hide Next button initially
                     } else {
                         instantaneousStorageSection.style.display = 'none'; // Hide the next question section
+                        nextButton.style.display = 'block'; // Show the Next button for 'No'
                         heaterTypeButtons.forEach(btn => btn.classList.remove('active')); // Clear heater type selection
                         sessionStorage.removeItem('heaterType'); // Clear heater type in sessionStorage
                     }
-
-                    nextButton.style.display = 'block'; // Show the Next button
 
                     // Save selection to sessionStorage
                     sessionStorage.setItem('gasWaterHeater', this.getAttribute('data-value'));
@@ -179,6 +217,9 @@
 
                     // Add 'active' class to the clicked button
                     this.classList.add('active');
+
+                    // Show the Next button since a selection is made for the heater type
+                    nextButton.style.display = 'block';
 
                     // Save selection to sessionStorage
                     sessionStorage.setItem('heaterType', this.getAttribute('data-value'));
@@ -227,7 +268,7 @@
                 });
 
                 // Proceed to the next step (can redirect or perform another action here)
-                //window.location.href = 'emission_cal_trans.html';
+                window.location.href = 'emission_cal_trans.html';
             });
 
             // Event listeners for additional buttons
@@ -262,6 +303,49 @@
                     document.getElementById('heater-type-hidden').value = this.getAttribute('data-value');
                 });
             });
+        });
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        $('#grid-info-icon-1').on('mouseenter', function () {
+            const infoText = `
+        Check your water heater or utility bill.<br>
+        If it mentions gas usage for heating water, <strong>select "yes".</strong><br>
+        Otherwise, you may have an electric or solar water heater.<br></br>
+        If you live in a new home built after 1 January 2024, you will not have a gas connection as natural gas connections have been banned, so <strong>select "no".</strong>
+    `;
+
+            const gridInfo = $('#grid-info-1'); // Use the first info box
+            gridInfo.html(infoText).addClass('show').show(); // Add 'show' class to display it
+            console.log('Info text set:', infoText); // Debugging output
+        });
+
+        $('#grid-info-icon-1').on('mouseleave', function () {
+            const gridInfo = $('#grid-info-1'); // Use the first info box
+            gridInfo.removeClass('show'); // Remove 'show' class to hide it
+            setTimeout(() => gridInfo.hide(), 300); // Hide after the transition
+        });
+
+        $('#grid-info-icon-2').on('mouseenter', function () {
+            console.log('Grid info icon 2 hovered!'); // Debugging output
+
+            const infoText = `
+        Look at the heater unit or manual.
+        <br><br>
+        <strong>Instantaneous heaters</strong> heat water on demand and are therefore small and compact, while <strong>storage heaters</strong> are larger as they have a tank.
+    `;
+
+            const gridInfo = $('#grid-info-2'); // Use the second info box
+            gridInfo.html(infoText).addClass('show').show(); // Add 'show' class to display it
+            console.log('Info text set:', infoText); // Debugging output
+        });
+
+        $('#grid-info-icon-2').on('mouseleave', function () {
+            const gridInfo = $('#grid-info-2'); // Use the second info box
+            gridInfo.removeClass('show'); // Remove 'show' class to hide it
+            setTimeout(() => gridInfo.hide(), 300); // Hide after the transition
         });
     </script>
 </body>

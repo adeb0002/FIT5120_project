@@ -42,8 +42,9 @@
                         <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a>
                         </li>
                         <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
-                        <li><a href="emission_cal_personal.html">Emission Calculator</a></li>
-                        <li><a href="recommendations.html">Recommendations</a></li>
+                        <li><a href="#" id="clear-session-link">Emission Calculator</a></li>
+                        <li><a href="personal_recommendations.html">Recommendations</a></li>
+                        <li><a href="education_hub.html">Education Hub</a></li>
                     </ul>
                 </div>
             </nav>
@@ -108,6 +109,16 @@
     <script src="js/main.js"></script>
 
     <script>
+        // Clear session storage when clicking "Emission Calculator" link
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('clear-session-link').addEventListener('click', function (event) {
+                event.preventDefault();
+                sessionStorage.clear();
+                console.log('SessionStorage cleared for Emission Calculator link.');
+                window.location.href = "emission_cal_cover.html";
+            });
+        });
+
         document.addEventListener('DOMContentLoaded', function () {
             const buttons = document.querySelectorAll('#transportation-selection .transportation-button');
             const noneButton = document.getElementById('none-button');
@@ -225,7 +236,7 @@
         <div class="input-container">
             <input type="number" class="form-control" id="${btn.dataset.value}-usage" min="1" placeholder="Enter kilometers">
             ${btn.dataset.value === 'private-vehicle' || btn.dataset.value === 'bus' || btn.dataset.value === 'train' || btn.dataset.value === 'tram' ?
-                                `<button type="button" id="display-map-button-${btn.dataset.value}" class="map-button">Display Map</button>`
+                                `<button type="button" id="display-map-button-${btn.dataset.value}" class="map-button">Calculate Now</button>`
                                 : ''}
         </div>
     `;
@@ -300,17 +311,27 @@
 
                     if (result[0]?.body) {
                         const parsedBody = JSON.parse(result[0].body);
+
+                        // Store the total emissions and individual emissions in session storage
+                        if (parsedBody?.total_emissions !== undefined) {
+                            sessionStorage.setItem('totalEmissions', parsedBody.total_emissions);
+                            console.log('Total emissions saved to sessionStorage:', parsedBody.total_emissions);
+                        } else {
+                            console.warn('Total emissions data is missing in response.');
+                        }
+
                         if (parsedBody?.individual_transport_emissions) {
                             sessionStorage.setItem('transportationData', JSON.stringify(parsedBody.individual_transport_emissions));
                             console.log('Transport data saved to sessionStorage:', parsedBody.individual_transport_emissions);
                         } else {
-                            console.warn('Transport emissions data is missing in response.');
+                            console.warn('Individual transport emissions data is missing in response.');
                         }
                     } else {
                         console.warn('Unexpected data format:', result);
                     }
 
-                    window.location.href = 'emission_cal_appli.html'; // Redirect to the next page
+                    // Redirect to the next page
+                    window.location.href = 'emission_cal_appli.html';
                 } else {
                     const errorText = await response.text(); // Log the error response
                     console.error('Error response from server:', response.status, errorText);
@@ -322,6 +343,7 @@
             }
         }
 
+
         function validateAndNavigate() {
             const questions = document.querySelectorAll('#transportation-usage-section input[type="number"]');
             let valid = true;
@@ -330,17 +352,36 @@
 
             // Check validation only if "None of the above" is not selected
             if (!noneButtonSelected) {
-                questions.forEach(input => {
-                    if (input.value.trim() === '' || isNaN(input.value) || input.value < 1) {
-                        valid = false;
-                        input.style.borderColor = 'red';
-                    } else {
-                        input.style.borderColor = '';
-                        const type = input.id.replace('-usage', ''); // Get the transportation type from input id
-                        dataToSend.push({ type: 'transportation', transportation_type: type.replace(/-/g, '_'), kms: parseFloat(input.value) });
-                    }
-                });
+    questions.forEach(input => {
+        if (input.value.trim() === '' || isNaN(input.value) || input.value < 1) {
+            valid = false;
+            input.style.borderColor = 'red';
+        } else {
+            input.style.borderColor = '';
+            const type = input.id.replace('-usage', ''); // Get the transportation type from input id
+            dataToSend.push({
+                type: 'transportation',
+                transportation_type: type.replace(/-/g, '_'),
+                kms: parseFloat(input.value)
+            });
+
+            // Store kilometers in sessionStorage based on transportation type using the original if-else structure
+            if (type === 'private-vehicle') {
+                sessionStorage.setItem('totalDistance_car', input.value);
+                console.log('Private vehicle kilometers saved to sessionStorage:', input.value);
+            } else if (type === 'bus') {
+                sessionStorage.setItem('totalDistance_bus', input.value);
+                console.log('Bus kilometers saved to sessionStorage:', input.value);
+            } else if (type === 'train') {
+                sessionStorage.setItem('totalDistance_train', input.value);
+                console.log('Train kilometers saved to sessionStorage:', input.value);
+            } else if (type === 'tram') {
+                sessionStorage.setItem('totalDistance_tram', input.value);
+                console.log('Tram kilometers saved to sessionStorage:', input.value);
             }
+        }
+    });
+}
 
             // If "None of the above" is selected, skip validation errors and still prepare data to send
             if (noneButtonSelected) {
@@ -352,7 +393,7 @@
             }
 
             // Save data to localStorage for debugging or future use
-            localStorage.setItem('transportationData', JSON.stringify(dataToSend));
+            sessionStorage.setItem('transportationData', JSON.stringify(dataToSend));
 
             console.log('Original data (input values):');
             questions.forEach(input => {

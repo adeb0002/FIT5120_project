@@ -4,16 +4,18 @@
     font-family: 'Roboto', arial, sans-serif;
 }
 
-html, body {
+html,
+body {
     background-color: #f2e8d5;
     height: 100%;
     margin: 0;
-    overflow-x: hidden; /* This prevents scrolling */
+    overflow-x: hidden;
+    /* This prevents scrolling */
 }
 
 ul {
-	list-style: none;
-	margin: 0px;
+    list-style: none;
+    margin: 0px;
 }
 
 .header {
@@ -25,44 +27,46 @@ ul {
     z-index: 10000;
     transition: all 0.2s ease-in-out;
     height: 80px;
-    background-color: #131212d4; /* Charcoal Grey with opacity */
+    background-color: #131212d4;
+    /* Charcoal Grey with opacity */
     text-align: center;
     line-height: 40px;
     color: white;
 }
 
-.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-nav>li>a {
     text-shadow: none;
 }
 
 .navbar-brand {
-	line-height: 80px;
-	padding: 0px;
+    line-height: 80px;
+    padding: 0px;
 }
 
 .navbar-nav>li>a {
-	color: #fff!important;
-	font-size: 13px;
-	font-weight: 300;
-	text-transform: uppercase;
-	text-shadow: none;
-	line-height: 80px;
-	padding: 0px;
-	letter-spacing: 0.5px;
+    color: #fff !important;
+    font-size: 13px;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-shadow: none;
+    line-height: 80px;
+    padding: 0px;
+    letter-spacing: 0.5px;
 }
 
 .navbar-nav>li {
-	margin-left: 45px;
+    margin-left: 45px;
 }
 
 .header.active .navbar-nav>li>a {
-	font-family: 'Open Sans', arial, sans-serif;
-	font-size: 13px;
-	font-weight: 500;
-	letter-spacing: 0.5px;
-	text-transform: uppercase;
-	text-shadow: none;
-	color: #121212!important;
+    font-family: 'Open Sans', arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-shadow: none;
+    color: #121212 !important;
 }
 
 .header.active {
@@ -71,50 +75,60 @@ ul {
     -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
 }
+
 .navbar-brand {
-	font-family: 'Open Sans', sans-serif;
-	font-size: 25px;
-	text-transform: uppercase;
-	color: #fff!important;
-	transition: all 0.5s;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #fff !important;
+    transition: all 0.5s;
 
 }
+
 .navbar-brand em {
-	font-style: normal;
-	color: #f7c552;
-	font-size: 32px;
+    font-style: normal;
+    color: #f7c552;
+    font-size: 32px;
 }
+
 .header.active .navbar-brand {
-	color: #121212!important;
+    color: #121212 !important;
 }
+
 .header .navbar-brand {
     font-weight: 800;
 }
+
 .navbar-inverse {
-	background-image: none;
-	background-color: transparent;
+    background-image: none;
+    background-color: transparent;
 }
+
 .header .navbar {
     margin: 0;
     border: none;
 }
+
 .page-section {
     padding: 80px 0;
 }
+
 .navbar-inverse .navbar-toggle {
-	margin-top: 22px;
-    border-color: #69d76c!important;
-    background-color: #69d76c!important;
+    margin-top: 22px;
+    border-color: #69d76c !important;
+    background-color: #69d76c !important;
 }
-.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
-	background-color: #f7c552;
+
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+    background-color: #f7c552;
 }
-bootstrap.min.css
-.navbar-toggle {
+
+bootstrap.min.css .navbar-toggle {
     position: relative;
     float: right;
     padding: 9px 10px;
-    margin-top: 15px!important;
+    margin-top: 15px !important;
     margin-right: 15px;
     margin-bottom: 8px;
     background-color: transparent;
@@ -122,14 +136,17 @@ bootstrap.min.css
     border: 1px solid transparent;
     border-radius: 4px;
 }
+
 @media (min-width: 768px) {
     .header .navbar-brand {
         padding-left: 0;
     }
+
     .navbar-nav {
         float: right;
     }
 }
+
 .page-section {
     min-height: 100vh;
     padding: 0;
@@ -139,9 +156,11 @@ bootstrap.min.css
     .page-section h1 {
         font-size: 3em;
     }
+
     .page-section h2 {
         font-size: 2em;
     }
+
     .page-section p {
         font-size: 1em;
         margin: 0 0 20px;
@@ -149,43 +168,43 @@ bootstrap.min.css
 }
 
 .baner-content {
-	width: 100%;
-  	padding-top: 35vh;
-  	text-align: center;
-  	background-image: url(../img/blog_item_01.jpg);
-  	vertical-align: middle;
+    width: 100%;
+    padding-top: 35vh;
+    text-align: center;
+    background-image: url(../img/blog_item_01.jpg);
+    vertical-align: middle;
 }
 
 .baner-content .text-content {
-	text-align: center;
+    text-align: center;
 }
 
 .baner-content .text-content h2 {
-	font-size: 36px;
-	font-weight: 400;
-	color: #fff;
+    font-size: 36px;
+    font-weight: 400;
+    color: #fff;
 }
 
 .baner-content .text-content h2 span {
-	font-weight: 700;
-	color: #33c1cf!important;
+    font-weight: 700;
+    color: #33c1cf !important;
 }
 
 .baner-content .text-content h2 em {
-	font-style: normal;
-	font-weight: 700;
-	color: #f89624!important;
+    font-style: normal;
+    font-weight: 700;
+    color: #f89624 !important;
 }
 
 .baner-content .text-content p {
-	color: #fff;
-	font-size: 14px;
-	line-height: 24px;
-	padding: 0px 25%;
+    color: #fff;
+    font-size: 14px;
+    line-height: 24px;
+    padding: 0px 25%;
 }
 
 .baner-content .text-content .primary-white-button {
-	margin-top: 25px;
+    margin-top: 25px;
 }
 
 .is-invalid {
@@ -202,15 +221,18 @@ h2 {
     font-weight: 800;
     margin-top: 120px;
     margin-left: 200px;
-    margin-bottom: 20px; /* Space below the heading */
+    margin-bottom: 20px;
+    /* Space below the heading */
     color: #28a745;
     line-height: 1.4;
     text-transform: uppercase;
-    width: 100%; /* Ensure the heading takes full width of the container */
+    width: 100%;
+    /* Ensure the heading takes full width of the container */
     white-space: nowrap;
 }
 
 @media (max-width: 768px) {
+
     /* Tablets and small desktops */
     h2 {
         font-size: 2.5rem;
@@ -223,6 +245,7 @@ h2 {
 }
 
 @media (max-width: 480px) {
+
     /* Mobile devices */
     h2 {
         font-size: 2rem;
@@ -236,25 +259,37 @@ h2 {
 
 .icon-label-container {
     display: flex;
-    align-items: center; /* Align items vertically center */
-    margin-bottom: 20px; /* Add space between the label and slider */
+    align-items: center;
+    /* Align items vertically center */
+    margin-bottom: 20px;
+    /* Add space between the label and slider */
 }
 
 label[for="gas-water-heater"] {
-    display: block; /* Makes the label a block-level element */
-    margin-top: 300px; /* Adjust this value as needed for positioning */
-    font-size: 1.5em; /* Adjust the size of the text */
-    font-weight: bold; /* Makes the text bold */
+    display: block;
+    /* Makes the label a block-level element */
+    margin-top: 300px;
+    /* Adjust this value as needed for positioning */
+    font-size: 1.5em;
+    /* Adjust the size of the text */
+    font-weight: bold;
+    /* Makes the text bold */
     color: #333;
-    text-align: center;/* Optional: Adjust the text color */
+    text-align: center;
+    /* Optional: Adjust the text color */
 }
 
 label[for="instantaneous-storage"] {
-    display: block; /* Makes the label a block-level element */
-    margin-top: 50px; /* Adjust this value as needed for positioning */
-    font-size: 1.5em; /* Adjust the size of the text */
-    font-weight: bold; /* Makes the text bold */
-    color: #333; /* Optional: Adjust the text color */
+    display: block;
+    /* Makes the label a block-level element */
+    margin-top: 50px;
+    /* Adjust this value as needed for positioning */
+    font-size: 1.5em;
+    /* Adjust the size of the text */
+    font-weight: bold;
+    /* Makes the text bold */
+    color: #333;
+    /* Optional: Adjust the text color */
 }
 
 .gas-icon-1 {
@@ -379,7 +414,7 @@ label[for="instantaneous-storage"] {
 .floating-buttons {
     position: relative;
     margin-top: 269px;
-    margin-left:-97px;
+    margin-left: -97px;
     transform: translateX(-50%);
     display: flex;
     justify-content: space-between;
@@ -419,31 +454,38 @@ label[for="instantaneous-storage"] {
 }
 
 /* Icon Styling inside Buttons */
-#back-button i, #next-button i {
-    margin-right: 8px; /* Space between icon and text */
+#back-button i,
+#next-button i {
+    margin-right: 8px;
+    /* Space between icon and text */
 }
 
 /* Ensure no conflicting styles for floating-buttons links */
 .floating-buttons a {
-    background: #28a745; /* Green background */
+    background: #28a745;
+    /* Green background */
     color: white;
-    padding: 20px 30px; /* Adjusted padding for better button size */
+    padding: 20px 30px;
+    /* Adjusted padding for better button size */
     border-radius: 20px;
     text-decoration: none;
     font-weight: bold;
     text-align: center;
     display: inline-flex;
-    align-items: center; /* Center text and icon vertically */
+    align-items: center;
+    /* Center text and icon vertically */
     transition: background-color .3s ease;
 }
+
 .floating-buttons a:hover {
-    background-color: #00332b; /* Darker shade for hover effect */
+    background-color: #00332b;
+    /* Darker shade for hover effect */
 }
 
 /* Media query for tablets (max-width: 768px) */
 @media (max-width: 768px) {
     .floating-buttons {
-        position: fixed;
+        position: relative;
         /* Fix position relative to the viewport */
         bottom: 10px;
         /* Distance from bottom */
@@ -454,7 +496,8 @@ label[for="instantaneous-storage"] {
         /* Space between buttons */
         gap: 10px;
         /* Space between buttons */
-        margin: 0;
+        margin-top: 200px;
+        margin-left: 0px;
         /* Reset margin */
         transform: none;
         /* Remove any existing transform */
@@ -464,7 +507,6 @@ label[for="instantaneous-storage"] {
         position: absolute;
         /* Absolute positioning within the container */
         left: 0;
-        /* Align to the left */
     }
 
     #next-button {
@@ -486,7 +528,7 @@ label[for="instantaneous-storage"] {
 /* Media query for mobile devices (max-width: 576px) */
 @media (max-width: 576px) {
     .floating-buttons {
-        position: fixed;
+        position: relative;
         /* Fix position relative to the viewport */
         bottom: 5px;
         /* Distance from bottom */
@@ -497,7 +539,8 @@ label[for="instantaneous-storage"] {
         /* Space between buttons */
         gap: 8px;
         /* Space between buttons */
-        margin: 0;
+        margin-top: 200px;
+        margin-left: 0px;
         /* Reset margin */
         transform: none;
         /* Remove any existing transform */
@@ -513,7 +556,7 @@ label[for="instantaneous-storage"] {
     #next-button {
         position: absolute;
         /* Absolute positioning within the container */
-        right: 40px;
+        right: -10px;
         /* Align to the right */
     }
 
@@ -529,8 +572,10 @@ label[for="instantaneous-storage"] {
 
 
 .progress {
-    width: 400%; /* Make the progress bar container take full width of the column */
-    margin: 30px auto; /* Add some margin and center it */
+    width: 400%;
+    /* Make the progress bar container take full width of the column */
+    margin: 30px auto;
+    /* Add some margin and center it */
 }
 
 .progress-bar {
@@ -565,8 +610,10 @@ label[for="instantaneous-storage"] {
 
 /* Add this in your CSS file or within a <style> block in the <head> */
 input[type="number"] {
-    width: 50%; /* Adjust the percentage to make the input bar shorter */
-    max-width: 500px; /* Optional: Set a maximum width */
+    width: 50%;
+    /* Adjust the percentage to make the input bar shorter */
+    max-width: 500px;
+    /* Optional: Set a maximum width */
     display: inline-block;
 }
 
@@ -596,7 +643,6 @@ input[type="number"] {
     display: flex;
     gap: 10px;
     margin-top: 20px;
-    margin-left: 35px;
 }
 
 .button-group-2 .btn {
@@ -615,9 +661,9 @@ input[type="number"] {
 }
 
 .btn.active {
-            background-color: green;
-            color: white;
-        }
+    background-color: green;
+    color: white;
+}
 
 /* Responsive styles for tablets and below */
 @media (max-width: 768px) {
@@ -692,8 +738,8 @@ input[type="number"] {
 }
 
 #instantaneous-storage-section {
-            display: none;
-        }
+    display: none;
+}
 
 @media (max-width: 768px) {
     .baner-content .text-content p {
@@ -727,5 +773,223 @@ input[type="number"] {
         font-family: 'Roboto', sans-serif !important;
         line-height: 55px;
         color: #343434 !important;
+    }
+}
+
+/* Style for the question mark icon */
+.question-icon {
+    color: green;
+    margin-left: 10px;
+    margin-top: 295px;
+    cursor: pointer;
+    font-size: 20px;
+    position: relative;
+    /* Ensure the icon has a positioning context */
+    z-index: 10;
+    /* Higher z-index than #grid-info */
+}
+
+/* Responsive styles for the question icon */
+@media (max-width: 768px) {
+    .question-icon {
+        font-size: 18px;
+        /* Slightly smaller font size for tablets */
+        margin-top: 20px;
+        /* Adjust margin for tablets */
+        margin-left: 8px;
+        /* Slightly reduced left margin */
+    }
+}
+
+@media (max-width: 480px) {
+    .question-icon {
+        font-size: 16px;
+        /* Further reduced font size for mobile */
+        margin-top: 200px;
+        /* Further adjusted margin for mobile */
+        margin-left: 5px;
+        /* Further reduced left margin */
+    }
+}
+
+/* General styles for both info boxes */
+.grid-info {
+    position: absolute;
+    /* Positioned absolutely to place it based on the icon's position */
+    display: none;
+    /* Initially hidden */
+    z-index: 999;
+    /* Ensure it's on top of other elements */
+    background-color: #f9f9f9;
+    /* Light background color */
+    border: 1px solid green;
+    /* Green border for distinction */
+    padding: 30px;
+    /* Further increased padding for more space around the content */
+    border-radius: 8px;
+    /* Slightly larger rounded corners */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    /* Enhanced shadow for depth */
+    width: 500px;
+    height: auto;
+    /* Optional: Add a transition for a smooth appearance */
+    transition: opacity 0.3s ease;
+    /* Transition effect for opacity */
+    opacity: 0;
+    /* Initially hidden */
+    font-size: 16px;
+}
+
+/* Show class to display the grid info */
+.grid-info.show {
+    display: block;
+    /* Show the info box */
+    opacity: 1;
+    /* Make it fully visible */
+}
+
+/* Specific styles for the first info box */
+#grid-info-1 {
+    left: 375px;
+    top: 320px;
+}
+
+/* Specific styles for the second info box */
+#grid-info-2 {
+    left: 400px;
+    /* Adjust left positioning to move it to the right */
+    top: 470px;
+    /* Set base font size for the text */
+
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .grid-info {
+        width: 80%;
+        /* Use 80% of the viewport width for smaller screens */
+        padding: 20px;
+        /* Adjust padding for smaller screens */
+        font-size: 14px;
+        /* Decrease font size for better fit */
+    }
+
+    /* Adjust positioning for smaller screens */
+    #grid-info-1 {
+        left: 10%;
+        /* Center the info box more on smaller screens */
+        top: 150px;
+        /* Adjust top position */
+    }
+
+    #grid-info-2 {
+        left: 10%;
+        /* Center the info box more on smaller screens */
+        top: 250px;
+        /* Adjust top position */
+    }
+}
+
+@media (max-width: 480px) {
+    .grid-info {
+        width: 95%;
+        /* Use 95% of the viewport width for mobile */
+        padding: 15px;
+        /* Further adjust padding for mobile */
+        font-size: 12px;
+        /* Further decrease font size for better fit */
+    }
+
+    /* Adjust positioning for mobile screens */
+    #grid-info-1 {
+        left: 5%;
+        /* Center the info box */
+        top: 150px;
+        /* Adjust top position */
+    }
+
+    #grid-info-2 {
+        left: 5%;
+        /* Center the info box */
+        top: 230px;
+        /* Adjust top position */
+    }
+}
+
+.button-group-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    /* Center items horizontally */
+    max-width: 250px;
+    /* Limit the width of the button group */
+    margin-left: -50px;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease;
+    width: 80%; /* Use percentage to make it larger while responsive */
+    max-width: 1200px; /* Set a larger maximum width */
+    min-width: 500px; /* Set a minimum width to avoid being too small */
+}
+
+.button-container:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    /* Shadow effect on hover */
+}
+
+.heater-image {
+    width: 400px;
+    /* Adjust width as needed */
+    height: auto;
+    /* Maintain aspect ratio */
+    margin-top: 10px;
+    /* Space between button and image */
+}
+
+/* Media query for 748px */
+@media (max-width: 748px) {
+    .button-group-2 {
+        max-width: 100%;
+        /* Full width on smaller screens */
+        margin-left: 0;
+        /* Reset margin */
+    }
+
+    .button-container {
+        max-width: 100%;
+        /* Ensure container takes full width */
+    }
+
+    .heater-image {
+        width: 100%;
+        /* Make image responsive */
+    }
+}
+
+/* Media query for 480px */
+@media (max-width: 480px) {
+    .button-group-2 {
+        max-width: 100%;
+        /* Full width on mobile screens */
+    }
+
+    .button-container {
+        margin: 10px 0;
+        /* Reduce space between containers */
+        padding: 5px;
+        /* Adjust padding for mobile */
+    }
+
+    .heater-image {
+        width: 100%;
+        /* Make image fully responsive */
     }
 }
