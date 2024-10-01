@@ -480,9 +480,11 @@ recom
 ---------------------------------------------
 */
 #solar {
-  padding-top: 90px;
-  padding-bottom: 90px;
+  padding: 90px 0;
+  /* Combined padding */
   border-bottom: 3px dotted #eee;
+  color: white;
+  /* Changes text color to contrast with the background */
 }
 
 #solar .section-heading {
@@ -515,35 +517,57 @@ recom
 .flip-card-front,
 .flip-card-back {
   position: absolute;
-  /* Absolute positioning */
   width: 100%;
-  /* Full width of the card */
   height: 100%;
-  /* Full height of the card */
   backface-visibility: hidden;
-  /* Hide back side when facing front */
   display: flex;
-  /* Flexbox for alignment */
   justify-content: center;
-  /* Center content horizontally */
   align-items: center;
-  /* Center content vertically */
   padding: 20px;
-  /* Spacing within the card */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  /* Shadow for depth */
-  border-radius: 8px;
-  /* Rounded corners for modern look */
+  border-radius: 10px;
 }
 
 /* Front side styles */
 .flip-card-front {
-  background-color: #f9f9f9;
-  /* Light background for front */
+  background-image: url(../img/solar-panel.jpg);
+  /* Replace with your image path */
+  background-size: cover;
+  /* Ensures the image covers the entire section */
+  background-position: center center;
+  /* Centers the image */
+  background-repeat: no-repeat;
+  /* Prevents the image from repeating */
+  padding: 80px 0;
+  /* Adds padding to the section for better spacing */
 }
 
+.flip-card-front::before {
+  content: "";
+  /* Required for the pseudo-element */
+  position: absolute;
+  /* Positions it relative to the parent */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Change the rgba values for different colors/opacity */
+  z-index: 1;
+  /* Ensure it sits above the background but below the content */
+}
+
+/* Ensure content inside the card is above the overlay */
+.flip-card-front>* {
+  position: relative;
+  /* To ensure the content appears above the overlay */
+  z-index: 2;
+  /* Content appears above the overlay */
+}
+
+
 .flip-card-front strong {
-  color: green;
+  color: yellow;
 }
 
 .flip-card-back {
@@ -563,7 +587,7 @@ recom
 
 /* Styles for headings and paragraphs */
 .flip-card h3 {
-  color: #2c3e50;
+  color: white;
   /* Dark color for headings */
 }
 
@@ -608,14 +632,190 @@ recom
   border-bottom: 3px dotted #eee;
 }
 
-#gas .section-heading {
-  margin-bottom: 60px;
+#gas-flip-card .flip-card-front {
+  background-image: url(../img/gas-water-heater.jpg);
+  /* Replace with your image path */
+  background-size: cover;
+  /* Ensures the image covers the entire section */
+  background-position: center center;
+  /* Centers the image */
+  background-repeat: no-repeat;
+  /* Prevents the image from repeating */
+  padding: 80px 0;
+  /* Adds padding to the section for better spacing */
+}
+
+#gas-flip-card .flip-card-front::before {
+  content: "";
+  /* Required for the pseudo-element */
+  position: absolute;
+  /* Positions it relative to the parent */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Change the rgba values for different colors/opacity */
+  z-index: 1;
+  /* Ensure it sits above the background but below the content */
+}
+
+/* Ensure content inside the card is above the overlay */
+#gas-flip-card .flip-card-front>* {
+  position: relative;
+  /* To ensure the content appears above the overlay */
+  z-index: 2;
+  /* Content appears above the overlay */
 }
 
 #transportation {
   padding-top: 90px;
   padding-bottom: 90px;
   border-bottom: 3px dotted #eee;
+}
+
+#car-flip-card .flip-card-front {
+  background-image: url(../img/eco-trans.jpeg);
+  /* Replace with your image path */
+  background-size: cover;
+  /* Ensures the image covers the entire section */
+  background-position: center center;
+  /* Centers the image */
+  background-repeat: no-repeat;
+  /* Prevents the image from repeating */
+  padding: 80px 0;
+  /* Adds padding to the section for better spacing */
+}
+
+#car-flip-card .flip-card-front::before {
+  content: "";
+  /* Required for the pseudo-element */
+  position: absolute;
+  /* Positions it relative to the parent */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Change the rgba values for different colors/opacity */
+  z-index: 1;
+  /* Ensure it sits above the background but below the content */
+}
+
+/* Ensure content inside the card is above the overlay */
+#car-flip-card .flip-card-front>* {
+  position: relative;
+  /* To ensure the content appears above the overlay */
+  z-index: 2;
+  /* Content appears above the overlay */
+}
+
+#bus-flip-card .flip-card-front {
+  background-image: url(../img/eco-trans.jpeg);
+  /* Replace with your image path */
+  background-size: cover;
+  /* Ensures the image covers the entire section */
+  background-position: center center;
+  /* Centers the image */
+  background-repeat: no-repeat;
+  /* Prevents the image from repeating */
+  padding: 80px 0;
+  /* Adds padding to the section for better spacing */
+}
+
+#bus-flip-card .flip-card-front::before {
+  content: "";
+  /* Required for the pseudo-element */
+  position: absolute;
+  /* Positions it relative to the parent */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Change the rgba values for different colors/opacity */
+  z-index: 1;
+  /* Ensure it sits above the background but below the content */
+}
+
+/* Ensure content inside the card is above the overlay */
+#bus-flip-card .flip-card-front>* {
+  position: relative;
+  /* To ensure the content appears above the overlay */
+  z-index: 2;
+  /* Content appears above the overlay */
+}
+
+#tram-flip-card .flip-card-front {
+  background-image: url(../img/eco-trans.jpeg);
+  /* Replace with your image path */
+  background-size: cover;
+  /* Ensures the image covers the entire section */
+  background-position: center center;
+  /* Centers the image */
+  background-repeat: no-repeat;
+  /* Prevents the image from repeating */
+  padding: 80px 0;
+  /* Adds padding to the section for better spacing */
+}
+
+#tram-flip-card .flip-card-front::before {
+  content: "";
+  /* Required for the pseudo-element */
+  position: absolute;
+  /* Positions it relative to the parent */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Change the rgba values for different colors/opacity */
+  z-index: 1;
+  /* Ensure it sits above the background but below the content */
+}
+
+/* Ensure content inside the card is above the overlay */
+#tram-flip-card .flip-card-front>* {
+  position: relative;
+  /* To ensure the content appears above the overlay */
+  z-index: 2;
+  /* Content appears above the overlay */
+}
+
+#general-flip-card .flip-card-front {
+  background-image: url(../img/eco-trans.jpeg);
+  /* Replace with your image path */
+  background-size: cover;
+  /* Ensures the image covers the entire section */
+  background-position: center center;
+  /* Centers the image */
+  background-repeat: no-repeat;
+  /* Prevents the image from repeating */
+  padding: 80px 0;
+  /* Adds padding to the section for better spacing */
+}
+
+#general-flip-card .flip-card-front::before {
+  content: "";
+  /* Required for the pseudo-element */
+  position: absolute;
+  /* Positions it relative to the parent */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Change the rgba values for different colors/opacity */
+  z-index: 1;
+  /* Ensure it sits above the background but below the content */
+}
+
+/* Ensure content inside the card is above the overlay */
+#general-flip-card .flip-card-front>* {
+  position: relative;
+  /* To ensure the content appears above the overlay */
+  z-index: 2;
+  /* Content appears above the overlay */
 }
 
 #transportation .section-heading {
@@ -630,6 +830,222 @@ recom
 
 #appliances .section-heading {
   margin-bottom: 60px;
+}
+
+#tv-flip-card .flip-card-front {
+  background-image: url(../img/Appliances.jpg);
+  /* Replace with your image path */
+  background-size: cover;
+  /* Ensures the image covers the entire section */
+  background-position: center center;
+  /* Centers the image */
+  background-repeat: no-repeat;
+  /* Prevents the image from repeating */
+  padding: 80px 0;
+  /* Adds padding to the section for better spacing */
+}
+
+#tv-flip-card .flip-card-front::before {
+  content: "";
+  /* Required for the pseudo-element */
+  position: absolute;
+  /* Positions it relative to the parent */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  /* Change the rgba values for different colors/opacity */
+  z-index: 1;
+  /* Ensure it sits above the background but below the content */
+}
+
+/* Ensure content inside the card is above the overlay */
+#tv-flip-card .flip-card-front>* {
+  position: relative;
+  /* To ensure the content appears above the overlay */
+  z-index: 2;
+  /* Content appears above the overlay */
+}
+
+#cw-flip-card .flip-card-front {
+  background-image: url(../img/Appliances.jpg);
+  /* Replace with your image path */
+  background-size: cover;
+  /* Ensures the image covers the entire section */
+  background-position: center center;
+  /* Centers the image */
+  background-repeat: no-repeat;
+  /* Prevents the image from repeating */
+  padding: 80px 0;
+  /* Adds padding to the section for better spacing */
+}
+
+#cw-flip-card .flip-card-front::before {
+  content: "";
+  /* Required for the pseudo-element */
+  position: absolute;
+  /* Positions it relative to the parent */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  /* Change the rgba values for different colors/opacity */
+  z-index: 1;
+  /* Ensure it sits above the background but below the content */
+}
+
+/* Ensure content inside the card is above the overlay */
+#cw-flip-card .flip-card-front>* {
+  position: relative;
+  /* To ensure the content appears above the overlay */
+  z-index: 2;
+  /* Content appears above the overlay */
+}
+
+#ac-flip-card .flip-card-front {
+  background-image: url(../img/Appliances.jpg);
+  /* Replace with your image path */
+  background-size: cover;
+  /* Ensures the image covers the entire section */
+  background-position: center center;
+  /* Centers the image */
+  background-repeat: no-repeat;
+  /* Prevents the image from repeating */
+  padding: 80px 0;
+  /* Adds padding to the section for better spacing */
+}
+
+#ac-flip-card .flip-card-front::before {
+  content: "";
+  /* Required for the pseudo-element */
+  position: absolute;
+  /* Positions it relative to the parent */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  /* Change the rgba values for different colors/opacity */
+  z-index: 1;
+  /* Ensure it sits above the background but below the content */
+}
+
+/* Ensure content inside the card is above the overlay */
+#ac-flip-card .flip-card-front>* {
+  position: relative;
+  /* To ensure the content appears above the overlay */
+  z-index: 2;
+  /* Content appears above the overlay */
+}
+
+#dw-flip-card .flip-card-front {
+  background-image: url(../img/Appliances.jpg);
+  /* Replace with your image path */
+  background-size: cover;
+  /* Ensures the image covers the entire section */
+  background-position: center center;
+  /* Centers the image */
+  background-repeat: no-repeat;
+  /* Prevents the image from repeating */
+  padding: 80px 0;
+  /* Adds padding to the section for better spacing */
+}
+
+#dw-flip-card .flip-card-front::before {
+  content: "";
+  /* Required for the pseudo-element */
+  position: absolute;
+  /* Positions it relative to the parent */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  /* Change the rgba values for different colors/opacity */
+  z-index: 1;
+  /* Ensure it sits above the background but below the content */
+}
+
+/* Ensure content inside the card is above the overlay */
+#dw-flip-card .flip-card-front>* {
+  position: relative;
+  /* To ensure the content appears above the overlay */
+  z-index: 2;
+  /* Content appears above the overlay */
+}
+
+#ref-flip-card .flip-card-front {
+  background-image: url(../img/Appliances.jpg);
+  /* Replace with your image path */
+  background-size: cover;
+  /* Ensures the image covers the entire section */
+  background-position: center center;
+  /* Centers the image */
+  background-repeat: no-repeat;
+  /* Prevents the image from repeating */
+  padding: 80px 0;
+  /* Adds padding to the section for better spacing */
+}
+
+#ref-flip-card .flip-card-front::before {
+  content: "";
+  /* Required for the pseudo-element */
+  position: absolute;
+  /* Positions it relative to the parent */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  /* Change the rgba values for different colors/opacity */
+  z-index: 1;
+  /* Ensure it sits above the background but below the content */
+}
+
+/* Ensure content inside the card is above the overlay */
+#ref-flip-card .flip-card-front>* {
+  position: relative;
+  /* To ensure the content appears above the overlay */
+  z-index: 2;
+  /* Content appears above the overlay */
+}
+
+#cd-flip-card .flip-card-front {
+  background-image: url(../img/Appliances.jpg);
+  /* Replace with your image path */
+  background-size: cover;
+  /* Ensures the image covers the entire section */
+  background-position: center center;
+  /* Centers the image */
+  background-repeat: no-repeat;
+  /* Prevents the image from repeating */
+  padding: 80px 0;
+  /* Adds padding to the section for better spacing */
+}
+
+#cd-flip-card .flip-card-front::before {
+  content: "";
+  /* Required for the pseudo-element */
+  position: absolute;
+  /* Positions it relative to the parent */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  /* Change the rgba values for different colors/opacity */
+  z-index: 1;
+  /* Ensure it sits above the background but below the content */
+}
+
+/* Ensure content inside the card is above the overlay */
+#cd-flip-card .flip-card-front>* {
+  position: relative;
+  /* To ensure the content appears above the overlay */
+  z-index: 2;
+  /* Content appears above the overlay */
 }
 
 #gov {
@@ -809,4 +1225,70 @@ recom
     /* Add vertical margin for spacing */
     border-radius: 20px;
   }
+}
+
+.section-heading p {
+  font-size: 16px;
+  /* Adjust font size */
+  color: #555;
+  /* Light gray color */
+  margin-top: 20px;
+  /* Space between the heading and the paragraph */
+  text-align: left;
+  /* Center the text */
+  font-style: italic;
+  /* Make the text italic */
+  transition: color 0.3s ease;
+  /* Smooth color transition on hover */
+}
+
+.dollar-icon {
+  position: absolute;
+  /* Make it absolute to position it within the parent */
+  top: 10px;
+  /* Adjust as needed */
+  right: 10px;
+  /* Adjust as needed */
+  z-index: 2;
+  /* Ensure it appears above other content */
+}
+
+.dollar-icon img {
+  width: 60px;
+  /* Adjust size as needed */
+  height: 60px;
+  /* Maintain aspect ratio */
+}
+
+#go-to-top {
+  position: fixed;
+  bottom: 30px;
+  /* Distance from the bottom */
+  right: 30px;
+  /* Distance from the right */
+  background-color: #28a745;
+  /* Green color */
+  color: white;
+  /* Text color */
+  border: none;
+  border-radius: 50%;
+  /* Circular shape */
+  padding: 10px;
+  font-size: 24px;
+  /* Icon size */
+  display: none;
+  /* Hidden by default */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  /* Shadow for depth */
+  z-index: 1000;
+  /* Ensure it stays on top of other elements */
+  transition: background-color 0.3s, transform 0.3s;
+  /* Smooth transitions */
+}
+
+#go-to-top:hover {
+  background-color: #218838;
+  /* Darker green on hover */
+  transform: scale(1.1);
+  /* Slightly enlarge on hover */
 }

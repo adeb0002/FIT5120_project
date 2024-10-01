@@ -41,6 +41,7 @@
                 window.location.href = 'emission_cal_cover.html';
             }
         };
+
     </script>
 </head>
 
@@ -83,7 +84,7 @@
                     <div class="left-content">
                         <div class="thumb">
                             <div class="inner-content">
-                                <h4>Your Custom Plan for a Greener Future.</h4>
+                                <h4>Your Personalised Recommendations for a Greener Future.</h4>
                                 <span>Tailored CO2 Reduction Strategies for Your Lifestyle</span>
                             </div>
                             <img src="img/greener_future.jpg" alt="">
@@ -160,6 +161,7 @@
                 <div class="col-lg-6">
                     <div class="section-heading">
                         <h2>Unlock Solar Potential</h2>
+                        <p> Hover to see recommendations</p>
                     </div>
                 </div>
             </div>
@@ -183,6 +185,10 @@
                 </div>
             </div>
         </div>
+        <!-- Go to Top Button -->
+        <a id="go-to-top" href="#" title="Go to Top">
+            <i class="fas fa-chevron-up"></i>
+        </a>
     </section>
     <!-- ***** Solar Area Ends ***** -->
 
@@ -193,6 +199,7 @@
                 <div class="col-lg-6">
                     <div class="section-heading">
                         <h2>Smart Gas Usage</h2>
+                        <p> Hover to see recommendations</p>
                     </div>
                 </div>
             </div>
@@ -226,6 +233,7 @@
                 <div class="col-lg-6">
                     <div class="section-heading">
                         <h2>Green Travel Choices</h2>
+                        <p> Hover to see recommendations</p>
                     </div>
                 </div>
             </div>
@@ -332,6 +340,7 @@
                 <div class="col-lg-6">
                     <div class="section-heading">
                         <h2>Eco-Friendly Appliance Tips</h2>
+                        <p> Hover to see recommendations</p>
                     </div>
                 </div>
             </div>
@@ -444,8 +453,6 @@
                 </div>
             </div>
         </div>
-
-
     </section>
     <!-- ***** Transportation Area Ends ***** -->
 
@@ -485,311 +492,323 @@
             Again</button>
         <button onclick="window.location.href='index.html'" class="button">Back to Home</button>
     </div>
-</body>
 
-</html>
-
-<script>
-    function getDistance(key) {
-        const value = sessionStorage.getItem(key);
-        return value !== null ? parseFloat(value) : 0; // Return the parsed float or 0 if null
-    }
-
-    // Check sessionStorage for solar panel data
-    const solarPanels = sessionStorage.getItem('solarPanels');
-    const gridDependence = parseFloat(sessionStorage.getItem('gridDependence'));
-
-    const recommendationContainer = document.getElementById('solar-recommendations');
-    const flipCardFront = document.querySelector('.flip-card-front');
-    const flipCardBack = document.getElementById('flip-card-back-content');
-
-    // Check sessionStorage for gas water heater data
-    const gasWaterHeater = sessionStorage.getItem('gasWaterHeater');
-    const gasRecommendationContainer = document.getElementById('gas-recommendations');
-    const gasFlipCardFront = document.querySelector('#gas-flip-card .flip-card-front');
-    const gasFlipCardBack = document.querySelector('#gas-flip-card .flip-card-back');
-
-    if (solarPanels === 'yes') {
-        recommendationContainer.style.display = 'block'; // Show recommendations
-        if (gridDependence >= 50) {
-            flipCardFront.innerHTML = `
-                <h3>You rely on solar energy for <strong>at least half of your electricity needs</strong>.</h3>
-            `;
-            flipCardBack.innerHTML = `
-                <p>Schedule heavy electricity use (like washing machines or electric vehicles) during the day when your solar panels are generating power.<br></br>
-                You can also take advantage of the Victorian Solar Battery Rebate, offering up to $2,950, to install solar battery storage.<br>
-                This will allow you to store excess energy for nighttime use, reducing reliance on the grid and saving money.<br></br>
-                <a href="https://www.solar.vic.gov.au/" target="_blank" class="learn-more-button">Learn More</a></p>
-            `;
-        } else {
-            flipCardFront.innerHTML = `
-                <h3>You rely on solar energy for <strong>less than half of your electricity needs</strong>.</h3>
-            `;
-            flipCardBack.innerHTML = `
-                <p>Consider increasing your reliance on solar power by installing a solar battery system to store excess energy generated during the day.<br></br>
-                With the Victorian Solar Battery Rebate of up to $2,950, this can be a more affordable option to reduce grid dependence and enhance energy savings. <br></br>
-                <a href="https://www.solar.vic.gov.au/" target="_blank" class="learn-more-button">Learn More</a></p>
-            `;
+    <script>
+        function getDistance(key) {
+            const value = sessionStorage.getItem(key);
+            return value !== null ? parseFloat(value) : 0; // Return the parsed float or 0 if null
         }
-    } else if (solarPanels === 'no') {
-        recommendationContainer.style.display = 'block'; // Show recommendations
-        flipCardFront.innerHTML = `
+
+        // Check sessionStorage for solar panel data
+        const solarPanels = sessionStorage.getItem('solarPanels');
+        const gridDependence = parseFloat(sessionStorage.getItem('gridDependence'));
+
+        const recommendationContainer = document.getElementById('solar-recommendations');
+        const flipCardFront = document.querySelector('.flip-card-front');
+        const flipCardBack = document.getElementById('flip-card-back-content');
+
+        // Check sessionStorage for gas water heater data
+        const gasWaterHeater = sessionStorage.getItem('gasWaterHeater');
+        const gasRecommendationContainer = document.getElementById('gas-recommendations');
+        const gasFlipCardFront = document.querySelector('#gas-flip-card .flip-card-front');
+        const gasFlipCardBack = document.querySelector('#gas-flip-card .flip-card-back');
+
+        if (solarPanels === 'yes') {
+            recommendationContainer.style.display = 'block'; // Show recommendations
+
+            if (gridDependence >= 50) {
+                flipCardFront.innerHTML = `
+            <h3>You rely on solar energy for <strong> 50% or more of your electricity needs</strong>.</h3>
+        `;
+                flipCardBack.innerHTML = `
+                <div class="dollar-icon">
+        <img src="../img/dollar.png" alt="Dollar Icon" />
+    </div>
+            <p>Schedule heavy electricity use (like washing machines or electric vehicles) during the day when your solar panels are generating power.<br></br>
+            You can also take advantage of the Victorian Solar Battery Rebate, offering up to $2,950, to install solar battery storage.<br>
+            This will allow you to store excess energy for nighttime use, reducing reliance on the grid and saving money.<br></br>
+            <a href="https://www.solar.vic.gov.au/" target="_blank" class="learn-more-button">Learn More</a></p>
+        `;
+            } else {
+                flipCardFront.innerHTML = `
+            <h3>You rely on solar energy for <strong> less than 50% of your electricity needs</strong>.</h3>
+        `;
+                flipCardBack.innerHTML = `
+          <div class="dollar-icon">
+        <img src="../img/dollar.png" alt="Dollar Icon" />
+    </div>
+            <p>Consider increasing your reliance on solar power by installing a solar battery system to store excess energy generated during the day.<br></br>
+            With the Victorian Solar Battery Rebate of up to $2,950, this can be a more affordable option to reduce grid dependence and enhance energy savings. <br></br>
+            <a href="https://www.solar.vic.gov.au/" target="_blank" class="learn-more-button">Learn More</a></p>
+        `;
+            }
+        } else if (solarPanels === 'no') {
+            recommendationContainer.style.display = 'block'; // Show recommendations
+            flipCardFront.innerHTML = `
             <h3>You <strong>do not have solar panels</strong> installed in your home.</h3>
         `;
-        flipCardBack.innerHTML = `
+            flipCardBack.innerHTML = `
+          <div class="dollar-icon">
+        <img src="../img/dollar.png" alt="Dollar Icon" />
+    </div>
             <p>Explore the Solar Homes Program by the Victorian government, which offers a rebate of up to $1,400 for solar panel installations.<br>
             You can also apply for interest-free loans to make the switch to solar energy more affordable.<br>
             By switching to solar, you can significantly reduce your energy costs while also lowering your household’s carbon footprint.<br></br>
             <a href="https://www.solar.vic.gov.au/" target="_blank" class="learn-more-button">Learn More</a></p>
         `;
-    }
+        }
 
-    if (gasWaterHeater === 'yes') {
-        gasRecommendationContainer.style.display = 'block'; // Show recommendations
-        gasFlipCardFront.innerHTML = `
+        if (gasWaterHeater === 'yes') {
+            gasRecommendationContainer.style.display = 'block'; // Show recommendations
+            gasFlipCardFront.innerHTML = `
             <h3>You are using a gas water heater for your hot water needs.</h3>
         `;
-        gasFlipCardBack.innerHTML = `
+            gasFlipCardBack.innerHTML = `
+          <div class="dollar-icon">
+        <img src="../img/dollar.png" alt="Dollar Icon" />
+    </div>
             <p>Switching to an energy-efficient gas water heater or an electric heat pump can significantly lower your energy usage and utilities bill.<br></br>
              In Victoria, electricity works out much cheaper than gas.<br>
              Swapping gas for electricity can save Australian households about $450 per household every year.<br></br>
             <a href="https://www.joincitro.com.au/news/gas-vs-electricity-a-surprising-switch#:~:text=Monash%20University%20projects%20that%20swapping,%2C%20and%20cooking%20(5%25)." target="_blank" class="learn-more-button">Learn More</a></p>
         `;
-    } else if (gasWaterHeater === 'no') {
-        gasRecommendationContainer.style.display = 'block'; // Show recommendations for users without gas water heaters
-        gasFlipCardFront.innerHTML = `
-            <h3>You are not using gas currently.</h3>
+        } else if (gasWaterHeater === 'no') {
+            gasRecommendationContainer.style.display = 'block'; // Show recommendations for users without gas water heaters
+            gasFlipCardFront.innerHTML = `
+            <h3>You are <strong>not using a gas water heater</strong>currently.</h3>
         `;
-        gasFlipCardBack.innerHTML = `
+            gasFlipCardBack.innerHTML = `
+          <div class="dollar-icon">
+        <img src="../img/dollar.png" alt="Dollar Icon" />
+    </div>
             <p>By relying on electricity, you’ve already made a smart choice!<br></br>
             Electric appliances are often more efficient and can significantly lower your energy bills compared to gas.
             Explore the latest energy-efficient electric options available, and consider how this choice contributes to a more sustainable future.</p>
         `;
-    }
+        }
 
-    // Check sessionStorage for distances
-    const carDistance = getDistance('totalDistance_car');
-    const busDistance = getDistance('totalDistance_bus');
-    const trainDistance = getDistance('totalDistance_train');
-    const tramDistance = getDistance('totalDistance_tram');
+        // Check sessionStorage for distances
+        const carDistance = getDistance('totalDistance_car');
+        const busDistance = getDistance('totalDistance_bus');
+        const trainDistance = getDistance('totalDistance_train');
+        const tramDistance = getDistance('totalDistance_tram');
 
-    // Transportation recommendations container
-    //const transportationRecommendationContainer = document.getElementById('trans-recommendations');
+        // Transportation recommendations container
+        //const transportationRecommendationContainer = document.getElementById('trans-recommendations');
 
-    // Populate Car Recommendations
-    const carRecommendations = document.getElementById('car-recommendations');
-    const carFlipCardFront = document.querySelector('#car-flip-card .flip-card-front');
-    const carFlipCardBack = document.querySelector('#car-flip-card .flip-card-back');
+        // Populate Car Recommendations
+        const carRecommendations = document.getElementById('car-recommendations');
+        const carFlipCardFront = document.querySelector('#car-flip-card .flip-card-front');
+        const carFlipCardBack = document.querySelector('#car-flip-card .flip-card-back');
 
-    if (carDistance < 50 && carDistance > 0) {
-        carRecommendations.style.display = 'block'; // Show recommendations
-        carFlipCardFront.innerHTML = `
-        <h3>You drive <strong>less than 50 km per week</strong> in your private vehicle.</h3>
+        if (carDistance < 50 && carDistance > 0) {
+            carRecommendations.style.display = 'block'; // Show recommendations
+            carFlipCardFront.innerHTML = `
+        <h3>You drive <strong> less than 50km per week</strong> in your private vehicle.</h3>
     `;
-        carFlipCardBack.innerHTML = `
+            carFlipCardBack.innerHTML = `
         <p>For shorter trips, consider walking or biking to reduce your emissions.<br>
         Melbourne has plenty of bike lanes and pedestrian-friendly paths, making it easier to avoid using the car.<br></br>
         If you must drive, practice efficient driving by maintaining a steady speed and ensuring your tires are properly inflated.</p>
     `;
-    } else if (carDistance >= 50) {
-        carRecommendations.style.display = 'block'; // Show recommendations
-        carFlipCardFront.innerHTML = `
-        <h3>You drive <strong>more than 50 km per week</strong> in your private vehicle.</h3>
+        } else if (carDistance >= 50) {
+            carRecommendations.style.display = 'block'; // Show recommendations
+            carFlipCardFront.innerHTML = `
+        <h3>You drive <strong> 50km or more per week</strong> in your private vehicle.</h3>
     `;
-        carFlipCardBack.innerHTML = `
+            carFlipCardBack.innerHTML = `
+            <div class="dollar-icon">
+        <img src="../img/dollar.png" alt="Dollar Icon" />
+    </div>
         <p>For long-distance driving, consider switching to an electric vehicle (EV).<br></br>
          With the Victorian Zero Emissions Vehicle (ZEV) Subsidy, you can receive <strong>up to $3,000</strong>to offset the cost of a new EV.<br></br>
          Alternatively, consider carpooling with others to share the driving burden, reducing emissions and fuel costs.</p>
     `;
-    }
+        }
 
-    // Populate Bus Recommendations
-    const busRecommendations = document.getElementById('bus-recommendations');
-    const busFlipCardFront = document.querySelector('#bus-flip-card .flip-card-front');
-    const busFlipCardBack = document.querySelector('#bus-flip-card .flip-card-back');
+        // Populate Bus Recommendations
+        const busRecommendations = document.getElementById('bus-recommendations');
+        const busFlipCardFront = document.querySelector('#bus-flip-card .flip-card-front');
+        const busFlipCardBack = document.querySelector('#bus-flip-card .flip-card-back');
 
-    if (busDistance < 50 && busDistance > 0) {
-        busRecommendations.style.display = 'block'; // Show recommendations
-        busFlipCardFront.innerHTML = `
-        <h3>You use the bus for <strong>less than 50 km per week per week</strong>.</h3>
+        if (busDistance < 50 && busDistance > 0) {
+            busRecommendations.style.display = 'block'; // Show recommendations
+            busFlipCardFront.innerHTML = `
+        <h3>You use the bus for <strong> less than 50km per week per week</strong>.</h3>
     `;
-        busFlipCardBack.innerHTML = `
+            busFlipCardBack.innerHTML = `
         <p>For short bus commutes, try combining your ride with active travel like walking or biking to the bus stop.<br>
          This can reduce the overall carbon footprint of your journey while also promoting healthier habits.</p>
     `;
-    } else if (busDistance >= 50) {
-        busRecommendations.style.display = 'block'; // Show recommendations
-        busFlipCardFront.innerHTML = `
-        <h3>You use the bus for <strong>more than 50 km per week</strong>.</h3>
+        } else if (busDistance >= 50) {
+            busRecommendations.style.display = 'block'; // Show recommendations
+            busFlipCardFront.innerHTML = `
+        <h3>You use the bus for <strong> 50km or more per week</strong>.</h3>
     `;
-        busFlipCardBack.innerHTML = `
+            busFlipCardBack.innerHTML = `
         <p>You’re already making an environmentally friendly choice by using public transport!<br></br>
          Maximise your savings by using a Myki Pass for unlimited travel, and plan your trips using bus scheduling apps to further optimize your commute.<br>
          This can help you avoid unnecessary car trips and further reduce your emissions.</p>
     `;
-    }
+        }
 
-    // Populate Tram Recommendations
-    const tramRecommendations = document.getElementById('tram-recommendations');
-    const tramFlipCardFront = document.querySelector('#tram-flip-card .flip-card-front');
-    const tramFlipCardBack = document.querySelector('#tram-flip-card .flip-card-back');
+        // Populate Tram Recommendations
+        const tramRecommendations = document.getElementById('tram-recommendations');
+        const tramFlipCardFront = document.querySelector('#tram-flip-card .flip-card-front');
+        const tramFlipCardBack = document.querySelector('#tram-flip-card .flip-card-back');
 
-    if (tramDistance < 50 && tramDistance > 0) {
-        tramRecommendations.style.display = 'block'; // Show recommendations
-        tramFlipCardFront.innerHTML = `
-        <h3>You use the tram for <strong>less than 50 km per week per week</strong>.</h3>
+        if (tramDistance < 50 && tramDistance > 0) {
+            tramRecommendations.style.display = 'block'; // Show recommendations
+            tramFlipCardFront.innerHTML = `
+        <h3>You use the tram for <strong> less than 50km per week per week</strong>.</h3>
     `;
-        tramFlipCardBack.innerHTML = `
+            tramFlipCardBack.innerHTML = `
+          <div class="dollar-icon">
+        <img src="../img/dollar.png" alt="Dollar Icon" />
+    </div>
         <p>For short commutes within Melbourne's CBD, take advantage of the Free Tram Zone.<br>
          Walking to and from tram stops instead of driving can also help cut down on emissions and parking costs.<br></br>
          <a href="https://www.ptv.vic.gov.au/assets/PDFs/Maps/Network-maps/5b4a3efe80/PTV-Free-Tram-Zone-Map.pdf" target="_blank" class="learn-more-button">Learn More</a></p>
     `;
-    } else if (tramDistance >= 50) {
-        tramRecommendations.style.display = 'block'; // Show recommendations
-        tramFlipCardFront.innerHTML = `
-        <h3>You use the tram for <strong>more than 50 km per week</strong>.</h3>
+        } else if (tramDistance >= 50) {
+            tramRecommendations.style.display = 'block'; // Show recommendations
+            tramFlipCardFront.innerHTML = `
+        <h3>You use the tram for <strong> 50km or more per week</strong>.</h3>
     `;
-        tramFlipCardBack.innerHTML = `
+            tramFlipCardBack.innerHTML = `
         <p>Melbourne’s tram network extends beyond the city center.<br>
          Use trams for longer suburban trips as well—trams are one of the most eco-friendly public transport options. Incorporating walking or biking to your tram stop can further reduce your emissions.</p>
     `;
-    }
+        }
 
-    // Populate General Recommendations
-    const generalRecommendations = document.getElementById('general-recommendations');
-    const generalFlipCardFront = document.querySelector('#general-flip-card .flip-card-front');
-    const generalFlipCardBack = document.querySelector('#general-flip-card .flip-card-back');
+        // Populate General Recommendations
+        const generalRecommendations = document.getElementById('general-recommendations');
+        const generalFlipCardFront = document.querySelector('#general-flip-card .flip-card-front');
+        const generalFlipCardBack = document.querySelector('#general-flip-card .flip-card-back');
 
-    if (busDistance == 0 && tramDistance == 0 && trainDistance == 0 && carDistance != 0) {
-        generalRecommendations.style.display = 'block'; // Show recommendations
-        generalFlipCardFront.innerHTML = `
+        if (busDistance == 0 && tramDistance == 0 && trainDistance == 0 && carDistance != 0) {
+            generalRecommendations.style.display = 'block'; // Show recommendations
+            generalFlipCardFront.innerHTML = `
         <h3>You don't use public transportation.</h3>
     `;
-        generalFlipCardBack.innerHTML = `
+            generalFlipCardBack.innerHTML = `
+          <div class="dollar-icon">
+        <img src="../img/dollar.png" alt="Dollar Icon" />
+    </div>
         <p>Consider taking public transport.<br></br>
          With an extensive network of trains, trams, and buses, Melbourne's public transport system offers a convenient alternative to driving.<br></br>
          Letting you save on all those tanks of petrol as well.</p>
     `;
-    }
+        }
 
-    const tvScreen = sessionStorage.getItem('television-screen-size');
-    const tvRecommendations = document.getElementById('tv-recommendations');
-    const tvFlipCardFront = document.querySelector('#tv-flip-card .flip-card-front');
-    const tvFlipCardBack = document.querySelector('#tv-flip-card .flip-card-back');
+        const tvScreen = sessionStorage.getItem('television-screen-size');
+        const tvRecommendations = document.getElementById('tv-recommendations');
+        const tvFlipCardFront = document.querySelector('#tv-flip-card .flip-card-front');
+        const tvFlipCardBack = document.querySelector('#tv-flip-card .flip-card-back');
 
-    if (tvScreen === "70-79" || tvScreen === "80-89" || tvScreen === "90-99" || tvScreen === "Greater than 100") {
-        tvRecommendations.style.display = 'block'; // Show recommendations
-        tvFlipCardFront.innerHTML = `
+        if (tvScreen === "70-79" || tvScreen === "80-89" || tvScreen === "90-99" || tvScreen === "Greater than 100") {
+            tvRecommendations.style.display = 'block'; // Show recommendations
+            tvFlipCardFront.innerHTML = `
         <h3>You use <strong>a large TV</strong>.</h3>
     `;
-        tvFlipCardBack.innerHTML = `
+            tvFlipCardBack.innerHTML = `
+          <div class="dollar-icon">
+        <img src="../img/dollar.png" alt="Dollar Icon" />
+    </div>
         <p>Having a large TV can be great.. <br>
         But sometimes you might have a TV that's bigger than necessary. <br></br>
         Check the size chart below to see if your TV is the right size, given how close you sit to it. You could even save hundreds of dollars in price by opting for a smaller TV!
         <a href="https://i.rtings.com/images/optimal-viewing-distance-television-graph-size.png" target="_blank" class="learn-more-button">Learn More</a></p>
     `;
-    }
+        }
 
-    const cwType = sessionStorage.getItem('clothes_washer-loading');
-    const cwRecommendations = document.getElementById('cw-recommendations');
-    const cwFlipCardFront = document.querySelector('#cw-flip-card .flip-card-front');
-    const cwFlipCardBack = document.querySelector('#cw-flip-card .flip-card-back');
+        const cwType = sessionStorage.getItem('clothes_washer-loading');
+        const cwRecommendations = document.getElementById('cw-recommendations');
+        const cwFlipCardFront = document.querySelector('#cw-flip-card .flip-card-front');
+        const cwFlipCardBack = document.querySelector('#cw-flip-card .flip-card-back');
 
-    if (cwType === "Top") {
-        cwRecommendations.style.display = 'block'; // Show recommendations
-        cwFlipCardFront.innerHTML = `
+        if (cwType === "Top") {
+            cwRecommendations.style.display = 'block'; // Show recommendations
+            cwFlipCardFront.innerHTML = `
         <h3>You use <strong>a top load clothes washer</strong>.</h3>
     `;
-        cwFlipCardBack.innerHTML = `
+            cwFlipCardBack.innerHTML = `
+          <div class="dollar-icon">
+        <img src="../img/dollar.png" alt="Dollar Icon" />
+    </div>
         <p>Consider changing to a front loader which are high efficiency, using less water overall.<br></br>
         <strong>Front load washers</strong> can also reduce dry time. Water drains out of clothes more easily with a tumbling motion, so clothes come out of the washer dryer, further reducing energy use and your electric and water bill.</p>
     `;
-    }
+        }
 
-    const acType = sessionStorage.getItem('air_conditioner-type');
-    const acRecommendations = document.getElementById('ac-recommendations');
-    const acFlipCardFront = document.querySelector('#ac-flip-card .flip-card-front');
-    const acFlipCardBack = document.querySelector('#ac-flip-card .flip-card-back');
+        const acType = sessionStorage.getItem('air_conditioner-type');
+        const acRecommendations = document.getElementById('ac-recommendations');
+        const acFlipCardFront = document.querySelector('#ac-flip-card .flip-card-front');
+        const acFlipCardBack = document.querySelector('#ac-flip-card .flip-card-back');
 
-    if (acType === "Ducted") {
-        acRecommendations.style.display = 'block'; // Show recommendations
-        acFlipCardFront.innerHTML = `
+        if (acType === "Ducted") {
+            acRecommendations.style.display = 'block'; // Show recommendations
+            acFlipCardFront.innerHTML = `
         <h3>Be careful using <strong>ducted air conditioning</strong>.</h3>
     `;
-        acFlipCardBack.innerHTML = `
+            acFlipCardBack.innerHTML = `
         <p>While <strong>ducted air conditioning</strong>can be an efficient way to heat up an entire home, it may not always be necessary. <br>
         By only heating or cooling occupied spaces, <strong>non-ducted systems</strong> typically use less energy, leading to lower CO2 emissions.<br>
         Without the need for ducts, there’s also no risk of energy loss through leaks, improving overall system efficiency.<br></br>
 
 Even if you were to have <strong>non-ducted system</strong> in each room, the energy use increase could be negligible compared to heating unused rooms.</p>
     `;
-    }
+        }
 
-    const dw = sessionStorage.getItem('dishwasher-usage');
-    const dwRecommendations = document.getElementById('dw-recommendations');
-    const dwFlipCardFront = document.querySelector('#dw-flip-card .flip-card-front');
-    const dwFlipCardBack = document.querySelector('#dw-flip-card .flip-card-back');
+        const dw = sessionStorage.getItem('dishwasher-usage');
+        const dwRecommendations = document.getElementById('dw-recommendations');
+        const dwFlipCardFront = document.querySelector('#dw-flip-card .flip-card-front');
+        const dwFlipCardBack = document.querySelector('#dw-flip-card .flip-card-back');
 
-    if (dw > 0) {
-        dwRecommendations.style.display = 'block'; // Show recommendations
-        dwFlipCardFront.innerHTML = `
+        if (dw > 0) {
+            dwRecommendations.style.display = 'block'; // Show recommendations
+            dwFlipCardFront.innerHTML = `
         <h3>Use your <strong>dishwasher</strong> smarter.</h3>
     `;
-        dwFlipCardBack.innerHTML = `
+            dwFlipCardBack.innerHTML = `
         <p>Run your dishwasher only when it's full and use the energy-saving mode.<br>
          Reducing the frequency of washes and opting for cooler water settings can lower energy consumption, reducing your carbon footprint.</p>
     `;
-    }
+        }
 
-    const ref = sessionStorage.getItem('refrigerator-volume');
-    const refRecommendations = document.getElementById('ref-recommendations');
-    const refFlipCardFront = document.querySelector('#ref-flip-card .flip-card-front');
-    const refFlipCardBack = document.querySelector('#ref-flip-card .flip-card-back');
+        const ref = sessionStorage.getItem('refrigerator-volume');
+        const refRecommendations = document.getElementById('ref-recommendations');
+        const refFlipCardFront = document.querySelector('#ref-flip-card .flip-card-front');
+        const refFlipCardBack = document.querySelector('#ref-flip-card .flip-card-back');
 
-    if (ref != null) {
-        refRecommendations.style.display = 'block'; // Show recommendations
-        refFlipCardFront.innerHTML = `
+        if (ref != null) {
+            refRecommendations.style.display = 'block'; // Show recommendations
+            refFlipCardFront.innerHTML = `
         <h3>Optimise Your <strong>Refrigerator Usage</strong>.</h3>
     `;
-        refFlipCardBack.innerHTML = `
+            refFlipCardBack.innerHTML = `
         <p>Keep your refrigerator between 3°C and 5°C, and defrost it regularly to improve energy efficiency.<br>
          Doing so reduces emissions and prolongs the appliance's life.</p>
     `;
-    }
+        }
 
-    const cd = sessionStorage.getItem('clothes_dryer-type');
-    const cdRecommendations = document.getElementById('cd-recommendations');
-    const cdFlipCardFront = document.querySelector('#cd-flip-card .flip-card-front');
-    const cdFlipCardBack = document.querySelector('#cd-flip-card .flip-card-back');
+        const cd = sessionStorage.getItem('clothes_dryer-type');
+        const cdRecommendations = document.getElementById('cd-recommendations');
+        const cdFlipCardFront = document.querySelector('#cd-flip-card .flip-card-front');
+        const cdFlipCardBack = document.querySelector('#cd-flip-card .flip-card-back');
 
-    if (cd != null) {
-        cdRecommendations.style.display = 'block'; // Show recommendations
-        cdFlipCardFront.innerHTML = `
+        if (cd != null) {
+            cdRecommendations.style.display = 'block'; // Show recommendations
+            cdFlipCardFront.innerHTML = `
         <h3>Opt Out of Using <strong>a clothes dryer</strong>.</h3>
     `;
-        cdFlipCardBack.innerHTML = `
+            cdFlipCardBack.innerHTML = `
         <p>Skipping the dryer and air-drying clothes can save energy and lower your electricity costs.<br>
          This eco-friendly habit is especially effective during warmer months.</p>
     `;
-    }
+        }
 
-    $(document).ready(function () {
-        // Keep dropdown open on click
-        $('.dropdown-toggle').on('click', function (e) {
-            e.preventDefault(); // Prevent default action
-            $(this).next('.dropdown-menu').toggle(); // Toggle the dropdown menu
-        });
+    </script>
+</body>
 
-        // Hide dropdown when clicking outside of it
-        $(document).on('click', function (e) {
-            if (!$(e.target).closest('.dropdown').length) {
-                $('.dropdown-menu').hide(); // Hide the dropdown menu if clicked outside
-            }
-        });
-
-        // Optional: Hide dropdown when a menu item is clicked
-        $('.dropdown-menu a').on('click', function () {
-            $('.dropdown-menu').hide(); // Hide the dropdown after clicking an item
-        });
-    });
-</script>
+</html>
