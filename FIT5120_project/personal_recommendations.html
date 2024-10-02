@@ -185,12 +185,14 @@
                 </div>
             </div>
         </div>
-        <!-- Go to Top Button -->
-        <a id="go-to-top" href="#" title="Go to Top">
-            <i class="fas fa-chevron-up"></i>
-        </a>
     </section>
     <!-- ***** Solar Area Ends ***** -->
+
+    <div>
+        <button onclick="topFunction()" id="myBtn" title="Go to top">
+            <span class="text">TOP</span>
+        </button>
+    </div>
 
     <!-- ***** Gas Area Starts ***** -->
     <section class="section" id="gas">
@@ -494,6 +496,25 @@
     </div>
 
     <script>
+        // Get the button:
+        let button = document.getElementById("myBtn");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                button.style.display = "block";
+            } else {
+                button.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
         function getDistance(key) {
             const value = sessionStorage.getItem(key);
             return value !== null ? parseFloat(value) : 0; // Return the parsed float or 0 if null
@@ -807,7 +828,6 @@ Even if you were to have <strong>non-ducted system</strong> in each room, the en
          This eco-friendly habit is especially effective during warmer months.</p>
     `;
         }
-
     </script>
 </body>
 

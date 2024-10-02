@@ -485,6 +485,8 @@ recom
   border-bottom: 3px dotted #eee;
   color: white;
   /* Changes text color to contrast with the background */
+  position: relative;
+  /* Ensures proper layering of content */
 }
 
 #solar .section-heading {
@@ -1260,35 +1262,42 @@ recom
   /* Maintain aspect ratio */
 }
 
-#go-to-top {
+#myBtn {
   position: fixed;
-  bottom: 30px;
-  /* Distance from the bottom */
+  /* Keep it fixed on screen */
+  bottom: 20px;
+  /* Positioned 20px from the bottom */
   right: 30px;
-  /* Distance from the right */
-  background-color: #28a745;
-  /* Green color */
-  color: white;
-  /* Text color */
+  /* Positioned 30px from the right */
+  z-index: 999;
+  /* Ensures the button is on top of other elements */
+  width: 70px;
+  /* Set a smaller size */
+  height: 50px;
+  /* Make it a circle */
+  color: grey;
+  /* White icon */
   border: none;
-  border-radius: 50%;
-  /* Circular shape */
-  padding: 10px;
-  font-size: 24px;
+  /* No border */
+  border-radius: 30%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  /* Add shadow for depth */
+  cursor: pointer;
+  /* Pointer on hover */
+  font-size: 18px;
   /* Icon size */
   display: none;
-  /* Hidden by default */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  /* Shadow for depth */
-  z-index: 1000;
-  /* Ensure it stays on top of other elements */
-  transition: background-color 0.3s, transform 0.3s;
-  /* Smooth transitions */
+  /* Initially hidden */
+  justify-content: center;
+  /* Center icon */
+  align-items: center;
+  /* Center icon vertically */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  /* Smooth transition */
+  display: flex;
 }
 
-#go-to-top:hover {
-  background-color: #218838;
-  /* Darker green on hover */
-  transform: scale(1.1);
-  /* Slightly enlarge on hover */
+#myBtn::before {
+  content: "\25B2";
+  /* Unicode for an upward triangle (up arrow) */
 }
