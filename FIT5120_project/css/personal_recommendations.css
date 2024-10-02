@@ -497,15 +497,21 @@ recom
   background-color: transparent;
   width: 100%;
   min-height: 300px;
-  /* Use min-height for flexibility */
+  /* Minimum height for larger screens */
   perspective: 1000px;
   margin: 20px 0;
+  height: auto;
+  /* Allow the card to grow based on content */
+  display: flex;
+  flex-direction: column;
+  /* Ensures content stacks vertically */
 }
 
 .flip-card-inner {
   position: relative;
   width: 100%;
-  min-height: 300px;
+  min-height: 500px;
+  height: auto;
   /* Ensure inner also has a min-height */
   transition: transform 0.6s;
   transform-style: preserve-3d;
@@ -1098,8 +1104,10 @@ recom
 /* For screens smaller than 480px */
 @media (max-width: 480px) {
   .flip-card {
-    height: 180px;
-    /* Reduce card height */
+    min-height: 500px;
+    /* Set a minimum height, but allow it to grow */
+    height: auto;
+    /* Let the height adjust based on content */
   }
 
   .flip-card h3 {
@@ -1300,4 +1308,59 @@ recom
 #myBtn::before {
   content: "\25B2";
   /* Unicode for an upward triangle (up arrow) */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #myBtn {
+    width: 60px;
+    /* Slightly smaller width */
+    height: 45px;
+    /* Slightly smaller height */
+    font-size: 16px;
+    /* Smaller icon size */
+  }
+}
+
+@media (max-width: 480px) {
+  #myBtn {
+    width: 50px;
+    /* Even smaller width */
+    height: 40px;
+    /* Even smaller height */
+    font-size: 14px;
+    /* Smaller icon size */
+    right: 20px;
+    /* Adjust right position for smaller screens */
+    bottom: 15px;
+    /* Adjust bottom position for smaller screens */
+  }
+}
+
+#myBtn:hover {
+  background-color: #218838;
+  /* Darker green on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  /* Stronger shadow on hover */
+}
+
+#myBtn::before {
+  content: "\25B2";
+  /* Unicode for an upward triangle (up arrow) */
+  font-size: 24px;
+  /* Set a default size for the icon */
+}
+
+@media (max-width: 768px) {
+  #myBtn::before {
+    font-size: 20px;
+    /* Smaller icon for medium screens */
+  }
+}
+
+@media (max-width: 480px) {
+  #myBtn::before {
+    font-size: 16px;
+    /* Even smaller icon for smaller screens */
+  }
 }
