@@ -480,13 +480,10 @@ recom
 ---------------------------------------------
 */
 #solar {
-  padding: 90px 0;
-  /* Combined padding */
+  padding: 90px 0; /* Combined padding */
   border-bottom: 3px dotted #eee;
-  color: white;
-  /* Changes text color to contrast with the background */
-  position: relative;
-  /* Ensures proper layering of content */
+  color: white; /* Changes text color to contrast with the background */
+  position: relative; /* Ensures proper layering of content */
 }
 
 #solar .section-heading {
@@ -496,15 +493,12 @@ recom
 .flip-card {
   background-color: transparent;
   width: 100%;
-  min-height: 300px;
-  /* Minimum height for larger screens */
+  min-height: 300px; /* Minimum height for larger screens */
   perspective: 1000px;
   margin: 20px 0;
-  height: auto;
-  /* Allow the card to grow based on content */
+  height: auto; /* Allow the card to grow based on content */
   display: flex;
-  flex-direction: column;
-  /* Ensures content stacks vertically */
+  flex-direction: column; /* Ensures content stacks vertically */
 }
 
 .flip-card-inner {
@@ -538,39 +532,28 @@ recom
 
 /* Front side styles */
 .flip-card-front {
-  background-image: url(../img/solar-panel.jpg);
-  /* Replace with your image path */
-  background-size: cover;
-  /* Ensures the image covers the entire section */
-  background-position: center center;
-  /* Centers the image */
-  background-repeat: no-repeat;
-  /* Prevents the image from repeating */
-  padding: 80px 0;
-  /* Adds padding to the section for better spacing */
+  background-image: url(../img/solar-panel.jpg); /* Replace with your image path */
+  background-size: cover; /* Ensures the image covers the entire section */
+  background-position: center center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  padding: 80px 0; /* Adds padding to the section for better spacing */
 }
 
 .flip-card-front::before {
-  content: "";
-  /* Required for the pseudo-element */
-  position: absolute;
-  /* Positions it relative to the parent */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  /* Change the rgba values for different colors/opacity */
-  z-index: 1;
-  /* Ensure it sits above the background but below the content */
+    content: ""; /* Required for the pseudo-element */
+    position: absolute; /* Positions it relative to the parent */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Change the rgba values for different colors/opacity */
+    z-index: 1; /* Ensure it sits above the background but below the content */
 }
 
 /* Ensure content inside the card is above the overlay */
-.flip-card-front>* {
-  position: relative;
-  /* To ensure the content appears above the overlay */
-  z-index: 2;
-  /* Content appears above the overlay */
+.flip-card-front > * {
+    position: relative; /* To ensure the content appears above the overlay */
+    z-index: 2; /* Content appears above the overlay */
 }
 
 
@@ -641,39 +624,28 @@ recom
 }
 
 #gas-flip-card .flip-card-front {
-  background-image: url(../img/gas-water-heater.jpg);
-  /* Replace with your image path */
-  background-size: cover;
-  /* Ensures the image covers the entire section */
-  background-position: center center;
-  /* Centers the image */
-  background-repeat: no-repeat;
-  /* Prevents the image from repeating */
-  padding: 80px 0;
-  /* Adds padding to the section for better spacing */
+  background-image: url(../img/gas-water-heater.jpg); /* Replace with your image path */
+  background-size: cover; /* Ensures the image covers the entire section */
+  background-position: center center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  padding: 80px 0; /* Adds padding to the section for better spacing */
 }
 
 #gas-flip-card .flip-card-front::before {
-  content: "";
-  /* Required for the pseudo-element */
-  position: absolute;
-  /* Positions it relative to the parent */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  /* Change the rgba values for different colors/opacity */
-  z-index: 1;
-  /* Ensure it sits above the background but below the content */
+    content: ""; /* Required for the pseudo-element */
+    position: absolute; /* Positions it relative to the parent */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Change the rgba values for different colors/opacity */
+    z-index: 1; /* Ensure it sits above the background but below the content */
 }
 
 /* Ensure content inside the card is above the overlay */
-#gas-flip-card .flip-card-front>* {
-  position: relative;
-  /* To ensure the content appears above the overlay */
-  z-index: 2;
-  /* Content appears above the overlay */
+#gas-flip-card .flip-card-front > * {
+    position: relative; /* To ensure the content appears above the overlay */
+    z-index: 2; /* Content appears above the overlay */
 }
 
 #transportation {
@@ -683,147 +655,103 @@ recom
 }
 
 #car-flip-card .flip-card-front {
-  background-image: url(../img/eco-trans.jpeg);
-  /* Replace with your image path */
-  background-size: cover;
-  /* Ensures the image covers the entire section */
-  background-position: center center;
-  /* Centers the image */
-  background-repeat: no-repeat;
-  /* Prevents the image from repeating */
-  padding: 80px 0;
-  /* Adds padding to the section for better spacing */
+  background-image: url(../img/eco-trans.jpeg); /* Replace with your image path */
+  background-size: cover; /* Ensures the image covers the entire section */
+  background-position: center center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  padding: 80px 0; /* Adds padding to the section for better spacing */
 }
 
 #car-flip-card .flip-card-front::before {
-  content: "";
-  /* Required for the pseudo-element */
-  position: absolute;
-  /* Positions it relative to the parent */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  /* Change the rgba values for different colors/opacity */
-  z-index: 1;
-  /* Ensure it sits above the background but below the content */
+    content: ""; /* Required for the pseudo-element */
+    position: absolute; /* Positions it relative to the parent */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Change the rgba values for different colors/opacity */
+    z-index: 1; /* Ensure it sits above the background but below the content */
 }
 
 /* Ensure content inside the card is above the overlay */
-#car-flip-card .flip-card-front>* {
-  position: relative;
-  /* To ensure the content appears above the overlay */
-  z-index: 2;
-  /* Content appears above the overlay */
+#car-flip-card .flip-card-front > * {
+    position: relative; /* To ensure the content appears above the overlay */
+    z-index: 2; /* Content appears above the overlay */
 }
 
 #bus-flip-card .flip-card-front {
-  background-image: url(../img/eco-trans.jpeg);
-  /* Replace with your image path */
-  background-size: cover;
-  /* Ensures the image covers the entire section */
-  background-position: center center;
-  /* Centers the image */
-  background-repeat: no-repeat;
-  /* Prevents the image from repeating */
-  padding: 80px 0;
-  /* Adds padding to the section for better spacing */
+  background-image: url(../img/eco-trans.jpeg); /* Replace with your image path */
+  background-size: cover; /* Ensures the image covers the entire section */
+  background-position: center center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  padding: 80px 0; /* Adds padding to the section for better spacing */
 }
 
 #bus-flip-card .flip-card-front::before {
-  content: "";
-  /* Required for the pseudo-element */
-  position: absolute;
-  /* Positions it relative to the parent */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  /* Change the rgba values for different colors/opacity */
-  z-index: 1;
-  /* Ensure it sits above the background but below the content */
+    content: ""; /* Required for the pseudo-element */
+    position: absolute; /* Positions it relative to the parent */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Change the rgba values for different colors/opacity */
+    z-index: 1; /* Ensure it sits above the background but below the content */
 }
 
 /* Ensure content inside the card is above the overlay */
-#bus-flip-card .flip-card-front>* {
-  position: relative;
-  /* To ensure the content appears above the overlay */
-  z-index: 2;
-  /* Content appears above the overlay */
+#bus-flip-card .flip-card-front > * {
+    position: relative; /* To ensure the content appears above the overlay */
+    z-index: 2; /* Content appears above the overlay */
 }
 
 #tram-flip-card .flip-card-front {
-  background-image: url(../img/eco-trans.jpeg);
-  /* Replace with your image path */
-  background-size: cover;
-  /* Ensures the image covers the entire section */
-  background-position: center center;
-  /* Centers the image */
-  background-repeat: no-repeat;
-  /* Prevents the image from repeating */
-  padding: 80px 0;
-  /* Adds padding to the section for better spacing */
+  background-image: url(../img/eco-trans.jpeg); /* Replace with your image path */
+  background-size: cover; /* Ensures the image covers the entire section */
+  background-position: center center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  padding: 80px 0; /* Adds padding to the section for better spacing */
 }
 
 #tram-flip-card .flip-card-front::before {
-  content: "";
-  /* Required for the pseudo-element */
-  position: absolute;
-  /* Positions it relative to the parent */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  /* Change the rgba values for different colors/opacity */
-  z-index: 1;
-  /* Ensure it sits above the background but below the content */
+    content: ""; /* Required for the pseudo-element */
+    position: absolute; /* Positions it relative to the parent */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Change the rgba values for different colors/opacity */
+    z-index: 1; /* Ensure it sits above the background but below the content */
 }
 
 /* Ensure content inside the card is above the overlay */
-#tram-flip-card .flip-card-front>* {
-  position: relative;
-  /* To ensure the content appears above the overlay */
-  z-index: 2;
-  /* Content appears above the overlay */
+#tram-flip-card .flip-card-front > * {
+    position: relative; /* To ensure the content appears above the overlay */
+    z-index: 2; /* Content appears above the overlay */
 }
 
 #general-flip-card .flip-card-front {
-  background-image: url(../img/eco-trans.jpeg);
-  /* Replace with your image path */
-  background-size: cover;
-  /* Ensures the image covers the entire section */
-  background-position: center center;
-  /* Centers the image */
-  background-repeat: no-repeat;
-  /* Prevents the image from repeating */
-  padding: 80px 0;
-  /* Adds padding to the section for better spacing */
+  background-image: url(../img/eco-trans.jpeg); /* Replace with your image path */
+  background-size: cover; /* Ensures the image covers the entire section */
+  background-position: center center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  padding: 80px 0; /* Adds padding to the section for better spacing */
 }
 
 #general-flip-card .flip-card-front::before {
-  content: "";
-  /* Required for the pseudo-element */
-  position: absolute;
-  /* Positions it relative to the parent */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  /* Change the rgba values for different colors/opacity */
-  z-index: 1;
-  /* Ensure it sits above the background but below the content */
+    content: ""; /* Required for the pseudo-element */
+    position: absolute; /* Positions it relative to the parent */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Change the rgba values for different colors/opacity */
+    z-index: 1; /* Ensure it sits above the background but below the content */
 }
 
 /* Ensure content inside the card is above the overlay */
-#general-flip-card .flip-card-front>* {
-  position: relative;
-  /* To ensure the content appears above the overlay */
-  z-index: 2;
-  /* Content appears above the overlay */
+#general-flip-card .flip-card-front > * {
+    position: relative; /* To ensure the content appears above the overlay */
+    z-index: 2; /* Content appears above the overlay */
 }
 
 #transportation .section-heading {
@@ -841,219 +769,153 @@ recom
 }
 
 #tv-flip-card .flip-card-front {
-  background-image: url(../img/Appliances.jpg);
-  /* Replace with your image path */
-  background-size: cover;
-  /* Ensures the image covers the entire section */
-  background-position: center center;
-  /* Centers the image */
-  background-repeat: no-repeat;
-  /* Prevents the image from repeating */
-  padding: 80px 0;
-  /* Adds padding to the section for better spacing */
+  background-image: url(../img/Appliances.jpg); /* Replace with your image path */
+  background-size: cover; /* Ensures the image covers the entire section */
+  background-position: center center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  padding: 80px 0; /* Adds padding to the section for better spacing */
 }
 
 #tv-flip-card .flip-card-front::before {
-  content: "";
-  /* Required for the pseudo-element */
-  position: absolute;
-  /* Positions it relative to the parent */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.75);
-  /* Change the rgba values for different colors/opacity */
-  z-index: 1;
-  /* Ensure it sits above the background but below the content */
+    content: ""; /* Required for the pseudo-element */
+    position: absolute; /* Positions it relative to the parent */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75); /* Change the rgba values for different colors/opacity */
+    z-index: 1; /* Ensure it sits above the background but below the content */
 }
 
 /* Ensure content inside the card is above the overlay */
-#tv-flip-card .flip-card-front>* {
-  position: relative;
-  /* To ensure the content appears above the overlay */
-  z-index: 2;
-  /* Content appears above the overlay */
+#tv-flip-card .flip-card-front > * {
+    position: relative; /* To ensure the content appears above the overlay */
+    z-index: 2; /* Content appears above the overlay */
 }
 
 #cw-flip-card .flip-card-front {
-  background-image: url(../img/Appliances.jpg);
-  /* Replace with your image path */
-  background-size: cover;
-  /* Ensures the image covers the entire section */
-  background-position: center center;
-  /* Centers the image */
-  background-repeat: no-repeat;
-  /* Prevents the image from repeating */
-  padding: 80px 0;
-  /* Adds padding to the section for better spacing */
+  background-image: url(../img/Appliances.jpg); /* Replace with your image path */
+  background-size: cover; /* Ensures the image covers the entire section */
+  background-position: center center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  padding: 80px 0; /* Adds padding to the section for better spacing */
 }
 
 #cw-flip-card .flip-card-front::before {
-  content: "";
-  /* Required for the pseudo-element */
-  position: absolute;
-  /* Positions it relative to the parent */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.75);
-  /* Change the rgba values for different colors/opacity */
-  z-index: 1;
-  /* Ensure it sits above the background but below the content */
+    content: ""; /* Required for the pseudo-element */
+    position: absolute; /* Positions it relative to the parent */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75); /* Change the rgba values for different colors/opacity */
+    z-index: 1; /* Ensure it sits above the background but below the content */
 }
 
 /* Ensure content inside the card is above the overlay */
-#cw-flip-card .flip-card-front>* {
-  position: relative;
-  /* To ensure the content appears above the overlay */
-  z-index: 2;
-  /* Content appears above the overlay */
+#cw-flip-card .flip-card-front > * {
+    position: relative; /* To ensure the content appears above the overlay */
+    z-index: 2; /* Content appears above the overlay */
 }
 
 #ac-flip-card .flip-card-front {
-  background-image: url(../img/Appliances.jpg);
-  /* Replace with your image path */
-  background-size: cover;
-  /* Ensures the image covers the entire section */
-  background-position: center center;
-  /* Centers the image */
-  background-repeat: no-repeat;
-  /* Prevents the image from repeating */
-  padding: 80px 0;
-  /* Adds padding to the section for better spacing */
+  background-image: url(../img/Appliances.jpg); /* Replace with your image path */
+  background-size: cover; /* Ensures the image covers the entire section */
+  background-position: center center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  padding: 80px 0; /* Adds padding to the section for better spacing */
 }
 
 #ac-flip-card .flip-card-front::before {
-  content: "";
-  /* Required for the pseudo-element */
-  position: absolute;
-  /* Positions it relative to the parent */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.75);
-  /* Change the rgba values for different colors/opacity */
-  z-index: 1;
-  /* Ensure it sits above the background but below the content */
+    content: ""; /* Required for the pseudo-element */
+    position: absolute; /* Positions it relative to the parent */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75); /* Change the rgba values for different colors/opacity */
+    z-index: 1; /* Ensure it sits above the background but below the content */
 }
 
 /* Ensure content inside the card is above the overlay */
-#ac-flip-card .flip-card-front>* {
-  position: relative;
-  /* To ensure the content appears above the overlay */
-  z-index: 2;
-  /* Content appears above the overlay */
+#ac-flip-card .flip-card-front > * {
+    position: relative; /* To ensure the content appears above the overlay */
+    z-index: 2; /* Content appears above the overlay */
 }
 
 #dw-flip-card .flip-card-front {
-  background-image: url(../img/Appliances.jpg);
-  /* Replace with your image path */
-  background-size: cover;
-  /* Ensures the image covers the entire section */
-  background-position: center center;
-  /* Centers the image */
-  background-repeat: no-repeat;
-  /* Prevents the image from repeating */
-  padding: 80px 0;
-  /* Adds padding to the section for better spacing */
+  background-image: url(../img/Appliances.jpg); /* Replace with your image path */
+  background-size: cover; /* Ensures the image covers the entire section */
+  background-position: center center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  padding: 80px 0; /* Adds padding to the section for better spacing */
 }
 
 #dw-flip-card .flip-card-front::before {
-  content: "";
-  /* Required for the pseudo-element */
-  position: absolute;
-  /* Positions it relative to the parent */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.75);
-  /* Change the rgba values for different colors/opacity */
-  z-index: 1;
-  /* Ensure it sits above the background but below the content */
+    content: ""; /* Required for the pseudo-element */
+    position: absolute; /* Positions it relative to the parent */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75); /* Change the rgba values for different colors/opacity */
+    z-index: 1; /* Ensure it sits above the background but below the content */
 }
 
 /* Ensure content inside the card is above the overlay */
-#dw-flip-card .flip-card-front>* {
-  position: relative;
-  /* To ensure the content appears above the overlay */
-  z-index: 2;
-  /* Content appears above the overlay */
+#dw-flip-card .flip-card-front > * {
+    position: relative; /* To ensure the content appears above the overlay */
+    z-index: 2; /* Content appears above the overlay */
 }
 
 #ref-flip-card .flip-card-front {
-  background-image: url(../img/Appliances.jpg);
-  /* Replace with your image path */
-  background-size: cover;
-  /* Ensures the image covers the entire section */
-  background-position: center center;
-  /* Centers the image */
-  background-repeat: no-repeat;
-  /* Prevents the image from repeating */
-  padding: 80px 0;
-  /* Adds padding to the section for better spacing */
+  background-image: url(../img/Appliances.jpg); /* Replace with your image path */
+  background-size: cover; /* Ensures the image covers the entire section */
+  background-position: center center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  padding: 80px 0; /* Adds padding to the section for better spacing */
 }
 
 #ref-flip-card .flip-card-front::before {
-  content: "";
-  /* Required for the pseudo-element */
-  position: absolute;
-  /* Positions it relative to the parent */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.75);
-  /* Change the rgba values for different colors/opacity */
-  z-index: 1;
-  /* Ensure it sits above the background but below the content */
+    content: ""; /* Required for the pseudo-element */
+    position: absolute; /* Positions it relative to the parent */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75); /* Change the rgba values for different colors/opacity */
+    z-index: 1; /* Ensure it sits above the background but below the content */
 }
 
 /* Ensure content inside the card is above the overlay */
-#ref-flip-card .flip-card-front>* {
-  position: relative;
-  /* To ensure the content appears above the overlay */
-  z-index: 2;
-  /* Content appears above the overlay */
+#ref-flip-card .flip-card-front > * {
+    position: relative; /* To ensure the content appears above the overlay */
+    z-index: 2; /* Content appears above the overlay */
 }
 
 #cd-flip-card .flip-card-front {
-  background-image: url(../img/Appliances.jpg);
-  /* Replace with your image path */
-  background-size: cover;
-  /* Ensures the image covers the entire section */
-  background-position: center center;
-  /* Centers the image */
-  background-repeat: no-repeat;
-  /* Prevents the image from repeating */
-  padding: 80px 0;
-  /* Adds padding to the section for better spacing */
+  background-image: url(../img/Appliances.jpg); /* Replace with your image path */
+  background-size: cover; /* Ensures the image covers the entire section */
+  background-position: center center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  padding: 80px 0; /* Adds padding to the section for better spacing */
 }
 
 #cd-flip-card .flip-card-front::before {
-  content: "";
-  /* Required for the pseudo-element */
-  position: absolute;
-  /* Positions it relative to the parent */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.75);
-  /* Change the rgba values for different colors/opacity */
-  z-index: 1;
-  /* Ensure it sits above the background but below the content */
+    content: ""; /* Required for the pseudo-element */
+    position: absolute; /* Positions it relative to the parent */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75); /* Change the rgba values for different colors/opacity */
+    z-index: 1; /* Ensure it sits above the background but below the content */
 }
 
 /* Ensure content inside the card is above the overlay */
-#cd-flip-card .flip-card-front>* {
-  position: relative;
-  /* To ensure the content appears above the overlay */
-  z-index: 2;
-  /* Content appears above the overlay */
+#cd-flip-card .flip-card-front > * {
+    position: relative; /* To ensure the content appears above the overlay */
+    z-index: 2; /* Content appears above the overlay */
 }
 
 #gov {
@@ -1104,11 +966,9 @@ recom
 /* For screens smaller than 480px */
 @media (max-width: 480px) {
   .flip-card {
-    min-height: 500px;
-    /* Set a minimum height, but allow it to grow */
-    height: auto;
-    /* Let the height adjust based on content */
-  }
+    min-height: 500px; /* Set a minimum height, but allow it to grow */
+    height: auto; /* Let the height adjust based on content */
+}
 
   .flip-card h3 {
     font-size: 1.4em;
@@ -1238,129 +1098,260 @@ recom
 }
 
 .section-heading p {
-  font-size: 16px;
-  /* Adjust font size */
-  color: #555;
-  /* Light gray color */
-  margin-top: 20px;
-  /* Space between the heading and the paragraph */
-  text-align: left;
-  /* Center the text */
-  font-style: italic;
-  /* Make the text italic */
-  transition: color 0.3s ease;
-  /* Smooth color transition on hover */
+    font-size: 16px; /* Adjust font size */
+    color: #555; /* Light gray color */
+    margin-top: 20px; /* Space between the heading and the paragraph */
+    text-align: left; /* Center the text */
+    font-style: italic; /* Make the text italic */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
 }
 
 .dollar-icon {
-  position: absolute;
-  /* Make it absolute to position it within the parent */
-  top: 10px;
-  /* Adjust as needed */
-  right: 10px;
-  /* Adjust as needed */
-  z-index: 2;
-  /* Ensure it appears above other content */
+    position: absolute; /* Make it absolute to position it within the parent */
+    top: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    z-index: 2; /* Ensure it appears above other content */
 }
 
 .dollar-icon img {
-  width: 60px;
-  /* Adjust size as needed */
-  height: 60px;
-  /* Maintain aspect ratio */
+    width: 60px; /* Adjust size as needed */
+    height: 60px; /* Maintain aspect ratio */
 }
 
 #myBtn {
-  position: fixed;
-  /* Keep it fixed on screen */
-  bottom: 20px;
-  /* Positioned 20px from the bottom */
-  right: 30px;
-  /* Positioned 30px from the right */
-  z-index: 999;
-  /* Ensures the button is on top of other elements */
-  width: 70px;
-  /* Set a smaller size */
-  height: 50px;
-  /* Make it a circle */
-  color: grey;
-  /* White icon */
-  border: none;
-  /* No border */
+  position: fixed; /* Keep it fixed on screen */
+  bottom: 20px; /* Positioned 20px from the bottom */
+  right: 30px; /* Positioned 30px from the right */
+  z-index: 999; /* Ensures the button is on top of other elements */
+  width: 70px; /* Set a smaller size */
+  height: 50px; /* Make it a circle */
+  color: grey; /* White icon */
+  border: none; /* No border */
   border-radius: 30%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  /* Add shadow for depth */
-  cursor: pointer;
-  /* Pointer on hover */
-  font-size: 18px;
-  /* Icon size */
-  display: none;
-  /* Initially hidden */
-  justify-content: center;
-  /* Center icon */
-  align-items: center;
-  /* Center icon vertically */
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  /* Smooth transition */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Add shadow for depth */
+  cursor: pointer; /* Pointer on hover */
+  font-size: 18px; /* Icon size */
+  display: none; /* Initially hidden */
+  justify-content: center; /* Center icon */
+  align-items: center; /* Center icon vertically */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
   display: flex;
 }
-
 #myBtn::before {
-  content: "\25B2";
-  /* Unicode for an upward triangle (up arrow) */
+  content: "\25B2"; /* Unicode for an upward triangle (up arrow) */
 }
-
 /* Responsive adjustments */
 @media (max-width: 768px) {
   #myBtn {
-    width: 60px;
-    /* Slightly smaller width */
-    height: 45px;
-    /* Slightly smaller height */
-    font-size: 16px;
-    /* Smaller icon size */
+    width: 60px; /* Slightly smaller width */
+    height: 45px; /* Slightly smaller height */
+    font-size: 16px; /* Smaller icon size */
   }
 }
 
 @media (max-width: 480px) {
   #myBtn {
-    width: 50px;
-    /* Even smaller width */
-    height: 40px;
-    /* Even smaller height */
-    font-size: 14px;
-    /* Smaller icon size */
-    right: 20px;
-    /* Adjust right position for smaller screens */
-    bottom: 15px;
-    /* Adjust bottom position for smaller screens */
+    width: 50px; /* Even smaller width */
+    height: 40px; /* Even smaller height */
+    font-size: 14px; /* Smaller icon size */
+    right: 20px; /* Adjust right position for smaller screens */
+    bottom: 15px; /* Adjust bottom position for smaller screens */
   }
 }
 
 #myBtn:hover {
-  background-color: #218838;
-  /* Darker green on hover */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-  /* Stronger shadow on hover */
+  background-color: #218838; /* Darker green on hover */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4); /* Stronger shadow on hover */
 }
 
 #myBtn::before {
-  content: "\25B2";
-  /* Unicode for an upward triangle (up arrow) */
-  font-size: 24px;
-  /* Set a default size for the icon */
+  content: "\25B2"; /* Unicode for an upward triangle (up arrow) */
+  font-size: 24px; /* Set a default size for the icon */
 }
 
 @media (max-width: 768px) {
   #myBtn::before {
-    font-size: 20px;
-    /* Smaller icon for medium screens */
+    font-size: 20px; /* Smaller icon for medium screens */
   }
 }
 
 @media (max-width: 480px) {
   #myBtn::before {
-    font-size: 16px;
-    /* Even smaller icon for smaller screens */
+    font-size: 16px; /* Even smaller icon for smaller screens */
   }
+}
+
+footer {
+	margin-top: -6px;
+	background-color: #373a3c;
+	padding: 50px 0px;
+}
+footer .logo em {
+	font-style: normal;
+	font-size: 28px;
+	color: #69d76c;
+}
+footer .logo-ft {
+	display: inline-block;
+	margin-top: 15px;
+	text-decoration: none;
+	color: #fff!important;
+	font-size: 21px;
+	font-weight: 900;
+	text-transform: uppercase;
+	text-shadow: none;
+	letter-spacing: 1px;
+}
+
+footer .logo p {
+	font-weight: 300;
+	font-size: 12px;
+	color: #fff;
+	margin-bottom: -10px;
+	letter-spacing: 0.5px;
+}
+
+footer .logo span {
+	font-weight: 600;
+	color: #f7c552;
+}
+
+footer .logo a {
+	color: #FFF;
+}
+
+footer .logo a:hover {
+	color: #9F0;
+}
+
+footer .location h4 {
+	margin-top: 0px;
+	font-size: 13px;
+	font-weight: 500;
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	margin-bottom: 30px;
+}
+
+footer .location ul li {
+	font-size: 13px;
+	color: #fff;
+	display: inline-block;
+	line-height: 24px;
+	letter-spacing: 0.5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+footer .location ul li:first-child {
+	margin-right: 15px;
+	padding-right: 15px;
+	border-right: 1px solid rgba(250, 250, 250, 0.1);
+}
+
+footer .contact-info h4 {
+	margin-top: 0px;
+	font-size: 13px;
+	font-weight: 500;
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	margin-bottom: 30px;
+}
+
+footer .contact-info ul li {
+	font-size: 13px;
+	color: #fff;
+	display: inline-block;
+	line-height: 24px;
+	letter-spacing: 0.5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-weight: 300;
+	margin-bottom: -15px;
+}
+
+footer .contact-info ul li em {
+	font-style: normal;
+	font-weight: 500;
+}
+
+footer .connect-us h4 {
+	margin-top: 0px;
+	font-size: 13px;
+	font-weight: 500;
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	margin-bottom: 35px;
+}
+
+footer .connect-us ul li {
+	display: inline-block;
+	margin-right: 2px;
+}
+
+footer .connect-us ul li a {
+	display: inline-block;
+	width: 28px;
+	height: 28px;
+	line-height: 28px;
+	text-align: center;
+	background-color: #fff;
+	border-radius: 50%;
+	color: #373a3c;
+	font-size: 15px;
+	transition: all 0.3s;
+}
+footer .connect-us ul li a:hover {
+	background-color: #f7c552;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 991px){
+
+	footer {
+		text-align: center;
+	}
+
+	footer .logo {
+		margin-bottom: 30px;
+		padding-bottom: 30px;
+		border-bottom: 1px solid rgba(250, 250, 250, 0.1);
+	}
+
+	footer .location {
+		margin-bottom: 30px;
+		padding-bottom: 30px;
+		border-bottom: 1px solid rgba(250, 250, 250, 0.1);
+	}
+
+	footer .contact-info {
+		margin-bottom: 30px;
+		padding-bottom: 30px;
+		border-bottom: 1px solid rgba(250, 250, 250, 0.1);
+	}
+
+	footer .contact-info ul li {
+		margin-right: 10px;
+		margin-left: 10px;
+	}
+
+}
+
+
+@media (max-width: 385px){
+
+	footer .location ul li {
+		display: block;
+	}
+
+	footer .location ul li:first-child {
+		margin-right: 0px;
+		padding-right: 0px;
+		border-right: none;
+	}
+
 }
