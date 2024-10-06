@@ -41,7 +41,8 @@
                 window.location.href = 'emission_cal_cover.html';
             }
         };
-    </script>
+
+</script>
 </head>
 
 <body>
@@ -83,7 +84,7 @@
                     <div class="left-content">
                         <div class="thumb">
                             <div class="inner-content">
-                                <h4>Your Custom Plan for a Greener Future.</h4>
+                                <h4>Your Personalised Recommendations for a Greener Future.</h4>
                                 <span>Tailored CO2 Reduction Strategies for Your Lifestyle</span>
                             </div>
                             <img src="img/greener_future.jpg" alt="">
@@ -160,6 +161,7 @@
                 <div class="col-lg-6">
                     <div class="section-heading">
                         <h2>Unlock Solar Potential</h2>
+                            <p> Hover to see recommendations</p>
                     </div>
                 </div>
             </div>
@@ -186,6 +188,12 @@
     </section>
     <!-- ***** Solar Area Ends ***** -->
 
+    <div>
+        <button onclick="topFunction()" id="myBtn" title="Go to top">
+            <span class="text">TOP</span>
+        </button>
+    </div>
+
     <!-- ***** Gas Area Starts ***** -->
     <section class="section" id="gas">
         <div class="container">
@@ -193,6 +201,7 @@
                 <div class="col-lg-6">
                     <div class="section-heading">
                         <h2>Smart Gas Usage</h2>
+                        <p> Hover to see recommendations</p>
                     </div>
                 </div>
             </div>
@@ -226,6 +235,7 @@
                 <div class="col-lg-6">
                     <div class="section-heading">
                         <h2>Green Travel Choices</h2>
+                        <p> Hover to see recommendations</p>
                     </div>
                 </div>
             </div>
@@ -332,6 +342,7 @@
                 <div class="col-lg-6">
                     <div class="section-heading">
                         <h2>Eco-Friendly Appliance Tips</h2>
+                        <p> Hover to see recommendations</p>
                     </div>
                 </div>
             </div>
@@ -444,8 +455,6 @@
                 </div>
             </div>
         </div>
-
-
     </section>
     <!-- ***** Transportation Area Ends ***** -->
 
@@ -485,11 +494,42 @@
             Again</button>
         <button onclick="window.location.href='index.html'" class="button">Back to Home</button>
     </div>
-</body>
 
-</html>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+                <div class="logo">
+                    <a href="index.html" class="scroll-top">
+                        <img src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
+                    </a>
+                    <p>Melbourne, Australia</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
 <script>
+        // Get the button:
+let button = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    button.style.display = "block";
+  } else {
+    button.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
     function getDistance(key) {
         const value = sessionStorage.getItem(key);
         return value !== null ? parseFloat(value) : 0; // Return the parsed float or 0 if null
@@ -510,33 +550,43 @@
     const gasFlipCardBack = document.querySelector('#gas-flip-card .flip-card-back');
 
     if (solarPanels === 'yes') {
-        recommendationContainer.style.display = 'block'; // Show recommendations
-        if (gridDependence >= 50) {
-            flipCardFront.innerHTML = `
-                <h3>You rely on solar energy for <strong>at least half of your electricity needs</strong>.</h3>
-            `;
-            flipCardBack.innerHTML = `
-                <p>Schedule heavy electricity use (like washing machines or electric vehicles) during the day when your solar panels are generating power.<br></br>
-                You can also take advantage of the Victorian Solar Battery Rebate, offering up to $2,950, to install solar battery storage.<br>
-                This will allow you to store excess energy for nighttime use, reducing reliance on the grid and saving money.<br></br>
-                <a href="https://www.solar.vic.gov.au/" target="_blank" class="learn-more-button">Learn More</a></p>
-            `;
-        } else {
-            flipCardFront.innerHTML = `
-                <h3>You rely on solar energy for <strong>less than half of your electricity needs</strong>.</h3>
-            `;
-            flipCardBack.innerHTML = `
-                <p>Consider increasing your reliance on solar power by installing a solar battery system to store excess energy generated during the day.<br></br>
-                With the Victorian Solar Battery Rebate of up to $2,950, this can be a more affordable option to reduce grid dependence and enhance energy savings. <br></br>
-                <a href="https://www.solar.vic.gov.au/" target="_blank" class="learn-more-button">Learn More</a></p>
-            `;
-        }
+    recommendationContainer.style.display = 'block'; // Show recommendations
+
+    if (gridDependence >= 50) {
+        flipCardFront.innerHTML = `
+            <h3>You rely on solar energy for <strong> 50% or more of your electricity needs</strong>.</h3>
+        `;
+        flipCardBack.innerHTML = `
+                <div class="dollar-icon">
+        <img src="../img/dollar.png" alt="Dollar Icon" />
+    </div>
+            <p>Schedule heavy electricity use (like washing machines or electric vehicles) during the day when your solar panels are generating power.<br></br>
+            You can also take advantage of the Victorian Solar Battery Rebate, offering up to $2,950, to install solar battery storage.<br>
+            This will allow you to store excess energy for nighttime use, reducing reliance on the grid and saving money.<br></br>
+            <a href="https://www.solar.vic.gov.au/" target="_blank" class="learn-more-button">Learn More</a></p>
+        `;
+    } else {
+        flipCardFront.innerHTML = `
+            <h3>You rely on solar energy for <strong> less than 50% of your electricity needs</strong>.</h3>
+        `;
+        flipCardBack.innerHTML = `
+          <div class="dollar-icon">
+        <img src="../img/dollar.png" alt="Dollar Icon" />
+    </div>
+            <p>Consider increasing your reliance on solar power by installing a solar battery system to store excess energy generated during the day.<br></br>
+            With the Victorian Solar Battery Rebate of up to $2,950, this can be a more affordable option to reduce grid dependence and enhance energy savings. <br></br>
+            <a href="https://www.solar.vic.gov.au/" target="_blank" class="learn-more-button">Learn More</a></p>
+        `;
+    }
     } else if (solarPanels === 'no') {
         recommendationContainer.style.display = 'block'; // Show recommendations
         flipCardFront.innerHTML = `
             <h3>You <strong>do not have solar panels</strong> installed in your home.</h3>
         `;
         flipCardBack.innerHTML = `
+          <div class="dollar-icon">
+        <img src="../img/dollar.png" alt="Dollar Icon" />
+    </div>
             <p>Explore the Solar Homes Program by the Victorian government, which offers a rebate of up to $1,400 for solar panel installations.<br>
             You can also apply for interest-free loans to make the switch to solar energy more affordable.<br>
             By switching to solar, you can significantly reduce your energy costs while also lowering your household’s carbon footprint.<br></br>
@@ -550,6 +600,9 @@
             <h3>You are using a gas water heater for your hot water needs.</h3>
         `;
         gasFlipCardBack.innerHTML = `
+          <div class="dollar-icon">
+        <img src="../img/dollar.png" alt="Dollar Icon" />
+    </div>
             <p>Switching to an energy-efficient gas water heater or an electric heat pump can significantly lower your energy usage and utilities bill.<br></br>
              In Victoria, electricity works out much cheaper than gas.<br>
              Swapping gas for electricity can save Australian households about $450 per household every year.<br></br>
@@ -558,9 +611,12 @@
     } else if (gasWaterHeater === 'no') {
         gasRecommendationContainer.style.display = 'block'; // Show recommendations for users without gas water heaters
         gasFlipCardFront.innerHTML = `
-            <h3>You are not using gas currently.</h3>
+            <h3>You are <strong>not using a gas water heater</strong>currently.</h3>
         `;
         gasFlipCardBack.innerHTML = `
+          <div class="dollar-icon">
+        <img src="../img/dollar.png" alt="Dollar Icon" />
+    </div>
             <p>By relying on electricity, you’ve already made a smart choice!<br></br>
             Electric appliances are often more efficient and can significantly lower your energy bills compared to gas.
             Explore the latest energy-efficient electric options available, and consider how this choice contributes to a more sustainable future.</p>
@@ -584,7 +640,7 @@
     if (carDistance < 50 && carDistance > 0) {
         carRecommendations.style.display = 'block'; // Show recommendations
         carFlipCardFront.innerHTML = `
-        <h3>You drive <strong>less than 50 km per week</strong> in your private vehicle.</h3>
+        <h3>You drive <strong> less than 50km per week</strong> in your private vehicle.</h3>
     `;
         carFlipCardBack.innerHTML = `
         <p>For shorter trips, consider walking or biking to reduce your emissions.<br>
@@ -594,9 +650,12 @@
     } else if (carDistance >= 50) {
         carRecommendations.style.display = 'block'; // Show recommendations
         carFlipCardFront.innerHTML = `
-        <h3>You drive <strong>more than 50 km per week</strong> in your private vehicle.</h3>
+        <h3>You drive <strong> 50km or more per week</strong> in your private vehicle.</h3>
     `;
         carFlipCardBack.innerHTML = `
+            <div class="dollar-icon">
+        <img src="../img/dollar.png" alt="Dollar Icon" />
+    </div>
         <p>For long-distance driving, consider switching to an electric vehicle (EV).<br></br>
          With the Victorian Zero Emissions Vehicle (ZEV) Subsidy, you can receive <strong>up to $3,000</strong>to offset the cost of a new EV.<br></br>
          Alternatively, consider carpooling with others to share the driving burden, reducing emissions and fuel costs.</p>
@@ -611,7 +670,7 @@
     if (busDistance < 50 && busDistance > 0) {
         busRecommendations.style.display = 'block'; // Show recommendations
         busFlipCardFront.innerHTML = `
-        <h3>You use the bus for <strong>less than 50 km per week per week</strong>.</h3>
+        <h3>You use the bus for <strong> less than 50km per week per week</strong>.</h3>
     `;
         busFlipCardBack.innerHTML = `
         <p>For short bus commutes, try combining your ride with active travel like walking or biking to the bus stop.<br>
@@ -620,7 +679,7 @@
     } else if (busDistance >= 50) {
         busRecommendations.style.display = 'block'; // Show recommendations
         busFlipCardFront.innerHTML = `
-        <h3>You use the bus for <strong>more than 50 km per week</strong>.</h3>
+        <h3>You use the bus for <strong> 50km or more per week</strong>.</h3>
     `;
         busFlipCardBack.innerHTML = `
         <p>You’re already making an environmentally friendly choice by using public transport!<br></br>
@@ -637,9 +696,12 @@
     if (tramDistance < 50 && tramDistance > 0) {
         tramRecommendations.style.display = 'block'; // Show recommendations
         tramFlipCardFront.innerHTML = `
-        <h3>You use the tram for <strong>less than 50 km per week per week</strong>.</h3>
+        <h3>You use the tram for <strong> less than 50km per week per week</strong>.</h3>
     `;
         tramFlipCardBack.innerHTML = `
+          <div class="dollar-icon">
+        <img src="../img/dollar.png" alt="Dollar Icon" />
+    </div>
         <p>For short commutes within Melbourne's CBD, take advantage of the Free Tram Zone.<br>
          Walking to and from tram stops instead of driving can also help cut down on emissions and parking costs.<br></br>
          <a href="https://www.ptv.vic.gov.au/assets/PDFs/Maps/Network-maps/5b4a3efe80/PTV-Free-Tram-Zone-Map.pdf" target="_blank" class="learn-more-button">Learn More</a></p>
@@ -647,7 +709,7 @@
     } else if (tramDistance >= 50) {
         tramRecommendations.style.display = 'block'; // Show recommendations
         tramFlipCardFront.innerHTML = `
-        <h3>You use the tram for <strong>more than 50 km per week</strong>.</h3>
+        <h3>You use the tram for <strong> 50km or more per week</strong>.</h3>
     `;
         tramFlipCardBack.innerHTML = `
         <p>Melbourne’s tram network extends beyond the city center.<br>
@@ -666,6 +728,9 @@
         <h3>You don't use public transportation.</h3>
     `;
         generalFlipCardBack.innerHTML = `
+          <div class="dollar-icon">
+        <img src="../img/dollar.png" alt="Dollar Icon" />
+    </div>
         <p>Consider taking public transport.<br></br>
          With an extensive network of trains, trams, and buses, Melbourne's public transport system offers a convenient alternative to driving.<br></br>
          Letting you save on all those tanks of petrol as well.</p>
@@ -683,6 +748,9 @@
         <h3>You use <strong>a large TV</strong>.</h3>
     `;
         tvFlipCardBack.innerHTML = `
+          <div class="dollar-icon">
+        <img src="../img/dollar.png" alt="Dollar Icon" />
+    </div>
         <p>Having a large TV can be great.. <br>
         But sometimes you might have a TV that's bigger than necessary. <br></br>
         Check the size chart below to see if your TV is the right size, given how close you sit to it. You could even save hundreds of dollars in price by opting for a smaller TV!
@@ -701,6 +769,9 @@
         <h3>You use <strong>a top load clothes washer</strong>.</h3>
     `;
         cwFlipCardBack.innerHTML = `
+          <div class="dollar-icon">
+        <img src="../img/dollar.png" alt="Dollar Icon" />
+    </div>
         <p>Consider changing to a front loader which are high efficiency, using less water overall.<br></br>
         <strong>Front load washers</strong> can also reduce dry time. Water drains out of clothes more easily with a tumbling motion, so clothes come out of the washer dryer, further reducing energy use and your electric and water bill.</p>
     `;
@@ -772,24 +843,6 @@ Even if you were to have <strong>non-ducted system</strong> in each room, the en
          This eco-friendly habit is especially effective during warmer months.</p>
     `;
     }
-
-    $(document).ready(function () {
-        // Keep dropdown open on click
-        $('.dropdown-toggle').on('click', function (e) {
-            e.preventDefault(); // Prevent default action
-            $(this).next('.dropdown-menu').toggle(); // Toggle the dropdown menu
-        });
-
-        // Hide dropdown when clicking outside of it
-        $(document).on('click', function (e) {
-            if (!$(e.target).closest('.dropdown').length) {
-                $('.dropdown-menu').hide(); // Hide the dropdown menu if clicked outside
-            }
-        });
-
-        // Optional: Hide dropdown when a menu item is clicked
-        $('.dropdown-menu a').on('click', function () {
-            $('.dropdown-menu').hide(); // Hide the dropdown after clicking an item
-        });
-    });
 </script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Portal - Bootstrap 5 Admin Dashboard Template For Developers</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/emission_appli.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/fontAwesome.css">
+    <link rel="stylesheet" href="css/hero-slider.css">
+    <link rel="stylesheet" href="css/owl-carousel.css">
+    <link rel="stylesheet" href="css/emission_personal.css">
+    <link rel="stylesheet" href="css/lightbox.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+
+    <!-- FontAwesome JS-->
+    <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!-- App CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
+
+    <style>
+        html, body {
+            height: 100%; /* Ensure full height for html and body */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f9f4e9;
+            padding: 100px 0 0 0;
+        }
+
+        .app-wrapper {
+            min-height: 100vh; /* Ensure wrapper takes full viewport height */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-content {
+            flex-grow: 1; /* Ensure content area grows */
+            overflow-y: auto; /* Enable scrolling in the content area */
+            padding: 20px;
+        }
+
+        .footer {
+            padding: 10px;
+            flex-shrink: 0; /* Make sure the footer is always at the bottom */
+        }
+
+        .container-xl {
+            max-width: 1400px; /* Set maximum width for the container */
+            margin: 0 auto;
+        }
+
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center; /* Center charts */
+            width: 100%;
+            padding: 10px;
+        }
+
+        .chart {
+            flex: 1 1 45%;
+            min-width: 300px;
+            max-width: 100%; /* Ensure charts are responsive */
+            margin-top: 20px;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <!-- Header Section with Navigation Bar -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
+                <div class="container-fluid">
+                    <!-- Navbar brand/logo -->
+                    <a href="index.html" class="navbar-brand">
+                        <img src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
+                    </a>
+
+                    <!-- Mobile toggle button (hamburger menu) -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <!-- Navigation menu links -->
+                    <div class="collapse navbar-collapse" id="main-nav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                            <li class="nav-item"><a class="nav-link scroll-link" href="index.html#contact-us" data-id="contact-us">Our Mission</a></li>
+                            <li class="nav-item"><a class="nav-link scroll-link" href="index.html#about" data-id="about">Services</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" id="clear-session-link">Emission Calculator</a></li>
+                            <li class="nav-item"><a class="nav-link" href="personal_recommendations.html">Recommendations</a></li>
+                            <li class="nav-item"><a class="nav-link" href="education_hub.html">Education Hub</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="app-wrapper">
+        <div class="app-content">
+            <div class="container-xl">
+                <!-- Dynamic Bar Chart -->
+                <div class="row g-4 mb-4">
+                    <div class="col-12 col-lg-6">
+                        <div class="app-card app-card-chart h-100 shadow-sm">
+                            <div class="app-card-header p-3 border-0">
+                                <h4 class="app-card-title">How your appliances compare to the average</h4>
+                            </div>
+                            <div class="app-card-body p-4">
+                                <div class="chart-container">
+                                    <canvas id="grouped-bar-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pie Chart -->
+                <div class="row g-4 mb-4">
+                    <div class="col-12 col-lg-6">
+                        <div class="app-card app-card-chart h-100 shadow-sm">
+                            <div class="app-card-header p-3 border-0">
+                                <h4 class="app-card-title">Emissions per Appliance (kg CO2)</h4>
+                            </div>
+                            <div class="app-card-body p-4">
+                                <div class="chart-container">
+                                    <canvas id="chart-pie"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TV Screen Size Chart -->
+                <div class="row g-4 mb-4">
+                    <div class="col-12 col-lg-6">
+                        <div class="app-card app-card-chart h-100 shadow-sm">
+                            <div class="app-card-header p-3 border-0">
+                                <h4 class="app-card-title">TV Screen Size Energy Consumption</h4>
+                            </div>
+                            <div class="app-card-body p-4">
+                                <div class="chart-container">
+                                    <canvas id="tv-screen-size-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="app-card app-card-chart h-100 shadow-sm">
+                            <div class="app-card-header p-3 border-0">
+                                <h4 class="app-card-title">TV Screen Technology Energy Consumption</h4>
+                            </div>
+                            <div class="app-card-body p-4">
+                                <div class="chart-container">
+                                    <canvas id="tv-screen-tech-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clothes Washer Charts -->
+                <div class="row g-4 mb-4">
+                    <div class="col-12 col-lg-6">
+                        <div class="app-card app-card-chart h-100 shadow-sm">
+                            <div class="app-card-header p-3 border-0">
+                                <h4 class="app-card-title">Clothes Washer Energy Usage by Load Size</h4>
+                            </div>
+                            <div class="app-card-body p-4">
+                                <div class="chart-container">
+                                    <canvas id="clothes-washer-load-size-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="app-card app-card-chart h-100 shadow-sm">
+                            <div class="app-card-header p-3 border-0">
+                                <h4 class="app-card-title">Clothes Washer Type Energy Usage</h4>
+                            </div>
+                            <div class="app-card-body p-4">
+                                <div class="chart-container">
+                                    <canvas id="clothes-washer-type-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clothes Dryer Chart -->
+                <div class="row g-4 mb-4">
+                    <div class="col-12 col-lg-6">
+                        <div class="app-card app-card-chart h-100 shadow-sm">
+                            <div class="app-card-header p-3 border-0">
+                                <h4 class="app-card-title">Clothes Dryer Energy Consumption</h4>
+                            </div>
+                            <div class="app-card-body p-4">
+                                <div class="chart-container">
+                                    <canvas id="clothes-dryer-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Air Conditioner Chart -->
+                <div class="row g-4 mb-4">
+                    <div class="col-12 col-lg-6">
+                        <div class="app-card app-card-chart h-100 shadow-sm">
+                            <div class="app-card-header p-3 border-0">
+                                <h4 class="app-card-title">Air Conditioner Energy Usage</h4>
+                            </div>
+                            <div class="app-card-body p-4">
+                                <div class="chart-container">
+                                    <canvas id="air-conditioner-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Refrigerator Chart -->
+                <div class="row g-4 mb-4">
+                    <div class="col-12 col-lg-6">
+                        <div class="app-card app-card-chart h-100 shadow-sm">
+                            <div class="app-card-header p-3 border-0">
+                                <h4 class="app-card-title">Refrigerator Energy Usage by Volume</h4>
+                            </div>
+                            <div class="app-card-body p-4">
+                                <div class="chart-container">
+                                    <canvas id="refrigerator-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Javascript -->
+    <script src="assets/plugins/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Charts JS -->
+    <script src="assets/plugins/chart.js/chart.min.js"></script>
+    <script src="assets/js/charts-demo.js"></script>
+</body>
+</html>

@@ -209,13 +209,12 @@ bootstrap.min.css .navbar-toggle {
 /* Common floating buttons styles */
 .floating-buttons {
     position: relative;
-    margin-top: 269px;
-    margin-left: -97px;
+    margin-top: 200px;
+    margin-left: 700px;
     transform: translateX(-50%);
     display: flex;
     justify-content: space-between;
-    width: 180%;
-    bottom: 50px;
+    width: 60%;
 }
 
 /* Back Button Styling */
@@ -231,7 +230,6 @@ bootstrap.min.css .navbar-toggle {
     text-align: center;
     display: inline-flex;
     align-items: center;
-    margin-left: 600px;
 }
 
 /* Next Button Styling */
@@ -261,7 +259,7 @@ bootstrap.min.css .navbar-toggle {
     background: #28a745;
     /* Green background */
     color: white;
-    padding: 20px 25px;
+    padding: 20px 30px;
     /* Adjusted padding for better button size */
     border-radius: 20px;
     text-decoration: none;
@@ -344,14 +342,14 @@ bootstrap.min.css .navbar-toggle {
     #back-button {
         position: absolute;
         /* Absolute positioning within the container */
-        left: -610px;
+        left: 20px;
         /* Align to the left */
     }
 
     #next-button {
         position: absolute;
         /* Absolute positioning within the container */
-        right: 40px;
+        right: 10px;
         /* Align to the right */
     }
 
@@ -364,13 +362,6 @@ bootstrap.min.css .navbar-toggle {
         bottom: 70px;
     }
 }
-
-.button-group .btn.active {
-    background-color: #28a745;
-    color: white;
-    /* Ensure no size-changing styles here */
-}
-
 
 .icon-label-container {
     display: flex;
