@@ -39,15 +39,30 @@ p {
 }
 
 .primary-blue-button a {
-	display: inline-block;
-	background-color: #69d76c!important;
-	padding: 12px 18px;
-	color: #fff;
-	font-weight: 500;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	text-decoration: none;
-	border-radius: 20px;
+    display: inline-block;
+    background-color: #69d76c !important; /* Normal background color */
+    padding: 12px 18px;
+    color: #fff; /* Keep text color white */
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 20px;
+}
+
+/* Styles for disabled buttons */
+.primary-blue-button.disabled a {
+    background-color: grey !important;   
+    color: #fff;                      
+    pointer-events: none;             
+    text-decoration: none;            
+    cursor: not-allowed;               
+    display: inline-block;              
+    padding: 12px 18px;                
+    border-radius: 20px;                 
+    font-weight: 500;                    
+    letter-spacing: 1px;              
+    text-transform: uppercase;            
 }
 
 .pop-button h4 {
@@ -200,11 +215,49 @@ bootstrap.min.css
 }
 
 .baner-content {
-	width: 100%;
-  	padding-top: 35vh;
-  	text-align: center;
-  	background-image: url(../img/banner-green.jpeg);
-  	vertical-align: middle;
+    position: relative;
+    width: 100%;
+    padding-top: 35vh;
+    text-align: center;
+    background-image: url(https://images.pexels.com/photos/26362393/pexels-photo-26362393/free-photo-of-view-of-the-queen-victoria-gardens-in-autumn-melbourne-australia.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
+    background-size: cover;
+    background-position: center;
+    vertical-align: middle;
+    z-index: 1;
+}
+
+.baner-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* 50% opacity black */
+    z-index: -1; /* Keep it behind the content */
+}
+.custom-row {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+.custom-column {
+	flex: 1 0 17%; /* Each column will take 20% width on large screens */
+	max-width: 17%; /* Ensure no overflow on large screens */
+	box-sizing: border-box; /* Include padding/borders in width */
+	margin: 10px; /* Add some spacing between columns */
+}
+@media (max-width: 768px) {
+	.custom-column {
+		flex: 1 0 45%; /* Two columns on medium screens */
+		max-width: 45%;
+	}
+}
+@media (max-width: 576px) {
+	.custom-column {
+		flex: 1 0 100%; /* One column on small screens */
+		max-width: 100%;
+	}
 }
 
 .baner-content .text-content {
@@ -241,15 +294,35 @@ bootstrap.min.css
 
 
 #about {
-	padding: 150px 0px;
-	background-image: url(../img/about-bg2.jpeg);
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-attachment: fixed;
+    position: relative; /* Make sure the parent is positioned */
+    padding: 150px 0px;
+    background-image: url(https://images.unsplash.com/photo-1725684001057-b04d833cf28c?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    overflow: hidden; /* Prevent overflow issues */
+}
+
+#about::before {
+    content: ''; /* Required to make the pseudo-element appear */
+    position: absolute; /* Position it over the parent */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6); /* 30% black overlay */
+    z-index: 1; /* Ensure it sits above the background but below the content */
+}
+
+#about > * {
+    position: relative; /* Ensure content sits above the overlay */
+    z-index: 2; /* Raise content above the overlay */
+    color: white; /* Optional: Adjust text color for better contrast */
 }
 
 #about .service-item {
 	text-align: center;
+	padding: 10px;
 }
 
 #about .service-item .icon {
@@ -266,7 +339,7 @@ bootstrap.min.css
 #about .service-item h4 {
 	margin-bottom: 30px;
 	margin-top: 45px;
-	font-size: 17px;
+	font-size: 20px;
 	font-weight: 500;
 	color: #fff;
 	letter-spacing: 1px;

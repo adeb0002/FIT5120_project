@@ -22,6 +22,7 @@
     <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="icon" href="img/icon.png" type="image/png">
 </head>
 
 <body>
@@ -990,6 +991,11 @@
                 sendDataToLambda(data);
             }
         }
+    document.getElementById("next-button").addEventListener("click", function() {
+    // Set a flag in localStorage indicating the calculator is completed
+    localStorage.setItem("calculatorCompleted", "true");
+    });
+</script>
     </script>
 </body>
 

@@ -50,9 +50,11 @@
         }
 
         h2 {
-            font-size: 2em; /* Relative to the body font size */
+            font-size: 2em;
+            /* Relative to the body font size */
             text-align: center;
-            margin: 20px 0; /* Margin for spacing */
+            margin: 20px 0;
+            /* Margin for spacing */
         }
 
         /*@media (max-width: 768px) {
@@ -61,11 +63,15 @@
                 flex: 1 1 100%; 
             }*/
 
+<<<<<<< HEAD
+        .chart {
+=======
         .chart-container {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
             justify-content: center; /* Center charts within the container */
+>>>>>>> main
             width: 100%;
             box-sizing: border-box;
             padding: 10px;
@@ -95,16 +101,20 @@
         .equivalence-container,
         .offset-container {
             display: flex;
-            flex-wrap: wrap; /* Allows items to wrap onto the next line */
+            flex-wrap: wrap;
+            /* Allows items to wrap onto the next line */
             justify-content: space-around;
             width: 100%;
         }
 
         .equivalence-container div,
         .offset-container div {
-            flex: 1 1 45%; /* Allows each item to take 45% of the width, adjust as needed */
-            margin: 10px; /* Adds spacing around items */
-            min-width: 150px; /* Minimum width to maintain some size */
+            flex: 1 1 45%;
+            /* Allows each item to take 45% of the width, adjust as needed */
+            margin: 10px;
+            /* Adds spacing around items */
+            min-width: 150px;
+            /* Minimum width to maintain some size */
             text-align: center;
         }
 
@@ -142,6 +152,8 @@
             max-width: 100%;
             height: auto;
         }
+<<<<<<< HEAD
+=======
 
         #negative-differences {
             font-size: 2.5em;
@@ -185,6 +197,7 @@
         }
 
 
+>>>>>>> main
     </style>
 </head>
 
@@ -207,8 +220,14 @@
                 </div>
                 <div id="main-nav" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
+<<<<<<< HEAD
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a>
+                        </li>
+=======
                                                <li><a href="index.html">Home</a></li>
                         <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a></li>
+>>>>>>> main
                         <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
                         <li><a href="#" id="clear-session-link">Emission Calculator</a></li>
                         <li><a href="personal_recommendations.html">Recommendations</a></li>
@@ -225,7 +244,8 @@
         <div class="section" id="emission-comparison">
             <h2>Emission Analytics</h2>
             <p>Your estimated emissions are <span id="user-emissions">0</span> kg CO2 per week</p>
-            <p>You currently emit <span id="comparison-percentage" style="color:red;">0% more</span> CO2 than the average Melbournian</p>
+            <p>You currently emit <span id="comparison-percentage" style="color:red;">0% more</span> CO2 than the
+                average Melbournian</p>
         </div>
 
         <!-- Equivalence Section -->
@@ -306,6 +326,45 @@
             </div>
         </div>
 
+<<<<<<< HEAD
+        <!-- cost saving container -->
+        <div class="section chart">
+            <div class="chart-title">How your appliances compare to the average</div>
+            <div id="grouped-bar-chart"></div>
+            <h4>Some of your appliances have room for improvement in terms of efficiency. By choosing smarter,
+                eco-friendly alternatives, we estimate that you could save:</h4>
+            <p id="negative-differences"
+                style="font-size: 2.5em; font-weight: bold; color: white; background-color: #4CAF50; padding: 10px; border-radius: 5px; text-align: center; margin-top: 15px;">
+            </p>
+        </div>
+
+        <div id="tv-screen-size-chart" class="section chart">
+            <div class="chart-title">TV Screen Size Energy Consumption</div>
+        </div>
+
+        <div id="tv-screen-tech-chart" class="section chart">
+            <div class="chart-title">TV Screen Technology Energy Consumption</div>
+        </div>
+
+        <div id="clothes-washer-load-size-chart" class="section chart">
+            <div class="chart-title">Clothes Washer Energy Usage by Load Size</div>
+        </div>
+
+        <div id="clothes-washer-type-chart" class="section chart">
+            <div class="chart-title">Clothes Washer Type Energy Usage</div>
+        </div>
+
+        <div id="clothes-dryer-chart" class="section chart">
+            <div class="chart-title">Clothes Dryer Energy Consumption</div>
+        </div>
+
+        <div id="air-conditioner-chart" class="section chart">
+            <div class="chart-title">Air Conditioner Energy Usage</div>
+        </div>
+
+        <div id="refrigerator-chart" class="section chart">
+            <div class="chart-title">Refrigerator Energy Usage by Volume</div>
+=======
         <!-- Clothes Washer Charts Section -->
         <div class="section">
             <h2>Clothes Washer Energy Consumption</h2>
@@ -320,6 +379,7 @@
                     <div id="clothes-washer-type-chart"></div>
                 </div>
             </div>
+>>>>>>> main
         </div>
 
 
@@ -386,6 +446,9 @@
     </div>
 
     <script>
+<<<<<<< HEAD
+        // Constants for equivalences and offsets
+=======
 
         document.getElementById('navigate-to-simulation').addEventListener('click', function () {
             window.location.href = 'simulation.html'; // Adjust the file path as needed
@@ -401,6 +464,7 @@
         });
 
        // Constants for equivalences and offsets
+>>>>>>> main
         const CO2_PER_KM_PETROL_CAR = 0.17048; // in kg per km
         const CO2_PER_ICE_SQUARE_METER = 333.33; // in kg per m^2 (1000kg CO2 = 3 m^2 ice)
         const TREES_TO_OFFSET_CO2 = 21.77; // Each tree offsets 21.77 kg of CO2 per year
@@ -772,9 +836,17 @@
                 .attr('text-anchor', 'middle')
                 .text(d => `${d[valueKey].toFixed(2)} kg`);
         }
-        
-        
+
+
         // Data for charts
+<<<<<<< HEAD
+        const averagesData = [
+            { appliance: "Television", userConsumption: 50, avgConsumption: 37 },
+            { appliance: "Clothes Washer", userConsumption: 58, avgConsumption: 70 },
+            { appliance: "Clothes Dryer", userConsumption: 40, avgConsumption: 62 },
+            { appliance: "Air Conditioner", userConsumption: 91, avgConsumption: 30 },
+            { appliance: "Refrigerator", userConsumption: 30, avgConsumption: 20 }
+=======
 
         const averagesData = [
             { appliance: "Television", userConsumption: 50, avgConsumption: 654.73 },
@@ -782,6 +854,7 @@
             { appliance: "Clothes Dryer", userConsumption: 40, avgConsumption: 224.52 },
             { appliance: "Air Conditioner", userConsumption: 91, avgConsumption: 20.01 },
             { appliance: "Refrigerator", userConsumption: 30, avgConsumption: 353.52 }
+>>>>>>> main
         ];
 
         const tvScreenSizeData = [
@@ -842,7 +915,7 @@
         ];
 
         // Retrieve data from local storage with default values to avoid undefined/null
-        const clothesWasherLoadSize = parseFloat(localStorage.getItem('clothesWasherLoadSize')) || 0; 
+        const clothesWasherLoadSize = parseFloat(localStorage.getItem('clothesWasherLoadSize')) || 0;
         const clothesWasherLoadingType = localStorage.getItem('clothesWasherLoadingType') || '';
 
         // Constants for calculations
@@ -957,6 +1030,114 @@
             return averagesData;
         }
 
+        function createGroupedBarChart(data, selector) {
+            const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+            const width = 600 - margin.left - margin.right;
+            const height = 400 - margin.top - margin.bottom;
+
+            // Clear any previous content
+            const svg = d3.select(selector)
+                .html('')
+                .append('svg')
+                .attr('width', width + margin.left + margin.right)
+                .attr('height', height + margin.top + margin.bottom)
+                .append('g')
+                .attr('transform', `translate(${margin.left},${margin.top})`);
+
+            // Define the scales
+            const x0 = d3.scaleBand()
+                .domain(data.map(d => d.appliance))
+                .range([0, width])
+                .padding(0.2);
+
+            const x1 = d3.scaleBand()
+                .domain(["userConsumption", "avgConsumption"])
+                .range([0, x0.bandwidth()])
+                .padding(0.05);
+
+            const y = d3.scaleLinear()
+                .domain([0, d3.max(data, d => Math.max(d.userConsumption, d.avgConsumption))])
+                .nice()
+                .range([height, 0]);
+
+            // Define colors
+            const color = d3.scaleOrdinal()
+                .domain(["userConsumption", "avgConsumption"])
+                .range(["#5ad18f", "#d3d3d3"]); // Pastel green for userConsumption, light grey for avgConsumption
+
+            // Function to get a darker shade of a color
+            function darkenColor(color, factor) {
+                return d3.color(color).darker(factor).toString();
+            }
+
+            // Add the X axis
+            svg.append('g')
+                .attr('class', 'x axis')
+                .attr('transform', `translate(0,${height})`)
+                .call(d3.axisBottom(x0));
+
+            // Add the Y axis
+            svg.append('g')
+                .attr('class', 'y axis')
+                .call(d3.axisLeft(y));
+
+            // Create the bars
+            const groups = svg.selectAll('.group')
+                .data(data)
+                .enter().append('g')
+                .attr('class', 'group')
+                .attr('transform', d => `translate(${x0(d.appliance)},0)`);
+
+            // Create the bars
+            const bars = groups.selectAll('rect')
+                .data(d => ["userConsumption", "avgConsumption"].map(key => ({ key, value: d[key], avgConsumption: d.avgConsumption })))
+                .enter().append('rect')
+                .attr('x', d => x1(d.key))
+                .attr('y', d => y(d.value))
+                .attr('width', x1.bandwidth())
+                .attr('height', d => height - y(d.value))
+                .attr('fill', d => {
+                    if (d.key === "userConsumption") {
+                        // Use the avgConsumption from the data bound to the current rect
+                        const barColor = d.value > d.avgConsumption ? "#f0674f" : "#5ad18f";
+                        return barColor; // Softer pastel red and green
+                    } else {
+                        return color(d.key); // Use the color scale for avgConsumption
+                    }
+                });
+
+            // Add data labels for the difference between bars
+            groups.append('text')
+                .attr('x', d => x1("userConsumption") + x1.bandwidth() / 2) // Centered above the group
+                .attr('y', d => y(Math.max(d.userConsumption, d.avgConsumption)) - 5) // Position above the higher bar
+                .attr('text-anchor', 'middle')
+                .attr('font-size', '12px')
+                .attr('fill', d => {
+                    if (d.userConsumption > d.avgConsumption) {
+                        return darkenColor("#f0674f", 0.5); // Darker shade of red
+                    } else {
+                        return darkenColor("#5ad18f", 0.5); // Darker shade of green
+                    }
+                })
+                .text(d => `${Math.round(d.userConsumption - d.avgConsumption)} kWh/year`); // Rounded difference with suffix
+        }
+
+        function calculateCostSaving(data) {
+            let totalPositiveDifference = 0;
+
+            data.forEach(item => {
+                const difference = item.userConsumption - item.avgConsumption;
+                if (difference > 0) {
+                    totalPositiveDifference += difference;
+                }
+            });
+
+            return Math.round(totalPositiveDifference * 0.1901);
+        }
+
+
+        // Get the total negative differences
+        const totalCostSavings = calculateCostSaving(averagesData);
 
         function createBarChart(data, selector, valueKey, labelKey, userInput) {
             const margin = { top: 20, right: 20, bottom: 90, left: 50 }; // Increased bottom margin
@@ -1207,24 +1388,161 @@
             function midAngle(d) {
                 return d.startAngle + (d.endAngle - d.startAngle) / 2;
             }
+<<<<<<< HEAD
+
+            // Create pie charts with the retrieved data
+            createPieChart(categoryData, '#category-chart', 'emissions', 'category');
+            createPieChart(applianceData, '#appliance-chart', 'emissions', 'type');
+
+            // Create bar chart for transport emissions
+            createBarChart(transportData, '#transport-chart', 'emissions', 'type'); // Use bar chart for transport data
+        }
+
+
+
+        // Function to create a pie chart with legend
+        function createPieChart(data, selector, valueKey, labelKey) {
+            const width = 300;
+            const height = 300;
+            const radius = Math.min(width, height) / 2;
+
+            const svg = d3.select(selector)
+                .html('')  // Clear existing SVG content before drawing new chart
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height + 50) // Extra space for legend
+                .append('g')
+                .attr('transform', `translate(${width / 2}, ${height / 2})`);
+
+            const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+            const pie = d3.pie()
+                .value(d => d[valueKey]);
+
+            const arc = d3.arc()
+                .innerRadius(0)
+                .outerRadius(radius);
+
+            const arcs = svg.selectAll('arc')
+                .data(pie(data))
+                .enter()
+                .append('g')
+                .attr('class', 'arc');
+
+            arcs.append('path')
+                .attr('d', arc)
+                .attr('fill', d => color(d.data[labelKey]));
+
+            // Add labels to the pie slices
+            arcs.append('text')
+                .attr('transform', d => `translate(${arc.centroid(d)})`)
+                .attr('text-anchor', 'middle')
+                .style('font-size', '12px')
+                .text(d => `${d.data[labelKey]} (${d.data[valueKey].toFixed(2)} kg)`);
+
+            // Add a legend below the pie chart
+            const legend = d3.select(selector)
+                .append('div')
+                .attr('class', 'legend');
+
+            const legendItems = legend.selectAll('.legend-item')
+                .data(data)
+                .enter()
+                .append('div')
+                .attr('class', 'legend-item');
+
+            legendItems.append('div')
+                .attr('class', 'legend-color-box')
+                .style('background-color', d => color(d[labelKey]));
+
+            legendItems.append('span')
+                .attr('class', 'legend-text')
+                .text(d => `${d[labelKey]}: ${d[valueKey].toFixed(2)} kg CO2`);
+        }
+
+        function getTransportEmissionsData() {
+            // Retrieve data from local storage
+            const transportData = JSON.parse(localStorage.getItem('transportationData') || '{}');
+
+            console.log('Transport data retrieved from localStorage:', transportData); // Log retrieved data
+
+            // Map data to the expected format for your chart
+            const formattedData = Object.entries(transportData).map(([type, emissions]) => ({
+                type: type.replace('_', ' '), // Adjust type format if necessary
+                emissions: parseFloat(emissions) // Convert emissions to number
+            }));
+
+            console.log('Formatted transport emissions data for chart:', formattedData); // Log formatted data
+            return formattedData;
+        }
+
+        function initCharts() {
+            const { categoryData, applianceData } = getEmissionsData();
+
+            // Check for both category and appliance data
+            if (!categoryData.length && !applianceData.length) {
+                console.warn('No data available to display.');
+                alert('No emissions data available to display.');
+                return;
+            }
+
+            createPieChart(categoryData, '#category-chart', 'emissions', 'category');
+            createPieChart(applianceData, '#appliance-chart', 'emissions', 'type');
+=======
         }
 
             function getTransportEmissionsData() {
                 // Retrieve data from local storage
                 const transportData = JSON.parse(sessionStorage.getItem('transportationData') || '{}');
+>>>>>>> main
 
-                console.log('Transport data retrieved from localStorage:', transportData); // Log retrieved data
+            const transportData = getTransportEmissionsData(); // Ensure this retrieves correctly
 
-                // Map data to the expected format for your chart
-                const formattedData = Object.entries(transportData).map(([type, emissions]) => ({
-                    type: type.replace('_', ' '), // Adjust type format if necessary
-                    emissions: parseFloat(emissions) // Convert emissions to number
-                }));
-
-                console.log('Formatted transport emissions data for chart:', formattedData); // Log formatted data
-                return formattedData;
+            if (!transportData.length) {
+                console.warn('No data available to display for transport chart.');
+                alert('No emissions data available to display.');
+                return;
             }
 
+<<<<<<< HEAD
+            createBarChart(transportData, '#transport-chart', 'emissions', 'type'); // Make sure these keys align
+        }
+
+        // Initialize the page on window load
+        window.onload = function () {
+            initCharts();
+
+            // Pass the correct user input for highlighting
+            createLineChart(clothesWasherLoadSizeData, '#clothes-washer-load-size-chart', 'energyUsage', 'loadSize', userInputLoadSize.loadSize);
+            createBarChart(clothesWasherTypeData, '#clothes-washer-type-chart', 'energyUsage', 'loadType', clothesWasherLoadingType);
+
+            //Create Grouped Bar Chart
+            createGroupedBarChart(averagesData, "#grouped-bar-chart");
+            const totalCostSavings = calculateCostSaving(averagesData);
+
+            // Display total cost savings
+            document.getElementById('negative-differences').textContent = `$ ${totalCostSavings} / Year`;
+
+            // For other charts, ensure highlighting input is set correctly
+            createBarChart(tvScreenSizeData, '#tv-screen-size-chart', 'avgConsumption', 'screenSize', null);
+            createBarChart(tvScreenTechData, '#tv-screen-tech-chart', 'avgConsumption', 'screenTech', null);
+            createBarChart(clothesDryerData, '#clothes-dryer-chart', 'energyUsage', 'dryerType', null);
+            createBarChart(airConditionerData, '#air-conditioner-chart', 'energyUsage', 'type', null);
+            createBarChart(refrigeratorData, '#refrigerator-chart', 'avgUsage', 'volume', null);
+
+            const totalEmissions = parseFloat(localStorage.getItem('totalEmissions'));
+            console.log('Attempting to load totalEmissions from localStorage:', totalEmissions);
+
+            if (!isNaN(totalEmissions) && totalEmissions !== 0) {
+                console.log('Loaded totalEmissions:', totalEmissions);
+                updateEmissionComparison(totalEmissions);
+                displayEquivalences(totalEmissions);
+            } else {
+                console.error('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
+                alert('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
+            }
+        };
+=======
             function calculateCostSaving(data) {
             let totalPositiveDifference = 0;
 
@@ -1420,10 +1738,18 @@
                 // Recreate the pie chart for appliances
                 createAppliancePieChart();
             };
+>>>>>>> main
 
 
 
 
+<<<<<<< HEAD
+    </script>
+</body>
+
+</html>
+=======
         </script>
     </body>
     </html>
+>>>>>>> main
