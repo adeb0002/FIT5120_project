@@ -25,8 +25,9 @@
     <link rel="stylesheet" href="css/owl-carousel.css">
     <link rel="stylesheet" href="css/templatemo-style.css">
     <link rel="stylesheet" href="css/lightbox.css">
-    <!-- <link rel="stylesheet" href="css/emission_calculator.css"> -->
     <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <link rel="icon" href="img/icon.png" type="image/png">
+
 </head>
 
 <body>
@@ -115,73 +116,83 @@
     </div>
 
     <section id="about" class="page-section">
-        <h1 style="text-align: center; font-weight: bold; color: white; margin-top: -70px; margin-bottom: 70px">Our
-            Services</h1>
+        <h1 style="text-align: center; font-weight: bold; color: white; margin-top: -70px; margin-bottom: 70px">
+            Our Services
+        </h1>
         <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="custom-row">
+                <div class="custom-column">
                     <div class="service-item">
                         <div class="icon">
-                            <img src="img/calculator-icon.png" alt=""
-                                style="width: 50px; filter: brightness(0) invert(1);">
+                            <img src="img/calculator-icon.png" alt="" style="width: 50px; filter: brightness(0) invert(1);">
                         </div>
-                        <h4>Emission Calculator</h4>
+                        <h4 class="service-title">Emission Calculator</h4>
                         <div class="line-dec"></div>
-                        <p>Curious about your carbon footprint? Enter a few details about your household habits and
-                            discover the true impact you’re making on the environment!</p>
+                        <p>Curious about your carbon footprint? Enter a few details about your household habits and discover the true impact you’re making on the environment!</p>
                         <div class="primary-blue-button">
-                            <a href="emission_cal_personal.html">Calculate Now</a>
+                            <a href="emission_cal_personal.html" id="calculatorButton">Calculate Now</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="custom-column">
                     <div class="service-item">
                         <div class="icon">
-                            <img src="img/light-lightbulb-icon.png" alt=""
-                                style="width: 65px; filter: brightness(0) invert(1);">
+                            <img src="img/light-lightbulb-icon.png" alt="" class="monochrome" style="width: 65px; filter: brightness(0) invert(1);">
                         </div>
-                        <h4>Personalised Insights</h4>
+                        <h4 class="service-title">Personalised Insights</h4>
                         <div class="line-dec"></div>
                         <p>Unlock personalised insights with our new analytics feature. After using our emissions calculator, you'll receive customised data and actionable suggestions specific to your unique lifestyle.</p>
-                        <div class="primary-blue-button">
-                            <!-- <a href="emission_cal_personal.html">Go</a> -->
+                        <div class="primary-blue-button insights-button disabled">
+                            <a href="#" class="insights-link">Complete calculator to unlock</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="custom-column">
                     <div class="service-item">
                         <div class="icon">
-                            <img src="img/speech-bubble-line-icon.png" alt=""
-                                style="width: 50px; filter: brightness(0) invert(1);">
+                            <img src="img/speech-bubble-line-icon.png" alt="" class="monochrome" style="width: 50px; filter: brightness(0) invert(1);">
                         </div>
-                        <h4>Recommendations</h4>
+                        <h4 class="service-title">Personalised Recommendations</h4>
                         <div class="line-dec"></div>
-                        <p>Ever wondered how you can take action to fight climate change? Discover fact-based advice
-                            here to help you easily understand and reduce your carbon footprint.</p>
-                        <div class="primary-blue-button">
-                            <a href="recommendations.html">EXPLORE NOW</a>
+                        <p>Ever wondered how you can take action to fight climate change? Discover fact-based advice here to help you easily understand and reduce your carbon footprint.</p>
+                        <div class="primary-blue-button recommendations-button disabled">
+                            <a href="#" class="recommendations-link">Complete calculator to unlock</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="custom-column">
                     <div class="service-item">
                         <div class="icon">
-                            <img src="img/edu_icon.png" alt=""
-                                style="width: 70px; filter: brightness(0) invert(1);">
+                            <img src="img/simulation.png" alt="" style="width: 50px; filter: brightness(0) invert(1);">
                         </div>
-                        <h4>Education Hub</h4>
+                        <h4 class="service-title">Emission Simulation</h4>
+                        <div class="line-dec"></div>
+                        <p>Visualize the impact of your lifestyle choices on carbon emissions and associated costs. You'll see real-time changes in your emissions and expenses, empowering you to make informed decisions (Recommended to try after the calculator for the best insights).</p>
+                        <div class="primary-blue-button">
+                            <a href="simulation.html">SIMULATE NOW</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-column">
+                    <div class="service-item">
+                        <div class="icon">
+                            <img src="img/edu_icon.png" alt="" style="width: 70px; filter: brightness(0) invert(1);">
+                        </div>
+                        <h4 class="service-title">Education Hub<br><br></h4>
                         <div class="line-dec"></div>
                         <p>Deepen your understanding of climate change and its impact with our Education Hub. Visit this section for resources that help you grasp the broader effects of your actions on the environment. Learn how every choice you make contributes to a more sustainable future!</p>
                         <div class="primary-blue-button">
-                            <a href="recommendations.html">LEARN MORE</a>
+                            <a href="education_hub.html">LEARN MORE</a>
                         </div>
                     </div>
                 </div>
-                
             </div>
         </div>
     </section>
 
+    
+    
+    
     <footer>
         <div class="container">
             <div class="row">
@@ -241,6 +252,24 @@
             };
         }
 
+    document.addEventListener("DOMContentLoaded", function() {
+        const insightsButton = document.querySelector(".insights-button");
+        const recommendationsButton = document.querySelector(".recommendations-button");
+        
+        // Check if the calculator is completed
+        if (localStorage.getItem("calculatorCompleted") === "true") {
+            insightsButton.classList.remove("disabled"); // Enable button
+            insightsButton.querySelector(".insights-link").textContent = "SEE MY INSIGHTS"; // Change link text
+            insightsButton.querySelector(".insights-link").href = "test.html"; // Update link to insights page
+
+            recommendationsButton.classList.remove("disabled"); // Enable button
+            recommendationsButton.querySelector(".recommendations-link").textContent = "SEE MY RECOMMENDATIONS"; // Change link text
+            recommendationsButton.querySelector(".recommendations-link").href = "personal_recommendations.html"; // Update link to recommendations page
+
+            // Clear the flag after checking
+            localStorage.removeItem("calculatorCompleted");
+        }
+    });
     </script>
 </body>
 
