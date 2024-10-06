@@ -42,10 +42,9 @@
             padding: 100px 0 0 0;
         }
 
-        .app-wrapper {
-            min-height: 100vh; /* Ensure wrapper takes full viewport height */
-            display: flex;
-            flex-direction: column;
+        .app-wrapper, .app-content {
+            width: 100% !important; /* Ensure it's taking full width */
+            margin: 0 auto !important; /* Center the content */
         }
 
         .app-content {

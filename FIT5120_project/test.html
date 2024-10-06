@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"> 
 <head>
-    <title>Portal - Bootstrap 5 Admin Dashboard Template For Developers</title>
+    <title>Emission Charts</title>
     
     <!-- Meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
-    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
 
 
 	<link rel="stylesheet" href="css/bootstrap.min.css">
@@ -20,6 +17,7 @@
     <link rel="stylesheet" href="css/owl-carousel.css">
     <link rel="stylesheet" href="css/emission_personal.css">
     <link rel="stylesheet" href="css/lightbox.css">
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
@@ -32,9 +30,88 @@
     <!-- App CSS -->  
     <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
 
-</head> 
+
 
 <style>
+	/* Ensure that the nav items are displayed in one row */
+	.header .container {
+		display: flex !important;
+		justify-content: space-between !important;
+		align-items: center !important;
+		flex-wrap: nowrap !important; /* Prevent wrapping */
+		height: 80px !important; /* Ensure consistent height */
+		padding: 0 20px !important; /* Adjust padding as needed */
+	}
+
+	/* Ensure the logo (navbar-brand) is aligned to the left */
+	.header .navbar-brand {
+		display: inline-block !important;
+		vertical-align: middle !important;
+		line-height: 80px !important; /* Match the height of the navbar */
+		margin-right: auto !important; /* Align logo to the left */
+	}
+
+	/* Ensure that the nav items are displayed in one row */
+	.header .navbar-nav {
+		display: flex !important; /* Use flexbox for horizontal alignment */
+		justify-content: flex-end !important; /* Align items to the right */
+		align-items: center !important; /* Vertically center items */
+		flex-direction: row !important; /* Ensure it's in a row */
+		padding-left: 0 !important;
+		margin-bottom: 0 !important;
+		list-style: none !important;
+		flex-wrap: nowrap !important; /* Prevent wrapping */
+	}
+
+	/* Style the navbar items */
+	.header .navbar-nav > li {
+		display: inline-block !important;
+		margin-left: 30px !important;
+		margin-right: 30px !important;
+	}
+
+	/* Ensure the navbar links are styled correctly */
+	.header .navbar-nav > li > a {
+		display: block !important;
+		padding: 0px 15px !important; /* Adjust padding */
+		color: #fff !important; /* Ensure correct text color */
+		font-size: 14px !important; /* Adjust font size */
+		text-transform: uppercase; /* Optional: make text uppercase */
+		text-align: center;
+	}
+
+	/* Override any other conflicting styles for the navbar */
+	.navbar-inverse {
+		background-color: transparent !important;
+		border: none !important;
+	}
+
+	/* Ensure the toggle button is styled correctly */
+	.navbar-toggle {
+		background-color: #69d76c !important;
+		border-color: #69d76c !important;
+	}
+
+	/* Responsive Styles for mobile screens */
+	@media (max-width: 768px) {
+		.navbar-toggle {
+			display: block !important; /* Show toggle button on small screens */
+		}
+
+		.navbar-nav {
+			display: none !important; /* Hide navbar items initially */
+			flex-direction: column !important; /* Stack items vertically */
+		}
+
+		.navbar-nav.active {
+			display: flex !important; /* Show items when toggled */
+		}
+
+		.navbar-nav > li {
+			margin: 10px 0 !important; /* Adjust margin for stacked items */
+		}
+	}
+
 	html, body {
             height: 100%; /* Ensure full height for html and body */
             overflow-x: hidden; /* Prevent horizontal scrolling */
@@ -46,11 +123,10 @@
 		padding: 100px 0 0 0;
 	}
 
-	.app-wrapper {
-		min-height: 100vh; /* Ensure wrapper takes full viewport height */
-		display: flex;
-		flex-direction: column;
-	}
+	.app-wrapper, .app-content {
+            width: 100% !important; /* Ensure it's taking full width */
+            margin: 0 auto !important; /* Center the content */
+        }
 
 	.dashboard-container {
 		display: flex;
@@ -228,41 +304,150 @@
 		font-weight: bold;
 	}
 
+	/* Flip Card Container */
+	.flip-card {
+		background-color: transparent;
+		width: 100%;
+		height: 300px; /* Adjust height as needed */
+		perspective: 1000px; /* Perspective for the 3D effect */
+	}
 
+	.flip-card-inner {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		transition: transform 0.6s;
+		transform-style: preserve-3d;
+	}
 
-</style>
+	.flip-card:hover .flip-card-inner {
+		transform: rotateY(180deg);
+	}
+
+	/* Front Side of the Card */
+	.flip-card-front, .flip-card-back {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		backface-visibility: hidden;
+	}
+
+	.flip-card-front {
+		background-color: #fff;
+		color: black;
+	}
+
+	/* Back Side of the Card */
+	.flip-card-back {
+		background-color: #75c181; /* Adjust color if necessary */
+		color: white;
+		transform: rotateY(180deg);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+	}
+	/* Increase font size for the h4 element */
+	.stats-type {
+		font-size: 36px; /* Increase the font size */
+		font-weight: bold; /* Make the text bold */
+		text-align: center; /* Center the text */
+	}
+
+	/* Increase font size for the p element */
+	#car-equivalent {
+		font-size: 30px; /* Adjust size as needed */
+		font-weight: normal; /* Adjust weight if necessary */
+		text-align: center; /* Center the text */
+		color: #333; /* Adjust color if necessary */
+		margin-top: 10px; /* Add some spacing from the h4 */
+	}
+
+	#ice-equivalent {
+		font-size: 30px; /* Adjust size as needed */
+		font-weight: normal; /* Adjust weight if necessary */
+		text-align: center; /* Center the text */
+		color: #333; /* Adjust color if necessary */
+		margin-top: 10px; /* Add some spacing from the h4 */
+	}
+
+	#trees-equivalent {
+		font-size: 30px; /* Adjust size as needed */
+		font-weight: normal; /* Adjust weight if necessary */
+		text-align: center; /* Center the text */
+		color: #333; /* Adjust color if necessary */
+		margin-top: 10px; /* Add some spacing from the h4 */
+	}
+
+	#solar-panels-equivalent {
+		font-size: 30px; /* Adjust size as needed */
+		font-weight: normal; /* Adjust weight if necessary */
+		text-align: center; /* Center the text */
+		color: #333; /* Adjust color if necessary */
+		margin-top: 10px; /* Add some spacing from the h4 */
+	}
+	
+	#cars-removed-equivalent {
+		font-size: 30px; /* Adjust size as needed */
+		font-weight: normal; /* Adjust weight if necessary */
+		text-align: center; /* Center the text */
+		color: #333; /* Adjust color if necessary */
+		margin-top: 10px; /* Add some spacing from the h4 */
+	}
+
+	.navigate-btn {
+            margin: 20px auto;
+            padding: 15px 30px;
+            font-weight: bold;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            display: block;
+            width: fit-content;
+        }
+
+        .navigate-btn:hover {
+            background-color: #45a049;
+        }
+
+		
+	</style>
+</head> 
 
 <body>   	
     <!-- Header Section with Navigation Bar -->
-    <header class="header">
+    <div class="header">
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
-                <div class="container-fluid">
-                    <!-- Navbar brand/logo -->
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#main-nav">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                     <a href="index.html" class="navbar-brand">
                         <img src="img/logo.png" alt="EcoInsight Logo" style="height: 80px; margin-right: 10px;">
                     </a>
-
-                    <!-- Mobile toggle button (hamburger menu) -->
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <!-- Navigation menu links -->
-                    <div class="collapse navbar-collapse" id="main-nav">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                            <li class="nav-item"><a class="nav-link scroll-link" href="index.html#contact-us" data-id="contact-us">Our Mission</a></li>
-                            <li class="nav-item"><a class="nav-link scroll-link" href="index.html#about" data-id="about">Services</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" id="clear-session-link">Emission Calculator</a></li>
-                            <li class="nav-item"><a class="nav-link" href="personal_recommendations.html">Recommendations</a></li>
-                            <li class="nav-item"><a class="nav-link" href="education_hub.html">Education Hub</a></li>
-                        </ul>
-                    </div>
+                </div>
+                <div id="main-nav" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                                               <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a></li>
+                        <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
+                        <li><a href="#" id="clear-session-link">Emission Calculator</a></li>
+                        <li><a href="personal_recommendations.html">Recommendations</a></li>
+                        <li><a href="education_hub.html">Education Hub</a></li>
+                    </ul>
                 </div>
             </nav>
         </div>
-    </header>
+    </div>
+
     <div class="app-wrapper">
 	    
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
@@ -287,81 +472,97 @@
 			    </div><!--//app-card-->
 
 				<div class="row g-4 mb-4">
-				    <div class="col-6 col-lg-3">
-					    <div class="app-card app-card-stat shadow-sm h-100">
-						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">Car</h4>
-							    <div class="stats-figure"><p id="car-equivalent">Calculating...</p> <!-- Dynamic update --></div></div>
-							    <div class="stats-meta text-success">
-									
-						    </div><!--//app-card-body-->
-						    <a class="app-card-link-mask" href="#"></a>
-					    </div><!--//app-card-->
-				    </div><!--//col-->
+					<h2>This is equivalent to...</h2>
+					<div class="col-6 col-lg-6">
+						<div class="flip-card">
+							<div class="flip-card-inner">
+								<!-- Front Side (Image) -->
+								<div class="flip-card-front">
+									<img src="img/traffic.png" alt="Car" style="width:100%; height:100%">
+								</div>
+								<!-- Back Side (Calculation Result) -->
+								<div class="flip-card-back">
+									<h4 class="stats-type mb-1">Car</h4>
+									<p id="car-equivalent">Calculating...</p>
+								</div>
+							</div>
+						</div>
+					</div><!--//col-->
+					
+					<div class="col-6 col-lg-6">
+						<div class="flip-card">
+							<div class="flip-card-inner">
+								<!-- Front Side (Image) -->
+								<div class="flip-card-front">
+									<img src="img/iceberg.png" alt="Ice Cap" style="width:100%; height:100%">
+								</div>
+								<!-- Back Side (Calculation Result) -->
+								<div class="flip-card-back">
+									<h4 class="stats-type mb-1">Ice Cap</h4>
+									<p id="ice-equivalent">Calculating...</p>
+								</div>
+							</div>
+						</div>
+					</div><!--//col-->
+				</div><!--//row-->
+				
 				    
-				    <div class="col-6 col-lg-3">
-					    <div class="app-card app-card-stat shadow-sm h-100">
-						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">Ice Cap</h4>
-							    <div class="stats-figure"><p id="ice-equivalent">Calculating...</p> <!-- Dynamic update --></div>
-							    <div class="stats-meta text-success">
-								     </div>
-						    </div><!--//app-card-body-->
-						    <a class="app-card-link-mask" href="#"></a>
-					    </div><!--//app-card-->
-				    </div><!--//col-->
-			    </div><!--//row-->
-				    
-			    <div class="row g-4 mb-4">
-				    <div class="col-6 col-lg-3">
-					    <div class="app-card app-card-stat shadow-sm h-100">
-						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">Total Sales</h4>
-							    <div class="stats-figure">$12,628</div>
-							    <div class="stats-meta text-success">
-								    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
-</svg> 20%</div>
-						    </div><!--//app-card-body-->
-						    <a class="app-card-link-mask" href="#"></a>
-					    </div><!--//app-card-->
-				    </div><!--//col-->
-				    
-				    <div class="col-6 col-lg-3">
-					    <div class="app-card app-card-stat shadow-sm h-100">
-						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">Expenses</h4>
-							    <div class="stats-figure">$2,250</div>
-							    <div class="stats-meta text-success">
-								    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
-</svg> 5% </div>
-						    </div><!--//app-card-body-->
-						    <a class="app-card-link-mask" href="#"></a>
-					    </div><!--//app-card-->
-				    </div><!--//col-->
-				    <div class="col-6 col-lg-3">
-					    <div class="app-card app-card-stat shadow-sm h-100">
-						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">Projects</h4>
-							    <div class="stats-figure">23</div>
-							    <div class="stats-meta">
-								    Open</div>
-						    </div><!--//app-card-body-->
-						    <a class="app-card-link-mask" href="#"></a>
-					    </div><!--//app-card-->
-				    </div><!--//col-->
-				    <div class="col-6 col-lg-3">
-					    <div class="app-card app-card-stat shadow-sm h-100">
-						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">Invoices</h4>
-							    <div class="stats-figure">6</div>
-							    <div class="stats-meta">New</div>
-						    </div><!--//app-card-body-->
-						    <a class="app-card-link-mask" href="#"></a>
-					    </div><!--//app-card-->
-				    </div><!--//col-->
-			    </div><!--//row-->
+				<div class="row g-4 mb-4">
+					<h2>To offset this you would need to...</h2>
+				
+					<!-- Trees to Plant Flip Card -->
+					<div class="col-12 col-lg-4">
+						<div class="flip-card">
+							<div class="flip-card-inner">
+								<!-- Front Side (Image) -->
+								<div class="flip-card-front">
+									<img src="img/planttree.png" alt="Trees" style="width:100%; height:100%">
+								</div>
+								<!-- Back Side (Calculation Result) -->
+								<div class="flip-card-back">
+									<h4 class="stats-type mb-1">Trees to Plant</h4>
+									<p id="trees-equivalent">Calculating...</p>
+								</div>
+							</div>
+						</div>
+					</div><!--//col-->
+				
+					<!-- Solar Panels to Install Flip Card -->
+					<div class="col-12 col-lg-4">
+						<div class="flip-card">
+							<div class="flip-card-inner">
+								<!-- Front Side (Image) -->
+								<div class="flip-card-front">
+									<img src="img/solar-panel.jpg" alt="Solar Panels" style="width:100%; height:100%">
+								</div>
+								<!-- Back Side (Calculation Result) -->
+								<div class="flip-card-back">
+									<h4 class="stats-type mb-1">Solar Panels to Install</h4>
+									<p id="solar-panels-equivalent">Calculating...</p>
+								</div>
+							</div>
+						</div>
+					</div><!--//col-->
+				
+					<!-- Cars to Remove Flip Card -->
+					<div class="col-12 col-lg-4">
+						<div class="flip-card">
+							<div class="flip-card-inner">
+								<!-- Front Side (Image) -->
+								<div class="flip-card-front">
+									<img src="img/carremove.png" alt="Cars" style="width:100%; height:100%">
+								</div>
+								<!-- Back Side (Calculation Result) -->
+								<div class="flip-card-back">
+									<h4 class="stats-type mb-1">Cars to Remove</h4>
+									<p id="cars-removed-equivalent">Calculating...</p>
+								</div>
+							</div>
+						</div>
+					</div><!--//col-->
+				</div><!--//row-->
+				
+				
 			    <div class="row g-4 mb-4">
 			        <div class="col-12 col-lg-6">
 				        <div class="app-card app-card-chart h-100 shadow-sm">
@@ -420,15 +621,11 @@
     <!-- Charts JS -->
     <script src="assets/plugins/chart.js/chart.min.js"></script> 
     <script src="assets/js/index-charts.js"></script> 
-    
-    <!-- Page Specific JS -->
-    <script src="assets/js/app.js"></script> 
+
     <!-- Bootstrap JS from CDN (to replace local) -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 
-    <!-- Local JavaScript Files -->
-    <script src="assets/js/app.js"></script>
 </body>
 </html> 
 
