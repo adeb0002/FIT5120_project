@@ -412,13 +412,12 @@ label[for="appliance-selection"] {
 /* Common floating buttons styles */
 .floating-buttons {
     position: relative;
-    margin-top: 120px;
-    bottom: 15px;
-    margin-left: 500px;
+    margin-left: 700px;
     transform: translateX(-50%);
     display: flex;
     justify-content: space-between;
-    width: 110%;
+    width: 60%;
+    margin-bottom: 20px;
 }
 
 /* Back Button Styling */
@@ -434,7 +433,6 @@ label[for="appliance-selection"] {
     text-align: center;
     display: inline-flex;
     align-items: center;
-    margin-left: 600px;
 }
 
 /* Next Button Styling */
@@ -484,7 +482,7 @@ label[for="appliance-selection"] {
 /* Media query for tablets (max-width: 768px) */
 @media (max-width: 768px) {
     .floating-buttons {
-        position: relative;
+        position: fixed;
         /* Fix position relative to the viewport */
         bottom: 10px;
         /* Distance from bottom */
@@ -504,7 +502,7 @@ label[for="appliance-selection"] {
     #back-button {
         position: absolute;
         /* Absolute positioning within the container */
-        left: 0px;
+        left: 0;
         /* Align to the left */
     }
 
@@ -525,9 +523,9 @@ label[for="appliance-selection"] {
 }
 
 /* Media query for mobile devices (max-width: 576px) */
-@media (max-width: 480px) {
+@media (max-width: 576px) {
     .floating-buttons {
-        position: relative;
+        position: fixed;
         /* Fix position relative to the viewport */
         bottom: 5px;
         /* Distance from bottom */
@@ -538,7 +536,7 @@ label[for="appliance-selection"] {
         /* Space between buttons */
         gap: 8px;
         /* Space between buttons */
-        margin-top: 153px;
+        margin: 0;
         /* Reset margin */
         transform: none;
         /* Remove any existing transform */
@@ -547,7 +545,7 @@ label[for="appliance-selection"] {
     #back-button {
         position: absolute;
         /* Absolute positioning within the container */
-        left: -580px;
+        left: 20px;
         /* Align to the left */
     }
 
@@ -555,6 +553,7 @@ label[for="appliance-selection"] {
         position: absolute;
         /* Absolute positioning within the container */
         right: 10px;
+        /* Align to the right */
     }
 
     #back-button,

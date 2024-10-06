@@ -411,15 +411,15 @@ label[for="instantaneous-storage"] {
     }
 }
 
+/* Common floating buttons styles */
 .floating-buttons {
     position: relative;
-    margin-top: 269px;
-    margin-left: -97px;
+    margin-top: 200px;
+    margin-left: 700px;
     transform: translateX(-50%);
     display: flex;
     justify-content: space-between;
-    width: 180%;
-    bottom: 50px;
+    width: 60%;
 }
 
 /* Back Button Styling */
@@ -435,7 +435,6 @@ label[for="instantaneous-storage"] {
     text-align: center;
     display: inline-flex;
     align-items: center;
-    margin-left: 600px;
 }
 
 /* Next Button Styling */
@@ -485,7 +484,7 @@ label[for="instantaneous-storage"] {
 /* Media query for tablets (max-width: 768px) */
 @media (max-width: 768px) {
     .floating-buttons {
-        position: relative;
+        position: fixed;
         /* Fix position relative to the viewport */
         bottom: 10px;
         /* Distance from bottom */
@@ -496,8 +495,7 @@ label[for="instantaneous-storage"] {
         /* Space between buttons */
         gap: 10px;
         /* Space between buttons */
-        margin-top: 200px;
-        margin-left: 0px;
+        margin: 0;
         /* Reset margin */
         transform: none;
         /* Remove any existing transform */
@@ -507,6 +505,7 @@ label[for="instantaneous-storage"] {
         position: absolute;
         /* Absolute positioning within the container */
         left: 0;
+        /* Align to the left */
     }
 
     #next-button {
@@ -528,7 +527,7 @@ label[for="instantaneous-storage"] {
 /* Media query for mobile devices (max-width: 576px) */
 @media (max-width: 576px) {
     .floating-buttons {
-        position: relative;
+        position: fixed;
         /* Fix position relative to the viewport */
         bottom: 5px;
         /* Distance from bottom */
@@ -539,8 +538,7 @@ label[for="instantaneous-storage"] {
         /* Space between buttons */
         gap: 8px;
         /* Space between buttons */
-        margin-top: 200px;
-        margin-left: 0px;
+        margin: 0;
         /* Reset margin */
         transform: none;
         /* Remove any existing transform */
@@ -549,14 +547,14 @@ label[for="instantaneous-storage"] {
     #back-button {
         position: absolute;
         /* Absolute positioning within the container */
-        left: -610px;
+        left: 20px;
         /* Align to the left */
     }
 
     #next-button {
         position: absolute;
         /* Absolute positioning within the container */
-        right: -10px;
+        right: 10px;
         /* Align to the right */
     }
 
@@ -935,9 +933,12 @@ input[type="number"] {
     border: 1px solid #ccc;
     border-radius: 8px;
     transition: box-shadow 0.3s ease;
-    width: 80%; /* Use percentage to make it larger while responsive */
-    max-width: 1200px; /* Set a larger maximum width */
-    min-width: 500px; /* Set a minimum width to avoid being too small */
+    width: 80%;
+    /* Use percentage to make it larger while responsive */
+    max-width: 1200px;
+    /* Set a larger maximum width */
+    min-width: 500px;
+    /* Set a minimum width to avoid being too small */
 }
 
 .button-container:hover {

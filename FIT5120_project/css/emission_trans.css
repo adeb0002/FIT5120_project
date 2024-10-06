@@ -4,16 +4,18 @@
     font-family: 'Roboto', arial, sans-serif;
 }
 
-html, body {
+html,
+body {
     background-color: #f2e8d5;
     height: 100%;
     margin: 0;
-    overflow-x: hidden; /* This prevents scrolling */
+    overflow-x: hidden;
+    /* This prevents scrolling */
 }
 
 ul {
-	list-style: none;
-	margin: 0px;
+    list-style: none;
+    margin: 0px;
 }
 
 .header {
@@ -25,44 +27,46 @@ ul {
     z-index: 10000;
     transition: all 0.2s ease-in-out;
     height: 80px;
-    background-color: #131212d4; /* Charcoal Grey with opacity */
+    background-color: #131212d4;
+    /* Charcoal Grey with opacity */
     text-align: center;
     line-height: 40px;
     color: white;
 }
 
-.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-nav>li>a {
     text-shadow: none;
 }
 
 .navbar-brand {
-	line-height: 80px;
-	padding: 0px;
+    line-height: 80px;
+    padding: 0px;
 }
 
 .navbar-nav>li>a {
-	color: #fff!important;
-	font-size: 13px;
-	font-weight: 300;
-	text-transform: uppercase;
-	text-shadow: none;
-	line-height: 80px;
-	padding: 0px;
-	letter-spacing: 0.5px;
+    color: #fff !important;
+    font-size: 13px;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-shadow: none;
+    line-height: 80px;
+    padding: 0px;
+    letter-spacing: 0.5px;
 }
 
 .navbar-nav>li {
-	margin-left: 45px;
+    margin-left: 45px;
 }
 
 .header.active .navbar-nav>li>a {
-	font-family: 'Open Sans', arial, sans-serif;
-	font-size: 13px;
-	font-weight: 500;
-	letter-spacing: 0.5px;
-	text-transform: uppercase;
-	text-shadow: none;
-	color: #121212!important;
+    font-family: 'Open Sans', arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-shadow: none;
+    color: #121212 !important;
 }
 
 .header.active {
@@ -71,50 +75,60 @@ ul {
     -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
 }
+
 .navbar-brand {
-	font-family: 'Open Sans', sans-serif;
-	font-size: 25px;
-	text-transform: uppercase;
-	color: #fff!important;
-	transition: all 0.5s;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #fff !important;
+    transition: all 0.5s;
 
 }
+
 .navbar-brand em {
-	font-style: normal;
-	color: #f7c552;
-	font-size: 32px;
+    font-style: normal;
+    color: #f7c552;
+    font-size: 32px;
 }
+
 .header.active .navbar-brand {
-	color: #121212!important;
+    color: #121212 !important;
 }
+
 .header .navbar-brand {
     font-weight: 800;
 }
+
 .navbar-inverse {
-	background-image: none;
-	background-color: transparent;
+    background-image: none;
+    background-color: transparent;
 }
+
 .header .navbar {
     margin: 0;
     border: none;
 }
+
 .page-section {
     padding: 80px 0;
 }
+
 .navbar-inverse .navbar-toggle {
-	margin-top: 22px;
-    border-color: #69d76c!important;
-    background-color: #69d76c!important;
+    margin-top: 22px;
+    border-color: #69d76c !important;
+    background-color: #69d76c !important;
 }
-.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
-	background-color: #f7c552;
+
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+    background-color: #f7c552;
 }
-bootstrap.min.css
-.navbar-toggle {
+
+bootstrap.min.css .navbar-toggle {
     position: relative;
     float: right;
     padding: 9px 10px;
-    margin-top: 15px!important;
+    margin-top: 15px !important;
     margin-right: 15px;
     margin-bottom: 8px;
     background-color: transparent;
@@ -122,14 +136,17 @@ bootstrap.min.css
     border: 1px solid transparent;
     border-radius: 4px;
 }
+
 @media (min-width: 768px) {
     .header .navbar-brand {
         padding-left: 0;
     }
+
     .navbar-nav {
         float: right;
     }
 }
+
 .page-section {
     min-height: 100vh;
     padding: 0;
@@ -139,9 +156,11 @@ bootstrap.min.css
     .page-section h1 {
         font-size: 3em;
     }
+
     .page-section h2 {
         font-size: 2em;
     }
+
     .page-section p {
         font-size: 1em;
         margin: 0 0 20px;
@@ -149,43 +168,43 @@ bootstrap.min.css
 }
 
 .baner-content {
-	width: 100%;
-  	padding-top: 35vh;
-  	text-align: center;
-  	background-image: url(../img/blog_item_01.jpg);
-  	vertical-align: middle;
+    width: 100%;
+    padding-top: 35vh;
+    text-align: center;
+    background-image: url(../img/blog_item_01.jpg);
+    vertical-align: middle;
 }
 
 .baner-content .text-content {
-	text-align: center;
+    text-align: center;
 }
 
 .baner-content .text-content h2 {
-	font-size: 36px;
-	font-weight: 400;
-	color: #fff;
+    font-size: 36px;
+    font-weight: 400;
+    color: #fff;
 }
 
 .baner-content .text-content h2 span {
-	font-weight: 700;
-	color: #33c1cf!important;
+    font-weight: 700;
+    color: #33c1cf !important;
 }
 
 .baner-content .text-content h2 em {
-	font-style: normal;
-	font-weight: 700;
-	color: #f89624!important;
+    font-style: normal;
+    font-weight: 700;
+    color: #f89624 !important;
 }
 
 .baner-content .text-content p {
-	color: #fff;
-	font-size: 14px;
-	line-height: 24px;
-	padding: 0px 25%;
+    color: #fff;
+    font-size: 14px;
+    line-height: 24px;
+    padding: 0px 25%;
 }
 
 .baner-content .text-content .primary-white-button {
-	margin-top: 25px;
+    margin-top: 25px;
 }
 
 .is-invalid {
@@ -202,15 +221,18 @@ h2 {
     font-weight: 800;
     margin-top: 20px;
     margin-left: 200px;
-    margin-bottom: 20px; /* Space below the heading */
+    margin-bottom: 20px;
+    /* Space below the heading */
     color: #28a745;
     line-height: 1.4;
     text-transform: uppercase;
-    width: 100%; /* Ensure the heading takes full width of the container */
+    width: 100%;
+    /* Ensure the heading takes full width of the container */
     white-space: nowrap;
 }
 
 @media (max-width: 768px) {
+
     /* Tablets and small desktops */
     h2 {
         font-size: 2.5rem;
@@ -223,6 +245,7 @@ h2 {
 }
 
 @media (max-width: 480px) {
+
     /* Mobile devices */
     h2 {
         font-size: 2rem;
@@ -236,48 +259,66 @@ h2 {
 
 .icon-label-container {
     display: flex;
-    align-items: center; /* Align items vertically center */
-    margin-bottom: 20px; /* Add space between the label and slider */
+    align-items: center;
+    /* Align items vertically center */
+    margin-bottom: 20px;
+    /* Add space between the label and slider */
 }
 
 
 label[for="transportation-selection"] {
-    display: block; /* Makes the label a block-level element */
-    margin-top: 200px; /* Adjust this value as needed for positioning */
-    font-size: 1.5em; /* Adjust the size of the text */
-    font-weight: bold; /* Makes the text bold */
-    color: #333; /* Optional: Adjust the text color */
+    display: block;
+    /* Makes the label a block-level element */
+    margin-top: 200px;
+    /* Adjust this value as needed for positioning */
+    font-size: 1.5em;
+    /* Adjust the size of the text */
+    font-weight: bold;
+    /* Makes the text bold */
+    color: #333;
+    /* Optional: Adjust the text color */
 }
 
 /* Style for each question group */
 #usage-questions .form-group {
     margin-top: 50px;
-    margin-bottom: 40px; /* Space between questions */
+    margin-bottom: 40px;
+    /* Space between questions */
 }
 
 /* Style for labels */
 #usage-questions label {
     margin-top: 5px;
-    font-weight: bold; /* Bold text for labels */
+    font-weight: bold;
+    /* Bold text for labels */
     display: block;
-    margin-bottom: 5px; /* Space between label and input */
+    margin-bottom: 5px;
+    /* Space between label and input */
     color: #333;
-    font-size: 1.5em;/* Dark grey color for text */
+    font-size: 1.5em;
+    /* Dark grey color for text */
 }
 
 /* Style for inputs */
 #usage-questions input[type="number"] {
-    width: 100%; /* Full width of the container */
-    padding: 10px; /* Padding inside the input */
-    border: 1px solid #ccc; /* Border around the input */
-    border-radius: 4px; /* Slightly rounded corners */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    width: 100%;
+    /* Full width of the container */
+    padding: 10px;
+    /* Padding inside the input */
+    border: 1px solid #ccc;
+    /* Border around the input */
+    border-radius: 4px;
+    /* Slightly rounded corners */
+    box-sizing: border-box;
+    /* Include padding and border in the element's total width and height */
 }
 
 /* Style for invalid inputs */
 #usage-questions input[type="number"].is-invalid {
-    border-color: #e74c3c; /* Red border for invalid inputs */
-    background-color: #fdd; /* Light red background */
+    border-color: #e74c3c;
+    /* Red border for invalid inputs */
+    background-color: #fdd;
+    /* Light red background */
 }
 
 .trans-icon-1 {
@@ -335,40 +376,49 @@ label[for="transportation-selection"] {
 
 @media (max-width: 768px) {
     label[for="transportation-selection"] {
-        margin-top: 150px; /* Adjust positioning for tablets */
-        font-size: 1.4em; /* Slightly smaller font size for tablets */
+        margin-top: 150px;
+        /* Adjust positioning for tablets */
+        font-size: 1.4em;
+        /* Slightly smaller font size for tablets */
     }
 
     #usage-questions label {
-        font-size: 1.4em; /* Slightly smaller font size for labels on tablets */
+        font-size: 1.4em;
+        /* Slightly smaller font size for labels on tablets */
     }
 
     .icon-label-container {
-        flex-direction: column; /* Stack icons and labels vertically */
-        align-items: flex-start; /* Align items to the left */
+        flex-direction: column;
+        /* Stack icons and labels vertically */
+        align-items: flex-start;
+        /* Align items to the left */
     }
 
     .icon-private-vehicle,
     .icon-train,
     .icon-tram,
     .icon-bus {
-        width: 28px; /* Smaller icons for tablets */
+        width: 28px;
+        /* Smaller icons for tablets */
         height: 28px;
     }
 
     #usage-questions input[type="number"] {
-        padding: 9px; /* Reduced padding for tablets */
+        padding: 9px;
+        /* Reduced padding for tablets */
     }
 
     .trans-icon-1 {
-        margin-top: 150px; /* Adjust the margin for better positioning on tablets */
+        margin-top: 150px;
+        /* Adjust the margin for better positioning on tablets */
     }
 }
 
 /* Screens up to 480px (mobile devices) */
 @media (max-width: 480px) {
     label[for="transportation-selection"] {
-        margin-top: -25px; /* Adjust positioning for mobile */
+        margin-top: -25px;
+        /* Adjust positioning for mobile */
         font-size: 1.1em;
         margin-left: 35px;
     }
@@ -376,41 +426,45 @@ label[for="transportation-selection"] {
     #usage-questions label {
         font-size: 1.1em;
         margin-top: -25px;
-         margin-left: 35px;
+        margin-left: 35px;
     }
 
     .icon-label-container {
-        flex-direction: column; /* Stack icons and labels vertically */
-        align-items: flex-start; /* Align items to the left */
+        flex-direction: column;
+        /* Stack icons and labels vertically */
+        align-items: flex-start;
+        /* Align items to the left */
     }
 
     .icon-private-vehicle,
     .icon-train,
     .icon-tram,
     .icon-bus {
-        width: 30px; /* Smaller icons for mobile */
+        width: 30px;
+        /* Smaller icons for mobile */
         height: 30px;
     }
 
     #usage-questions input[type="number"] {
-        padding: 8px; /* Reduced padding for mobile screens */
+        padding: 8px;
+        /* Reduced padding for mobile screens */
     }
 
     .trans-icon-1 {
-        margin-top: 30px; /* Adjust the margin for better positioning on mobile */
+        margin-top: 30px;
+        /* Adjust the margin for better positioning on mobile */
     }
 }
 
 /* Common floating buttons styles */
 .floating-buttons {
     position: relative;
-    margin-top: -60px;
-    bottom: 30px;
-    margin-left: 500px;
+    margin-left: 700px;
     transform: translateX(-50%);
     display: flex;
     justify-content: space-between;
-    width: 110%;
+    width: 60%;
+    margin-bottom: 20px;
 }
 
 /* Back Button Styling */
@@ -426,7 +480,6 @@ label[for="transportation-selection"] {
     text-align: center;
     display: inline-flex;
     align-items: center;
-    margin-left: 580px;
 }
 
 /* Next Button Styling */
@@ -442,35 +495,41 @@ label[for="transportation-selection"] {
     text-align: center;
     display: inline-flex;
     align-items: center;
-    margin-right: 50px;
 }
 
 /* Icon Styling inside Buttons */
-#back-button i, #next-button i {
-    margin-right: 8px; /* Space between icon and text */
+#back-button i,
+#next-button i {
+    margin-right: 8px;
+    /* Space between icon and text */
 }
 
 /* Ensure no conflicting styles for floating-buttons links */
 .floating-buttons a {
-    background: #28a745; /* Green background */
+    background: #28a745;
+    /* Green background */
     color: white;
-    padding: 20px 30px; /* Adjusted padding for better button size */
+    padding: 20px 30px;
+    /* Adjusted padding for better button size */
     border-radius: 20px;
     text-decoration: none;
     font-weight: bold;
     text-align: center;
     display: inline-flex;
-    align-items: center; /* Center text and icon vertically */
+    align-items: center;
+    /* Center text and icon vertically */
     transition: background-color .3s ease;
 }
+
 .floating-buttons a:hover {
-    background-color: #00332b; /* Darker shade for hover effect */
+    background-color: #00332b;
+    /* Darker shade for hover effect */
 }
 
 /* Media query for tablets (max-width: 768px) */
 @media (max-width: 768px) {
     .floating-buttons {
-        position: relative;
+        position: fixed;
         /* Fix position relative to the viewport */
         bottom: 10px;
         /* Distance from bottom */
@@ -511,9 +570,9 @@ label[for="transportation-selection"] {
 }
 
 /* Media query for mobile devices (max-width: 576px) */
-@media (max-width: 480px) {
+@media (max-width: 576px) {
     .floating-buttons {
-        position: relative;
+        position: fixed;
         /* Fix position relative to the viewport */
         bottom: 5px;
         /* Distance from bottom */
@@ -524,7 +583,7 @@ label[for="transportation-selection"] {
         /* Space between buttons */
         gap: 8px;
         /* Space between buttons */
-        margin-top: 153px;
+        margin: 0;
         /* Reset margin */
         transform: none;
         /* Remove any existing transform */
@@ -533,14 +592,15 @@ label[for="transportation-selection"] {
     #back-button {
         position: absolute;
         /* Absolute positioning within the container */
-        left: -560px;
+        left: 20px;
         /* Align to the left */
     }
 
     #next-button {
         position: absolute;
         /* Absolute positioning within the container */
-        right: -40px;
+        right: 10px;
+        /* Align to the right */
     }
 
     #back-button,
@@ -554,8 +614,10 @@ label[for="transportation-selection"] {
 }
 
 .progress {
-    width: 400%; /* Make the progress bar container take full width of the column */
-    margin: 30px auto; /* Add some margin and center it */
+    width: 400%;
+    /* Make the progress bar container take full width of the column */
+    margin: 30px auto;
+    /* Add some margin and center it */
 }
 
 .progress-bar {
@@ -590,8 +652,10 @@ label[for="transportation-selection"] {
 
 /* Add this in your CSS file or within a <style> block in the <head> */
 input[type="number"] {
-    width: 50%; /* Adjust the percentage to make the input bar shorter */
-    max-width: 500px; /* Optional: Set a maximum width */
+    width: 50%;
+    /* Adjust the percentage to make the input bar shorter */
+    max-width: 500px;
+    /* Optional: Set a maximum width */
     display: inline-block;
 }
 
@@ -615,17 +679,20 @@ input[type="number"] {
 }
 
 .transportation-button.active {
-    background-color: #0056b3; /* Active state background color */
+    background-color: #0056b3;
+    /* Active state background color */
     color: white;
 }
 
 .transportation-button.selected-green {
-    background-color: #28a745; /* Green background */
+    background-color: #28a745;
+    /* Green background */
     color: white;
 }
 
 .transportation-button.selected-green.active {
-    background-color: #28a745; /* Green background */
+    background-color: #28a745;
+    /* Green background */
     color: white;
 }
 
@@ -633,35 +700,44 @@ input[type="number"] {
 /* Responsive styles */
 @media (max-width: 768px) {
     .button-group {
-        margin-left: 30px; /* Adjust margin for smaller screens */
+        margin-left: 30px;
+        /* Adjust margin for smaller screens */
     }
 
     .transportation-button {
-        padding: 8px 14px; /* Make buttons full width */
-        font-size: 1.1em; /* Slightly reduce font size */
+        padding: 8px 14px;
+        /* Make buttons full width */
+        font-size: 1.1em;
+        /* Slightly reduce font size */
     }
 }
 
 @media (max-width: 480px) {
     .button-group {
-        margin-left: 10px; /* Further reduce margin */
+        margin-left: 10px;
+        /* Further reduce margin */
     }
 
     .transportation-button {
-        padding: 8px 14px; /* Reduce padding */
-        font-size: 1.1em; /* Further reduce font size */
+        padding: 8px 14px;
+        /* Reduce padding */
+        font-size: 1.1em;
+        /* Further reduce font size */
     }
 }
 
 .map-button {
     padding: 10px 20px;
     font-size: 1.2em;
-    font-weight: bold; /* Corrected property name */
+    font-weight: bold;
+    /* Corrected property name */
     width: auto;
     border: 1px solid #28a745;
     border-radius: 20px;
-    background-color: #d9e7d4; /* Existing background color */
-    color: #333; /* Improved color for better readability */
+    background-color: #d9e7d4;
+    /* Existing background color */
+    color: #333;
+    /* Improved color for better readability */
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
 }
@@ -676,10 +752,14 @@ input[type="number"] {
 
 @media (max-width: 480px) {
     .map-button {
-        padding: 8px 16px; /* Reduce padding */
-        font-size: 1em; /* Adjust font size */
-        width: auto; /* Narrower width */
-        border-radius: 15px; /* Smaller border radius */
+        padding: 8px 16px;
+        /* Reduce padding */
+        font-size: 1em;
+        /* Adjust font size */
+        width: auto;
+        /* Narrower width */
+        border-radius: 15px;
+        /* Smaller border radius */
     }
 }
 
@@ -692,11 +772,16 @@ input[type="number"] {
 .form-control {
     flex: 1;
     margin-right: 10px;
-    max-width: 200px; /* Adjust width as needed */
-    height: 40px; /* Increase the height */
-    padding: 10px; /* Increase padding for better text alignment */
-    font-size: 16px; /* Adjust font size if necessary */
-    box-sizing: border-box; /* Ensure padding and border are included in the height */
+    max-width: 200px;
+    /* Adjust width as needed */
+    height: 40px;
+    /* Increase the height */
+    padding: 10px;
+    /* Increase padding for better text alignment */
+    font-size: 16px;
+    /* Adjust font size if necessary */
+    box-sizing: border-box;
+    /* Ensure padding and border are included in the height */
 }
 
 @media (max-width: 768px) {
