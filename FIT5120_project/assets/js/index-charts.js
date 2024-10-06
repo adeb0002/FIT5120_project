@@ -179,6 +179,54 @@ var transportBarChartConfig = {
     }
 };
 
+const CO2_PER_KM_PETROL_CAR = 0.17048;
+const CO2_PER_ICE_SQUARE_METER = 333.33;
+const TREES_TO_OFFSET_CO2 = 21.77;
+const CO2_SAVED_PER_SOLAR_PANEL = 38.46;
+const CO2_EMITTED_PER_CAR = 88.46;
+const AVERAGE_WEEKLY_EMISSIONS = 234.6153846;
+
+function displayEquivalences(totalEmissions) {
+    const kmsEquivalent = (totalEmissions / CO2_PER_KM_PETROL_CAR).toFixed(2);
+    const iceEquivalent = (totalEmissions / CO2_PER_ICE_SQUARE_METER).toFixed(2);
+    const treesEquivalent = (totalEmissions / TREES_TO_OFFSET_CO2).toFixed(2);
+    const solarPanelsEquivalent = (totalEmissions / CO2_SAVED_PER_SOLAR_PANEL).toFixed(2);
+    const carsRemovedEquivalent = (totalEmissions / CO2_EMITTED_PER_CAR).toFixed(2);
+
+    document.getElementById('car-equivalent').innerText = `${kmsEquivalent} km travelled by petrol car`;
+    document.getElementById('ice-equivalent').innerText = `${iceEquivalent} m² of melted polar ice caps`;
+    document.getElementById('trees-equivalent').innerText = `Plant ${treesEquivalent} trees to offset`;
+    document.getElementById('solar-panels-equivalent').innerText = `Install ${solarPanelsEquivalent} solar panels to offset`;
+    document.getElementById('cars-removed-equivalent').innerText = `Remove ${carsRemovedEquivalent} cars from the road to offset`;
+}
+
+function updateEmissionComparison(userEmissions) {
+    const difference = (userEmissions - AVERAGE_WEEKLY_EMISSIONS) / AVERAGE_WEEKLY_EMISSIONS;
+    const percentageDifference = (difference * 100).toFixed(2);
+    const comparisonElement = document.getElementById('comparison-percentage');
+
+    if (difference > 0) {
+        comparisonElement.textContent = `${percentageDifference}% more`;
+        comparisonElement.style.color = 'red';
+    } else if (difference < 0) {
+        comparisonElement.textContent = `${Math.abs(percentageDifference)}% less`;
+        comparisonElement.style.color = 'green';
+    } else {
+        comparisonElement.textContent = `equal to the average`;
+        comparisonElement.style.color = 'blue';
+    }
+
+    document.getElementById('user-emissions').textContent = userEmissions.toFixed(2);
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const totalEmissions = parseFloat(sessionStorage.getItem('totalEmissions')); // Example: getting total emissions from sessionStorage
+    if (!isNaN(totalEmissions)) {
+        updateEmissionComparison(totalEmissions); // Update comparison to average
+        displayEquivalences(totalEmissions); // Update equivalences dynamically
+    }
+});
+
 // Generate charts on load
 window.addEventListener('load', function () {
     var categoryBarChart = document.getElementById('categoryBarChart').getContext('2d');
