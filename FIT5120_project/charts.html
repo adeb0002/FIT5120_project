@@ -262,5 +262,16 @@
     <!-- Charts JS -->
     <script src="assets/plugins/chart.js/chart.min.js"></script>
     <script src="assets/js/charts-demo.js"></script>
+
+    <script>
+		document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('clear-session-link').addEventListener('click', function (event) {
+                event.preventDefault();
+                sessionStorage.clear();
+                console.log('SessionStorage cleared for Emission Calculator link.');
+                window.location.href = "emission_cal_cover.html";
+            });
+        });
+	</script>
 </body>
 </html>

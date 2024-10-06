@@ -312,26 +312,41 @@
                     if (result[0]?.body) {
                         const parsedBody = JSON.parse(result[0].body);
 
-                        // Store the total emissions and individual emissions in session storage
-                        if (parsedBody?.total_emissions !== undefined) {
-                            sessionStorage.setItem('totalEmissions', parsedBody.total_emissions);
-                            console.log('Total emissions saved to sessionStorage:', parsedBody.total_emissions);
-                        } else {
-                            console.warn('Total emissions data is missing in response.');
-                        }
-
+                        // Calculate total transportation emissions from individual transport types
                         if (parsedBody?.individual_transport_emissions) {
-                            sessionStorage.setItem('transportationData', JSON.stringify(parsedBody.individual_transport_emissions));
-                            console.log('Transport data saved to sessionStorage:', parsedBody.individual_transport_emissions);
+                            let transportEmissions = 0;
+
+                            // Sum the emissions from all transportation types
+                            Object.values(parsedBody.individual_transport_emissions).forEach(emission => {
+                                transportEmissions += parseFloat(emission) || 0;
+                            });
+
+                            // Store total transportation emissions in sessionStorage
+                            sessionStorage.setItem('transportEmissions', transportEmissions.toFixed(2));
+                            console.log('Total transport emissions saved to sessionStorage:', transportEmissions);
+
+                            // Now combine the transport emissions with appliance emissions
+                            const applianceEmissions = parseFloat(sessionStorage.getItem('applianceEmissions')) || 0;
+                            const totalEmissions = applianceEmissions + transportEmissions;
+
+                            // Store the combined total emissions in sessionStorage
+                            sessionStorage.setItem('totalEmissions', totalEmissions.toFixed(2));
+                            console.log('Total combined emissions (appliance + transport) saved to sessionStorage:', totalEmissions);
                         } else {
                             console.warn('Individual transport emissions data is missing in response.');
                         }
+
+                        // Store individual transportation emissions
+                        if (parsedBody?.individual_transport_emissions) {
+                            sessionStorage.setItem('transportationData', JSON.stringify(parsedBody.individual_transport_emissions));
+                            console.log('Individual transport data saved to sessionStorage:', parsedBody.individual_transport_emissions);
+                        }
+
+                        // Redirect to the next page
+                        window.location.href = 'emission_cal_appli.html';
                     } else {
                         console.warn('Unexpected data format:', result);
                     }
-
-                    // Redirect to the next page
-                    window.location.href = 'emission_cal_appli.html';
                 } else {
                     const errorText = await response.text(); // Log the error response
                     console.error('Error response from server:', response.status, errorText);
@@ -342,6 +357,8 @@
                 alert('Error sending data to the server. Please try again.');
             }
         }
+
+
 
 
         function validateAndNavigate() {
