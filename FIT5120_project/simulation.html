@@ -22,8 +22,13 @@
             margin: 0;
             padding: 0;
             font-family: 'Open Sans', sans-serif;
-            background-color: #f4f4f4;
             overflow:auto;
+            height: 100%;
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
         }
 
         .simulation-container {
@@ -32,14 +37,15 @@
             align-items: center;
             margin: 0 auto;
             max-width: 1200px;
-            padding: 0px;
+            min-height: 100vh;
+            padding-bottom: 100px; /* Add extra padding for the footer */
+            box-sizing: border-box;
         }
 
         /* Header styling */
         .header-section {
             text-align: center;
             padding: 130px 0 0 0;
-            background-color: #f5f5f5; /* Light background */
             font-family: 'Open Sans', sans-serif;
         }
 
@@ -81,9 +87,10 @@
 
         /* Ensure that the text is in the middle */
         .subtitle-text {
-            font-size: 1.2em;
+            font-size: 1.5em;
             color: #4e8e31;
             white-space: nowrap; /* Prevent text wrapping */
+            font-weight: bold;
         }
 
         /* Header description */
@@ -95,29 +102,41 @@
 
         .form-charts-container {
             display: flex;
-            width: 100%;
+            flex-wrap: wrap; /* This allows the charts to wrap if the space is too small */
             justify-content: space-between;
-            margin-top: 0;
+            width: 100%;
         }
 
         .form-section, .charts-section {
             flex: 1;
             padding: 20px;
+            min-width: 400px;
+            max-width: 500px;
+            flex-grow: 1;
         }
 
         .chart-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+            width: 100%;
+            height: 400px; 
+            max-width: 1000px;
+            margin-bottom: 20px; 
+            position: relative;
         }
 
         .chart {
+            position: relative;
             flex-basis: 100%;
             padding: 20px;
             margin-top: 20px;
             background: white;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            height: 100%;
+            margin-bottom: 50px;
         }
 
         @media (max-width: 800px) {
@@ -160,10 +179,12 @@
         }
 
         footer {
-            margin-top: 40px;
             padding: 20px;
             text-align: center;
-            background-color: #f1f1f1;
+            width: 100%;
+            position: relative; /* Relative positioning so it's not fixed */
+            bottom: 0; /* Keep the footer at the bottom of the container */
+            clear: both;
         }
 
         .highlight {
@@ -179,6 +200,9 @@
             margin-right: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
+            white-space: nowrap; /* Prevents text from wrapping */
+            min-width: 100px; /* Optional: Set a minimum width to ensure enough space */
+            text-align: center; /* Aligns the text in the center */
         }
 
         input[type="radio"] {
@@ -260,6 +284,86 @@
             opacity: 0.8; /* Slight opacity change on hover */
         }
 
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+
+        .radio-option label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group .radio-option {
+            flex: 2; 
+            display: flex;
+            justify-content: flex-start; 
+        }
+
+        .radio-option label {
+            margin-right: 15px; 
+        }
+        .radio-option {
+            flex: 1;
+            display: flex;
+            justify-content: center; /* Centers the button text */
+        }
+
+        .radio-question {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column; /* Ensures label appears above the buttons */
+        }
+
+        .radio-option-group {
+            display: flex;
+            justify-content: space-between; /* Ensures even spacing between buttons */
+            flex-wrap: nowrap; /* Prevents wrapping to the next line */
+            gap: 15px; /* Adds spacing between buttons */
+        }
+
+        .icon-text {
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            margin-left: -20px; /* Adjust this value as per your requirement */
+        }
+
+        .icon {
+            margin-right: 10px; /* Space between the icon and the text */
+        }
+
+        .text {
+            font-size: 1em; /* You can adjust the size if needed */
+            font-weight: bold;
+        }
+        #loading-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    background-color: rgba(255, 255, 255, 0.8); /* Optional: translucent background */
+    z-index: 9999; /* Ensure it's on top of other content */
+    flex-direction: column; /* Stack the image and text vertically */
+    pointer-events: none;
+}
+
+#loading-animation img {
+    width: 100px; /* Adjust image size */
+    height: auto;
+}
+
+#loading-animation p {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+}
     </style>
 </head>
 
@@ -302,7 +406,6 @@
 
             <!-- Prominent Apply and Reset buttons at the top -->
             <div class="button-section">
-                <button onclick="applyChanges()">Apply</button>
                 <button class="reset-btn" onclick="resetChanges()">Reset</button>
             </div>
 
@@ -407,19 +510,19 @@
                         <div class="radio-option-group">
                             <div class="radio-option">
                                 <input type="radio" id="tech-lcd" name="television-screen-tech" value="LCD" required>
-                                <label for="tech-lcd" class="radio-label btn-radio">LCD</label>
+                                <label for="tech-lcd" class="btn-radio">LCD</label>
                             </div>
                             <div class="radio-option">
                                 <input type="radio" id="tech-plasma" name="television-screen-tech" value="Plasma" required>
-                                <label for="tech-plasma" class="radio-label btn-radio">Plasma</label>
+                                <label for="tech-plasma" class="btn-radio">Plasma</label>
                             </div>
                             <div class="radio-option">
                                 <input type="radio" id="tech-led" name="television-screen-tech" value="LED" required>
-                                <label for="tech-led" class="radio-label btn-radio">LED</label>
+                                <label for="tech-led" class="btn-radio">LED</label>
                             </div>
                             <div class="radio-option">
                                 <input type="radio" id="tech-oled" name="television-screen-tech" value="OLED" required>
-                                <label for="tech-oled" class="radio-label btn-radio">OLED</label>
+                                <label for="tech-oled" class="btn-radio">OLED</label>
                             </div>
                         </div>
                     </div>
@@ -452,11 +555,11 @@
                         <div class="radio-option-group">
                             <div class="radio-option">
                                 <input type="radio" id="washer-loading-front" name="clothes-washer-loading" value="Front" required>
-                                <label for="washer-loading-front" class="radio-label btn-radio">Front</label>
+                                <label for="washer-loading-front" class="btn-radio">Front</label>
                             </div>
                             <div class="radio-option">
                                 <input type="radio" id="washer-loading-top" name="clothes-washer-loading" value="Top" required>
-                                <label for="washer-loading-top" class="radio-label btn-radio">Top</label>
+                                <label for="washer-loading-top" class="btn-radio">Top</label>
                             </div>
                         </div>
                     </div>
@@ -484,11 +587,11 @@
                         <div class="radio-option-group">
                             <div class="radio-option">
                                 <input type="radio" id="dryer-type-vented" name="clothes-dryer-type" value="Vented" required>
-                                <label for="dryer-type-vented" class="radio-label btn-radio">Vented</label>
+                                <label for="dryer-type-vented" class="btn-radio">Vented</label>
                             </div>
                             <div class="radio-option">
                                 <input type="radio" id="dryer-type-condenser" name="clothes-dryer-type" value="Condenser" required>
-                                <label for="dryer-type-condenser" class="radio-label btn-radio">Condenser</label>
+                                <label for="dryer-type-condenser" class="btn-radio">Condenser</label>
                             </div>
                         </div>
                     </div>
@@ -509,15 +612,15 @@
                         <div class="radio-option-group">
                             <div class="radio-option">
                                 <input type="radio" id="ac-type-ducted" name="air-conditioner-type" value="Ducted" required>
-                                <label for="ac-type-ducted" class="radio-label btn-radio">Ducted</label>
+                                <label for="ac-type-ducted" class="btn-radio">Ducted</label>
                             </div>
                             <div class="radio-option">
                                 <input type="radio" id="ac-type-non-ducted" name="air-conditioner-type" value="Non Ducted" required>
-                                <label for="ac-type-non-ducted" class="radio-label btn-radio">Non Ducted</label>
+                                <label for="ac-type-non-ducted" class="btn-radio">Non Ducted</label>
                             </div>
                             <div class="radio-option">
                                 <input type="radio" id="ac-type-both" name="air-conditioner-type" value="Both" required>
-                                <label for="ac-type-both" class="radio-label btn-radio">Both</label>
+                                <label for="ac-type-both" class="btn-radio">Both</label>
                             </div>
                         </div>
                     </div>
@@ -565,17 +668,12 @@
     </div>
 
 </div>
-
-    <footer>
-        Ready to take action?
-        <p>Use our <a href="#">Emissions Calculator</a> to discover your personal carbon footprint and ways to reduce it.</p>
-    </footer>
-
-    <!-- Add a loading animation or spinner (hidden initially) -->
+    <!-- Loading Animation with Tree GIF -->
     <div id="loading-animation" style="display: none;">
-        <img src="img/loading.gif" alt="Loading..." style="width: 100px; height: auto;">
+        <img src="img/tree.gif" alt="Loading...">
         <p>Calculating, please wait...</p>
     </div>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
@@ -638,17 +736,35 @@
         }
 
         document.addEventListener('DOMContentLoaded', function () {
-                    document.getElementById('clear-session-link').addEventListener('click', function (event) {
-                        event.preventDefault();
-                        sessionStorage.clear();
-                        console.log('SessionStorage cleared for Emission Calculator link.');
-                        window.location.href = "emission_cal_cover.html";
-                    });
-                });
+            // Add event listeners to all input elements to update dynamically
+            const formElements = document.querySelectorAll('input, select');
+
+            formElements.forEach((element) => {
+                element.addEventListener('input', applyChanges);  // for input changes
+                element.addEventListener('change', applyChanges); // for selection changes
+            });
+
+            // Event listener for clearing session storage and restarting
+            document.getElementById('clear-session-link').addEventListener('click', function (event) {
+                event.preventDefault();
+                sessionStorage.clear();
+                console.log('SessionStorage cleared for Emission Calculator link.');
+                window.location.href = "emission_cal_cover.html";
+            });
+
+            // Load the charts with stored data if available
+            const storedData = sessionStorage.getItem('simulationData');
+            if (storedData) {
+                applyChanges();  // Apply the stored data to the form
+            } else {
+                resetChanges();  // Otherwise, reset the charts
+            }
+        });
+
 
         // Function to show the loading animation
         function showLoading() {
-            document.getElementById('loading-animation').style.display = 'block';  // Show the loading animation
+            document.getElementById('loading-animation').style.display = 'flex';  // Show the loading animation
         }
 
         // Function to hide the loading animation
@@ -951,10 +1067,18 @@
                     ]
                 },
                 options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    layout: {
+                        padding: {
+                            bottom: 60
+                        }
+                    },
                     scales: {
                         x: {
                             beginAtZero: true,
                             ticks: {
+                                autoSkip: false,
                                 maxRotation: 0, // Ensures no label rotation
                                 minRotation: 0 // Ensures no label rotation
                             }
@@ -967,6 +1091,7 @@
                         datalabels: {
                             anchor: 'end',
                             align: 'start',
+                            offset: -20, 
                             formatter: function(value) {
                                 return typeof value === 'number' && !isNaN(value) ? value.toFixed(2) : ''; 
                             },
@@ -986,15 +1111,23 @@
                 data: {
                     labels: categories,
                     datasets: [
-                        { label: 'Current Cost', data: currentCosts, backgroundColor: 'rgba(54, 162, 235, 0.5)' },
+                        { label: 'Current Cost', data: currentCosts, backgroundColor: 'rgba(54, 235, 162, 0.5)' },
                         { label: 'Simulated Cost', data: simulatedCosts, backgroundColor: 'rgba(255, 99, 132, 0.5)' }
                     ]
                 },
                 options: {
+                    responsive: true,
+                    maintainAspectRatio: false,  // Allows custom sizing
+                    layout: {
+                        padding: {
+                            bottom: 60
+                        }
+                    },
                     scales: {
                         x: {
                             beginAtZero: true,
                             ticks: {
+                                autoSkip: false,
                                 maxRotation: 0, // Ensures no label rotation
                                 minRotation: 0 // Ensures no label rotation
                             }
@@ -1007,6 +1140,7 @@
                         datalabels: {
                             anchor: 'end',
                             align: 'start',
+                            offset: -20, 
                             formatter: function(value) {
                                 return typeof value === 'number' && !isNaN(value) ? `$${value.toFixed(2)}` : ''; 
                             },
