@@ -185,6 +185,87 @@ const TREES_TO_OFFSET_CO2 = 21.77;
 const CO2_SAVED_PER_SOLAR_PANEL = 38.46;
 const CO2_EMITTED_PER_CAR = 88.46;
 const AVERAGE_WEEKLY_EMISSIONS = 234.6153846;
+// Constants for calculations
+const ENERGY_COST_PER_UNIT = 0.1901; 
+
+// Function to retrieve appliance data from session storage and format it
+function retrieveApplianceData() {
+    const individualApplianceEmissions = JSON.parse(sessionStorage.getItem('individualApplianceEmissions')) || {};
+
+    const averageConsumptions = {
+        television: 654.73,
+        clothes_washer: 32.65,
+        clothes_dryer: 224.52,
+        air_conditioner: 20.01,
+        refrigerator: 353.52
+    };    
+
+    const applianceData = Object.entries(individualApplianceEmissions).map(([appliance, emissions]) => {
+        const userConsumption = emissions * 1000; 
+        const avgConsumption = averageConsumptions[appliance.toLowerCase().replace(/\s+/g, '_')]; 
+        return { appliance, userConsumption, avgConsumption };
+    });
+
+    return applianceData;
+}
+
+// Function to calculate the cost savings based on the retrieved appliance data
+function calculateCostSaving(data) {
+    let totalPositiveDifference = 0;
+
+    data.forEach(item => {
+        const difference = item.avgConsumption - item.userConsumption; 
+        if (difference > 0) {
+            totalPositiveDifference += difference; 
+        }
+    });
+
+    const totalCostSavings = Math.round(totalPositiveDifference * ENERGY_COST_PER_UNIT); 
+    return totalCostSavings;
+}
+
+// Function to dynamically display the calculated savings on the webpage
+function displayTotalSavings(totalSavings) {
+    const savingsContainer = document.getElementById('negative-differences');
+    if (totalSavings > 0) {
+        savingsContainer.textContent = `$${totalSavings} per year`;
+        savingsContainer.style.backgroundColor = '#4CAF50'; 
+    } else {
+        savingsContainer.textContent = 'No significant savings identified';
+        savingsContainer.style.backgroundColor = '#f44336'; 
+    }
+}
+
+// Function to initialize and calculate savings on page load
+function init() {
+    const applianceData = retrieveApplianceData(); 
+    const totalSavings = calculateCostSaving(applianceData); 
+    displayTotalSavings(totalSavings); 
+}
+
+
+window.onload = init;
+
+
+// Function to dynamically update the comparison section
+function updateComparisonSection() {
+    // Calculate the total cost savings
+    const totalSavings = calculateCostSaving(averagesData);
+
+    // Find the container where you want to display the savings
+    const savingsContainer = document.getElementById('negative-differences');
+    if (totalSavings > 0) {
+        savingsContainer.textContent = `$${totalSavings} per year`;
+        savingsContainer.style.backgroundColor = '#4CAF50'; // Green for positive savings
+    } else {
+        savingsContainer.textContent = 'No significant savings identified';
+        savingsContainer.style.backgroundColor = '#f44336'; // Red for no savings
+    }
+
+    // Update other relevant dynamic parts
+    // Example: Update bar chart dynamically if not done elsewhere
+    createGroupedBarChart(averagesData, "#grouped-bar-chart");
+}
 
 function displayEquivalences(totalEmissions) {
     const kmsEquivalent = (totalEmissions / CO2_PER_KM_PETROL_CAR).toFixed(2);
