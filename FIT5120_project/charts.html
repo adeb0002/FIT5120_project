@@ -79,7 +79,25 @@
             max-width: 100%; /* Ensure charts are responsive */
             margin-top: 20px;
         }
-        
+        /* Centering the "How your appliances compare to the average" chart */
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            padding: 0; /* Remove any padding */
+        }
+        /* Style adjustments for single chart centering */
+        .single-chart-container {
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .single-chart {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+       
     </style>
 </head>
 
@@ -118,10 +136,10 @@
     <div class="app-wrapper">
         <div class="app-content">
             <div class="container-xl">
-                <!-- Dynamic Bar Chart -->
-                <div class="row g-4 mb-4">
-                    <div class="col-12 col-lg-6">
-                        <div class="app-card app-card-chart h-100 shadow-sm">
+                <!-- Centered Single Chart -->
+                <div class="row g-4 mb-4 single-chart-container">
+                    <div class="col-12">
+                        <div class="app-card app-card-chart h-100 shadow-sm single-chart">
                             <div class="app-card-header p-3 border-0">
                                 <h4 class="app-card-title">How your appliances compare to the average</h4>
                             </div>
@@ -135,9 +153,9 @@
                 </div>
 
                 <!-- Pie Chart -->
-                <div class="row g-4 mb-4">
-                    <div class="col-12 col-lg-6">
-                        <div class="app-card app-card-chart h-100 shadow-sm">
+                <div class="row g-4 mb-4 single-chart-container">
+                    <div class="col-12">
+                        <div class="app-card app-card-chart h-100 shadow-sm single-chart">
                             <div class="app-card-header p-3 border-0">
                                 <h4 class="app-card-title">Emissions per Appliance (kg CO2)</h4>
                             </div>
@@ -207,9 +225,9 @@
                 </div>
 
                 <!-- Clothes Dryer Chart -->
-                <div class="row g-4 mb-4">
-                    <div class="col-12 col-lg-6">
-                        <div class="app-card app-card-chart h-100 shadow-sm">
+                <div class="row g-4 mb-4 single-chart-container">
+                    <div class="col-12">
+                        <div class="app-card app-card-chart h-100 shadow-sm single-chart">
                             <div class="app-card-header p-3 border-0">
                                 <h4 class="app-card-title">Clothes Dryer Energy Consumption</h4>
                             </div>
@@ -223,9 +241,9 @@
                 </div>
 
                 <!-- Air Conditioner Chart -->
-                <div class="row g-4 mb-4">
-                    <div class="col-12 col-lg-6">
-                        <div class="app-card app-card-chart h-100 shadow-sm">
+                <div class="row g-4 mb-4 single-chart-container">
+                    <div class="col-12">
+                        <div class="app-card app-card-chart h-100 shadow-sm single-chart">
                             <div class="app-card-header p-3 border-0">
                                 <h4 class="app-card-title">Air Conditioner Energy Usage</h4>
                             </div>
@@ -239,9 +257,9 @@
                 </div>
 
                 <!-- Refrigerator Chart -->
-                <div class="row g-4 mb-4">
-                    <div class="col-12 col-lg-6">
-                        <div class="app-card app-card-chart h-100 shadow-sm">
+                <div class="row g-4 mb-4 single-chart-container">
+                    <div class="col-12">
+                        <div class="app-card app-card-chart h-100 shadow-sm single-chart">
                             <div class="app-card-header p-3 border-0">
                                 <h4 class="app-card-title">Refrigerator Energy Usage by Volume</h4>
                             </div>
@@ -253,6 +271,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
