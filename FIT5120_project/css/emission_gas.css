@@ -420,6 +420,7 @@ label[for="instantaneous-storage"] {
     display: flex;
     justify-content: space-between;
     width: 60%;
+    margin-bottom: 50px;
 }
 
 /* Back Button Styling */
