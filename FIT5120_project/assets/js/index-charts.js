@@ -197,7 +197,8 @@ function retrieveApplianceData() {
         clothes_washer: 32.65,
         clothes_dryer: 224.52,
         air_conditioner: 20.01,
-        refrigerator: 353.52
+        refrigerator: 353.52,
+        dishwahser: 250.82,
     };    
 
     const applianceData = Object.entries(individualApplianceEmissions).map(([appliance, emissions]) => {

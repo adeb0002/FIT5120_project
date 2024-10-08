@@ -130,14 +130,26 @@ function getClothesWasherLoadSizeData() {
 		{ loadSize: 11, energyUsage: 62.37 },
 		{ loadSize: 12, energyUsage: 51.48 },
 		{ loadSize: 13, energyUsage: 67.38 },
-		{ loadSize: 14, energyUsage: 69.53 }
+		{ loadSize: 14, energyUsage: 69.53 },
+        { loadSize: 15, energyUsage: 72.32 },
+        { loadSize: 16, energyUsage: 75.23 }
 	];
 }
 
 // Function to get the user's selected load size
 function getUserSelectedLoadSize() {
-	return parseFloat(sessionStorage.getItem('userSelectedLoadSize')) || 0;  // Default to 0 if no selection
+    // Retrieve the load size from sessionStorage
+    const userSelectedLoadSize = parseFloat(sessionStorage.getItem('clothes_washer-load-size'));
+
+    // Check if a valid value is retrieved, otherwise log a message and return 0
+    if (isNaN(userSelectedLoadSize)) {
+        console.warn("No valid load size found in sessionStorage. Defaulting to 0.");
+        return 0;  // Default to 0 if no valid value is found
+    }
+
+    return userSelectedLoadSize;
 }
+
 
 function createClothesWasherLineChart() {
     const clothesWasherLoadSizeData = getClothesWasherLoadSizeData();
@@ -147,7 +159,7 @@ function createClothesWasherLineChart() {
     const avgEnergyUsageData = clothesWasherLoadSizeData.map(item => item.energyUsage);
 
     // Create a dataset with only the user-selected load size's energy usage
-    const userEnergyUsageData = clothesWasherLoadSizeData.map(item => (item.loadSize === userSelectedLoadSize ? item.energyUsage : null));
+    const userEnergyUsageData = clothesWasherLoadSizeData.map(item => item.loadSize === userSelectedLoadSize ? item.energyUsage : null);
 
     const ctx = document.getElementById('clothes-washer-load-size-chart').getContext('2d');
 
@@ -161,17 +173,16 @@ function createClothesWasherLineChart() {
                 borderColor: "rgba(91,153,234,0.8)", 
                 data: avgEnergyUsageData,  // Y-axis values (Average Energy Usage)
                 fill: true,
-                pointRadius: 3,
-                pointBackgroundColor: 'rgba(91,153,234,0.8)'
+                pointRadius: 5,
+                pointBackgroundColor: 'rgba(91,153,234,0.8)'  // Default point color
             }, {
                 label: 'Your Energy Usage (kWh)',
                 backgroundColor: "rgba(117,193,129,0.2)", 
                 borderColor: "darkgreen", 
                 data: userEnergyUsageData,  // Only highlight the user's selected load size
                 fill: false,
-                pointRadius: labels.map(label => label === userSelectedLoadSize ? 7 : 0),  // Only show point for selected load size
-                pointBackgroundColor: 'darkgreen',
-                pointBorderColor: 'black'
+                pointRadius: labels.map(label => label === userSelectedLoadSize ? 10 : 0),  // Only show point for selected load size
+                pointBackgroundColor: labels.map(label => label === userSelectedLoadSize ? 'darkgreen' : 'transparent'),  // Highlight user-selected point
             }]
         },
         options: {
@@ -206,15 +217,14 @@ function createClothesWasherLineChart() {
     new Chart(ctx, lineChartConfig);
 }
 
-
-
 // Fixed average consumption values for appliances
 const averageConsumptions = {
     television: 385,
     clothes_washer: 520,
     clothes_dryer: 720,
     air_conditioner: 540,
-    refrigerator: 420
+    refrigerator: 420,
+    dishwasher: 250.82
 };
 
 //Bar Chart Demo
