@@ -255,19 +255,16 @@
     document.addEventListener("DOMContentLoaded", function() {
         const insightsButton = document.querySelector(".insights-button");
         const recommendationsButton = document.querySelector(".recommendations-button");
-        
+
         // Check if the calculator is completed
-        if (localStorage.getItem("calculatorCompleted") === "true") {
-            insightsButton.classList.remove("disabled"); // Enable button
-            insightsButton.querySelector(".insights-link").textContent = "SEE MY INSIGHTS"; // Change link text
-            insightsButton.querySelector(".insights-link").href = "test.html"; // Update link to insights page
+        if (sessionStorage.getItem("calculatorCompleted") === "true") {
+            insightsButton.classList.remove("disabled"); // Enable the button
+            insightsButton.querySelector(".insights-link").textContent = "SEE MY INSIGHTS"; // Update link text
+            insightsButton.querySelector(".insights-link").href = "test.html"; // Set the link to the insights page
 
-            recommendationsButton.classList.remove("disabled"); // Enable button
-            recommendationsButton.querySelector(".recommendations-link").textContent = "SEE MY RECOMMENDATIONS"; // Change link text
-            recommendationsButton.querySelector(".recommendations-link").href = "personal_recommendations.html"; // Update link to recommendations page
-
-            // Clear the flag after checking
-            localStorage.removeItem("calculatorCompleted");
+            recommendationsButton.classList.remove("disabled"); // Enable the button
+            recommendationsButton.querySelector(".recommendations-link").textContent = "SEE MY RECOMMENDATIONS"; // Update link text
+            recommendationsButton.querySelector(".recommendations-link").href = "personal_recommendations.html"; // Set the link to the recommendations page
         }
     });
     </script>

@@ -992,10 +992,10 @@
                 sendDataToLambda(data);
             }
         }
-    document.getElementById("next-button").addEventListener("click", function() {
-    // Set a flag in localStorage indicating the calculator is completed
-    localStorage.setItem("calculatorCompleted", "true");
-    });
+        document.getElementById("next-button").addEventListener("click", function() {
+            // Set a flag in sessionStorage indicating the calculator is completed
+            sessionStorage.setItem("calculatorCompleted", "true");
+        });
 </script>
     </script>
 </body>
