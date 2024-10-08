@@ -495,14 +495,14 @@
                         <label for="tv-screen-size">What screen size is your television?</label>
                         <select id="tv-screen-size" class="form-control" style="width: 500px;">
                             <option value="">--Select Size--</option>
-                            <option value="Less than 40">Less than 40"</option>
-                            <option value="40-49">40 - 49"</option>
-                            <option value="50-59">50 - 59"</option>
-                            <option value="60-69">60 - 69"</option>
-                            <option value="70-79">70 - 79"</option>
-                            <option value="80-89">80 - 89"</option>
-                            <option value="90-99">90 - 99"</option>
-                            <option value="Greater than 100">Greater than 100"</option>
+                            <option value="Less than 40">Less than 40</option>
+                            <option value="40 - 49">40 - 49</option>
+                            <option value="50 - 59">50 - 59</option>
+                            <option value="60 - 69">60 - 69</option>
+                            <option value="70 - 79">70 - 79</option>
+                            <option value="80 - 89">80 - 89</option>
+                            <option value="90 - 99">90 - 99</option>
+                            <option value="Greater than 100">Greater than 100</option>
                         </select>
                     </div>
                     <div class="form-group radio-question">
@@ -878,6 +878,8 @@
                     
 
                     console.log("Simulated Emissions Data:", simulatedEmissions);
+                    console.log("Lambda Response:", results);
+
 
                     // Update the charts with the simulated emissions data
                     updateCharts(simulatedEmissions);
@@ -913,6 +915,8 @@
             const tvScreenSizeVal = tvScreenSize.value || null;
             const tvScreenTech = getSelectedRadioValue('television-screen-tech') || null;
             const tvHours = televisionHours.value ? parseFloat(televisionHours.value) : 0;
+            console.log("Television Input:", tvScreenSizeVal, tvScreenTech, tvHours);
+
 
             if (tvScreenSizeVal && tvScreenTech && tvHours > 0) {
                 requests.push({
@@ -1051,6 +1055,9 @@
             const energyCostPerUnit = 0.1901; // cost per unit of energy
             const currentCosts = currentEmissionsArray.map(e => e * energyCostPerUnit);
             const simulatedCosts = simulatedEmissionsArray.map(e => e * energyCostPerUnit);
+            console.log("Simulated Emissions Array:", simulatedEmissionsArray);
+            console.log("Current Emissions Array:", currentEmissionsArray);
+
 
             // Destroy previous chart instances if they exist
             if (emissionsChartInstance) emissionsChartInstance.destroy();
