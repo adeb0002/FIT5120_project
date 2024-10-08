@@ -212,7 +212,6 @@ bootstrap.min.css .navbar-toggle {
     margin-top: 200px;
     display: flex;
     justify-content: space-between;
-    transform: translateX(-50%);
     margin-bottom: 50px;
 }
 
