@@ -294,73 +294,80 @@
         // Call the function after the page loads
         logSavedData();
 
-        async function sendDataToLambda(data) {
-            try {
-                console.log('Sending data to Lambda:', data); // Log the data being sent
+ async function sendDataToLambda(data) {
+    try {
+        console.log('Sending data to Lambda:', data); // Log the data being sent
 
-                const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
+        const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
 
-                if (response.ok) {
-                    const result = await response.json();
-                    console.log('Data sent successfully:', result);
+        if (response.ok) {
+            const result = await response.json();
+            console.log('Data sent successfully:', result);
 
-                    if (result[0]?.body) {
-                        const parsedBody = JSON.parse(result[0].body);
-
-                        // Calculate total transportation emissions from individual transport types
-                        if (parsedBody?.individual_transport_emissions) {
-                            let transportEmissions = 0;
-
-                            // Sum the emissions from all transportation types
-                            Object.values(parsedBody.individual_transport_emissions).forEach(emission => {
-                                transportEmissions += parseFloat(emission) || 0;
-                            });
-
-                            // Store total transportation emissions in sessionStorage
-                            sessionStorage.setItem('transportEmissions', transportEmissions.toFixed(2));
-                            console.log('Total transport emissions saved to sessionStorage:', transportEmissions);
-
-                            // Now combine the transport emissions with appliance emissions
-                            const applianceEmissions = parseFloat(sessionStorage.getItem('applianceEmissions')) || 0;
-                            const totalEmissions = applianceEmissions + transportEmissions;
-
-                            // Store the combined total emissions in sessionStorage
-                            sessionStorage.setItem('totalEmissions', totalEmissions.toFixed(2));
-                            console.log('Total combined emissions (appliance + transport) saved to sessionStorage:', totalEmissions);
-                        } else {
-                            console.warn('Individual transport emissions data is missing in response.');
-                        }
-
-                        // Store individual transportation emissions
-                        if (parsedBody?.individual_transport_emissions) {
-                            sessionStorage.setItem('transportationData', JSON.stringify(parsedBody.individual_transport_emissions));
-                            console.log('Individual transport data saved to sessionStorage:', parsedBody.individual_transport_emissions);
-                        }
-
-                        // Redirect to the next page
-                        window.location.href = 'emission_cal_appli.html';
-                    } else {
-                        console.warn('Unexpected data format:', result);
-                    }
-                } else {
-                    const errorText = await response.text(); // Log the error response
-                    console.error('Error response from server:', response.status, errorText);
-                    alert('Error sending data to the server. Please try again.');
-                }
-            } catch (error) {
-                console.error('Error sending data:', error);
-                alert('Error sending data to the server. Please try again.');
+            // Check if no data is received (i.e., empty array) and handle it gracefully
+            if (result.length === 0) {
+                console.log('No data received from Lambda, likely because "None of the Above" was selected.');
+                // Proceed without emissions data, as it's okay in this case
+                window.location.href = 'emission_cal_appli.html';
+                return; // Exit early since no data is returned
             }
+
+            // Ensure result[0] and result[0].body are available before parsing
+            if (result[0]?.body) {
+                const parsedBody = JSON.parse(result[0].body);
+
+                // Calculate total transportation emissions from individual transport types
+                if (parsedBody?.individual_transport_emissions) {
+                    let transportEmissions = 0;
+
+                    // Sum the emissions from all transportation types
+                    Object.values(parsedBody.individual_transport_emissions).forEach(emission => {
+                        transportEmissions += parseFloat(emission) || 0;
+                    });
+
+                    // Store total transportation emissions in sessionStorage
+                    sessionStorage.setItem('transportEmissions', transportEmissions.toFixed(2));
+                    console.log('Total transport emissions saved to sessionStorage:', transportEmissions);
+                } else {
+                    console.warn('Individual transport emissions data is missing in response.');
+                }
+
+                // Store individual transportation emissions
+                if (parsedBody?.individual_transport_emissions) {
+                    sessionStorage.setItem('transportationData', JSON.stringify(parsedBody.individual_transport_emissions));
+                    console.log('Individual transport data saved to sessionStorage:', parsedBody.individual_transport_emissions);
+                }
+
+                // Combine transport emissions with appliance emissions
+                const applianceEmissions = parseFloat(sessionStorage.getItem('applianceEmissions')) || 0;
+                const totalEmissions = applianceEmissions + (parseFloat(sessionStorage.getItem('transportEmissions')) || 0);
+
+                // Store the combined total emissions in sessionStorage
+                sessionStorage.setItem('totalEmissions', totalEmissions.toFixed(2));
+                console.log('Total combined emissions (appliance + transport) saved to sessionStorage:', totalEmissions);
+
+                // Redirect to the next page
+                window.location.href = 'emission_cal_appli.html';
+            } else {
+                console.warn('Unexpected data format:', result);
+                alert('Unexpected data format from the server. Please try again.');
+            }
+        } else {
+            const errorText = await response.text(); // Log the error response
+            console.error('Error response from server:', response.status, errorText);
+            alert('Error sending data to the server. Please try again.');
         }
-
-
-
+    } catch (error) {
+        console.error('Error sending data:', error);
+        alert('Error sending data to the server. Please try again.');
+    }
+}
 
         function validateAndNavigate() {
             const questions = document.querySelectorAll('#transportation-usage-section input[type="number"]');
