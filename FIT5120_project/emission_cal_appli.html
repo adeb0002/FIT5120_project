@@ -808,6 +808,7 @@
                 Object.entries(response.individual_appliance_emissions).forEach(([applianceType, emission]) => {
                     const emissionsKey = `emissions_${applianceType}`;
                     allIndividualApplianceEmissions[applianceType] = emission;
+                    console.log(`Storing emissions for ${applianceType}: ${emission}`);
                     sessionStorage.setItem(emissionsKey, JSON.stringify({ appliance_emissions: emission }));
                 });
             }

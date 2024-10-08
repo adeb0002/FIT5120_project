@@ -63,15 +63,11 @@
                 flex: 1 1 100%; 
             }*/
 
-<<<<<<< HEAD
-        .chart {
-=======
         .chart-container {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
             justify-content: center; /* Center charts within the container */
->>>>>>> main
             width: 100%;
             box-sizing: border-box;
             padding: 10px;
@@ -152,8 +148,6 @@
             max-width: 100%;
             height: auto;
         }
-<<<<<<< HEAD
-=======
 
         #negative-differences {
             font-size: 2.5em;
@@ -197,7 +191,6 @@
         }
 
 
->>>>>>> main
     </style>
 </head>
 
@@ -220,14 +213,8 @@
                 </div>
                 <div id="main-nav" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-<<<<<<< HEAD
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a>
-                        </li>
-=======
                                                <li><a href="index.html">Home</a></li>
                         <li><a href="index.html#contact-us" class="scroll-link" data-id="contact-us">Our Mission</a></li>
->>>>>>> main
                         <li><a href="index.html#about" class="scroll-link" data-id="about">Services</a></li>
                         <li><a href="#" id="clear-session-link">Emission Calculator</a></li>
                         <li><a href="personal_recommendations.html">Recommendations</a></li>
@@ -326,45 +313,6 @@
             </div>
         </div>
 
-<<<<<<< HEAD
-        <!-- cost saving container -->
-        <div class="section chart">
-            <div class="chart-title">How your appliances compare to the average</div>
-            <div id="grouped-bar-chart"></div>
-            <h4>Some of your appliances have room for improvement in terms of efficiency. By choosing smarter,
-                eco-friendly alternatives, we estimate that you could save:</h4>
-            <p id="negative-differences"
-                style="font-size: 2.5em; font-weight: bold; color: white; background-color: #4CAF50; padding: 10px; border-radius: 5px; text-align: center; margin-top: 15px;">
-            </p>
-        </div>
-
-        <div id="tv-screen-size-chart" class="section chart">
-            <div class="chart-title">TV Screen Size Energy Consumption</div>
-        </div>
-
-        <div id="tv-screen-tech-chart" class="section chart">
-            <div class="chart-title">TV Screen Technology Energy Consumption</div>
-        </div>
-
-        <div id="clothes-washer-load-size-chart" class="section chart">
-            <div class="chart-title">Clothes Washer Energy Usage by Load Size</div>
-        </div>
-
-        <div id="clothes-washer-type-chart" class="section chart">
-            <div class="chart-title">Clothes Washer Type Energy Usage</div>
-        </div>
-
-        <div id="clothes-dryer-chart" class="section chart">
-            <div class="chart-title">Clothes Dryer Energy Consumption</div>
-        </div>
-
-        <div id="air-conditioner-chart" class="section chart">
-            <div class="chart-title">Air Conditioner Energy Usage</div>
-        </div>
-
-        <div id="refrigerator-chart" class="section chart">
-            <div class="chart-title">Refrigerator Energy Usage by Volume</div>
-=======
         <!-- Clothes Washer Charts Section -->
         <div class="section">
             <h2>Clothes Washer Energy Consumption</h2>
@@ -379,7 +327,6 @@
                     <div id="clothes-washer-type-chart"></div>
                 </div>
             </div>
->>>>>>> main
         </div>
 
 
@@ -446,9 +393,6 @@
     </div>
 
     <script>
-<<<<<<< HEAD
-        // Constants for equivalences and offsets
-=======
 
         document.getElementById('navigate-to-simulation').addEventListener('click', function () {
             window.location.href = 'simulation.html'; // Adjust the file path as needed
@@ -464,7 +408,6 @@
         });
 
        // Constants for equivalences and offsets
->>>>>>> main
         const CO2_PER_KM_PETROL_CAR = 0.17048; // in kg per km
         const CO2_PER_ICE_SQUARE_METER = 333.33; // in kg per m^2 (1000kg CO2 = 3 m^2 ice)
         const TREES_TO_OFFSET_CO2 = 21.77; // Each tree offsets 21.77 kg of CO2 per year
@@ -839,14 +782,6 @@
 
 
         // Data for charts
-<<<<<<< HEAD
-        const averagesData = [
-            { appliance: "Television", userConsumption: 50, avgConsumption: 37 },
-            { appliance: "Clothes Washer", userConsumption: 58, avgConsumption: 70 },
-            { appliance: "Clothes Dryer", userConsumption: 40, avgConsumption: 62 },
-            { appliance: "Air Conditioner", userConsumption: 91, avgConsumption: 30 },
-            { appliance: "Refrigerator", userConsumption: 30, avgConsumption: 20 }
-=======
 
         const averagesData = [
             { appliance: "Television", userConsumption: 50, avgConsumption: 654.73 },
@@ -854,7 +789,6 @@
             { appliance: "Clothes Dryer", userConsumption: 40, avgConsumption: 224.52 },
             { appliance: "Air Conditioner", userConsumption: 91, avgConsumption: 20.01 },
             { appliance: "Refrigerator", userConsumption: 30, avgConsumption: 353.52 }
->>>>>>> main
         ];
 
         const tvScreenSizeData = [
@@ -1388,113 +1322,11 @@
             function midAngle(d) {
                 return d.startAngle + (d.endAngle - d.startAngle) / 2;
             }
-<<<<<<< HEAD
-
-            // Create pie charts with the retrieved data
-            createPieChart(categoryData, '#category-chart', 'emissions', 'category');
-            createPieChart(applianceData, '#appliance-chart', 'emissions', 'type');
-
-            // Create bar chart for transport emissions
-            createBarChart(transportData, '#transport-chart', 'emissions', 'type'); // Use bar chart for transport data
-        }
-
-
-
-        // Function to create a pie chart with legend
-        function createPieChart(data, selector, valueKey, labelKey) {
-            const width = 300;
-            const height = 300;
-            const radius = Math.min(width, height) / 2;
-
-            const svg = d3.select(selector)
-                .html('')  // Clear existing SVG content before drawing new chart
-                .append('svg')
-                .attr('width', width)
-                .attr('height', height + 50) // Extra space for legend
-                .append('g')
-                .attr('transform', `translate(${width / 2}, ${height / 2})`);
-
-            const color = d3.scaleOrdinal(d3.schemeCategory10);
-
-            const pie = d3.pie()
-                .value(d => d[valueKey]);
-
-            const arc = d3.arc()
-                .innerRadius(0)
-                .outerRadius(radius);
-
-            const arcs = svg.selectAll('arc')
-                .data(pie(data))
-                .enter()
-                .append('g')
-                .attr('class', 'arc');
-
-            arcs.append('path')
-                .attr('d', arc)
-                .attr('fill', d => color(d.data[labelKey]));
-
-            // Add labels to the pie slices
-            arcs.append('text')
-                .attr('transform', d => `translate(${arc.centroid(d)})`)
-                .attr('text-anchor', 'middle')
-                .style('font-size', '12px')
-                .text(d => `${d.data[labelKey]} (${d.data[valueKey].toFixed(2)} kg)`);
-
-            // Add a legend below the pie chart
-            const legend = d3.select(selector)
-                .append('div')
-                .attr('class', 'legend');
-
-            const legendItems = legend.selectAll('.legend-item')
-                .data(data)
-                .enter()
-                .append('div')
-                .attr('class', 'legend-item');
-
-            legendItems.append('div')
-                .attr('class', 'legend-color-box')
-                .style('background-color', d => color(d[labelKey]));
-
-            legendItems.append('span')
-                .attr('class', 'legend-text')
-                .text(d => `${d[labelKey]}: ${d[valueKey].toFixed(2)} kg CO2`);
-        }
-
-        function getTransportEmissionsData() {
-            // Retrieve data from local storage
-            const transportData = JSON.parse(localStorage.getItem('transportationData') || '{}');
-
-            console.log('Transport data retrieved from localStorage:', transportData); // Log retrieved data
-
-            // Map data to the expected format for your chart
-            const formattedData = Object.entries(transportData).map(([type, emissions]) => ({
-                type: type.replace('_', ' '), // Adjust type format if necessary
-                emissions: parseFloat(emissions) // Convert emissions to number
-            }));
-
-            console.log('Formatted transport emissions data for chart:', formattedData); // Log formatted data
-            return formattedData;
-        }
-
-        function initCharts() {
-            const { categoryData, applianceData } = getEmissionsData();
-
-            // Check for both category and appliance data
-            if (!categoryData.length && !applianceData.length) {
-                console.warn('No data available to display.');
-                alert('No emissions data available to display.');
-                return;
-            }
-
-            createPieChart(categoryData, '#category-chart', 'emissions', 'category');
-            createPieChart(applianceData, '#appliance-chart', 'emissions', 'type');
-=======
         }
 
             function getTransportEmissionsData() {
                 // Retrieve data from local storage
                 const transportData = JSON.parse(sessionStorage.getItem('transportationData') || '{}');
->>>>>>> main
 
             const transportData = getTransportEmissionsData(); // Ensure this retrieves correctly
 
@@ -1503,46 +1335,8 @@
                 alert('No emissions data available to display.');
                 return;
             }
-
-<<<<<<< HEAD
-            createBarChart(transportData, '#transport-chart', 'emissions', 'type'); // Make sure these keys align
         }
 
-        // Initialize the page on window load
-        window.onload = function () {
-            initCharts();
-
-            // Pass the correct user input for highlighting
-            createLineChart(clothesWasherLoadSizeData, '#clothes-washer-load-size-chart', 'energyUsage', 'loadSize', userInputLoadSize.loadSize);
-            createBarChart(clothesWasherTypeData, '#clothes-washer-type-chart', 'energyUsage', 'loadType', clothesWasherLoadingType);
-
-            //Create Grouped Bar Chart
-            createGroupedBarChart(averagesData, "#grouped-bar-chart");
-            const totalCostSavings = calculateCostSaving(averagesData);
-
-            // Display total cost savings
-            document.getElementById('negative-differences').textContent = `$ ${totalCostSavings} / Year`;
-
-            // For other charts, ensure highlighting input is set correctly
-            createBarChart(tvScreenSizeData, '#tv-screen-size-chart', 'avgConsumption', 'screenSize', null);
-            createBarChart(tvScreenTechData, '#tv-screen-tech-chart', 'avgConsumption', 'screenTech', null);
-            createBarChart(clothesDryerData, '#clothes-dryer-chart', 'energyUsage', 'dryerType', null);
-            createBarChart(airConditionerData, '#air-conditioner-chart', 'energyUsage', 'type', null);
-            createBarChart(refrigeratorData, '#refrigerator-chart', 'avgUsage', 'volume', null);
-
-            const totalEmissions = parseFloat(localStorage.getItem('totalEmissions'));
-            console.log('Attempting to load totalEmissions from localStorage:', totalEmissions);
-
-            if (!isNaN(totalEmissions) && totalEmissions !== 0) {
-                console.log('Loaded totalEmissions:', totalEmissions);
-                updateEmissionComparison(totalEmissions);
-                displayEquivalences(totalEmissions);
-            } else {
-                console.error('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
-                alert('Total emissions data is missing or invalid. Please perform the calculation on the result page first.');
-            }
-        };
-=======
             function calculateCostSaving(data) {
             let totalPositiveDifference = 0;
 
@@ -1738,18 +1532,10 @@
                 // Recreate the pie chart for appliances
                 createAppliancePieChart();
             };
->>>>>>> main
 
 
 
 
-<<<<<<< HEAD
-    </script>
-</body>
-
-</html>
-=======
         </script>
     </body>
     </html>
->>>>>>> main

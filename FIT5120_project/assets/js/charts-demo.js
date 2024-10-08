@@ -220,14 +220,18 @@ const averageConsumptions = {
 //Bar Chart Demo
 
 // Function to dynamically create the bar chart using session storage data and fixed average values
-function createDynamicBarChart() {
-    const applianceData = getApplianceEmissionsData();
+// Bar Chart Demo
 
-    // Map the appliance data to include both user consumption and average consumption
-    const data = applianceData.map(appliance => ({
-        appliance: appliance.appliance,
-        userConsumption: appliance.userConsumption,
-        avgConsumption: averageConsumptions[appliance.appliance.toLowerCase().replace(/\s+/g, '_')] || 0 // Default to 0 if no average value is found
+// Function to dynamically create the bar chart using session storage data and fixed average values
+function createDynamicBarChart() {
+    // Retrieve individual appliance emissions/consumptions from session storage
+    const individualApplianceEmissions = JSON.parse(sessionStorage.getItem('individualApplianceEmissions') || '{}');
+    
+    // Map the appliance data to include both user consumption (from sessionStorage) and average consumption (static)
+    const data = Object.entries(individualApplianceEmissions).map(([appliance, userConsumption]) => ({
+        appliance: appliance.charAt(0).toUpperCase() + appliance.slice(1).replace(/_/g, ' '), // Format appliance names
+        userConsumption: parseFloat(userConsumption), // Convert string to float for user consumption
+        avgConsumption: averageConsumptions[appliance.toLowerCase().replace(/\s+/g, '_')] || 0 // Default to 0 if no average value is found
     }));
 
     // Bar chart configuration for dynamic data
@@ -301,6 +305,7 @@ function createDynamicBarChart() {
     var barChart = document.getElementById('grouped-bar-chart').getContext('2d');
     new Chart(barChart, barChartConfig);
 }
+
 
 
 
