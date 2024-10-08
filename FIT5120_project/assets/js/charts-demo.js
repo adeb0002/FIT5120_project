@@ -219,12 +219,12 @@ function createClothesWasherLineChart() {
 
 // Fixed average consumption values for appliances
 const averageConsumptions = {
-    television: 385,
-    clothes_washer: 520,
-    clothes_dryer: 720,
-    air_conditioner: 540,
-    refrigerator: 420,
-    dishwasher: 250.82
+    television: 6.54,
+    clothes_washer: 3.2,
+    clothes_dryer: 22.452,
+    air_conditioner: 20.01,
+    refrigerator: 35.52,
+    dishwasher: 25.82
 };
 
 //Bar Chart Demo
