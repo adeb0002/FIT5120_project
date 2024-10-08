@@ -210,15 +210,15 @@ bootstrap.min.css .navbar-toggle {
 .floating-buttons {
     position: relative;
     margin-top: 200px;
-    margin-left: 700px;
-    transform: translateX(-50%);
     display: flex;
     justify-content: space-between;
-    width: 60%;
+    transform: translateX(-50%);
+    margin-bottom: 50px;
 }
 
 /* Back Button Styling */
 #back-button {
+    position: relative;
     background-color: white;
     font-size: 16px;
     padding: 20px 25px;
@@ -230,10 +230,12 @@ bootstrap.min.css .navbar-toggle {
     text-align: center;
     display: inline-flex;
     align-items: center;
+    margin-left: 200px;
 }
 
 /* Next Button Styling */
 #next-button {
+    position: relative;
     background-color: #28a745;
     font-size: 16px;
     padding: 20px 25px;
@@ -245,6 +247,7 @@ bootstrap.min.css .navbar-toggle {
     text-align: center;
     display: inline-flex;
     align-items: center;
+    margin-right: 200px;
 }
 
 /* Icon Styling inside Buttons */
@@ -279,32 +282,25 @@ bootstrap.min.css .navbar-toggle {
 /* Media query for tablets (max-width: 768px) */
 @media (max-width: 768px) {
     .floating-buttons {
-        position: fixed;
-        /* Fix position relative to the viewport */
+        position: relative;
         bottom: 10px;
-        /* Distance from bottom */
         width: calc(100% - 20px);
-        /* Full width minus padding */
         display: flex;
         justify-content: space-between;
-        /* Space between buttons */
         gap: 10px;
-        /* Space between buttons */
         margin: 0;
-        /* Reset margin */
         transform: none;
-        /* Remove any existing transform */
     }
 
     #back-button {
-        position: absolute;
+        position: relative;
         /* Absolute positioning within the container */
         left: 0;
         /* Align to the left */
     }
 
     #next-button {
-        position: absolute;
+        position: relative;
         /* Absolute positioning within the container */
         right: 0;
         /* Align to the right */
@@ -322,44 +318,32 @@ bootstrap.min.css .navbar-toggle {
 /* Media query for mobile devices (max-width: 576px) */
 @media (max-width: 576px) {
     .floating-buttons {
-        position: fixed;
-        /* Fix position relative to the viewport */
-        bottom: 5px;
-        /* Distance from bottom */
-        width: calc(100% - 10px);
-        /* Full width minus padding */
+        position: relative;
+        width: calc(100% - 10px); /* Full width minus padding */
         display: flex;
-        justify-content: space-between;
-        /* Space between buttons */
-        gap: 8px;
-        /* Space between buttons */
-        margin: 0;
-        /* Reset margin */
-        transform: none;
-        /* Remove any existing transform */
+        justify-content: space-between; /* Space between buttons */
+        gap: 8px; /* Space between buttons */
+        margin-top: 50px; /* Add margin at the top */
+        margin-bottom: 50px; /* Lower the buttons by adding margin at the bottom */
+        transform: none; /* Remove any existing transform */
     }
 
     #back-button {
-        position: absolute;
-        /* Absolute positioning within the container */
-        left: 20px;
-        /* Align to the left */
+        position: relative;
+        margin-left: 40px; /* Align to the left */
+        margin-bottom: 10px; /* Add margin below the button to create space */
     }
 
     #next-button {
-        position: absolute;
-        /* Absolute positioning within the container */
-        right: 10px;
-        /* Align to the right */
+        position: relative;
+        margin-right: 40px; /* Align to the right */
+        margin-bottom: 10px; /* Add margin below the button */
     }
 
     #back-button,
     #next-button {
-        font-size: 12px;
-        /* Adjust font size */
-        padding: 10px 14px;
-        /* Adjust padding */
-        bottom: 70px;
+        font-size: 12px; /* Adjust font size */
+        padding: 10px 14px; /* Adjust padding */
     }
 }
 

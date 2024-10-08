@@ -415,16 +415,14 @@ label[for="instantaneous-storage"] {
 .floating-buttons {
     position: relative;
     margin-top: 200px;
-    margin-left: 700px;
-    transform: translateX(-50%);
     display: flex;
     justify-content: space-between;
-    width: 60%;
     margin-bottom: 50px;
 }
 
 /* Back Button Styling */
 #back-button {
+    position: relative;
     background-color: white;
     font-size: 16px;
     padding: 20px 25px;
@@ -436,10 +434,12 @@ label[for="instantaneous-storage"] {
     text-align: center;
     display: inline-flex;
     align-items: center;
+    margin-left: 200px;
 }
 
 /* Next Button Styling */
 #next-button {
+    position: relative;
     background-color: #28a745;
     font-size: 16px;
     padding: 20px 25px;
@@ -451,6 +451,7 @@ label[for="instantaneous-storage"] {
     text-align: center;
     display: inline-flex;
     align-items: center;
+    margin-right: 200px;
 }
 
 /* Icon Styling inside Buttons */
@@ -485,32 +486,25 @@ label[for="instantaneous-storage"] {
 /* Media query for tablets (max-width: 768px) */
 @media (max-width: 768px) {
     .floating-buttons {
-        position: fixed;
-        /* Fix position relative to the viewport */
+        position: relative;
         bottom: 10px;
-        /* Distance from bottom */
         width: calc(100% - 20px);
-        /* Full width minus padding */
         display: flex;
         justify-content: space-between;
-        /* Space between buttons */
         gap: 10px;
-        /* Space between buttons */
         margin: 0;
-        /* Reset margin */
         transform: none;
-        /* Remove any existing transform */
     }
 
     #back-button {
-        position: absolute;
+        position: relative;
         /* Absolute positioning within the container */
         left: 0;
         /* Align to the left */
     }
 
     #next-button {
-        position: absolute;
+        position: relative;
         /* Absolute positioning within the container */
         right: 0;
         /* Align to the right */
@@ -528,47 +522,34 @@ label[for="instantaneous-storage"] {
 /* Media query for mobile devices (max-width: 576px) */
 @media (max-width: 576px) {
     .floating-buttons {
-        position: fixed;
-        /* Fix position relative to the viewport */
-        bottom: 5px;
-        /* Distance from bottom */
-        width: calc(100% - 10px);
-        /* Full width minus padding */
+        position: relative;
+        width: calc(100% - 10px); /* Full width minus padding */
         display: flex;
-        justify-content: space-between;
-        /* Space between buttons */
-        gap: 8px;
-        /* Space between buttons */
-        margin: 0;
-        /* Reset margin */
-        transform: none;
-        /* Remove any existing transform */
+        justify-content: space-between; /* Space between buttons */
+        gap: 8px; /* Space between buttons */
+        margin-top: 50px; /* Add margin at the top */
+        margin-bottom: 50px; /* Lower the buttons by adding margin at the bottom */
+        transform: none; /* Remove any existing transform */
     }
 
     #back-button {
-        position: absolute;
-        /* Absolute positioning within the container */
-        left: 20px;
-        /* Align to the left */
+        position: relative;
+        margin-left: 40px; /* Align to the left */
+        margin-bottom: 10px; /* Add margin below the button to create space */
     }
 
     #next-button {
-        position: absolute;
-        /* Absolute positioning within the container */
-        right: 10px;
-        /* Align to the right */
+        position: relative;
+        margin-right: 40px; /* Align to the right */
+        margin-bottom: 10px; /* Add margin below the button */
     }
 
     #back-button,
     #next-button {
-        font-size: 12px;
-        /* Adjust font size */
-        padding: 10px 14px;
-        /* Adjust padding */
-        bottom: 70px;
+        font-size: 12px; /* Adjust font size */
+        padding: 10px 14px; /* Adjust padding */
     }
 }
-
 
 .progress {
     width: 400%;
@@ -638,12 +619,6 @@ input[type="number"] {
     color: white;
 }
 
-.button-group-2 {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
 .button-group-2 .btn {
     padding: 10px 20px;
     font-size: 1.2em;
@@ -659,9 +634,22 @@ input[type="number"] {
     color: white;
 }
 
-.btn.active {
-    background-color: green;
-    color: white;
+.button-group-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    /* Center items horizontally */
+    max-width: 250px;
+    /* Limit the width of the button group */
+    margin-left: -50px;
+}
+
+.heater-image {
+    width: 100%; /* Make the image responsive by setting its width to 100% of its container */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 400px; /* Optional: Set a max width to prevent it from getting too large */
+    display: block; /* Prevents bottom space due to inline element */
+    margin: 0 auto; /* Center the image if it's in a container with a fixed width */
 }
 
 /* Responsive styles for tablets and below */
@@ -703,41 +691,41 @@ input[type="number"] {
 /* Responsive styles for tablets and below */
 @media (max-width: 768px) {
     .button-group-2 {
-        margin-left: 10px;
-        /* Reduced margin for smaller screens */
-        justify-content: left;
-        /* Center buttons in the container */
+        flex-direction: column; /* Change to row on larger screens */
+        justify-content: flex-start; /* Align buttons to the start */
+        margin-left: 0; /* Reset margin for smaller screens */
+        gap: 10px; /* Add gap for better spacing */
     }
 
     .button-group-2 .btn {
-        font-size: 1em;
-        /* Adjust font size for better readability on smaller screens */
-        padding: 8px 16px;
-        /* Adjust padding for better button size */
+        font-size: 1.1em; /* Adjust font size for better readability */
+        padding: 8px 12px; /* Adjust padding */
+    }
+
+    .heater-image {
+        max-width: 400px; /* Adjust max width for tablet screens */
+        width: 100%; /* Make sure images are responsive */
     }
 }
 
 /* Responsive styles for mobile phones and below */
 @media (max-width: 480px) {
     .button-group-2 {
-        margin-left: 30px;
-        /* Remove margin for very small screens */
-        flex-direction: row;
-        /* Stack buttons vertically */
-        align-items: left;
-        /* Center buttons horizontally */
+        flex-direction: column; /* Keep as row on mobile */
+        align-items: flex-start; /* Align items to the start */
+        margin-left: 0; /* Remove margin */
+        gap: 8px; /* Add a small gap */
     }
 
     .button-group-2 .btn {
-        font-size: 0.9em;
-        /* Further reduce font size */
-        padding: 6px 12px;
-        /* Further reduce padding */
+        font-size: 1em; /* Further reduce font size */
+        padding: 6px 10px; /* Adjust padding */
     }
-}
 
-#instantaneous-storage-section {
-    display: none;
+    .heater-image {
+        max-width: 300px; /* Adjust max width for mobile screens */
+        width: 100%; /* Make images responsive */
+    }
 }
 
 @media (max-width: 768px) {
@@ -915,16 +903,6 @@ input[type="number"] {
     }
 }
 
-.button-group-2 {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    /* Center items horizontally */
-    max-width: 250px;
-    /* Limit the width of the button group */
-    margin-left: -50px;
-}
-
 .button-container {
     display: flex;
     flex-direction: column;
@@ -947,51 +925,22 @@ input[type="number"] {
     /* Shadow effect on hover */
 }
 
-.heater-image {
-    width: 400px;
-    /* Adjust width as needed */
-    height: auto;
-    /* Maintain aspect ratio */
-    margin-top: 10px;
-    /* Space between button and image */
-}
-
-/* Media query for 748px */
-@media (max-width: 748px) {
-    .button-group-2 {
-        max-width: 100%;
-        /* Full width on smaller screens */
-        margin-left: 0;
-        /* Reset margin */
-    }
-
+/* Media query for tablets (max-width: 768px) */
+@media (max-width: 768px) {
     .button-container {
-        max-width: 100%;
-        /* Ensure container takes full width */
-    }
-
-    .heater-image {
-        width: 100%;
-        /* Make image responsive */
+        width: 90%; /* Adjust width for tablets */
+        margin: 15px auto; /* Center the container with reduced margins */
+        padding: 8px; /* Adjust padding for smaller screens */
+        min-width: 300px; /* Adjust minimum width for smaller devices */
     }
 }
 
-/* Media query for 480px */
-@media (max-width: 480px) {
-    .button-group-2 {
-        max-width: 100%;
-        /* Full width on mobile screens */
-    }
-
+/* Media query for mobile devices (max-width: 576px) */
+@media (max-width: 576px) {
     .button-container {
-        margin: 10px 0;
-        /* Reduce space between containers */
-        padding: 5px;
-        /* Adjust padding for mobile */
-    }
-
-    .heater-image {
-        width: 100%;
-        /* Make image fully responsive */
+        width: 95%; /* Further adjust width for mobile devices */
+        margin: 10px auto; /* Center with minimal margin */
+        padding: 6px; /* Further reduce padding for mobile */
+        min-width: 280px; /* Adjust minimum width for very small screens */
     }
 }
