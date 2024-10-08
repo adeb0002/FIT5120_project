@@ -145,188 +145,123 @@
                 window.location.href = "emission_cal_cover.html";
             });
         });
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('clear-session-link').addEventListener('click', function (event) {
-                event.preventDefault();
-                sessionStorage.clear();
-                console.log('SessionStorage cleared for Emission Calculator link.');
-                window.location.href = "emission_cal_cover.html";
-            });
 
-            const gasHeaterButtons = document.querySelectorAll('#gas-water-heater .btn');
-            const heaterTypeButtons = document.querySelectorAll('#instantaneous-storage-section .btn');
-            const instantaneousStorageSection = document.getElementById('instantaneous-storage-section');
-            const nextButton = document.getElementById('next-button');
+    document.addEventListener('DOMContentLoaded', function () {
+        const gasHeaterButtons = document.querySelectorAll('#gas-water-heater .btn');
+        const heaterTypeButtons = document.querySelectorAll('#instantaneous-storage-section .btn');
+        const nextButton = document.getElementById('next-button');
 
-            // Load saved values from sessionStorage
-            const savedGasHeater = sessionStorage.getItem('gasWaterHeater');
-            const savedHeaterType = sessionStorage.getItem('heaterType');
-
-            // Set saved values in the form
-            if (savedGasHeater) {
-                gasHeaterButtons.forEach(button => {
-                    if (button.getAttribute('data-value') === savedGasHeater) {
-                        button.classList.add('active');
-                        if (savedGasHeater === 'yes') {
-                            instantaneousStorageSection.style.display = 'block'; // Show heater type section
-                        } else {
-                            instantaneousStorageSection.style.display = 'none'; // Hide heater type section
-                        }
-                    }
-                });
-            }
-
-            if (savedHeaterType) {
-                heaterTypeButtons.forEach(button => {
-                    if (button.getAttribute('data-value') === savedHeaterType) {
-                        button.classList.add('active');
-                    }
-                });
-            }
-
-            // Event listener for gas water heater buttons
+        // Load saved values from sessionStorage
+        const savedGasHeater = sessionStorage.getItem('gasWaterHeater');
+        const savedHeaterType = sessionStorage.getItem('heaterType');
+        
+        // Set saved values in the form
+        if (savedGasHeater) {
             gasHeaterButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    // Remove 'active' class from all gas heater buttons
-                    gasHeaterButtons.forEach(btn => btn.classList.remove('active'));
-
-                    // Add 'active' class to the clicked button
-                    this.classList.add('active');
-
-                    // Show or hide the next question based on the selected button
-                    if (this.getAttribute('data-value') === 'yes') {
-                        instantaneousStorageSection.style.display = 'block'; // Show the next question section
-                        nextButton.style.display = 'none'; // Hide Next button initially
+                if (button.getAttribute('data-value') === savedGasHeater) {
+                    button.classList.add('active');
+                    if (savedGasHeater === 'yes') {
+                        document.getElementById('instantaneous-storage-section').style.display = 'block';
                     } else {
-                        instantaneousStorageSection.style.display = 'none'; // Hide the next question section
-                        nextButton.style.display = 'block'; // Show the Next button for 'No'
-                        heaterTypeButtons.forEach(btn => btn.classList.remove('active')); // Clear heater type selection
-                        sessionStorage.removeItem('heaterType'); // Clear heater type in sessionStorage
+                        document.getElementById('instantaneous-storage-section').style.display = 'none';
                     }
-
-                    // Save selection to sessionStorage
-                    sessionStorage.setItem('gasWaterHeater', this.getAttribute('data-value'));
-                });
+                }
             });
+        }
 
-            // Event listener for heater type buttons
+        if (savedHeaterType) {
             heaterTypeButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    // Remove 'active' class from all heater type buttons
-                    heaterTypeButtons.forEach(btn => btn.classList.remove('active'));
-
-                    // Add 'active' class to the clicked button
-                    this.classList.add('active');
-
-                    // Show the Next button since a selection is made for the heater type
-                    nextButton.style.display = 'block';
-
-                    // Save selection to sessionStorage
-                    sessionStorage.setItem('heaterType', this.getAttribute('data-value'));
-                });
+                if (button.getAttribute('data-value') === savedHeaterType) {
+                    button.classList.add('active');
+                }
             });
+        }
 
-            // Event listener for the Next button
-            nextButton.addEventListener('click', function () {
-                // Perform validation before proceeding
-                const gasWaterHeater = document.querySelector('#gas-water-heater .btn.active');
-                if (!gasWaterHeater) {
-                    alert('Please answer the gas water heater question.');
+        // Event listener for gas water heater buttons
+        gasHeaterButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                gasHeaterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+
+                if (this.getAttribute('data-value') === 'yes') {
+                    document.getElementById('instantaneous-storage-section').style.display = 'block';
+                } else {
+                    document.getElementById('instantaneous-storage-section').style.display = 'none';
+                    heaterTypeButtons.forEach(btn => btn.classList.remove('active'));
+                    sessionStorage.removeItem('heaterType');
+                }
+
+                sessionStorage.setItem('gasWaterHeater', this.getAttribute('data-value'));
+            });
+        });
+
+        // Event listener for heater type buttons
+        heaterTypeButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                heaterTypeButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+
+                nextButton.style.display = 'block';
+                sessionStorage.setItem('heaterType', this.getAttribute('data-value'));
+            });
+        });
+
+        // Event listener for the Next button
+        nextButton.addEventListener('click', async function () {
+            const gasWaterHeater = document.querySelector('#gas-water-heater .btn.active');
+            if (!gasWaterHeater) {
+                alert('Please answer the gas water heater question.');
+                return;
+            }
+
+            let heaterType = 'none'; // Default to 'none'
+            if (gasWaterHeater.getAttribute('data-value') === 'yes') {
+                heaterType = document.querySelector('#instantaneous-storage-section .btn.active')?.getAttribute('data-value') || 'none';
+                if (heaterType === 'none') {
+                    alert('Please select whether your gas water heater is instantaneous or storage.');
                     return;
                 }
+            }
 
-                let heaterType = 'none'; // Default to 'none'
-                if (gasWaterHeater.getAttribute('data-value') === 'yes') {
-                    heaterType = document.querySelector('#instantaneous-storage-section .btn.active')?.getAttribute('data-value') || 'none';
-                    if (heaterType === 'none') {
-                        alert('Please select whether your gas water heater is instantaneous or storage.');
-                        return;
-                    }
+            // Collect form data
+            const dataToSend = {
+                type: 'gas',
+                heater: gasWaterHeater.getAttribute('data-value'),
+                heater_type: heaterType
+            };
+
+            try {
+                const response = await fetch('https://t5tau9uvbf.execute-api.ap-southeast-2.amazonaws.com/Eco/calculator', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dataToSend)
+                });
+
+                const result = await response.json();
+
+                // Debug: Log the entire result
+                console.log('Response from server:', result);
+
+                if (result.gas_emissions !== undefined) {
+                    // Store gas emissions in sessionStorage
+                    sessionStorage.setItem('gasEmissions', result.gas_emissions);
+                    console.log('Gas emissions saved to sessionStorage:', sessionStorage.getItem('gasEmissions'));
+
+                    // Proceed to next page
+                    window.location.href = 'emission_cal_trans.html';
+                } else {
+                    console.error('Gas emissions not found in the response');
+                    alert('Gas emissions data is missing from the server response.');
                 }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error calculating the gas emissions. Please try again later.');
+            }
 
-                // Debugging output
-                console.log('Selected Gas Water Heater:', gasWaterHeater.getAttribute('data-value'));
-                console.log('Selected Heater Type:', heaterType);
-
-                // Collect form data
-                const dataToSend = {
-                    type: 'gas',
-                    heater: gasWaterHeater.getAttribute('data-value'),
-                    heater_type: heaterType
-                };
-
-                console.log('Data to Send:', dataToSend); // Debugging output
-
-                // Save data to sessionStorage
-                sessionStorage.setItem('gasWaterHeater', gasWaterHeater.getAttribute('data-value'));
-                sessionStorage.setItem('heaterType', heaterType);
-
-                // Log the saved data to the console
-                console.log('Saved to sessionStorage:', {
-                    gasWaterHeater: sessionStorage.getItem('gasWaterHeater'),
-                    heaterType: sessionStorage.getItem('heaterType')
-                });
-
-                // Proceed to the next step (can redirect or perform another action here)
-                window.location.href = 'emission_cal_trans.html';
-            });
-
-            // Event listeners for additional buttons
-            const buttons = document.querySelectorAll('.button-group .btn');
-
-            // Loop through each button and add a click event listener
-            buttons.forEach(button => {
-                button.addEventListener('click', function () {
-                    // Remove the 'active' class from all buttons
-                    buttons.forEach(btn => btn.classList.remove('active'));
-
-                    // Add the 'active' class to the clicked button
-                    this.classList.add('active');
-
-                    // Update the hidden input value with the selected button's data-value
-                    document.getElementById('gas-water-heater-hidden').value = this.getAttribute('data-value');
-                });
-            });
-
-            const buttons_2 = document.querySelectorAll('.button-group-2 .btn');
-
-            // Loop through each button and add a click event listener
-            buttons_2.forEach(button => {
-                button.addEventListener('click', function () {
-                    // Remove the 'active' class from all buttons
-                    buttons_2.forEach(btn => btn.classList.remove('active'));
-
-                    // Add the 'active' class to the clicked button
-                    this.classList.add('active');
-
-                    // Update the hidden input value with the selected button's data-value
-                    document.getElementById('heater-type-hidden').value = this.getAttribute('data-value');
-                });
-            });
         });
-
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-
-        $('#grid-info-icon-1').on('mouseenter', function () {
-            const infoText = `
-        Check your water heater or utility bill.<br>
-        If it mentions gas usage for heating water, <strong>select "yes".</strong><br>
-        Otherwise, you may have an electric or solar water heater.<br></br>
-        If you live in a new home built after 1 January 2024, you will not have a gas connection as natural gas connections have been banned, so <strong>select "no".</strong>
-    `;
-
-            const gridInfo = $('#grid-info-1'); // Use the first info box
-            gridInfo.html(infoText).addClass('show').show(); // Add 'show' class to display it
-            console.log('Info text set:', infoText); // Debugging output
-        });
-
-        $('#grid-info-icon-1').on('mouseleave', function () {
-            const gridInfo = $('#grid-info-1'); // Use the first info box
-            gridInfo.removeClass('show'); // Remove 'show' class to hide it
-            setTimeout(() => gridInfo.hide(), 300); // Hide after the transition
-        });
+    });
 
         $('#grid-info-icon-2').on('mouseenter', function () {
             console.log('Grid info icon 2 hovered!'); // Debugging output

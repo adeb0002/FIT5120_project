@@ -192,23 +192,35 @@ const ENERGY_COST_PER_UNIT = 0.1901;
 function retrieveApplianceData() {
     const individualApplianceEmissions = JSON.parse(sessionStorage.getItem('individualApplianceEmissions')) || {};
 
+    // Log individual appliance emissions to check if the data is correctly stored
+    console.log('Individual Appliance Emissions:', individualApplianceEmissions);
+
     const averageConsumptions = {
-        television: 654.73,
-        clothes_washer: 32.65,
-        clothes_dryer: 224.52,
+        television: 6.54,
+        clothes_washer: 3.2,
+        clothes_dryer: 22.452,
         air_conditioner: 20.01,
-        refrigerator: 353.52,
-        dishwahser: 250.82,
-    };    
+        refrigerator: 35.52,
+        dishwasher: 25.82
+    };
 
     const applianceData = Object.entries(individualApplianceEmissions).map(([appliance, emissions]) => {
-        const userConsumption = emissions * 1000; 
-        const avgConsumption = averageConsumptions[appliance.toLowerCase().replace(/\s+/g, '_')]; 
-        return { appliance, userConsumption, avgConsumption };
-    });
+        const normalizedAppliance = appliance.toLowerCase().replace(/\s+/g, '_');
+        const avgConsumption = averageConsumptions[normalizedAppliance];  
+        if (avgConsumption) {
+            const userConsumption = emissions; 
+            return { appliance, userConsumption, avgConsumption };
+        }
+        return null;  
+    }).filter(item => item !== null); 
+
+    // Log the formatted appliance data
+    console.log('Appliance Data:', applianceData);
 
     return applianceData;
 }
+
+
 
 // Function to calculate the cost savings based on the retrieved appliance data
 function calculateCostSaving(data) {
@@ -216,18 +228,23 @@ function calculateCostSaving(data) {
 
     data.forEach(item => {
         const difference = item.avgConsumption - item.userConsumption; 
+        console.log(`Appliance: ${item.appliance}, Average Consumption: ${item.avgConsumption}, User Consumption: ${item.userConsumption}, Difference: ${difference}`);
+
         if (difference > 0) {
             totalPositiveDifference += difference; 
         }
     });
 
     const totalCostSavings = Math.round(totalPositiveDifference * ENERGY_COST_PER_UNIT); 
+    console.log('Total Cost Savings:', totalCostSavings);
     return totalCostSavings;
 }
+
 
 // Function to dynamically display the calculated savings on the webpage
 function displayTotalSavings(totalSavings) {
     const savingsContainer = document.getElementById('negative-differences');
+    console.log('Displaying Total Savings:', totalSavings);
     if (totalSavings > 0) {
         savingsContainer.textContent = `$${totalSavings} per year`;
         savingsContainer.style.backgroundColor = '#4CAF50'; 
