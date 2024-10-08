@@ -225,44 +225,60 @@ function retrieveApplianceData() {
 // Function to calculate the cost savings based on the retrieved appliance data
 function calculateCostSaving(data) {
     let totalPositiveDifference = 0;
+    let totalNegativeDifference = 0;
 
     data.forEach(item => {
-        const difference = item.avgConsumption - item.userConsumption; 
+        const difference = item.avgConsumption - item.userConsumption;
         console.log(`Appliance: ${item.appliance}, Average Consumption: ${item.avgConsumption}, User Consumption: ${item.userConsumption}, Difference: ${difference}`);
 
-        if (difference > 0) {
-            totalPositiveDifference += difference; 
+        if (difference > 0) {  
+            totalPositiveDifference += difference;
+        } else if (difference < 0) {  
+            totalNegativeDifference += Math.abs(difference);
         }
     });
 
     const totalCostSavings = Math.round(totalPositiveDifference * ENERGY_COST_PER_UNIT); 
+    const totalExtraCost = Math.round(totalNegativeDifference * ENERGY_COST_PER_UNIT); 
+
     console.log('Total Cost Savings:', totalCostSavings);
-    return totalCostSavings;
+    console.log('Total Extra Cost:', totalExtraCost);
+
+    return {
+        savings: totalCostSavings,
+        extraCost: totalExtraCost
+    };
 }
+
 
 
 // Function to dynamically display the calculated savings on the webpage
-function displayTotalSavings(totalSavings) {
+function displayTotalSavings(totalResults) {
+    const { savings, extraCost } = totalResults;
     const savingsContainer = document.getElementById('negative-differences');
-    console.log('Displaying Total Savings:', totalSavings);
-    if (totalSavings > 0) {
-        savingsContainer.textContent = `$${totalSavings} per year`;
-        savingsContainer.style.backgroundColor = '#4CAF50'; 
-    } else {
-        savingsContainer.textContent = 'No significant savings identified';
+    
+    if (savings > 0) {
+        savingsContainer.textContent = `You can save $${savings} per year`;
+        savingsContainer.style.backgroundColor = '#4CAF50';  
+    } else if (extraCost > 0) {
+        savingsContainer.textContent = `You are spending $${extraCost} more than the average`;
         savingsContainer.style.backgroundColor = '#f44336'; 
+    } else {
+        savingsContainer.textContent = 'No significant savings or extra costs identified';
+        savingsContainer.style.backgroundColor = '#f44336';  
     }
 }
 
-// Function to initialize and calculate savings on page load
-function init() {
-    const applianceData = retrieveApplianceData(); 
-    const totalSavings = calculateCostSaving(applianceData); 
-    displayTotalSavings(totalSavings); 
-}
 
-
-window.onload = init;
+    // Function to initialize and calculate savings on page load
+    function init() {
+        const applianceData = retrieveApplianceData();
+        const totalResults = calculateCostSaving(applianceData);
+        displayTotalSavings(totalResults);
+    }
+    
+    window.onload = init;
+    
 
 
 // Function to dynamically update the comparison section
