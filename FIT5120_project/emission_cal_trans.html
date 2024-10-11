@@ -369,71 +369,71 @@
     }
 }
 
-        function validateAndNavigate() {
-            const questions = document.querySelectorAll('#transportation-usage-section input[type="number"]');
-            let valid = true;
-            const dataToSend = [];
-            const noneButtonSelected = document.getElementById('none-button').classList.contains('selected-green');
+function validateAndNavigate() {
+    const questions = document.querySelectorAll('#transportation-usage-section input[type="number"]');
+    let valid = true;
+    const dataToSend = [];
+    const noneButtonSelected = document.getElementById('none-button').classList.contains('selected-green');
 
-            // Check validation only if "None of the above" is not selected
-            if (!noneButtonSelected) {
-                questions.forEach(input => {
-                    if (input.value.trim() === '' || isNaN(input.value) || input.value < 1) {
-                        valid = false;
-                        input.style.borderColor = 'red';
-                    } else {
-                        input.style.borderColor = '';
-                        const type = input.id.replace('-usage', ''); // Get the transportation type from input id
-                        dataToSend.push({
-                            type: 'transportation',
-                            transportation_type: type.replace(/-/g, '_'),
-                            kms: parseFloat(input.value)
-                        });
-
-                        // Store kilometers in sessionStorage based on transportation type using the original if-else structure
-                        if (type === 'private-vehicle') {
-                            sessionStorage.setItem('totalDistance_car', input.value);
-                            console.log('Private vehicle kilometers saved to sessionStorage:', input.value);
-                        } else if (type === 'bus') {
-                            sessionStorage.setItem('totalDistance_bus', input.value);
-                            console.log('Bus kilometers saved to sessionStorage:', input.value);
-                        } else if (type === 'train') {
-                            sessionStorage.setItem('totalDistance_train', input.value);
-                            console.log('Train kilometers saved to sessionStorage:', input.value);
-                        } else if (type === 'tram') {
-                            sessionStorage.setItem('totalDistance_tram', input.value);
-                            console.log('Tram kilometers saved to sessionStorage:', input.value);
-                        }
-                    }
-                });
-            }
-
-            // If "None of the above" is selected, skip validation errors and still prepare data to send
-            if (noneButtonSelected) {
-                // Clear all other transportation inputs as they are not needed
-                questions.forEach(input => {
-                    input.value = '';
-                    input.style.borderColor = '';
-                });
-            }
-
-            // Save data to localStorage for debugging or future use
-            sessionStorage.setItem('transportationData', JSON.stringify(dataToSend));
-
-            console.log('Original data (input values):');
-            questions.forEach(input => {
-                console.log(`${input.id}: ${input.value}`);
-            });
-
-            console.log('Formatted data to send:', dataToSend);
-
-            if (valid || noneButtonSelected) {
-                sendDataToLambda(dataToSend); // Send data to Lambda if all inputs are valid or "None of the above" is selected
+    // Check validation only if "None of the above" is not selected
+    if (!noneButtonSelected) {
+        questions.forEach(input => {
+            // Validation: Check if the value is greater than 0
+            if (input.value.trim() === '' || isNaN(input.value) || input.value <= 0) {
+                valid = false;
+                input.style.borderColor = 'red'; // Mark invalid inputs
             } else {
-                alert('Please enter a value greater than 0.');
-            }
-        }
+                input.style.borderColor = ''; // Clear any previous errors
+                const type = input.id.replace('-usage', ''); // Get the transportation type from input id
+                dataToSend.push({
+                    type: 'transportation',
+                    transportation_type: type.replace(/-/g, '_'),
+                    kms: parseFloat(input.value)
+                });
 
+                // Store kilometers in sessionStorage based on transportation type
+                if (type === 'private-vehicle') {
+                    sessionStorage.setItem('totalDistance_car', input.value);
+                    console.log('Private vehicle kilometers saved to sessionStorage:', input.value);
+                } else if (type === 'bus') {
+                    sessionStorage.setItem('totalDistance_bus', input.value);
+                    console.log('Bus kilometers saved to sessionStorage:', input.value);
+                } else if (type === 'train') {
+                    sessionStorage.setItem('totalDistance_train', input.value);
+                    console.log('Train kilometers saved to sessionStorage:', input.value);
+                } else if (type === 'tram') {
+                    sessionStorage.setItem('totalDistance_tram', input.value);
+                    console.log('Tram kilometers saved to sessionStorage:', input.value);
+                }
+            }
+        });
+    }
+
+    // If "None of the above" is selected, skip validation errors and still prepare data to send
+    if (noneButtonSelected) {
+        // Clear all other transportation inputs as they are not needed
+        questions.forEach(input => {
+            input.value = '';
+            input.style.borderColor = '';
+        });
+    }
+
+    // Save data to sessionStorage for debugging or future use
+    sessionStorage.setItem('transportationData', JSON.stringify(dataToSend));
+
+    console.log('Original data (input values):');
+    questions.forEach(input => {
+        console.log(`${input.id}: ${input.value}`);
+    });
+
+    console.log('Formatted data to send:', dataToSend);
+
+    if (valid || noneButtonSelected) {
+        sendDataToLambda(dataToSend); // Send data to Lambda if all inputs are valid or "None of the above" is selected
+    } else {
+        alert('Please enter a value greater than 0.');
+    }
+}
     </script>
 </body>
 
